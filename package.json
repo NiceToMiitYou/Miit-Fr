@@ -1,0 +1,17 @@
+{
+  "name": "Miit",
+  "version": "1.0.0",
+  "description": "Miit Gulp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tacyniak Boris <boris.tacyniak@itevents.fr>",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-react": "^3.0.1",
+    "gulp-sass": "^1.3.3"
+  }
+}
