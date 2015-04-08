@@ -1,0 +1,12 @@
+{% if error is defined and error %}
+    <div>{{ error.message }}</div>
+{% endif %}
+
+{{ form_start(registration_form) }}
+    {{ form_errors(registration_form) }}
+
+    {{ form_row(registration_form.user) }}
+    {{ form_row(registration_form.terms) }}
+
+    <input type="submit" value="Envoyez le formulaire"/>
+{{ form_end(registration_form) }}

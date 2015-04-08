@@ -1,0 +1,80 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="user_handler.create.class">Miit\CoreDomain\User\CommandHandler\CreateUserCommandHandler</parameter>
+        <parameter key="user_handler.register.class">Miit\CoreDomain\User\CommandHandler\RegisterUserCommandHandler</parameter>
+        
+        <parameter key="user_handler.update.class">Miit\CoreDomain\User\CommandHandler\UpdateUserCommandHandler</parameter>
+        <parameter key="user_handler.change_password.class">Miit\CoreDomain\User\CommandHandler\ChangePasswordUserCommandHandler</parameter>
+
+        <parameter key="user_handler.promote.class">Miit\CoreDomain\User\CommandHandler\PromoteUserCommandHandler</parameter>
+        <parameter key="user_handler.demote.class">Miit\CoreDomain\User\CommandHandler\DemoteUserCommandHandler</parameter>
+        
+        <parameter key="user_handler.activate.class">Miit\CoreDomain\User\CommandHandler\ActivateUserCommandHandler</parameter>
+        <parameter key="user_handler.desactivate.class">Miit\CoreDomain\User\CommandHandler\DesactivateUserCommandHandler</parameter>
+        
+        <parameter key="user_handler.lock.class">Miit\CoreDomain\User\CommandHandler\LockUserCommandHandler</parameter>
+        <parameter key="user_handler.unlock.class">Miit\CoreDomain\User\CommandHandler\UnlockUserCommandHandler</parameter>
+    </parameters>
+
+    <services>
+        <!-- User Handlers Public -->
+        <service id="user_handler.create" class="%user_handler.create.class%">
+            <tag name="command_bus.register" />
+            <argument type="service" id="user_factory" />
+            <argument type="service" id="user_repository" />
+        </service>
+        <service id="user_handler.register" class="%user_handler.register.class%">
+            <tag name="command_bus.register" />
+            <argument type="service" id="user_factory" />
+            <argument type="service" id="user_repository" />
+        </service>
+        
+        <service id="user_handler.update" class="%user_handler.update.class%">
+            <tag name="command_bus.register" />
+            <argument type="service" id="user_factory" />
+            <argument type="service" id="user_repository" />
+        </service>
+        <service id="user_handler.change_password" class="%user_handler.change_password.class%">
+            <tag name="command_bus.register" />
+            <argument type="service" id="user_factory" />
+            <argument type="service" id="user_repository" />
+        </service>
+
+        <service id="user_handler.promote" class="%user_handler.promote.class%">
+            <tag name="command_bus.register" />
+            <argument type="service" id="user_factory" />
+            <argument type="service" id="user_repository" />
+        </service>
+        <service id="user_handler.demote" class="%user_handler.demote.class%">
+            <tag name="command_bus.register" />
+            <argument type="service" id="user_factory" />
+            <argument type="service" id="user_repository" />
+        </service>
+
+        <service id="user_handler.activate" class="%user_handler.activate.class%">
+            <tag name="command_bus.register" />
+            <argument type="service" id="user_factory" />
+            <argument type="service" id="user_repository" />
+        </service>
+        <service id="user_handler.desactivate" class="%user_handler.desactivate.class%">
+            <tag name="command_bus.register" />
+            <argument type="service" id="user_factory" />
+            <argument type="service" id="user_repository" />
+        </service>
+
+        <service id="user_handler.lock" class="%user_handler.lock.class%">
+            <tag name="command_bus.register" />
+            <argument type="service" id="user_factory" />
+            <argument type="service" id="user_repository" />
+        </service>
+        <service id="user_handler.unlock" class="%user_handler.unlock.class%">
+            <tag name="command_bus.register" />
+            <argument type="service" id="user_factory" />
+            <argument type="service" id="user_repository" />
+        </service>
+    </services>
+</container>

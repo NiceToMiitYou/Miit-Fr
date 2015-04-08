@@ -1,0 +1,15 @@
+{% extends "MiitFrontendBundle:team:layout.html.twig" %}
+
+{% block title %}Welcome on {{ team_slug }}{% endblock %}
+{% block head %}
+    {{ parent() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+{% block content %}
+    <h1>Welcome on {{ team_slug }}</h1>
+    <p class="important">
+        Welcome on my awesome team homepage.
+    </p>
+{% endblock %}

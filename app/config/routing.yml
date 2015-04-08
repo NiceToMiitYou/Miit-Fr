@@ -1,3 +1,10 @@
-app:
-    resource: "@AppBundle/Controller/"
+
+login_check:
+    pattern:  /login_check
+
+logout:
+    pattern:  /logout
+
+frontend:
+    resource: "@MiitFrontendBundle/Controller"
     type:     annotation

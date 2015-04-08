@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="user_repository.orm.class">Miit\CoreDomainBundle\Repository\UserRepository</parameter>
+        <parameter key="team_repository.orm.class">Miit\CoreDomainBundle\Repository\TeamRepository</parameter>
+    </parameters>
+
+    <services>
+        <!-- User user_repository Public -->
+        <service id="user_repository" alias="user_repository.orm"></service>
+
+        <!-- User Repository Private -->
+        <service id="user_repository.orm"
+                 public="false"
+                 class="%user_repository.orm.class%"
+                 factory-service="doctrine.orm.entity_manager"
+                 factory-method="getRepository">
+
+            <argument>MiitCoreDomainBundle:User</argument>
+        </service>
+        
+        <!-- Team team_repository Public -->
+        <service id="team_repository" alias="team_repository.orm"></service>
+
+        <!-- Team Repository Private -->
+        <service id="team_repository.orm"
+                 public="false"
+                 class="%team_repository.orm.class%"
+                 factory-service="doctrine.orm.entity_manager"
+                 factory-method="getRepository">
+
+            <argument>MiitCoreDomainBundle:Team</argument>
+        </service>
+        
+    </services>
+</container>

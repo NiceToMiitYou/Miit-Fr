@@ -12,3 +12,4 @@
 /composer.phar
 /app/Resources/lib
 /node_modules/
+.phpintel/
