@@ -25,7 +25,7 @@ class TeamController extends Controller
     public function indexAction(Request $request, $team_slug)
     {
         return $this->render('MiitFrontendBundle:team:index.html.twig', array(
-            'team_slug' => $team_slug
+            'team_slug' => $this->get('team_manager')->getTeam()->getName()
         ));
     }
 }

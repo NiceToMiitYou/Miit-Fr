@@ -23,7 +23,7 @@ final class UpdateTeamCommandHandler extends TeamCommandHandlerAbstract
         if($command instanceof UpdateTeamCommand) {
 
             $team = $this->teamRepository->findTeamByTeamId(
-                $command->getTeamId();
+                $command->getTeamId()
             );
 
             $team->update($command->getName());

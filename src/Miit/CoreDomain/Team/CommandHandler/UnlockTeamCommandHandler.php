@@ -23,7 +23,7 @@ final class UnlockTeamCommandHandler extends TeamCommandHandlerAbstract
         if($command instanceof UnlockTeamCommand) {
 
             $team = $this->teamRepository->findTeamByTeamId(
-                $command->getTeamId();
+                $command->getTeamId()
             );
 
             $team->unlock();

@@ -148,6 +148,22 @@ class Team implements Entity
     /**
      * @return string
      */
+    public function getUserRole()
+    {
+        return sprintf('ROLE_USER_', strtoupper($this->slug));
+    }
+
+    /**
+     * @return string
+     */
+    public function getAmindRole()
+    {
+        return sprintf('ROLE_ADMIN_', strtoupper($this->slug));
+    }
+
+    /**
+     * @return string
+     */
     public function getName()
     {
         return $this->name;

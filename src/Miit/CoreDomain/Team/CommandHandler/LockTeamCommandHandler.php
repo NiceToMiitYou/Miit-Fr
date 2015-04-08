@@ -23,7 +23,7 @@ final class LockTeamCommandHandler extends TeamCommandHandlerAbstract
         if($command instanceof LockTeamCommand) {
 
             $team = $this->teamRepository->findTeamByTeamId(
-                $command->getTeamId();
+                $command->getTeamId()
             );
 
             $team->lock();
