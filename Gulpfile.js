@@ -28,7 +28,7 @@ gulp.task('clean', function() {
         .pipe(clean({force: true}));
 });
 
-gulp.task('copy', ['clean'], function() {
+gulp.task('copy', ['clean', 'bower'], function() {
     // Copy libs
     gulp.src(path.LIBS_ALL)
         // Copy all libs files in LIBS_DIST
@@ -90,9 +90,30 @@ gulp.task('sass', ['clean'], function () {
         .on('error', gutil.log);
 });
 
-gulp.task('concat-uglify', ['clean'], function() {
+gulp.task('compile-jsx', ['clean'], function() {
+
+    return gulp.src(path.JSX_ALL)
+        // Source map init
+        .pipe(sourcemaps.init())
+
+        // Compile react
+        .pipe(react())
+
+        // Source map write
+        .pipe(sourcemaps.write('.'))
+
+        // Destination of templates
+        .pipe(gulp.dest(path.JSX_DIST))
+
+        .on('error', gutil.log);;
+});
+
+gulp.task('concat-uglify', ['clean', 'compile-jsx'], function() {
     // Uglify all scripts
-    gulp.src(path.SCRIPTS_ALL)
+    gulp.src( [
+            path.JSX_DIST_ALL.toString(),
+            path.SCRIPTS_ALL.toString()
+        ] )
         // Source map init
         .pipe(sourcemaps.init())
 
@@ -117,9 +138,16 @@ gulp.task('concat-uglify', ['clean'], function() {
 gulp.task('build', ['sass', 'concat-uglify']);
 
 gulp.task('watch', ['build'], function () {
-    // Watch all sass files and compile them
-    gulp.watch(path.SASS_ALL, ['sass']);
 
-    // Watch all scripts and compile them
-    gulp.watch(path.SCRIPTS_ALL, ['concat-uglify']);
+    // Watch all files then compile them
+    gulp.watch([
+        path.SASS_ALL,
+        path.JSX_ALL,
+        path.SCRIPTS_ALL
+    ], ['copy', 'build'])
+
+        .on('change', function(evt) {
+
+            gutil.log('File changed:', evt.path);
+        });
 });
