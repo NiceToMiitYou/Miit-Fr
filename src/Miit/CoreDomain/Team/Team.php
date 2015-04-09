@@ -150,7 +150,7 @@ class Team implements Entity
      */
     public function getUserRole()
     {
-        return sprintf('ROLE_USER_', strtoupper($this->slug));
+        return sprintf('ROLE_USER_', strtoupper($this->id->getValue()));
     }
 
     /**
@@ -158,7 +158,7 @@ class Team implements Entity
      */
     public function getAmindRole()
     {
-        return sprintf('ROLE_ADMIN_', strtoupper($this->slug));
+        return sprintf('ROLE_ADMIN_', strtoupper($this->id->getValue()));
     }
 
     /**

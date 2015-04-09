@@ -57,7 +57,7 @@ class CurrentTeamListener
 
         // define the pattern
         $pattern     = sprintf('.%s', $this->baseHost);
-        $subdomain   = str_replace($pattern, '',  $currentHost);
+        $subdomain   = str_replace($pattern, '', $currentHost);
 
         // There is no subdomain
         if($subdomain === $currentHost) {
