@@ -3,6 +3,4 @@ var HelloMessage = React.createClass({displayName: "HelloMessage",
     return React.createElement("div", null, "Hello ", this.props.name);
   }
 });
-
-React.render(React.createElement(HelloMessage, {name: "John"}), mountNode);
 //# sourceMappingURL=test.js.map

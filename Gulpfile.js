@@ -8,6 +8,7 @@ var react      = require('gulp-react');
 var rename     = require('gulp-rename');
 var gutil      = require('gulp-util');
 var uglify     = require('gulp-uglify');
+var wrap       = require('gulp-wrap');
 
 
 // Load the configuration
@@ -120,8 +121,11 @@ gulp.task('concat-uglify', ['clean', 'compile-jsx'], function() {
         // Concat
         .pipe(concat(path.TMP_CONCAT_DIST))
 
+        // Wrap all the content in a function (avoid leaking)
+        .pipe(wrap({ src: './wrapper.tpl'}))
+
         // Uglify
-        .pipe(uglify())
+        .pipe(uglify({ mangle: { toplevel: true, wrap: true }}))
 
         // Rename in .min.js
         .pipe(rename(path.TMP_UGILFY_DIST))

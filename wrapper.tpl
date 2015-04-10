@@ -1,0 +1,3 @@
+(function(React){
+<%= contents %>
+})(React);
