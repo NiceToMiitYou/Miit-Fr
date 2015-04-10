@@ -1,15 +1,20 @@
-{% extends "MiitFrontendBundle:www:layout.html.twig" %}
-
-{% block title %}Welcome{% endblock %}
-{% block head %}
-    {{ parent() }}
-    <style type="text/css">
-        .important { color: #336699; }
-    </style>
-{% endblock %}
-{% block content %}
-    <h1>Welcome</h1>
-    <p class="important">
-        Welcome on my awesome homepage.
-    </p>
-{% endblock %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/dist/css/flex/master.css" />
+        <link rel="stylesheet" href="/dist/css/www/master.css" />
+        <title>{% trans from "common" %}www.homepage{% endtrans %} - Miit</title>
+    </head>
+    <body>
+        <div id="content"></div>
+        <script type="text/javascript" src="/dist/lib/react.min.js"></script>
+        <script type="text/javascript" src="/dist/js/app.min.js"></script>
+        <script type="text/javascript">
+        window.onload = function(){
+            (function(r){
+                r.render(r.createElement(MiitHomePage,null),document.getElementById('content'));
+            })(React);
+        };
+        </script>
+    </body>
+</html>
