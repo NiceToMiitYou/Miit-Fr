@@ -11,5 +11,6 @@
 /bin/
 /composer.phar
 /app/Resources/lib
+/src/DomainDrivenDesign/
 /node_modules/
 .phpintel/
