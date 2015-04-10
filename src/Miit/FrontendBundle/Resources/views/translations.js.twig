@@ -1,0 +1,23 @@
+(function(){
+    var translations = {};
+
+{% for domain, domainMessages in messages if not (domain == 'validators' or domain == 'security') %}
+translations['{{ domain|replace({"'": "\'"})|raw }}'] = {};
+    {% for key, message in domainMessages %}
+translations['{{ domain|replace({"'": "\'"})|raw }}']['{{ key|replace({"'": "\'"})|raw }}'] = '{{ message|replace({"'": "\\\'"})|raw }}';
+    {% endfor %}
+
+ {% endfor %}
+
+    window.MiitTranslator = {
+        get: function(key, from) {
+            var from = from || 'messages';
+
+            if(translations[from] && translations[from][key]) {
+                return translations[from][key];
+            }
+
+            return '';
+        }
+    };
+})();
