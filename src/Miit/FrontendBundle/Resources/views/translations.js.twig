@@ -17,7 +17,7 @@ translations['{{ domain|replace({"'": "\'"})|raw }}']['{{ key|replace({"'": "\'"
                 return translations[from][key];
             }
 
-            return '';
+            return key;
         }
     };
 })();
