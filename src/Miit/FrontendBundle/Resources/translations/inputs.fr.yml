@@ -1,0 +1,6 @@
+placeholder:
+    your.email: "Votre adresse mail"
+    team.name: "Nom de votre équipe"
+
+submit:
+    create.team: "Créer l'équipe"

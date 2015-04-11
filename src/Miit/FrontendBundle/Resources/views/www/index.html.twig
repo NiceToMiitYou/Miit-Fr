@@ -6,7 +6,10 @@
         <title>{% trans from "common" %}www.homepage{% endtrans %} - Miit</title>
     </head>
     <body>
-        <div id="content"></div>
+        <div id="content">
+            
+            <div id="create-team"></div>
+        </div>
         <script type="text/javascript" src="/dist/lib/es5-shim.min.js"></script>
         <script type="text/javascript" src="/dist/lib/react.min.js"></script>
         <script type="text/javascript" src="/dist/js/translations.js"></script>
@@ -14,7 +17,7 @@
         <script type="text/javascript">
         window.onload = function(){
             (function(r){
-                r.render(r.createElement(MiitHomePage,null),document.getElementById('content'));
+                r.render(r.createElement(MiitComponents.CreateTeam,null),document.getElementById('create-team'));
             })(React);
         };
         </script>
