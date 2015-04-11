@@ -18,7 +18,7 @@ module.exports = {
     SASS_FLEX_MASTER: config.FRONTEND_RESOURCES + '/sass/flex-it/master.scss',
     SASS_WWW_MASTER:  config.FRONTEND_RESOURCES + '/sass/www/master.scss',
     SASS_TEAM_MASTER: config.FRONTEND_RESOURCES + '/sass/team/master.scss',
-    SASS_FLEX_DIST:   config.DIST + '/css/flex/',
+    SASS_FLEX_DIST:   config.DIST + '/css/flex-it/',
     SASS_WWW_DIST:    config.DIST + '/css/www/',
     SASS_TEAM_DIST:   config.DIST + '/css/team/',
 
@@ -35,6 +35,7 @@ module.exports = {
 
     // Libs of the project
     LIBS_ALL: [
+        config.BOWER + '/es5-shim/es5-shim.min.js',
         config.BOWER + '/react/react.min.js'
     ],
     LIBS_DIST:        config.DIST + '/lib/'

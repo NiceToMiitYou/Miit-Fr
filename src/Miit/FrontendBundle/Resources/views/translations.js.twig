@@ -10,13 +10,17 @@ translations['{{ domain|replace({"'": "\'"})|raw }}']['{{ key|replace({"'": "\'"
  {% endfor %}
 
     window.MiitTranslator = {
-        get: function(key, from) {
-            var from = from || 'messages';
+        get: function(key, params, from) {
+            var from   = from   || 'messages';
+            var params = params || {};
 
             if(translations[from] && translations[from][key]) {
-                return translations[from][key];
-            }
+                key = translations[from][key];
 
+                for(var param in params) {
+                    key = key.replace('%' + param + '%', params[param]);
+                }
+            }
             return key;
         }
     };
