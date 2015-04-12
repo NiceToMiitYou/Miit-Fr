@@ -117,7 +117,7 @@ class User implements Entity
         $this->password = $password;
 
         // Set the salt of the password
-        $this->salt = $salt;
+        $this->salt     = $salt;
 
         // Set the registered time
         $this->registeredAt = new \DateTime();
@@ -134,7 +134,7 @@ class User implements Entity
         $this->password  = $password;
 
         // Set the salt of the password
-        $this->salt = $salt;
+        $this->salt      = $salt;
 
         // Set the updated time
         $this->updatedAt = new \DateTime();
