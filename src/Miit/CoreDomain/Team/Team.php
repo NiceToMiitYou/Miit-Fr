@@ -65,7 +65,7 @@ class Team implements Entity
         $this->id     = $id;
         $this->slug   = (string) $slug;
         $this->name   = (string) $name;
-        $this->locked = false;
+        $this->locked = true;
     }
 
     /**

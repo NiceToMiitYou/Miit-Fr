@@ -65,6 +65,8 @@ class CurrentTeamListener
             $subdomain = '';
         }
 
+        $redirect = false;
+
         // Allow team if more than 3 characters
         if(3 < strlen($subdomain)) {
 
@@ -73,15 +75,21 @@ class CurrentTeamListener
                 $team = $this->teamRepository->findTeamBySlug($subdomain);
 
                 $this->teamManager->setCurrentTeam($team);
+
+                $redirect = $team->isLocked();
             
             } catch(NoResultException $ex) {
-
-                // No team found so redirect to home
-                $url      = sprintf('http://www.%s/', $this->baseHost);
-                $response = new RedirectResponse($url);
-
-                return $event->setResponse($response);
+                $redirect = true;
             }
+        }
+
+        if($redirect) {
+
+            // No unlocked team found so redirect to home
+            $url      = sprintf('http://www.%s/', $this->baseHost);
+            $response = new RedirectResponse($url);
+
+            return $event->setResponse($response);
         }
     }
 }
