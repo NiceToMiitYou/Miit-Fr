@@ -2,17 +2,22 @@
     var translations = {};
 
 {% for domain, domainMessages in messages if not (domain == 'validators' or domain == 'security') %}
-translations['{{ domain|replace({"'": "\'"})|raw }}'] = {};
+    translations['{{ domain|replace({"'": "\'"})|raw }}'] = {};
     {% for key, message in domainMessages %}
 translations['{{ domain|replace({"'": "\'"})|raw }}']['{{ key|replace({"'": "\'"})|raw }}'] = '{{ message|replace({"'": "\\\'"})|raw }}';
     {% endfor %}
 
- {% endfor %}
+{% endfor %}
 
     window.MiitTranslator = {
         get: function(key, params, from) {
-            var from   = from   || 'messages';
-            var params = params || {};
+            if(typeof params !== 'object') {
+                from   = params;
+                params = null;
+            }
+
+            from   = from   || 'messages';
+            params = params || {};
 
             if(translations[from] && translations[from][key]) {
                 key = translations[from][key];
