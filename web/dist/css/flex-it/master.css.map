@@ -1,1 +1,1 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"master.css","sourcesContent":[],"sourceRoot":"/source/"}
+{"version":3,"sources":["master.scss"],"names":[],"mappings":"AAAA,AAAK;EACD,AACW;EADX,AAEW;EAFX,AAGW","file":"master.css","sourcesContent":["input.invalid {\n    border: {\n        color: red;\n        style: solid;\n        width: 1px;\n    }\n}"],"sourceRoot":"/source/"}
