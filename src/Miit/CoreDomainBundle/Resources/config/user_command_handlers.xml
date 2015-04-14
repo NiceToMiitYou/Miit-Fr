@@ -13,9 +13,6 @@
         <parameter key="user_handler.promote.class">Miit\CoreDomain\User\CommandHandler\PromoteUserCommandHandler</parameter>
         <parameter key="user_handler.demote.class">Miit\CoreDomain\User\CommandHandler\DemoteUserCommandHandler</parameter>
         
-        <parameter key="user_handler.activate.class">Miit\CoreDomain\User\CommandHandler\ActivateUserCommandHandler</parameter>
-        <parameter key="user_handler.desactivate.class">Miit\CoreDomain\User\CommandHandler\DesactivateUserCommandHandler</parameter>
-        
         <parameter key="user_handler.lock.class">Miit\CoreDomain\User\CommandHandler\LockUserCommandHandler</parameter>
         <parameter key="user_handler.unlock.class">Miit\CoreDomain\User\CommandHandler\UnlockUserCommandHandler</parameter>
     </parameters>
@@ -50,17 +47,6 @@
             <argument type="service" id="user_repository" />
         </service>
         <service id="user_handler.demote" class="%user_handler.demote.class%">
-            <tag name="command_bus.register" />
-            <argument type="service" id="user_factory" />
-            <argument type="service" id="user_repository" />
-        </service>
-
-        <service id="user_handler.activate" class="%user_handler.activate.class%">
-            <tag name="command_bus.register" />
-            <argument type="service" id="user_factory" />
-            <argument type="service" id="user_repository" />
-        </service>
-        <service id="user_handler.desactivate" class="%user_handler.desactivate.class%">
             <tag name="command_bus.register" />
             <argument type="service" id="user_factory" />
             <argument type="service" id="user_repository" />
