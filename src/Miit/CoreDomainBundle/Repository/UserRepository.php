@@ -96,6 +96,8 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', get_class($user)));
         }
 
+        //die(var_dump($user));
+
         return $this->loadUserByUsername($user->getUsername());
     }
 

@@ -32,7 +32,7 @@ class User implements Entity
      * 
      * @var string
      */
-    protected $username;
+    protected $name;
 
     /**
      * The encrypted password
@@ -88,16 +88,16 @@ class User implements Entity
      * 
      * @param UserId $id
      * @param Email  $email
-     * @param string $username
+     * @param string $name
      */
-    public function __construct(UserId $id, $username, Email $email)
+    public function __construct(UserId $id, $name, Email $email)
     {
-        $this->id       = $id;
-        $this->username = $username;
-        $this->email    = $email;
-        $this->active   = false;
-        $this->locked   = false;
-        $this->roles    = array('ROLE_USER');
+        $this->id     = $id;
+        $this->name   = $name;
+        $this->email  = $email;
+        $this->active = false;
+        $this->locked = false;
+        $this->roles  = array('ROLE_USER');
     }
 
     /**
@@ -141,12 +141,12 @@ class User implements Entity
     }
 
     /**
-     * @param string $username
+     * @param string $name
      * @param Email  $email
      */
-    public function update($username, Email $email)
+    public function update($name, Email $email)
     {
-        $this->username  = $username;
+        $this->name      = $name;
         $this->email     = $email;
         $this->updatedAt = new \DateTime();
     }
@@ -255,9 +255,17 @@ class User implements Entity
     /**
      * @return string
      */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return string
+     */
     public function getUsername()
     {
-        return $this->username;
+        return $this->email;
     }
 
     /**

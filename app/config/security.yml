@@ -30,9 +30,16 @@ security:
         login:
             pattern:  ^/login$
             security: false
+
+        www:
+            pattern:  ^/
+            host: "www.%domain%"
+            security: false
+
         # redirect after login
         main:
-            anonymous: ~
+            pattern:  ^/
+            host: ".%domain%"
             form_login:
                 target_path_parameter: redirect_url
                 login_path: /login

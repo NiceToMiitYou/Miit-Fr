@@ -27,8 +27,13 @@ final class PromoteUserCommandHandler extends UserCommandHandlerAbstract
             );
 
             if(null !== $user) {
+                // Get the list of roles
+                $roles = $command->getRoles();
 
-                $user->promote($command->getRole());
+                // For each roles
+                foreach ($roles as $role) {
+                    $user->promote($role);
+                }
 
                 // Persist the user
                 $this->userRepository->persist($user);

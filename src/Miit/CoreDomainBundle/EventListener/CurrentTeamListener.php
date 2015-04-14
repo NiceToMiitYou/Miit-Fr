@@ -8,7 +8,6 @@ use Miit\CoreDomainBundle\Repository\TeamRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Core\SecurityContext;
 
 use Doctrine\ORM\NoResultException;
 
@@ -56,8 +55,8 @@ class CurrentTeamListener
         );
 
         // define the pattern
-        $pattern     = sprintf('.%s', $this->baseHost);
-        $subdomain   = str_replace($pattern, '', $currentHost);
+        $pattern   = sprintf('.%s', $this->baseHost);
+        $subdomain = str_replace($pattern, '', $currentHost);
 
         // There is no subdomain
         if($subdomain === $currentHost) {

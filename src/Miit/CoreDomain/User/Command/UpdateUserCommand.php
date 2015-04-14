@@ -22,7 +22,7 @@ final class UpdateUserCommand implements Command
     /**
      * @var string
      */
-    private $username;
+    private $name;
     
     /**
      * @var Email
@@ -31,14 +31,14 @@ final class UpdateUserCommand implements Command
 
     /**
      * @param UserId $userId
-     * @param string $username
+     * @param string $name
      * @param Email  $email
      */
-    public function __construct(UserId $userId, $username, Email $email)
+    public function __construct(UserId $userId, $name, Email $email)
     {
-        $this->userId   = $userId;
-        $this->username = (string) $username;
-        $this->email    = $email;
+        $this->userId = $userId;
+        $this->name   = (string) $name;
+        $this->email  = $email;
     }
 
     /**
@@ -52,9 +52,9 @@ final class UpdateUserCommand implements Command
     /**
      * @return string
      */
-    public function getUsername()
+    public function getName()
     {
-        return $this->username;
+        return $this->name;
     }
 
     /**

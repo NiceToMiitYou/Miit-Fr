@@ -5,19 +5,20 @@ namespace Miit\FrontendBundle\Model;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class User
+ * Class Team
  * 
  * @author Tacyniak Boris <boris.tacyniak@itevents.fr>
  */
-class User
-{
+class Team
+{   
     /**
      * @Assert\NotBlank(
      *      groups={"registration"}
      * )
-     * @Assert\Email(
-     *      groups={"registration"}
+     * @Assert\Length(
+     *      min=4,
+     *      min=32
      * )
      */
-    public $email;
+    public $name;
 }

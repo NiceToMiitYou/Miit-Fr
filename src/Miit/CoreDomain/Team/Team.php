@@ -65,7 +65,7 @@ class Team implements Entity
         $this->id     = $id;
         $this->slug   = (string) $slug;
         $this->name   = (string) $name;
-        $this->locked = true;
+        $this->locked = false;
     }
 
     /**
@@ -150,7 +150,7 @@ class Team implements Entity
      */
     public function getUserRole()
     {
-        return sprintf('ROLE_USER_', strtoupper($this->id->getValue()));
+        return sprintf('ROLE_USER_%s', strtoupper($this->id));
     }
 
     /**
@@ -158,7 +158,7 @@ class Team implements Entity
      */
     public function getAmindRole()
     {
-        return sprintf('ROLE_ADMIN_', strtoupper($this->id->getValue()));
+        return sprintf('ROLE_ADMIN_%s', strtoupper($this->id));
     }
 
     /**

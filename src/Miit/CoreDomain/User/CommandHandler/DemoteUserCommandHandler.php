@@ -28,7 +28,13 @@ final class DemoteUserCommandHandler extends UserCommandHandlerAbstract
 
             if(null !== $user) {
 
-                $user->demote($command->getRole());
+                // Get the list of roles
+                $roles = $command->getRoles();
+
+                // For each roles
+                foreach ($roles as $role) {
+                    $user->demote($role);
+                }
 
                 // Persist the user
                 $this->userRepository->persist($user);

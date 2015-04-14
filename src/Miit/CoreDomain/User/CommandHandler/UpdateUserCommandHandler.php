@@ -29,7 +29,7 @@ final class UpdateUserCommandHandler extends UserCommandHandlerAbstract
             if(null !== $user) {
 
                 $user->update(
-                    $command->getUsername(),
+                    $command->getName(),
                     $command->getEmail()
                 );
 

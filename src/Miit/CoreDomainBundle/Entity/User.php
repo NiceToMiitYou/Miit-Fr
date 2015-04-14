@@ -40,7 +40,7 @@ class User extends UserModel implements UserInterface, EquatableInterface
      * 
      * @ORM\Column(type="string", length=32, nullable=false)
      */
-    protected $username;
+    protected $name;
 
     /**
      * {@inheritDoc}
@@ -148,6 +148,6 @@ class User extends UserModel implements UserInterface, EquatableInterface
      */
     public function isEqualTo(UserInterface $user)
     {
-        return $this->username === $user->getUsername();
+        return $this->email === $user->getUsername();
     }
 }

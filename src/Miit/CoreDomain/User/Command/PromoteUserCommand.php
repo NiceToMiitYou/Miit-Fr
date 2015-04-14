@@ -19,18 +19,18 @@ final class PromoteUserCommand implements Command
     private $userId;
 
     /**
-     * @var string
+     * @var array
      */
-    private $role;
+    private $roles;
 
     /**
      * @param UserId $userId
      * @param string $role
      */
-    public function __construct(UserId $userId, $role)
+    public function __construct(UserId $userId, $roles)
     {
         $this->userId = $userId;
-        $this->role   = (string) $role;
+        $this->roles  = $roles;
     }
 
     /**
@@ -42,10 +42,10 @@ final class PromoteUserCommand implements Command
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getRole()
+    public function getRoles()
     {
-        return $this->role;
+        return $this->roles;
     }
 }

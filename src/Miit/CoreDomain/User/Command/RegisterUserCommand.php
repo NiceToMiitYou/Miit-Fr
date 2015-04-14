@@ -22,7 +22,7 @@ final class RegisterUserCommand implements Command
     /**
      * @var string
      */
-    private $username;
+    private $name;
     
     /**
      * @var Email
@@ -35,17 +35,24 @@ final class RegisterUserCommand implements Command
     private $password;
 
     /**
+     * @var array
+     */
+    private $roles;
+
+    /**
      * @param UserId $userId
-     * @param string $username
+     * @param string $name
      * @param Email  $email
      * @param string $password
+     * @param array  $roles
      */
-    public function __construct(UserId $userId, $username, Email $email, $password)
+    public function __construct(UserId $userId, $name, Email $email, $password, $roles = array())
     {
         $this->userId   = $userId;
-        $this->username = (string) $username;
+        $this->name     = (string) $name;
         $this->email    = $email;
         $this->password = (string) $password;
+        $this->roles    = $roles;
     }
 
     /**
@@ -59,9 +66,9 @@ final class RegisterUserCommand implements Command
     /**
      * @return string
      */
-    public function getUsername()
+    public function getName()
     {
-        return $this->username;
+        return $this->name;
     }
 
     /**
@@ -78,5 +85,13 @@ final class RegisterUserCommand implements Command
     public function getPassword()
     {
         return $this->password;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRoles()
+    {
+        return $this->roles;
     }
 }

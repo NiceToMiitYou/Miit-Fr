@@ -24,9 +24,14 @@ final class CreateUserCommandHandler extends UserCommandHandlerAbstract
 
             $user = $this->userFactory->newIntance(
                 $command->getUserId(),
-                $command->getUsername(),
+                $command->getName(),
                 $command->getEmail()
             );
+
+            // Promote for extra roles
+            foreach ($command->getRoles() as $role) {
+                $user->promote($role);
+            }
 
             // Persist the user
             $this->userRepository->persist($user);

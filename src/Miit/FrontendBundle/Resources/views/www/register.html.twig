@@ -1,6 +1,5 @@
-{% if error is defined and error %}
-    <div>{{ error.message }}</div>
-{% endif %}
+
+{{ form_errors(registration_form) }}
 
 {{ form_start(registration_form) }}
     {{ form_errors(registration_form) }}

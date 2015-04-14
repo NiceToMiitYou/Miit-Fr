@@ -17,10 +17,10 @@ interface UserFactory extends Factory
      * Return a new instance of user
      * 
      * @param UserId $userId
-     * @param string $username
+     * @param string $name
      * @param Email  $email
      * 
      * @return User
      */
-    public function newIntance(UserId $userId, $username, Email $email);
+    public function newIntance(UserId $userId, $name, Email $email);
 }

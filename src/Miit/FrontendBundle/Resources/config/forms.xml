@@ -4,15 +4,22 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="user_type.class">Miit\FrontendBundle\Form\Type\UserType</parameter>
+        <parameter key="user_registration_type.class">Miit\FrontendBundle\Form\Type\UserRegistrationType</parameter>
+        <parameter key="team_registration_type.class">Miit\FrontendBundle\Form\Type\TeamRegistrationType</parameter>
         <parameter key="registration_type.class">Miit\FrontendBundle\Form\Type\RegistrationType</parameter>
     </parameters>
 
     <services>
-        <!-- User Type -->
-        <service id="frontend.form.type.user"
-                 class="%user_type.class%">
-            <tag name="form.type" alias="user_type" />
+        <!-- User registration Type -->
+        <service id="frontend.form.type.user_registration"
+                 class="%user_registration_type.class%">
+            <tag name="form.type" alias="user_registration_type" />
+        </service>
+
+        <!-- Team Registration Type -->
+        <service id="frontend.form.type.team_registration"
+                 class="%team_registration_type.class%">
+            <tag name="form.type" alias="team_registration_type" />
         </service>
 
         <!-- Registration Type -->

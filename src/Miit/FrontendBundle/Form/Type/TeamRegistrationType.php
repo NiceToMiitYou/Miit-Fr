@@ -8,18 +8,18 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Class UserType
+ * Class TeamRegistrationType
  * 
  * @author Tacyniak Boris <boris.tacyniak@itevents.fr>
  */
-class UserType extends AbstractType
+class TeamRegistrationType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('email',    'email');
+        $builder->add('name', 'text');
     }
 
     /**
@@ -28,7 +28,7 @@ class UserType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Miit\FrontendBundle\Model\User',
+            'data_class' => 'Miit\FrontendBundle\Model\Team',
             'validation_groups' => array('registration')
         ));
     }
@@ -38,6 +38,6 @@ class UserType extends AbstractType
      */
     public function getName()
     {
-        return 'user_type';
+        return 'team_registration_type';
     }
 }

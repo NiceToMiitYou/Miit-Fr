@@ -1,4 +1,5 @@
 <?php
+
 namespace Miit\FrontendBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
@@ -7,24 +8,18 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Class RegistrationType
+ * Class UserRegistrationType
  * 
  * @author Tacyniak Boris <boris.tacyniak@itevents.fr>
  */
-class RegistrationType extends AbstractType
+class UserRegistrationType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('user', 'user_registration_type');
-
-        $builder->add('team', 'team_registration_type');
-
-        $builder->add('terms', 'checkbox', array(
-            'property_path' => 'termsAccepted'
-        ));
+        $builder->add('email', 'email');
     }
 
     /**
@@ -33,11 +28,8 @@ class RegistrationType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class'        => 'Miit\FrontendBundle\Model\Registration',
-            'validation_groups' => array('registration'),
-            'csrf_protection'   => true,
-            'csrf_field_name'   => '_token',
-            'intention'         => 'registration',
+            'data_class' => 'Miit\FrontendBundle\Model\User',
+            'validation_groups' => array('registration')
         ));
     }
 
@@ -46,6 +38,6 @@ class RegistrationType extends AbstractType
      */
     public function getName()
     {
-        return 'registration_type';
+        return 'user_registration_type';
     }
 }

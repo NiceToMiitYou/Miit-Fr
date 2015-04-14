@@ -20,6 +20,14 @@ class Registration
     public $user;
 
     /**
+     * @Assert\Type(
+     *      type="Miit\FrontendBundle\Model\Team",
+     *      groups={"registration"}
+     * )
+     */
+    public $team;
+
+    /**
      * @Assert\NotBlank(
      *      groups={"registration"}
      * )
