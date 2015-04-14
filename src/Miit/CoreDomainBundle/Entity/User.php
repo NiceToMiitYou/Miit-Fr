@@ -68,13 +68,6 @@ class User extends UserModel implements UserInterface, EquatableInterface
      * 
      * @ORM\Column(type="boolean", nullable=false)
      */
-    protected $active;
-
-    /**
-     * {@inheritDoc}
-     * 
-     * @ORM\Column(type="boolean", nullable=false)
-     */
     protected $locked;
 
     /**

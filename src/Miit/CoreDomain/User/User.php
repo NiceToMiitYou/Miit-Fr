@@ -56,13 +56,6 @@ class User implements Entity
     protected $roles;
 
     /**
-     * Define if the user is active, after registration
-     * 
-     * @var boolean
-     */
-    protected $active;
-
-    /**
      * Define if the user is locked
      * 
      * @var boolean
@@ -95,7 +88,6 @@ class User implements Entity
         $this->id     = $id;
         $this->name   = $name;
         $this->email  = $email;
-        $this->active = false;
         $this->locked = false;
         $this->roles  = array('ROLE_USER');
     }
@@ -148,24 +140,6 @@ class User implements Entity
     {
         $this->name      = $name;
         $this->email     = $email;
-        $this->updatedAt = new \DateTime();
-    }
-
-    /**
-     * Activate the user
-     */
-    public function activate()
-    {
-        $this->active    = true;
-        $this->updatedAt = new \DateTime();
-    }
-
-    /**
-     * Desactivate the user
-     */
-    public function deactivate()
-    {
-        $this->active    = false;
         $this->updatedAt = new \DateTime();
     }
 
@@ -300,14 +274,6 @@ class User implements Entity
     public function hasRole($role)
     {
         return in_array($role, $this->roles, true);
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isActive()
-    {
-        return (boolean) $this->active;
     }
 
     /**

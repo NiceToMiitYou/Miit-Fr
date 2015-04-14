@@ -67,9 +67,9 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
         $query = $em->createQueryBuilder()
                     ->select('u')
                     ->from('MiitCoreDomainBundle:User ', 'u')
-                    ->where('u.active = :active')
+                    ->where('u.locked = :locked')
                     ->andWhere('u.email = :username') // The email is used instead of the username to login
-                    ->setParameter('active',   true)
+                    ->setParameter('locked',   false)
                     ->setParameter('username', $username)
                     ->getQuery();
 
