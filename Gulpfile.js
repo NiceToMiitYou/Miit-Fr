@@ -42,6 +42,22 @@ gulp.task('copy', ['clean', 'bower'], function() {
 });
 
 gulp.task('sass', ['clean'], function () {
+    // Compile SASS Master file of FONT-AWESOME
+    gulp.src(path.SASS_AWESOME_MASTER)
+        // Source map init
+        .pipe(sourcemaps.init())
+
+        // Compile sass
+        .pipe(sass())
+
+        // Source map write
+        .pipe(sourcemaps.write('.'))
+
+        // Destination of sass file
+        .pipe(gulp.dest(path.SASS_AWESOME_DIST))
+
+        .on('error', gutil.log);
+    
     // Compile SASS Master file of FLEX IT
     gulp.src(path.SASS_FLEX_MASTER)
         // Source map init
