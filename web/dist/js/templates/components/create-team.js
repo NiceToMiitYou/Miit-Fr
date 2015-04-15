@@ -1,15 +1,17 @@
 MiitComponents.CreateTeam = React.createClass({displayName: "CreateTeam",
-
-    getInitialState: function() {
-
+    getDefaultProps: function() {
         return {
             placeholder: {
                 email: MiitTranslator.get('placeholder.your.email', 'inputs'),
                 team:  MiitTranslator.get('placeholder.team.name', 'inputs')
             },
-            submit: MiitTranslator.get('submit.create.team', 'inputs'),
-            errors: this.getDefaultErrors()
-        }
+            submit: MiitTranslator.get('submit.create.team', 'inputs')
+        };
+    },
+
+    getInitialState: function() {
+
+        return this.getDefaultErrors();
     },
 
     getDefaultErrors: function() {
@@ -31,33 +33,31 @@ MiitComponents.CreateTeam = React.createClass({displayName: "CreateTeam",
         
         // Check if there is data
         if (!email || !team || !terms) {
-            this.setState({ errors: {
+            this.setState({
                 missing_email: !email,
                 missing_team:  !team,
                 missing_terms: !terms
-            }});
+            });
             return;
         }
 
         // Check if this is a correct email
         if(!MiitUtils.validator.email(email)) {
-            this.setState({ errors: {
+            this.setState({
                 invalid_email: true
-            }});
+            });
             return;
         }
 
         // Check if this is a correct team name
         if(!MiitUtils.validator.team(team)) {
-            this.setState({ errors: {
+            this.setState({
                 invalid_team: true
-            }});
+            });
             return;
         }
 
-        this.setState({
-            errors: this.getDefaultErrors()
-        });
+        this.setState(this.getDefaultErrors());
 
         // Request for CRSF
         MiitUtils.ajax.crsf('registration', function(token) {
@@ -80,26 +80,26 @@ MiitComponents.CreateTeam = React.createClass({displayName: "CreateTeam",
         var cx = React.addons.classSet;
 
         var classes_email = cx({
-            'invalid': this.state.errors.missing_email ||
-                       this.state.errors.invalid_email
+            'invalid': this.state.missing_email ||
+                       this.state.invalid_email
         });
 
         var classes_team = cx({
-            'invalid':  this.state.errors.missing_team ||
-                        this.state.errors.invalid_team
+            'invalid':  this.state.missing_team ||
+                        this.state.invalid_team
         });
 
         var classes_terms = cx({
-            'invalid': this.state.errors.missing_terms
+            'invalid': this.state.missing_terms
         });
 
         return (
             React.createElement("form", {class: "miit-component create-team", onSubmit: this.handleSubmit}, 
                 React.createElement("div", null, 
-                    React.createElement("input", {type: "text", className: classes_email, placeholder: this.state.placeholder.email, ref: "email"}), 
-                    React.createElement("input", {type: "text", className: classes_team, placeholder: this.state.placeholder.team, ref: "team"}), 
+                    React.createElement("input", {type: "text", className: classes_email, placeholder: this.props.placeholder.email, ref: "email"}), 
+                    React.createElement("input", {type: "text", className: classes_team, placeholder: this.props.placeholder.team, ref: "team"}), 
                     React.createElement("input", {type: "checkbox", className: classes_terms, ref: "terms"}), 
-                    React.createElement("input", {type: "submit", value: this.state.submit})
+                    React.createElement("input", {type: "submit", value: this.props.submit})
                 )
             )
         );

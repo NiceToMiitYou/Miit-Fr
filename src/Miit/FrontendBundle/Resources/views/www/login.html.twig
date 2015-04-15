@@ -1,15 +1,41 @@
-{% if error is defined and error %}
-    <div>{{ error.message }}</div>
-{% endif %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="stylesheet" href="/dist/css/font-awesome/font-awesome.css" />
+        <link rel="stylesheet" href="/dist/css/flex-it/master.css" />
+        <link rel="stylesheet" href="/dist/css/www/master.css" />
+        <title>{% trans from "common" %}www.homepage{% endtrans %} - Miit</title>
+    </head>
+    <body>
+        <div id="content">
+            
+            {% if error is defined and error %}
+                <div>{{ error.message }}</div>
+            {% endif %}
 
-<form action="{{ path('login_check') }}" method="post">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="_username" value="{{ last_username }}" />
+            <form action="{{ path('login_check') }}" method="post">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="_username" value="{{ last_username }}" />
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="_password" />
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="_password" />
 
-    <input type="hidden" name="_target_path" value="account" />
+                <input type="hidden" name="_target_path" value="account" />
 
-    <input type="submit" name="login" />
-</form>
+                <input type="submit" name="login" />
+            </form>
+        </div>
+        <script type="text/javascript" src="/dist/lib/es5-shim.min.js"></script>
+        <script type="text/javascript" src="/dist/lib/react-with-addons.min.js"></script>
+        <script type="text/javascript" src="/dist/js/translations.js"></script>
+        <script type="text/javascript" src="/dist/js/app.min.js"></script>
+        <script type="text/javascript">
+        window.onload = function(){
+            (function(r){
+                
+            })(React);
+        };
+        </script>
+    </body>
+</html>
