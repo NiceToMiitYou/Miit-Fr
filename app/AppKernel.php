@@ -2,6 +2,7 @@
 
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\Finder\Finder;
 
 class AppKernel extends Kernel
 {
@@ -17,7 +18,20 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Miit\CoreDomainBundle\MiitCoreDomainBundle(),
             new Miit\FrontendBundle\MiitFrontendBundle(),
+            new Miit\AppBundle\MiitAppBundle(),
         );
+
+        $finder = new Finder();
+        $finder->files()
+               ->name('*Bundle.php')
+               ->depth('== 1')
+               ->in(__DIR__.'/../src/MiitApps');
+     
+        foreach ($finder as $file) {
+            $class = sprintf('MiitApps\\%s\\%s', $file->getRelativePath(), $file->getBasename('.php'));
+            
+            $bundles[] = new $class;
+        }
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
