@@ -11,7 +11,7 @@ MiitComponents.MiitTeamContent = React.createClass({
                 <div className="mb20">
                     <div className="checkbox-field mb20">
                         <label>
-                            <input type="radio" name="confid" className="option-input radio" checked />
+                            <input type="radio" name="confid" className="option-input radio" defaultChecked={true} />
                             Publique
                         </label>
                     </div>
