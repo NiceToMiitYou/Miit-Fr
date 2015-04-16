@@ -5,6 +5,10 @@ login_check:
 logout:
     pattern:  /logout
 
-frontend:
+miit_app:
+    resource: "@MiitAppBundle/Controller"
+    type:     annotation
+
+miit_frontend:
     resource: "@MiitFrontendBundle/Controller"
     type:     annotation
