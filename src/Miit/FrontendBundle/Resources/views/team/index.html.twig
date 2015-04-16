@@ -12,6 +12,7 @@
         <div id="content">
             {% trans from "team" %}loading{% endtrans %}
         </div>
+
         <script type="text/javascript" src="/dist/lib/es5-shim.min.js"></script>
         <script type="text/javascript" src="/dist/lib/react-with-addons.min.js"></script>
         <script type="text/javascript" src="/dist/js/translations.js"></script>
@@ -19,7 +20,7 @@
         <script type="text/javascript">
         window.onload = function(){
             (function(r){
-                r.render(r.createElement(MiitTeamHomePage,null),document.getElementById('content'));
+                r.render(r.createElement(MiitComponents.TeamApp,null),document.getElementById('content'));
             })(React);
         };
         </script>
