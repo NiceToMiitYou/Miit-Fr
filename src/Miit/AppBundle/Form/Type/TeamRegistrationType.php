@@ -1,6 +1,6 @@
 <?php
 
-namespace Miit\FrontendBundle\Form\Type;
+namespace Miit\AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -28,7 +28,7 @@ class TeamRegistrationType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Miit\FrontendBundle\Model\Team',
+            'data_class' => 'Miit\AppBundle\Model\Team',
             'validation_groups' => array('registration')
         ));
     }

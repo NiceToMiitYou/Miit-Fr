@@ -1,6 +1,6 @@
 <?php
 
-namespace Miit\FrontendBundle\DependencyInjection;
+namespace Miit\AppBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -16,7 +16,7 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
 
-        $rootNode = $treeBuilder->root('miit_frontend');
+        $rootNode = $treeBuilder->root('miit_app');
 
         return $treeBuilder;
     }

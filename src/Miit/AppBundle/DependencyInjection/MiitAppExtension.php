@@ -1,6 +1,6 @@
 <?php
 
-namespace Miit\FrontendBundle\DependencyInjection;
+namespace Miit\AppBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -8,11 +8,11 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 /**
- * Class MiitFrontendExtension
+ * Class MiitAppExtension
  * 
  * @author Tacyniak Boris <boris.tacyniak@itevents.fr>
  */
-class MiitFrontendExtension extends Extension
+class MiitAppExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container) {
         
@@ -35,6 +35,6 @@ class MiitFrontendExtension extends Extension
     }
     
     public function getAlias() {
-        return 'miit_frontend';
+        return 'miit_app';
     }
 }

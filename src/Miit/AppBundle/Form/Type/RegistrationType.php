@@ -1,5 +1,5 @@
 <?php
-namespace Miit\FrontendBundle\Form\Type;
+namespace Miit\AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -33,7 +33,7 @@ class RegistrationType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class'        => 'Miit\FrontendBundle\Model\Registration',
+            'data_class'        => 'Miit\AppBundle\Model\Registration',
             'validation_groups' => array('registration'),
             'csrf_protection'   => true,
             'csrf_field_name'   => '_token',

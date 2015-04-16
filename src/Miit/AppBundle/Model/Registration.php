@@ -1,6 +1,6 @@
 <?php
 
-namespace Miit\FrontendBundle\Model;
+namespace Miit\AppBundle\Model;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -13,7 +13,7 @@ class Registration
 {
     /**
      * @Assert\Type(
-     *      type="Miit\FrontendBundle\Model\User",
+     *      type="Miit\AppBundle\Model\User",
      *      groups={"registration"}
      * )
      */
@@ -21,7 +21,7 @@ class Registration
 
     /**
      * @Assert\Type(
-     *      type="Miit\FrontendBundle\Model\Team",
+     *      type="Miit\AppBundle\Model\Team",
      *      groups={"registration"}
      * )
      */
