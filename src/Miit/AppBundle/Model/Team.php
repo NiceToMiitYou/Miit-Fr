@@ -17,7 +17,7 @@ class Team
      * )
      * @Assert\Length(
      *      min=4,
-     *      min=32
+     *      max=32
      * )
      */
     public $name;
