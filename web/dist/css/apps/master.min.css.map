@@ -1,0 +1,1 @@
+{"version":3,"sources":["ChatBundle/Resources/sass/master.scss","QuizzBundle/Resources/sass/master.scss"],"names":[],"mappings":"AACA,SCAA,UDCkB","file":"master.min.css","sourcesContent":["//Test file\n.in-chat {\n    border-color: #000;\n}","//Test file\n.in-quizz {\n    border-color: #000;\n}"],"sourceRoot":"/source/"}

@@ -2,6 +2,7 @@ var gulp       = require('gulp');
 var bower      = require('gulp-bower');
 var clean      = require('gulp-clean');
 var concat     = require('gulp-concat');
+var minify     = require('gulp-minify-css');
 var sass       = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var react      = require('gulp-react');
@@ -42,69 +43,43 @@ gulp.task('copy', ['clean', 'bower'], function() {
 });
 
 gulp.task('sass', ['clean'], function () {
-    // Compile SASS Master file of FONT-AWESOME
-    gulp.src(path.SASS_AWESOME_MASTER)
-        // Source map init
-        .pipe(sourcemaps.init())
 
-        // Compile sass
-        .pipe(sass())
+    var list = {};
 
-        // Source map write
-        .pipe(sourcemaps.write('.'))
+    list[path.SASS_AWESOME_MASTER] = path.SASS_AWESOME_DIST;
+    list[path.SASS_FLEX_MASTER]    = path.SASS_FLEX_DIST;
+    list[path.SASS_WWW_MASTER]     = path.SASS_WWW_DIST;
+    list[path.SASS_TEAM_MASTER]    = path.SASS_TEAM_DIST;
+    list[path.SASS_APPS_MASTER]    = path.SASS_APPS_DIST;
 
-        // Destination of sass file
-        .pipe(gulp.dest(path.SASS_AWESOME_DIST))
+    for(var src in list) {
+        var dest = list[src];
 
-        .on('error', gutil.log);
-    
-    // Compile SASS Master file of FLEX IT
-    gulp.src(path.SASS_FLEX_MASTER)
-        // Source map init
-        .pipe(sourcemaps.init())
+        // Compile SASS Master file of TEAM
+        gulp.src(src)
+            // Source map init
+            .pipe(sourcemaps.init())
 
-        // Compile sass
-        .pipe(sass())
+            // Compile sass
+            .pipe(sass())
 
-        // Source map write
-        .pipe(sourcemaps.write('.'))
+            // Concat
+            .pipe(concat(path.TMP_CSS_CONCAT_DIST))
 
-        // Destination of sass file
-        .pipe(gulp.dest(path.SASS_FLEX_DIST))
+            // Minify css
+            .pipe(minify())
 
-        .on('error', gutil.log);
-    
-    // Compile SASS Master file of WWW
-    gulp.src(path.SASS_WWW_MASTER)
-        // Source map init
-        .pipe(sourcemaps.init())
+            // Rename in .min.js
+            .pipe(rename(path.TMP_CSS_UGILFY_DIST))
 
-        // Compile sass
-        .pipe(sass())
+            // Source map write
+            .pipe(sourcemaps.write('.'))
 
-        // Source map write
-        .pipe(sourcemaps.write('.'))
+            // Destination of sass file
+            .pipe(gulp.dest(dest))
 
-        // Destination of sass file
-        .pipe(gulp.dest(path.SASS_WWW_DIST))
-
-        .on('error', gutil.log);
-
-    // Compile SASS Master file of TEAM
-    gulp.src(path.SASS_TEAM_MASTER)
-        // Source map init
-        .pipe(sourcemaps.init())
-
-        // Compile sass
-        .pipe(sass())
-
-        // Source map write
-        .pipe(sourcemaps.write('.'))
-
-        // Destination of sass file
-        .pipe(gulp.dest(path.SASS_TEAM_DIST))
-
-        .on('error', gutil.log);
+            .on('error', gutil.log);
+    }
 });
 
 gulp.task('compile-jsx', ['clean'], function() {
@@ -135,7 +110,7 @@ gulp.task('concat-uglify', ['clean', 'compile-jsx'], function() {
         .pipe(sourcemaps.init())
 
         // Concat
-        .pipe(concat(path.TMP_CONCAT_DIST))
+        .pipe(concat(path.TMP_JS_CONCAT_DIST))
 
         // Wrap all the content in a function (avoid leaking)
         .pipe(wrap({ src: './wrapper.tpl'}))
@@ -144,7 +119,7 @@ gulp.task('concat-uglify', ['clean', 'compile-jsx'], function() {
         .pipe(uglify({ mangle: { toplevel: true, wrap: true }}))
 
         // Rename in .min.js
-        .pipe(rename(path.TMP_UGILFY_DIST))
+        .pipe(rename(path.TMP_JS_UGILFY_DIST))
 
         // Source map write
         .pipe(sourcemaps.write('.'))

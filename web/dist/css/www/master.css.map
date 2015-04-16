@@ -1,1 +1,0 @@
-{"version":3,"sources":["master.scss"],"names":[],"mappings":"AACA;EACI,AAAkB","file":"master.css","sourcesContent":["// Test sass\nbody {\n    background-color: #f4f4f4;\n}"],"sourceRoot":"/source/"}
