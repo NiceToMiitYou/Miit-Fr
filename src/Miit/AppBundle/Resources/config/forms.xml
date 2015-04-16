@@ -10,7 +10,7 @@
     </parameters>
 
     <services>
-        <!-- User registration Type -->
+        <!-- User Registration Type -->
         <service id="app.form.type.user_registration"
                  class="%user_registration_type.class%">
             <tag name="form.type" alias="user_registration_type" />

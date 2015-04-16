@@ -28,7 +28,7 @@ class UserRegistrationType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Miit\AppBundle\Model\User',
+            'data_class'        => 'Miit\AppBundle\Model\User',
             'validation_groups' => array('registration')
         ));
     }

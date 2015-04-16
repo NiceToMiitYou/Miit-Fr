@@ -8,6 +8,7 @@ logout:
 miit_app:
     resource: "@MiitAppBundle/Controller"
     type:     annotation
+    prefix:   /app
 
 miit_frontend:
     resource: "@MiitFrontendBundle/Controller"
