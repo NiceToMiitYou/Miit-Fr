@@ -60,17 +60,8 @@ MiitComponents.CreateTeam = React.createClass({
         this.setState(this.getDefaultErrors());
 
         // Request for CRSF
-        MiitUtils.ajax.crsf('registration', function(token) {
-
-            // Register the user
-            MiitUtils.ajax.send('/register', {
-                'registration_type[user][email]': email,
-                'registration_type[team][name]':  team,
-                'registration_type[terms]':       terms,
-                'registration_type[_token]':      token
-            }, function(data) {
-                console.log(data);    
-            });
+        MiitUser.registration(email, team, function(data) {
+            console.log(data);    
         });
 
         return;

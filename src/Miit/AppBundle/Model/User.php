@@ -20,4 +20,15 @@ class User
      * )
      */
     public $email;
+
+    /**
+     * @Assert\NotBlank(
+     *      groups={"change_password"}
+     * )
+     * @Assert\Length(
+     *      groups={"change_password"},
+     *      min=6
+     * )
+     */
+    public $password;
 }

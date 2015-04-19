@@ -134,6 +134,11 @@ class Team implements Entity
      */
     public function getId()
     {
+        if(true === is_string($this->id))
+        {
+            $this->id = new TeamId($this->id);
+        }
+
         return $this->id;
     }
 

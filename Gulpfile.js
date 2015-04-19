@@ -101,11 +101,13 @@ gulp.task('compile-jsx', ['clean'], function() {
 });
 
 gulp.task('concat-uglify', ['clean', 'compile-jsx'], function() {
+
+    var all = [].concat(path.SCRIPTS_ALL);
+
+    all.push(path.JSX_DIST_ALL);
+
     // Uglify all scripts
-    gulp.src( [
-            path.JSX_DIST_ALL.toString(),
-            path.SCRIPTS_ALL.toString()
-        ] )
+    gulp.src( all )
         // Source map init
         .pipe(sourcemaps.init())
 

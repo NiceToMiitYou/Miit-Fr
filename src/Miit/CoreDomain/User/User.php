@@ -215,6 +215,11 @@ class User implements Entity
      */
     public function getId()
     {
+        if(true === is_string($this->id))
+        {
+            $this->id = new UserId($this->id);
+        }
+
         return $this->id;
     }
 
