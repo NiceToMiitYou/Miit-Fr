@@ -47,6 +47,11 @@ security:
             logout:
                 path:   /logout
                 target: /
+            remember_me:
+                key:      "%secret%"
+                lifetime: 31536000
+                path:     /
+                domain:   ".%domain%"
 
         default:
             anonymous: ~
