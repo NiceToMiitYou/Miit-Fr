@@ -10,6 +10,9 @@ var MiitUtils = (function() {
     // Regex for team name
     var RegexTeamName = /^[a-z0-9]{4,}$/i;
 
+    // Regex for password
+    var RegexPassword = /^.{6,32}$/;
+
     // Generate the validator for a regex
     var validatorGenerator = function(re) {
         // Return the validation function
@@ -128,8 +131,9 @@ var MiitUtils = (function() {
         },
 
         validator: {
-            email: validatorGenerator(RegexEmail),
-            team:  validatorGenerator(RegexTeamName)
+            email:    validatorGenerator(RegexEmail),
+            password: validatorGenerator(RegexPassword),
+            team:     validatorGenerator(RegexTeamName)
         }
     };
 })();

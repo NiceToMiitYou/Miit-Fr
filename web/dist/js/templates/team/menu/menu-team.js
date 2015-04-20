@@ -36,4 +36,4 @@ MiitComponents.MenuTeam = React.createClass({displayName: "MenuTeam",
         );
     }
 });
-//# sourceMappingURL=../components/menu-team.js.map
+//# sourceMappingURL=../../team/menu/menu-team.js.map

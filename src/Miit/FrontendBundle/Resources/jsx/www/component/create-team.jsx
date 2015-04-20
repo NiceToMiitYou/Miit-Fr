@@ -1,9 +1,9 @@
-MiitComponents.CreateTeam = React.createClass({displayName: "CreateTeam",
+MiitComponents.CreateTeam = React.createClass({
     getDefaultProps: function() {
         return {
             placeholder: {
                 email: MiitTranslator.get('placeholder.your.email', 'inputs'),
-                team:  MiitTranslator.get('placeholder.team.name', 'inputs')
+                team:  MiitTranslator.get('placeholder.team.name',  'inputs')
             },
             submit: MiitTranslator.get('submit.create.team', 'inputs')
         };
@@ -30,7 +30,9 @@ MiitComponents.CreateTeam = React.createClass({displayName: "CreateTeam",
         var email = React.findDOMNode(this.refs.email).value.trim();
         var team  = React.findDOMNode(this.refs.team).value.trim();
         var terms = React.findDOMNode(this.refs.terms).checked;
-        
+
+        this.setState(this.getDefaultErrors());
+
         // Check if there is data
         if (!email || !team || !terms) {
             this.setState({
@@ -56,8 +58,6 @@ MiitComponents.CreateTeam = React.createClass({displayName: "CreateTeam",
             });
             return;
         }
-
-        this.setState(this.getDefaultErrors());
 
         // Request for CRSF
         MiitUser.registration(email, team, function(data) {
@@ -85,15 +85,14 @@ MiitComponents.CreateTeam = React.createClass({displayName: "CreateTeam",
         });
 
         return (
-            React.createElement("form", {class: "miit-component create-team", onSubmit: this.handleSubmit}, 
-                React.createElement("div", null, 
-                    React.createElement("input", {type: "text", className: classes_email, placeholder: this.props.placeholder.email, ref: "email"}), 
-                    React.createElement("input", {type: "text", className: classes_team, placeholder: this.props.placeholder.team, ref: "team"}), 
-                    React.createElement("input", {type: "checkbox", className: classes_terms, ref: "terms"}), 
-                    React.createElement("input", {type: "submit", value: this.props.submit})
-                )
-            )
+            <form className="miit-component create-team" onSubmit={this.handleSubmit}>
+                <div>
+                    <input type="text"     className={classes_email} placeholder={this.props.placeholder.email} ref="email" />
+                    <input type="text"     className={classes_team}  placeholder={this.props.placeholder.team}  ref="team" />
+                    <input type="checkbox" className={classes_terms} ref="terms" />
+                    <input type="submit" value={this.props.submit} />
+                </div>
+            </form>
         );
     }
 });
-//# sourceMappingURL=../components/create-team.js.map

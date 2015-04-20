@@ -84,4 +84,4 @@ MiitComponents.MiitTeamContent = React.createClass({displayName: "MiitTeamConten
   }
 });
 
-//# sourceMappingURL=../components/miit-team-content.js.map
+//# sourceMappingURL=../../team/page/miit-team-content.js.map

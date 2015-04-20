@@ -14,4 +14,4 @@ MiitComponents.MiitTeamHeader = React.createClass({displayName: "MiitTeamHeader"
   }
 });
 
-//# sourceMappingURL=../components/miit-team-header.js.map
+//# sourceMappingURL=../../team/page/miit-team-header.js.map
