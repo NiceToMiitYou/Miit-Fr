@@ -30,5 +30,16 @@ class User
      *      min=6
      * )
      */
-    public $password;
+    public $password_old;
+
+    /**
+     * @Assert\NotBlank(
+     *      groups={"change_password"}
+     * )
+     * @Assert\Length(
+     *      groups={"change_password"},
+     *      min=6
+     * )
+     */
+    public $password_new;
 }

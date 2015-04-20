@@ -42,21 +42,28 @@ class UserController extends Controller
 
         if ($form->isValid()) {
 
+            $user           = $this->getUser();
             $changePassword = $form->getData();
 
-            $userId   = $this->getUser()->getId();
+            $userId         = $user->getId();
+            $password_old   = $changePassword->password_old;
+            $password_new   = $changePassword->password_new;
 
-            $password = $changePassword->password;
+            $encoder        = $this->get('security.encoder_factory')->getEncoder($user);
 
-            $command = new ChangePasswordUserCommand($userId, $password);
+            if (
+                $encoder->isPasswordValid($user->getPassword(), $password_old, $user->getSalt())
+            ) {
+                $command = new ChangePasswordUserCommand($userId, $password_new);
 
-            try {
-                $this->get('command_bus')->dispatch($command);
+                try {
+                    $this->get('command_bus')->dispatch($command);
 
-                $response['done'] = true;
-            } catch (\Exception $e) {
+                    $response['done'] = true;
+                } catch (\Exception $e) {
 
-                $response['errors'][] = $e->getMessage();
+                    $response['errors'][] = $e->getMessage();
+                }
             }
         } else {
 

@@ -19,7 +19,8 @@ class UserChangePasswordType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('password', 'repeated', array(
+        $builder->add('password_old', 'password');
+        $builder->add('password_new', 'repeated', array(
             'type'           => 'password',
             'first_options'  => array('label' => 'Mot de passe'),
             'second_options' => array('label' => 'Mot de passe (validation)'),
