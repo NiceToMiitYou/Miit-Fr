@@ -51,7 +51,7 @@ security:
                 key:      "%secret%"
                 lifetime: 31536000
                 path:     /
-                domain:   ".%domain%"
+                domain:   ~
 
         default:
             anonymous: ~
