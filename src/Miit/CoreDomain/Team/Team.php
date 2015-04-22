@@ -168,7 +168,7 @@ class Team implements Entity
     /**
      * @return string
      */
-    public function getAmindRole()
+    public function getAdminRole()
     {
         return sprintf('ROLE_ADMIN_%s', strtoupper($this->id));
     }
