@@ -51,7 +51,7 @@ class User implements Entity
     /**
      * The roles of the user
      *
-     * @var string
+     * @var array
      */
     protected $roles;
 
@@ -61,6 +61,13 @@ class User implements Entity
      * @var boolean
      */
     protected $locked;
+
+    /**
+     * The list of affiliate teams
+     * 
+     * @var array
+     */
+    protected $teams;
 
     /**
      * The registration date
@@ -287,6 +294,14 @@ class User implements Entity
     public function isLocked()
     {
         return (boolean) $this->locked;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTeams()
+    {
+        return $this->teams;
     }
 
     /**

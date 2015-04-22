@@ -4,6 +4,7 @@ namespace Miit\CoreDomainBundle\Entity;
 
 use Miit\CoreDomain\User\User as UserModel;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -69,6 +70,14 @@ class User extends UserModel implements UserInterface, EquatableInterface
      * @ORM\Column(type="boolean", nullable=false)
      */
     protected $locked;
+
+    /**
+     * {@inheritDoc}
+     * 
+     * @ORM\ManyToMany(targetEntity="Team", inversedBy="users")
+     * @ORM\JoinTable(name="users_teams")
+     */
+    protected $teams;
 
     /**
      * {@inheritDoc}
@@ -142,5 +151,15 @@ class User extends UserModel implements UserInterface, EquatableInterface
     public function isEqualTo(UserInterface $user)
     {
         return $this->email === $user->getUsername();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function __construct($id, $name, $email)
+    {
+        parent::__construct($id, $name, $email);
+
+        $this->teams = new ArrayCollection();
     }
 }

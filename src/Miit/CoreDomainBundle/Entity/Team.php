@@ -4,6 +4,7 @@ namespace Miit\CoreDomainBundle\Entity;
 
 use Miit\CoreDomain\Team\Team as TeamModel;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -38,11 +39,19 @@ class Team extends TeamModel
     protected $name;
 
     /**
-     * {@inheritDoc}
+     * The list of users which they have subscribe
      * 
      * @ORM\Column(type="boolean", nullable=false)
      */
     protected $locked;
+
+    /**
+     * {@inheritDoc}
+     * 
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="teams")
+     * 
+     */
+    protected $users;
 
     /**
      * {@inheritDoc}
@@ -57,4 +66,14 @@ class Team extends TeamModel
      * @ORM\Column(type="datetime", nullable=true)
      */
     protected $updatedAt;
+
+    /**
+     * {@inheritDoc}
+     */
+    public function __construct($id, $slug, $name)
+    {
+        parent::__construct($id, $slug, $name);
+
+        $this->users = new ArrayCollection();
+    }
 }

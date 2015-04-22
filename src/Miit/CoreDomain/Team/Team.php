@@ -40,6 +40,13 @@ class Team implements Entity
     protected $locked;
 
     /**
+     * The list of users
+     * 
+     * @var array
+     */
+    protected $users;
+
+    /**
      * The creation date
      *
      * @var \DateTime
@@ -180,6 +187,14 @@ class Team implements Entity
     public function isLocked()
     {
         return (boolean) $this->locked;
+    }
+
+    /**
+     * @return array
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 
     /**
