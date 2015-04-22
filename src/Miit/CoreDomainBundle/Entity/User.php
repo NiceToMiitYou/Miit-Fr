@@ -162,4 +162,36 @@ class User extends UserModel implements UserInterface, EquatableInterface
 
         $this->teams = new ArrayCollection();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addTeam($team)
+    {
+        if(false === $this->hasTeam($team)) {
+            
+            // Push the team at the end of the array
+            $this->teams->add($team);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeTeam($team)
+    {
+        if(true === $this->hasTeam($team)) {
+
+            // Remove it
+            $this->teams->removeElement($team);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function hasTeam($team)
+    {
+        return $this->teams->contains($team);
+    }
 }

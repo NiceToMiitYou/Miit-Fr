@@ -6,15 +6,18 @@
     <parameters>
         <parameter key="user_handler.create.class">Miit\CoreDomain\User\CommandHandler\CreateUserCommandHandler</parameter>
         <parameter key="user_handler.register.class">Miit\CoreDomain\User\CommandHandler\RegisterUserCommandHandler</parameter>
-        
+
         <parameter key="user_handler.update.class">Miit\CoreDomain\User\CommandHandler\UpdateUserCommandHandler</parameter>
         <parameter key="user_handler.change_password.class">Miit\CoreDomain\User\CommandHandler\ChangePasswordUserCommandHandler</parameter>
 
         <parameter key="user_handler.promote.class">Miit\CoreDomain\User\CommandHandler\PromoteUserCommandHandler</parameter>
         <parameter key="user_handler.demote.class">Miit\CoreDomain\User\CommandHandler\DemoteUserCommandHandler</parameter>
-        
+
         <parameter key="user_handler.lock.class">Miit\CoreDomain\User\CommandHandler\LockUserCommandHandler</parameter>
         <parameter key="user_handler.unlock.class">Miit\CoreDomain\User\CommandHandler\UnlockUserCommandHandler</parameter>
+
+        <parameter key="user_handler.add_user.class">Miit\CoreDomain\User\CommandHandler\AddTeamUserCommandHandler</parameter>
+        <parameter key="user_handler.remove_user.class">Miit\CoreDomain\User\CommandHandler\RemoveTeamUserCommandHandler</parameter>
     </parameters>
 
     <services>
@@ -29,7 +32,7 @@
             <argument type="service" id="user_factory" />
             <argument type="service" id="user_repository" />
         </service>
-        
+
         <service id="user_handler.update" class="%user_handler.update.class%">
             <tag name="command_bus.register" />
             <argument type="service" id="user_factory" />
@@ -58,6 +61,17 @@
             <argument type="service" id="user_repository" />
         </service>
         <service id="user_handler.unlock" class="%user_handler.unlock.class%">
+            <tag name="command_bus.register" />
+            <argument type="service" id="user_factory" />
+            <argument type="service" id="user_repository" />
+        </service>
+
+        <service id="user_handler.add_user" class="%user_handler.add_user.class%">
+            <tag name="command_bus.register" />
+            <argument type="service" id="user_factory" />
+            <argument type="service" id="user_repository" />
+        </service>
+        <service id="user_handler.remove_user" class="%user_handler.remove_user.class%">
             <tag name="command_bus.register" />
             <argument type="service" id="user_factory" />
             <argument type="service" id="user_repository" />

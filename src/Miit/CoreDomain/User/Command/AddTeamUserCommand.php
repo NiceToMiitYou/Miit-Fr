@@ -7,11 +7,11 @@ use DomainDrivenDesign\Domain\Command\Command;
 use Miit\CoreDomain\User\UserId;
 
 /**
- * Class PromoteUserCommand
+ * Class AddTeamUserCommand
  * 
  * @author Tacyniak Boris <boris.tacyniak@itevents.fr>
  */
-final class PromoteUserCommand implements Command
+final class AddTeamUserCommand implements Command
 {
     /**
      * @var UserId
@@ -21,16 +21,16 @@ final class PromoteUserCommand implements Command
     /**
      * @var array
      */
-    private $roles;
+    private $teams;
 
     /**
      * @param UserId $userId
-     * @param string $roles
+     * @param string $teams
      */
-    public function __construct(UserId $userId, $roles)
+    public function __construct(UserId $userId, $teams)
     {
         $this->userId = $userId;
-        $this->roles  = $roles;
+        $this->teams  = $teams;
     }
 
     /**
@@ -44,8 +44,8 @@ final class PromoteUserCommand implements Command
     /**
      * @return array
      */
-    public function getRoles()
+    public function getTeams()
     {
-        return $this->roles;
+        return $this->teams;
     }
 }

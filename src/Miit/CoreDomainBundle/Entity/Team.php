@@ -76,4 +76,36 @@ class Team extends TeamModel
 
         $this->users = new ArrayCollection();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addUser($user)
+    {
+        if(false === $this->hasUser($user)) {
+            
+            // Push the user at the end of the array
+            $this->users->add($user);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeUser($user)
+    {
+        if(true === $this->hasUser($user)) {
+
+            // Remove it
+            $this->users->removeElement($user);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function hasUser($user)
+    {
+        return $this->users->contains($user);
+    }
 }

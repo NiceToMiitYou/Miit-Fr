@@ -119,6 +119,37 @@ class Team implements Entity
     }
 
     /**
+     * @param string $user
+     * 
+     * Add the reference to an user
+     */
+    public function addUser($user)
+    {
+        if(false === $this->hasUser($user)) {
+            
+            // Push the user at the end of the array
+            array_push($this->users, $user);
+        }
+    }
+
+    /**
+     * @param string $user
+     * 
+     * Remove the reference to an user
+     */
+    public function removeUser($user)
+    {
+        if(true === $this->hasUser($user)) {
+
+            // Find the key
+            $key = array_search($user, $this->users);
+            
+            // Remove it
+            unset($this->users[$key]);
+        }
+    }
+
+    /**
      * @return boolean 
      */
     public function equals(Team $team)
@@ -195,6 +226,16 @@ class Team implements Entity
     public function getUsers()
     {
         return $this->users;
+    }
+
+    /**
+     * @param string $user
+     * 
+     * @return boolean
+     */
+    public function hasUser($user)
+    {
+        return in_array($user, $this->users, true);
     }
 
     /**

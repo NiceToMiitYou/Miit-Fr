@@ -25,7 +25,7 @@ final class DemoteUserCommand implements Command
 
     /**
      * @param UserId $userId
-     * @param string $role
+     * @param string $roles
      */
     public function __construct(UserId $userId, $roles)
     {

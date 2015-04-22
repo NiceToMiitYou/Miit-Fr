@@ -173,7 +173,7 @@ class User implements Entity
      */
     public function promote($role)
     {
-        if(false === in_array($role, $this->roles, true)) {
+        if(false === $this->hasRole($role)) {
             
             // Push the role at the end of the array
             array_push($this->roles, $role);
@@ -187,7 +187,7 @@ class User implements Entity
      */
     public function demote($role)
     {
-        if(true === in_array($role, $this->roles, true)) {
+        if(true === $this->hasRole($role)) {
 
             // Find the key
             $key = array_search($role, $this->roles);
@@ -196,6 +196,37 @@ class User implements Entity
             unset($this->roles[$key]);
 
             $this->updatedAt = new \DateTime();
+        }
+    }
+
+    /**
+     * @param string $team
+     * 
+     * Add the reference to a team
+     */
+    public function addTeam($team)
+    {
+        if(false === $this->hasTeam($team)) {
+            
+            // Push the team at the end of the array
+            array_push($this->teams, $team);
+        }
+    }
+
+    /**
+     * @param string $team
+     * 
+     * Remove the reference to a team
+     */
+    public function removeTeam($team)
+    {
+        if(true === $this->hasTeam($team)) {
+
+            // Find the key
+            $key = array_search($team, $this->teams);
+            
+            // Remove it
+            unset($this->teams[$key]);
         }
     }
 
@@ -302,6 +333,16 @@ class User implements Entity
     public function getTeams()
     {
         return $this->teams;
+    }
+
+    /**
+     * @param string $team
+     * 
+     * @return boolean
+     */
+    public function hasTeam($team)
+    {
+        return in_array($team, $this->teams, true);
     }
 
     /**

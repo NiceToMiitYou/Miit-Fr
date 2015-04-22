@@ -6,6 +6,7 @@ use Miit\CoreDomain\Common\Email;
 use Miit\CoreDomain\User\UserId;
 use Miit\CoreDomain\User\Command\RegisterUserCommand;
 use Miit\CoreDomain\User\Command\PromoteUserCommand;
+use Miit\CoreDomain\User\Command\AddTeamUserCommand;
 use Miit\CoreDomain\Team\TeamId;
 use Miit\CoreDomain\Team\Command\CreateTeamCommand;
 
@@ -28,16 +29,9 @@ class WelcomeController extends Controller
 
     /**
      * @Route("/register",
-     *      host="{subdomain}.{domain}",
      *      name="welcome_register",
-     *      defaults={
-     *          "subdomain": "www",
-     *          "domain":    "%domain%"
-     *      },
      *      requirements={
-     *          "_method":   "POST",
-     *          "domain":    "%domain%",
-     *          "subdomain": "www"
+     *          "_method":   "POST"
      *      }
      * )
      */
@@ -76,6 +70,10 @@ class WelcomeController extends Controller
             $role_user  = strtoupper('ROLE_USER_'  . $teamId->getValue());
             $role_admin = strtoupper('ROLE_ADMIN_' . $teamId->getValue());
 
+            // Entity manager
+            $em         = $this->get('doctrine.orm.entity_manager');
+            $team       = $em->getReference('Miit\CoreDomainBundle\Entity\Team', $teamId);
+
             // Instanciate commands
             $command_register_user = new RegisterUserCommand($userId, $username, $email, $password);
 
@@ -86,6 +84,10 @@ class WelcomeController extends Controller
                 $role_user
             ));
 
+            $command_add_team_user = new AddTeamUserCommand($userId, array(
+                $team
+            ));
+
             try {
                 $this->get('command_bus')->dispatch($command_register_user);
 
@@ -94,6 +96,8 @@ class WelcomeController extends Controller
                 $this->get('command_bus')->dispatch($command_create_team);
 
                 $this->get('command_bus')->dispatch($command_promote_user);
+
+                $this->get('command_bus')->dispatch($command_add_team_user);
 
                 $response['done'] = true;
 
