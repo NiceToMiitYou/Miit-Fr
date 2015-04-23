@@ -7,6 +7,8 @@ use Miit\CoreDomain\Team\Team as TeamModel;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
+use JMS\Serializer\Annotation\Groups;
+
 /**
  * Class Team
  * 
@@ -21,6 +23,8 @@ class Team extends TeamModel
      * 
      * @ORM\Id
      * @ORM\Column(type="string", length=255, nullable=false)
+     * 
+     * @Groups({"list", "details"})
      */
     protected $id;
 
@@ -28,6 +32,8 @@ class Team extends TeamModel
      * {@inheritDoc}
      * 
      * @ORM\Column(type="string", length=255, nullable=false, unique=true)
+     * 
+     * @Groups({"list", "details"})
      */
     protected $slug;
 
@@ -35,6 +41,8 @@ class Team extends TeamModel
      * {@inheritDoc}
      * 
      * @ORM\Column(type="string", length=255, nullable=false)
+     * 
+     * @Groups({"list", "details"})
      */
     protected $name;
 
@@ -42,6 +50,8 @@ class Team extends TeamModel
      * The list of users which they have subscribe
      * 
      * @ORM\Column(type="boolean", nullable=false)
+     * 
+     * @Groups({"details"})
      */
     protected $locked;
 
@@ -49,7 +59,6 @@ class Team extends TeamModel
      * {@inheritDoc}
      * 
      * @ORM\ManyToMany(targetEntity="User", mappedBy="teams")
-     * 
      */
     protected $users;
 
@@ -57,6 +66,8 @@ class Team extends TeamModel
      * {@inheritDoc}
      * 
      * @ORM\Column(type="datetime", nullable=true)
+     * 
+     * @Groups({"details"})
      */
     protected $createdAt;
 

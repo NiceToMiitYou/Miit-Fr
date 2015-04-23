@@ -5,6 +5,7 @@ namespace Miit\CoreDomain\User;
 use DomainDrivenDesign\Domain\Model\Repository;
 
 use Miit\CoreDomain\Common\Email;
+use Miit\CoreDomain\Team\Team;
 
 /**
  * Interface UserRepository
@@ -30,6 +31,15 @@ interface UserRepository extends Repository
      * @return User
      */
     public function findUserByEmail(Email $email);
+
+    /**
+     * Return the list of user based on the team
+     * 
+     * @param Team $team
+     * 
+     * @return array
+     */
+    public function findUsersByTeam(Team $team);
 
     /**
      * Return the user based on his name

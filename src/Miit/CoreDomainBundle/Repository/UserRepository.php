@@ -5,6 +5,7 @@ namespace Miit\CoreDomainBundle\Repository;
 use Miit\CoreDomain\Common\Email;
 use Miit\CoreDomain\User\UserRepository as UserRepositoryInterface;
 use Miit\CoreDomain\User\User as UserModel;
+use Miit\CoreDomain\Team\Team as TeamModel;
 use Miit\CoreDomain\User\UserId;
 
 use Miit\CoreDomainBundle\Entity\User;
@@ -55,6 +56,24 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
                     ->getQuery();
 
         return $query->getSingleResult();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function findUsersByTeam(TeamModel $team)
+    {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQueryBuilder()
+                    ->select('u')
+                    ->from('MiitCoreDomainBundle:User ', 'u')
+                    ->join('u.teams', 't')
+                    ->where('t.id = :teamId')
+                    ->setParameter('teamId', $team->getId())
+                    ->getQuery();
+
+        return $query->getResult();
     }
 
     /**
