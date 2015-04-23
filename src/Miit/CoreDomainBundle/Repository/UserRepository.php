@@ -5,8 +5,8 @@ namespace Miit\CoreDomainBundle\Repository;
 use Miit\CoreDomain\Common\Email;
 use Miit\CoreDomain\User\UserRepository as UserRepositoryInterface;
 use Miit\CoreDomain\User\User as UserModel;
-use Miit\CoreDomain\Team\Team as TeamModel;
 use Miit\CoreDomain\User\UserId;
+use Miit\CoreDomain\Team\TeamId;
 
 use Miit\CoreDomainBundle\Entity\User;
 
@@ -61,7 +61,7 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
     /**
      * {@inheritDoc}
      */
-    public function findUsersByTeam(TeamModel $team)
+    public function findUsersByTeam(TeamId $teamId)
     {
         $em = $this->getEntityManager();
 
@@ -70,10 +70,30 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
                     ->from('MiitCoreDomainBundle:User ', 'u')
                     ->join('u.teams', 't')
                     ->where('t.id = :teamId')
-                    ->setParameter('teamId', $team->getId())
+                    ->setParameter('teamId', $team->getValue())
                     ->getQuery();
 
         return $query->getResult();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function isUserOfTeam(UserId $userId, TeamId $teamId)
+    {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQueryBuilder()
+                    ->select('COUNT(u)')
+                    ->from('MiitCoreDomainBundle:User ', 'u')
+                    ->join('u.teams', 't')
+                    ->where('u.id = :userId')
+                    ->andWhere('t.id = :teamId')
+                    ->setParameter('userId', $userId->getValue())
+                    ->setParameter('teamId', $teamId->getValue())
+                    ->getQuery();
+
+        return 0 !== $query->getSingleScalarResult();
     }
 
     /**

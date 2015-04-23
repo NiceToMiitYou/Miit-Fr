@@ -3,7 +3,9 @@
 namespace Miit\CoreDomainBundle\Security\Authorization\Voter;
 
 use Miit\CoreDomain\User\User as UserModel;
+use Miit\CoreDomain\Team\Team as TeamModel;
 
+use Miit\CoreDomain\User\UserRepository;
 use Miit\CoreDomainBundle\Manager\TeamManager;
 
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
@@ -26,11 +28,18 @@ class TeamVoter implements VoterInterface
     private $teamManager;
 
     /**
-     * @param TeamManager $teamManager
+     * @var UserRepository
      */
-    public function __construct(TeamManager $teamManager)
+    private $userRepository;
+
+    /**
+     * @param TeamManager    $teamManager
+     * @param UserRepository $userRepository
+     */
+    public function __construct(TeamManager $teamManager, UserRepository $userRepository)
     {
-        $this->teamManager = $teamManager;
+        $this->teamManager    = $teamManager;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -46,6 +55,14 @@ class TeamVoter implements VoterInterface
         // make sure there is a user object (i.e. that the user is logged in)
         if (!$user instanceof UserInterface && !$user instanceof UserModel) {
             return VoterInterface::ACCESS_DENIED;
+        }
+
+        if ($team instanceof TeamModel) {
+            $isInTeam = $this->userRepository->isUserOfTeam($user->getId(), $team->getId());
+
+            if(false === $isInTeam) {
+                return VoterInterface::ACCESS_DENIED;
+            }
         }
 
         // extract the role

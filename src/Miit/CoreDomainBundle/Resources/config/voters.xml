@@ -12,6 +12,7 @@
             class="%team_voter.class%" public="false">
             
             <argument type="service" id="team_manager" />
+            <argument type="service" id="user_repository" />
             <tag name="security.voter" />
         </service>
     </services>
