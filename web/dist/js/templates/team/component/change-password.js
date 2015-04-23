@@ -96,7 +96,7 @@ var ChangePassword = React.createClass({displayName: "ChangePassword",
                 value_first:  '',
                 value_second: ''
             });
-        });
+        }.bind(this));
 
         return;
     },
