@@ -30,13 +30,13 @@ class TeamController extends Controller
     {
         $serializer = $this->get('jms_serializer');
 
-        $response = new JsonResponse();
+        $response   = new JsonResponse();
 
-        $team     = $this->get('team_manager')->getTeam();
-        $users    = $this->get('user_repository')->findUsersByTeam($team);
+        $teamId     = $this->get('team_manager')->getTeam()->getId();
+        $users      = $this->get('user_repository')->findUsersByTeam($teamId);
 
-        $context  = SerializationContext::create()->setGroups(array('list'));
-        $data     = $serializer->serialize($users, 'json', $context);
+        $context    = SerializationContext::create()->setGroups(array('list'));
+        $data       = $serializer->serialize($users, 'json', $context);
 
         $response->setContent($data);
 

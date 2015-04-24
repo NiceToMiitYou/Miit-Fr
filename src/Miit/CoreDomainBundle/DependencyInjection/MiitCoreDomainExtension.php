@@ -33,6 +33,9 @@ class MiitCoreDomainExtension extends Extension
         // Load the voters
         $loader->load('voters.xml');
 
+        // Load the voters
+        $loader->load('serializer_subscribers.xml');
+
         // Load the managers
         $loader->load('event_listeners.xml');
 

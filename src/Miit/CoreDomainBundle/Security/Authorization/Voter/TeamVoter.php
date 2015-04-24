@@ -4,8 +4,8 @@ namespace Miit\CoreDomainBundle\Security\Authorization\Voter;
 
 use Miit\CoreDomain\User\User as UserModel;
 use Miit\CoreDomain\Team\Team as TeamModel;
-
 use Miit\CoreDomain\User\UserRepository;
+
 use Miit\CoreDomainBundle\Manager\TeamManager;
 
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;

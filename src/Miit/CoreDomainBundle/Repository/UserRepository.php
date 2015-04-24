@@ -70,7 +70,7 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
                     ->from('MiitCoreDomainBundle:User ', 'u')
                     ->join('u.teams', 't')
                     ->where('t.id = :teamId')
-                    ->setParameter('teamId', $team->getValue())
+                    ->setParameter('teamId', $teamId->getValue())
                     ->getQuery();
 
         return $query->getResult();
