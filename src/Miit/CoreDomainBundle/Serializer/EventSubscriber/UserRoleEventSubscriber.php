@@ -6,8 +6,7 @@ use Miit\CoreDomainBundle\Manager\TeamManager;
 
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\Events;
-use JMS\Serializer\EventDispatcher\PreDeserializeEvent;
-use JMS\Serializer\EventDispatcher\PreSerializeEvent;
+use JMS\Serializer\EventDispatcher\ObjectEvent;
 
 /**
  * UserRoleEventSubscriber
@@ -36,10 +35,10 @@ class UserRoleEventSubscriber implements EventSubscriberInterface
     {
         return array(
             array(
-                'event'  => Events::PRE_SERIALIZE,
+                'event'  => Events::POST_SERIALIZE,
                 'format' => 'json',
                 'type'   => 'Miit\\CoreDomainBundle\\Entity\\User',
-                'method' => 'onPreSerializeRolesToJson',
+                'method' => 'onPostSerializeTaskJson',
             ),
         );
     }
@@ -47,29 +46,27 @@ class UserRoleEventSubscriber implements EventSubscriberInterface
     /**
      * Convert the user to an array
      * 
-     * @param PreSerializeEvent $event
+     * @param ObjectEvent $event
      * 
      * @return array
      */
-    public function onPreSerializeRolesToJson(PreSerializeEvent $event)
+    public function onPostSerializeTaskJson(ObjectEvent $event)
     {
         $user  = $event->getObject();
-        $roles = $user->getRoles();
         $team  = $this->teamManager->getTeam();
+        $roles = array();
 
         $isTeamAdmin = $user->hasRole($team->getAdminRole());
         $isTeamUser  = $user->hasRole($team->getUserRole());
 
-        foreach ($roles as $role) {
-            $user->demote($role);
-        }
-
         if(true === $isTeamAdmin) {
-            $user->promote('ADMIN');
+            array_push($roles, 'ADMIN');
         }
 
         if(true === $isTeamUser) {
-            $user->promote('USER');
+            array_push($roles, 'USER');
         }
+
+        $event->getVisitor()->addData('roles', $roles);
     }
 }

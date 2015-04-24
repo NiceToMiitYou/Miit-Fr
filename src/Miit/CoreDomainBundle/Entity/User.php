@@ -69,8 +69,6 @@ class User extends UserModel implements UserInterface, EquatableInterface
      * {@inheritDoc}
      * 
      * @ORM\Column(type="array", nullable=true)
-     * 
-     * @Groups({"owner", "list", "details"})
      */
     protected $roles;
 
