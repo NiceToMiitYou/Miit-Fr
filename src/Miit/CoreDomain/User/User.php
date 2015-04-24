@@ -266,6 +266,11 @@ class User implements Entity
      */
     public function getEmail()
     {
+        if(true === is_string($this->email))
+        {
+            $this->email = new Email($this->email);
+        }
+
         return $this->email;
     }
 
