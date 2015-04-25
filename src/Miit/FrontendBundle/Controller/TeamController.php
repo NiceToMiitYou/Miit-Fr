@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
+use JMS\Serializer\SerializationContext;
+
 class TeamController extends Controller
 {
     /**
@@ -29,6 +31,7 @@ class TeamController extends Controller
     public function indexAction(Request $request, $team_slug)
     {
         $team = $this->get('team_manager')->getTeam();
+        $user = $this->getUser();
 
         if (false === $this->get('security.authorization_checker')->isGranted('user', $team)) {
             $url = $this->generateUrl('welcome_login');
@@ -36,8 +39,12 @@ class TeamController extends Controller
             return new RedirectResponse($url);
         }
 
+        $context    = SerializationContext::create()->setGroups(array('owner'));
+
         return $this->render('MiitFrontendBundle:team:index.html.twig', array(
-            'team_name' => $team->getName()
+            'team_name'    => $team->getName(),
+            'user_context' => $context,
+            'user'         => $user
         ));
     }
 

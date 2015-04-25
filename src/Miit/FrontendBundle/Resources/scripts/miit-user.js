@@ -1,4 +1,4 @@
-var MiitUser = (function(){
+MiitApp.request.user = (function(){
     "use strict";
 
     var obj = {};
@@ -6,14 +6,29 @@ var MiitUser = (function(){
     obj['change_password'] = function(password_old, password_new, cb) {
 
         // Request for CRSF
-        MiitUtils.ajax.crsf('change_password', function(token) {
+        MiitApp.utils.ajax.crsf('change_password', function(token) {
 
             // Register the user
-            MiitUtils.ajax.send('/app/user/change_password', {
-                'user_change_password_type[password_old]':         password_old,
-                'user_change_password_type[password_new][first]':  password_new,
-                'user_change_password_type[password_new][second]': password_new,
-                'user_change_password_type[_token]':               token
+            MiitApp.utils.ajax.send('/app/user/change_password', {
+                'password_old': password_old,
+                'password_new': {
+                    'first':    password_new,
+                    'second':   password_new
+                },
+                '_token':       token
+            }, cb);
+        });
+    };
+
+    obj['promote'] = function(user_id, user_roles, cb) {
+
+        // Request for CRSF
+        MiitApp.utils.ajax.crsf('promote_user', function(token) {
+
+            // Register the user
+            MiitApp.utils.ajax.send('/app/user/promote/' + user_id, {
+                'roles':  user_roles,
+                '_token': token
             }, cb);
         });
     };
@@ -21,14 +36,18 @@ var MiitUser = (function(){
     obj['registration'] = function(email, team, cb) {
 
         // Request for CRSF
-        MiitUtils.ajax.crsf('registration', function(token) {
+        MiitApp.utils.ajax.crsf('registration', function(token) {
 
             // Register the user
-            MiitUtils.ajax.send('/register', {
-                'registration_type[user][email]': email,
-                'registration_type[team][name]':  team,
-                'registration_type[terms]':       true,
-                'registration_type[_token]':      token
+            MiitApp.utils.ajax.send('/register', {
+                'user': {
+                    'email': email
+                },
+                'team': {
+                    'name':  team
+                },
+                'terms':       true,
+                '_token':      token
             }, cb);
         });
     };

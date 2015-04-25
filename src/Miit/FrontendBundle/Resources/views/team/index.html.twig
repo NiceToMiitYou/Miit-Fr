@@ -23,6 +23,8 @@
                 r.render(r.createElement(MiitComponents.TeamApp,null),document.getElementById('content'));
             })(React);
         };
+        {# Include the user in the code #}
+        window.MiitCurrentUser = {{ user | serialize('json', user_context) | raw }};
         </script>
     </body>
 </html>

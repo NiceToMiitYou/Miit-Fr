@@ -38,9 +38,10 @@ class WelcomeController extends Controller
     public function registerAction(Request $request)
     {
         $form = $this->createForm('registration_type');
+        $data = @json_decode($request->getContent(), true);
 
-        $form->handleRequest($request);
-   
+        $form->submit($data);
+
         $response = array(
             'done' => false
         );

@@ -1,4 +1,4 @@
-var MiitUtils = (function() {
+MiitApp.utils = (function() {
     "use strict";
     /**
      * Validator part
@@ -25,20 +25,6 @@ var MiitUtils = (function() {
     /**
      * Ajax part
      */
-
-    // export js object to application/x-www-form-urlencoded
-    var generatesParamsString = function(params) {
-        var encodedParams = [];
-
-        for(var key in params) {
-            var value = params[key];
-            var param = encodeURIComponent(key) + '=' + encodeURIComponent(value);
-
-            encodedParams.push(param);
-        }
-
-        return encodedParams.join('&');
-    };
 
     // get the list of HttpRequestHandlers
     var XMLHttpFactories = [
@@ -79,7 +65,7 @@ var MiitUtils = (function() {
         req.open(method, url, true);
         
         if(postData) {
-            req.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+            req.setRequestHeader('Content-type','application/json');
         }
 
         req.onreadystatechange = function () {
@@ -101,7 +87,7 @@ var MiitUtils = (function() {
         
         if (req.readyState == 4) return;
 
-        req.send(generatesParamsString(postData));
+        req.send(JSON.stringify(postData));
     }
 
     // Get CRSF token to validate Form.

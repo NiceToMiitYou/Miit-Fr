@@ -81,14 +81,14 @@ var ChangePassword = React.createClass({displayName: "ChangePassword",
         }
 
         // Check if this is a correct format
-        if(!MiitUtils.validator.password(first)) {
+        if(!MiitApp.utils.validator.password(first)) {
             this.setState({
                 invalid_format: true
             });
             return;
         }
 
-        MiitUser.change_password(old, first, function(data) {
+        MiitApp.request.user.change_password(old, first, function(data) {
 
             // Reset value
             this.setState({
