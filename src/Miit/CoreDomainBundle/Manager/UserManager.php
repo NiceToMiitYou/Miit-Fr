@@ -2,8 +2,20 @@
 
 namespace Miit\CoreDomainBundle\Manager;
 
+use DomainDrivenDesign\Domain\Command\CommandBus as CommandBusInterface;
+
 use Miit\CoreDomainBundle\Repository\UserRepository;
+use Miit\CoreDomainBundle\Repository\TeamRepository;
+
 use Miit\CoreDomain\Common\Email;
+use Miit\CoreDomain\User\UserId;
+use Miit\CoreDomain\User\Command\RegisterUserCommand;
+use Miit\CoreDomain\User\Command\PromoteUserCommand;
+use Miit\CoreDomain\User\Command\AddTeamUserCommand;
+use Miit\CoreDomain\Team\TeamId;
+use Miit\CoreDomain\Team\Team;
+
+use Monolog\Logger;
 
 /**
  * Class UserManager
@@ -13,9 +25,24 @@ use Miit\CoreDomain\Common\Email;
 class UserManager
 {
     /**
+     * @var Logger
+     */
+    private $logger;
+
+    /**
+     * @var CommandBusInterface
+     */
+    private $commandBus;
+
+    /**
      * @var UserRepository
      */
     private $userRepository;
+
+    /**
+     * @var TeamRepository
+     */
+    private $teamRepository;
 
     /**
      * @var \Swift_Mailer
@@ -30,9 +57,18 @@ class UserManager
     /**
      * @param UserRepository $userRepository
      */
-    public function __construct(UserRepository $userRepository, \Swift_Mailer $mailer, \Twig_Environment $twig)
-    {
+    public function __construct(
+        logger $logger,
+        CommandBusInterface $commandBus,
+        UserRepository $userRepository,
+        TeamRepository $teamRepository,
+        \Swift_Mailer $mailer,
+        \Twig_Environment $twig
+    ) {
+        $this->logger         = $logger;
+        $this->commandBus     = $commandBus;
         $this->userRepository = $userRepository;
+        $this->teamRepository = $teamRepository;
         $this->mailer         = $mailer;
         $this->twig           = $twig;
     }

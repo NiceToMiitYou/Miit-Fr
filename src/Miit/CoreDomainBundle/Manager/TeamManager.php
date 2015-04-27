@@ -2,8 +2,16 @@
 
 namespace Miit\CoreDomainBundle\Manager;
 
+use DomainDrivenDesign\Domain\Command\CommandBus as CommandBusInterface;
+
 use Miit\CoreDomainBundle\Repository\TeamRepository;
 use Miit\CoreDomain\Team\Team as TeamModel;
+use Miit\CoreDomain\Team\TeamId;
+use Miit\CoreDomain\Team\Command\CreateTeamCommand;
+
+use Monolog\Logger;
+
+use Cocur\Slugify\Slugify;
 
 /**
  * Class TeamManager
@@ -18,6 +26,16 @@ class TeamManager
     private $team;
 
     /**
+     * @var Logger
+     */
+    private $logger;
+
+    /**
+     * @var CommandBusInterface
+     */
+    private $commandBus;
+
+    /**
      * @var TeamRepository
      */
     private $teamRepository;
@@ -25,8 +43,10 @@ class TeamManager
     /**
      * @param TeamRepository $teamRepository
      */
-    public function __construct(TeamRepository $teamRepository)
+    public function __construct(Logger $logger, CommandBusInterface $commandBus, TeamRepository $teamRepository)
     {
+        $this->logger         = $logger;
+        $this->commandBus     = $commandBus;
         $this->teamRepository = $teamRepository;
     }
 
