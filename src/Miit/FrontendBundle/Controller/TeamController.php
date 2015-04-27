@@ -13,6 +13,11 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 use JMS\Serializer\SerializationContext;
 
+/**
+ * Class TeamController
+ * 
+ * @author Tacyniak Boris <boris.tacyniak@itevents.fr>
+ */
 class TeamController extends Controller
 {
     /**

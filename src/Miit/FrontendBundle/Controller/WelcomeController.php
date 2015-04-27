@@ -17,6 +17,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Core\Util\SecureRandom;
 
+/**
+ * Class WelcomeControlle
+ * 
+ * @author Tacyniak Boris <boris.tacyniak@itevents.fr>
+ */
 class WelcomeController extends Controller
 {
     /**
