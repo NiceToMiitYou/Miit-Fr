@@ -2,6 +2,8 @@
 
 namespace Miit\CoreDomainBundle\Serializer\EventSubscriber;
 
+use Miit\CoreDomain\Team\Team;
+
 use Miit\CoreDomainBundle\Manager\TeamManager;
 
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
@@ -52,19 +54,18 @@ class UserRoleEventSubscriber implements EventSubscriberInterface
      */
     public function onPostSerializeTaskJson(ObjectEvent $event)
     {
-        $user  = $event->getObject();
-        $team  = $this->teamManager->getTeam();
-        $roles = array();
+        $user    = $event->getObject();
+        $team    = $this->teamManager->getTeam();
+        $roles   = array();
 
-        $isTeamAdmin = $user->hasRole($team->getAdminRole());
-        $isTeamUser  = $user->hasRole($team->getUserRole());
+        $allowed = Team::getAllowedRoles();
 
-        if(true === $isTeamAdmin) {
-            array_push($roles, 'ADMIN');
-        }
+        foreach ($allowed as $tmp) {
+            $role = $team->getRole($tmp);
 
-        if(true === $isTeamUser) {
-            array_push($roles, 'USER');
+            if(true === $user->hasRole($role)) {
+                array_push($roles, $tmp);
+            }
         }
 
         $event->getVisitor()->addData('roles', $roles);

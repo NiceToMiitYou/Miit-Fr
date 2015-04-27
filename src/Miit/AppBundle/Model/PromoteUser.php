@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class PromoteUser
 {   
     /**
-     * @Assert\Choice(choices = {"USER", "ADMIN"}, multiple = true)
+     * @Assert\Choice(callback = {"Miit\CoreDomain\Team\Team", "getAllowedRoles"}, multiple = true)
      */
     public $roles;
 }

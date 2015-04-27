@@ -4,13 +4,17 @@ namespace Miit\AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 use JMS\Serializer\SerializationContext;
 
-class TeamController extends Controller
+/**
+ * Class TeamController
+ * 
+ * @author Tacyniak Boris <boris.tacyniak@itevents.fr>
+ */
+class TeamController extends AppControllerAbstract
 {
     /**
      * @Route("/team/users",
@@ -28,6 +32,8 @@ class TeamController extends Controller
      */
     public function listUsersAction(Request $request)
     {
+        $this->checkRole('USER');
+
         $serializer = $this->get('jms_serializer');
 
         $response   = new JsonResponse();

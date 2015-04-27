@@ -1,6 +1,8 @@
 <?php
 namespace Miit\AppBundle\Form\Type;
 
+use Miit\CoreDomain\Team\Team;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -19,10 +21,7 @@ class PromoteUserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('roles', 'choice', array(
-            'choices'   => array(
-                'USER'  => 'USER',
-                'ADMIN' => 'ADMIN'
-            ),
+            'choices'   => Team::getAllowedRoles(),
             'multiple'  => true,
             'required'  => true
         ));

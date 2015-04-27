@@ -189,19 +189,44 @@ class Team implements Entity
     }
 
     /**
+     * @param string
+     * 
      * @return string
      */
-    public function getUserRole()
+    public function getRole($role)
     {
-        return sprintf('ROLE_USER_%s', strtoupper($this->id));
+        return self::getRoleDefinition($this->id, $role);
     }
 
     /**
+     * The list of allowed Roles
+     * 
+     * @var array 
+     */
+    public static function getAllowedRoles()
+    {
+        return array(
+            'USER',
+            'ADMIN'
+        );
+    }
+
+    /**
+     * @param TeamId $teamId
+     * @param string $role
+     * 
      * @return string
      */
-    public function getAdminRole()
+    public static function getRoleDefinition(TeamId $teamId, $role)
     {
-        return sprintf('ROLE_ADMIN_%s', strtoupper($this->id));
+        if(true === in_array($role, self::getAllowedRoles(), true)) {
+
+            return strtoupper(
+                sprintf('ROLE_%s_%s', $role, $teamId)
+            );
+        }
+
+        return null;
     }
 
     /**

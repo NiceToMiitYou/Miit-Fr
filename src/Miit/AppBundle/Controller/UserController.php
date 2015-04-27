@@ -7,7 +7,6 @@ use Miit\CoreDomain\User\Command\ChangePasswordUserCommand;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -15,7 +14,12 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-class UserController extends Controller
+/**
+ * Class UserController
+ * 
+ * @author Tacyniak Boris <boris.tacyniak@itevents.fr>
+ */
+class UserController extends AppControllerAbstract
 {
     /**
      * @Route("/user/change_password",
@@ -92,11 +96,9 @@ class UserController extends Controller
      */
     public function promoteUserAction(Request $request, $id)
     {
-        $team = $this->get('team_manager')->getTeam();
+        $this->checkRole('USER');
 
-        if (false === $this->get('security.authorization_checker')->isGranted('admin', $team)) {
-            throw new NotFoundHttpException();
-        }
+        $team = $this->get('team_manager')->getTeam();
 
         $form = $this->createForm('promote_user_type');
         $data = @json_decode($request->getContent(), true);

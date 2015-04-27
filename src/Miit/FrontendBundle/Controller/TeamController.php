@@ -33,13 +33,13 @@ class TeamController extends Controller
         $team = $this->get('team_manager')->getTeam();
         $user = $this->getUser();
 
-        if (false === $this->get('security.authorization_checker')->isGranted('user', $team)) {
+        if (false === $this->get('security.authorization_checker')->isGranted('USER', $team)) {
             $url = $this->generateUrl('welcome_login');
 
             return new RedirectResponse($url);
         }
 
-        $context    = SerializationContext::create()->setGroups(array('owner'));
+        $context = SerializationContext::create()->setGroups(array('owner'));
 
         return $this->render('MiitFrontendBundle:team:index.html.twig', array(
             'team_name'    => $team->getName(),

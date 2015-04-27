@@ -19,8 +19,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class TeamVoter implements VoterInterface
 {
-    const ROLE_ADMIN = 'admin';
-    const ROLE_USER  = 'user';
+    const ROLE_ADMIN = 'ADMIN';
+    const ROLE_USER  = 'USER';
 
     /**
      * @var TeamManager
@@ -70,17 +70,9 @@ class TeamVoter implements VoterInterface
 
         switch ($role) {
             case TeamVoter::ROLE_USER:
-
-                $needed_role = $team->getUserRole();
-
-                if($user->hasRole($needed_role)) {
-                    return VoterInterface::ACCESS_GRANTED;
-                }
-                break;
-
             case TeamVoter::ROLE_ADMIN:
 
-                $needed_role = $team->getAdminRole();
+                $needed_role = $team->getRole($role);
 
                 if($user->hasRole($needed_role)) {
                     return VoterInterface::ACCESS_GRANTED;
