@@ -69,15 +69,13 @@ class CurrentTeamListener
         // Allow team if more than 3 characters
         if(3 < strlen($subdomain)) {
 
-            try {
+            $team = $this->teamRepository->findTeamBySlug($subdomain);
 
-                $team = $this->teamRepository->findTeamBySlug($subdomain);
-
+            if(null !== $team) {
                 $this->teamManager->setCurrentTeam($team);
 
                 $redirect = $team->isLocked();
-            
-            } catch(NoResultException $ex) {
+            } else {
                 $redirect = true;
             }
         }

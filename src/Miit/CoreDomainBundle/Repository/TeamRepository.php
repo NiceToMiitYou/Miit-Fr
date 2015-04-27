@@ -9,6 +9,7 @@ use Miit\CoreDomain\Team\TeamId;
 use Miit\CoreDomainBundle\Entity\Team;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NoResultException;
 
 /**
  * Class TeamRepository
@@ -22,16 +23,18 @@ class TeamRepository extends EntityRepository implements TeamRepositoryInterface
      */
     public function findTeamByTeamId(TeamId $teamId)
     {
-        $em = $this->getEntityManager();
-    
-        $query = $em->createQueryBuilder()
-                    ->select('t')
-                    ->from('MiitCoreDomainBundle:Team ', 't')
-                    ->where('t.id = :id')
-                    ->setParameter('id', $teamId->getValue())
-                    ->getQuery();
+        $query = $this->createQueryBuilder('t')
+                      ->where('t.id = :id')
+                      ->setParameter('id', $teamId->getValue())
+                      ->getQuery();
 
-        return $query->getSingleResult();
+        try {
+            $team = $query->getSingleResult();
+        } catch(NoResultException $e) {
+            $team = null;
+        }
+
+        return $team;
     }
 
     /**
@@ -39,16 +42,30 @@ class TeamRepository extends EntityRepository implements TeamRepositoryInterface
      */
     public function findTeamBySlug($slug)
     {
+        $query = $this->createQueryBuilder('t')
+                      ->where('t.slug = :slug')
+                      ->setParameter('slug', $slug)
+                      ->getQuery();
+
+        try {
+            $team = $query->getSingleResult();
+        } catch(NoResultException $e) {
+            $team = null;
+        }
+
+        return $team;
+    }
+
+    /**
+     * @param TeamId $teamId
+     * 
+     * @return Team
+     */
+    public function getReference(TeamId $teamId)
+    {
         $em = $this->getEntityManager();
-
-        $query = $em->createQueryBuilder()
-                    ->select('t')
-                    ->from('MiitCoreDomainBundle:Team ', 't')
-                    ->where('t.slug = :slug')
-                    ->setParameter('slug', $slug)
-                    ->getQuery();
-
-        return $query->getSingleResult();
+        
+        return $em->getReference($this->getEntityName(), $teamId);
     }
 
     /**
