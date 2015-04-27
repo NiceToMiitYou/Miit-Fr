@@ -103,4 +103,107 @@ class UserManager
         $this->mailer->send($message);
         $this->mailer->getTransport()->stop();
     }
+
+    /**
+     * @param Email $email
+     * 
+     * @return UserId
+     */
+    private function getUserIdOrNewByEmail(Email $email)
+    {
+        $user = $this->userRepository->findUserByEmail($email);
+        
+        if(null !== $user)
+            return $user->getId();
+        else
+            return $this->createNewUser($email);
+    }
+
+    /**
+     * @param Email $email
+     * 
+     * @return UserId
+     */
+    private function createNewUser(Email $email)
+    {
+        // Process registration
+        $userId     = UserId::newInstance();
+
+        $explode    = explode('@', $email->getValue());
+        $username   = reset($explode);
+
+        $generator  = new SecureRandom();
+        $password   = bin2hex(
+            $generator->nextBytes(8)
+        );
+
+        $command = new RegisterUserCommand($userId, $username, $email, $password);
+
+        try {
+            // Register the user
+            $this->commandBus->dispatch($command);
+
+            // then send the password
+            $this->sendNewUserEmail($email, $password);
+        } catch (\Exception $exception) {
+
+            $this->logger->crit('The user could not be created.', array(
+                'user_id'  => sprintf('%s', $userId),
+                'email'    => sprintf('%s', $email),
+                'username' => $username,
+                'password' => $password,
+                'error'    => sprintf('%s', $exception),
+            ));
+
+            $userId = null;
+        }
+
+        return $userId;
+    }
+
+    /**
+     * @param Email  $email
+     * @param TeamId $teamId
+     * @param array  $roles
+     * 
+     * @return UserId
+     */
+    public function inviteInTeam(Email $email, TeamId $teamId, array $roles = array('USER'))
+    {
+        $userId = $this->getUserIdOrNewByEmail($email);
+
+        if(null !== $userId) {
+            $finalRoles = array();
+
+            foreach($roles as $role) {
+                array_push($finalRoles,
+                    Team::getRoleDefinition($teamId, $role)
+                );
+            }
+
+            $command_promote = new PromoteUserCommand($userId, $finalRoles);
+            $command_add     = new AddTeamUserCommand($userId, array(
+                $this->teamRepository->getReference($teamId)
+            ));
+
+            try {
+                $this->commandBus->dispatch($command_add);
+                $this->commandBus->dispatch($command_promote);
+            } catch (\Exception $exception) {
+
+                $this->logger->crit('The user could not be promoted.', array(
+                    'user_id'     => sprintf('%s', $userId),
+                    'email'       => sprintf('%s', $email),
+                    'team'        => sprintf('%s', $teamId),
+                    'roles'       => $roles,
+                    'final_roles' => $finalRoles,
+                    'error'       => sprintf('%s', $exception),
+                ));
+
+                $userId = null;
+            }
+        }
+
+        return $userId;
+    }
 }

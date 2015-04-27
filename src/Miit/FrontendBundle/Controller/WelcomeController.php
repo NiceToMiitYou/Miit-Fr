@@ -15,7 +15,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Security\Core\Util\SecureRandom;
 
 /**
  * Class WelcomeControlle
@@ -54,65 +53,32 @@ class WelcomeController extends Controller
         if ($form->isValid()) {
 
             $registration = $form->getData();
+            $userManager  = $this->get('user_manager');
+            $teamManager  = $this->get('team_manager');
 
             // Process registration
-            $userId     = UserId::newInstance();
-            $email      = new Email($registration->user->email);
+            $email  = new Email($registration->user->email);
+            $name   = $registration->team->name;
 
-            $explode    = explode('@', $email->getValue());
-            $username   = reset($explode);
+            // Create the team
+            $teamId = $teamManager->createTeam($name);
 
-            $generator  = new SecureRandom();
-            $password   = bin2hex(
-                $generator->nextBytes(8)
-            );
+            // If team created
+            if(null !== $teamId) {
 
-            // Process team creation
-            $teamId     = TeamId::newInstance();
-            $name       = $registration->team->name;
-            $slug       = strtolower($name);
+                // Invite or create the user in the new team
+                $userId = $userManager->inviteInTeam($email, $teamId, array('ADMIN', 'USER'));
 
-            // Process roles for user
-            $role_user  = strtoupper('ROLE_USER_'  . $teamId->getValue());
-            $role_admin = strtoupper('ROLE_ADMIN_' . $teamId->getValue());
-
-            // Entity manager
-            $em         = $this->get('doctrine.orm.entity_manager');
-            $team       = $em->getReference('Miit\CoreDomainBundle\Entity\Team', $teamId);
-
-            // Instanciate commands
-            $command_register_user = new RegisterUserCommand($userId, $username, $email, $password);
-
-            $command_create_team   = new CreateTeamCommand($teamId, $slug, $name);
-
-            $command_promote_user  = new PromoteUserCommand($userId, array(
-                $role_admin,
-                $role_user
-            ));
-
-            $command_add_team_user = new AddTeamUserCommand($userId, array(
-                $team
-            ));
-
-            try {
-                $this->get('command_bus')->dispatch($command_register_user);
-
-                $this->get('user_manager')->sendNewUserEmail($email, $password);
-
-                $this->get('command_bus')->dispatch($command_create_team);
-
-                $this->get('command_bus')->dispatch($command_promote_user);
-
-                $this->get('command_bus')->dispatch($command_add_team_user);
-
-                $response['done'] = true;
-
-            } catch(\Exception $e) {
-                $response['errors'] = array();
-                $response['errors'][] = $e->getMessage();
+                // If user created or/and invited
+                if(null !== $userId) {
+                    $response['done'] = true;
+                } else {
+                    $response['errors'] = array('USER_NOT_CREATED');
+                }
+            } else {
+                $response['errors'] = array('TEAM_NOT_CREATED');
             }
         } else {
-
             $response['errors'] = $form->getErrors();
         }
 

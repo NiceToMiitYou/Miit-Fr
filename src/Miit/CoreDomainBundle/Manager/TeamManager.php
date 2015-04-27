@@ -51,6 +51,37 @@ class TeamManager
     }
 
     /**
+     * @param string name
+     * 
+     * @return TeamId
+     */
+    public function createTeam($name)
+    {
+        $slugify = new Slugify();
+
+        $teamId  = TeamId::newInstance();
+        $slug    = $slugify->slugify($name);
+
+        $command = new CreateTeamCommand($teamId, $slug, $name);
+
+        try {
+            $this->commandBus->dispatch($command);
+        } catch (\Exception $exception) {
+
+            $this->logger->crit('The team could not be created.', array(
+                'team_id' => sprintf('%s', $teamId),
+                'name'    => $name,
+                'slug'    => $slug,
+                'error'   => sprintf('%s', $exception),
+            ));
+
+            $teamId = null;
+        }
+
+        return $teamId;
+    }
+
+    /**
      * @param Team
      */
     public function setCurrentTeam(TeamModel $team)
