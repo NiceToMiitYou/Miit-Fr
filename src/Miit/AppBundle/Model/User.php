@@ -42,4 +42,13 @@ class User
      * )
      */
     public $password_new;
+
+    /**
+     * @Assert\Choice(
+     *      groups={"promote_user", "demote_user"},
+     *      callback = {"Miit\CoreDomain\Team\Team", "getAllowedRoles"},
+     *      multiple = true
+     * )
+     */
+    public $roles;
 }

@@ -18,11 +18,13 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  * Class UserController
  * 
  * @author Tacyniak Boris <boris.tacyniak@itevents.fr>
+ * 
+ * @Route("/user")
  */
 class UserController extends AppControllerAbstract
 {
     /**
-     * @Route("/user/change_password",
+     * @Route("/change_password",
      *      host="{team_slug}.{domain}",
      *      name="app_user_change_password",
      *      defaults={
@@ -37,17 +39,11 @@ class UserController extends AppControllerAbstract
      */
     public function changePasswordAction(Request $request)
     {
-        $form = $this->createForm('user_change_password_type');
-        $data = @json_decode($request->getContent(), true);
+        $form     = $this->validateForm('user_change_password_type', $request);
+        $response = $this->getDefaultResponse();
 
-        $form->submit($data);
-   
-        $response = array(
-            'done' => false
-        );
-
-        if ($form->isValid()) {
-
+        if ($form->isValid())
+        {
             $user           = $this->getUser();
             $changePassword = $form->getData();
 
@@ -80,7 +76,7 @@ class UserController extends AppControllerAbstract
     }
 
     /**
-     * @Route("/user/promote/{id}",
+     * @Route("/promote/{id}",
      *      host="{team_slug}.{domain}",
      *      name="app_user_promote_user",
      *      defaults={
@@ -90,27 +86,20 @@ class UserController extends AppControllerAbstract
      *          "_method":   "POST",
      *          "domain":    "%domain%",
      *          "team_slug": ".{4,}",
-     *          "id":        "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-5[0-9a-fA-F]{3}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"
+     *          "id":        "[0-9a-f]{8}-[0-9a-f]{4}-5[0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}"
      *      }
      * )
      */
     public function promoteUserAction(Request $request, $id)
     {
-        $this->checkRole('USER');
+        $this->checkRole('ADMIN');
 
-        $team = $this->getTeam();
-
-        $form = $this->createForm('promote_user_type');
-        $data = @json_decode($request->getContent(), true);
-
-        $form->submit($data);
-
-        $response = array(
-            'done' => false
-        );
+        $form     = $this->validateForm('promote_user_type', $request);
+        $response = $this->getDefaultResponse();
 
         if ($form->isValid())
         {
+            $team        = $this->getTeam();
             $promoteUser = $form->getData();
 
             die(var_dump($promoteUser));

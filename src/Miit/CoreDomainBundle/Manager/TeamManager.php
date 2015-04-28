@@ -41,7 +41,9 @@ class TeamManager
     private $teamRepository;
 
     /**
-     * @param TeamRepository $teamRepository
+     * @param Logger              $logger
+     * @param CommandBusInterface $commandBus
+     * @param TeamRepository      $teamRepository
      */
     public function __construct(Logger $logger, CommandBusInterface $commandBus, TeamRepository $teamRepository)
     {

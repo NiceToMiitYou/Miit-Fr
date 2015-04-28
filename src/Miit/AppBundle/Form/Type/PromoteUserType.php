@@ -33,7 +33,7 @@ class PromoteUserType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class'        => 'Miit\AppBundle\Model\PromoteUser',
+            'data_class'        => 'Miit\AppBundle\Model\User',
             'validation_groups' => array('promote_user'),
             'csrf_protection'   => true,
             'csrf_field_name'   => '_token',
