@@ -154,7 +154,7 @@ class Team implements Entity
      */
     public function equals(Team $team)
     {
-        if($this->id->getValue() !== $team->getId()->getValue()) {
+        if($this->getId()->getValue() !== $team->getId()->getValue()) {
             return false;
         }
 
@@ -174,7 +174,7 @@ class Team implements Entity
     {
         if(true === is_string($this->id))
         {
-            $this->id = new TeamId($this->id);
+            return new TeamId($this->id);
         }
 
         return $this->id;
@@ -195,7 +195,7 @@ class Team implements Entity
      */
     public function getRole($role)
     {
-        return self::getRoleDefinition($this->id, $role);
+        return self::getRoleDefinition($this->getId(), $role);
     }
 
     /**

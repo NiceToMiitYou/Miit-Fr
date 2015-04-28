@@ -29,7 +29,10 @@ class TeamRegistrationType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class'        => 'Miit\AppBundle\Model\Team',
-            'validation_groups' => array('registration')
+            'validation_groups' => array('registration'),
+            'csrf_protection'   => true,
+            'csrf_field_name'   => '_token',
+            'intention'         => 'registration',
         ));
     }
 

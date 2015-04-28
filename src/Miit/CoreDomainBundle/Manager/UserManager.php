@@ -15,6 +15,8 @@ use Miit\CoreDomain\User\Command\AddTeamUserCommand;
 use Miit\CoreDomain\Team\TeamId;
 use Miit\CoreDomain\Team\Team;
 
+use Symfony\Component\Security\Core\Util\SecureRandom;
+
 use Monolog\Logger;
 
 /**
@@ -45,63 +47,29 @@ class UserManager
     private $teamRepository;
 
     /**
-     * @var \Swift_Mailer
+     * @var EmailManager
      */
-    private $mailer;
+    private $emailManager;
 
     /**
-     * @var \Twig_Environment
-     */
-    private $twig;
-
-    /**
-     * @param UserRepository $userRepository
+     * @param Logger              $logger
+     * @param CommandBusInterface $commandBus
+     * @param UserRepository      $userRepository
+     * @param TeamRepository      $teamRepository
+     * @param EmailManager        $emailManager
      */
     public function __construct(
-        logger $logger,
+        Logger              $logger,
         CommandBusInterface $commandBus,
-        UserRepository $userRepository,
-        TeamRepository $teamRepository,
-        \Swift_Mailer $mailer,
-        \Twig_Environment $twig
+        UserRepository      $userRepository,
+        TeamRepository      $teamRepository,
+        EmailManager        $emailManager
     ) {
         $this->logger         = $logger;
         $this->commandBus     = $commandBus;
         $this->userRepository = $userRepository;
         $this->teamRepository = $teamRepository;
-        $this->mailer         = $mailer;
-        $this->twig           = $twig;
-    }
-
-    /**
-     * @param Email $email
-     */
-    public function sendNewUserEmail(Email $email, $password)
-    {
-        if(!$this->mailer->getTransport()->isStarted()){
-            $this->mailer->getTransport()->start();
-        }
-
-        $bodyHtml = $this->twig->render(
-            'MiitFrontendBundle:mailing:newUser.html.twig',
-            array('html' => true,  'password' => $password)
-        );
-
-        $bodyText = $this->twig->render(
-            'MiitFrontendBundle:mailing:newUser.html.twig',
-            array('html' => false, 'password' => $password)
-        );
-
-        $message = $this->mailer->createMessage();
-
-        $message->setBody($bodyHtml, 'text/html');
-        $message->addPart($bodyText, 'text/plain', 'UTF8');
-
-        $message->addTo($email->getValue());
-        $message->setFrom(array('no-reply@miit.fr' => 'Miit.fr'));      
-
-        $this->mailer->send($message);
-        $this->mailer->getTransport()->stop();
+        $this->emailManager   = $emailManager;
     }
 
     /**
@@ -144,7 +112,7 @@ class UserManager
             $this->commandBus->dispatch($command);
 
             // then send the password
-            $this->sendNewUserEmail($email, $password);
+            $this->emailManager->sendNewUser($email, $password);
         } catch (\Exception $exception) {
 
             $this->logger->crit('The user could not be created.', array(
@@ -162,13 +130,14 @@ class UserManager
     }
 
     /**
-     * @param Email  $email
-     * @param TeamId $teamId
-     * @param array  $roles
+     * @param Email   $email
+     * @param TeamId  $teamId
+     * @param array   $roles
+     * @param boolean $newTeam
      * 
      * @return UserId
      */
-    public function inviteInTeam(Email $email, TeamId $teamId, array $roles = array('USER'))
+    public function inviteInTeam(Email $email, TeamId $teamId, array $roles = array('USER'), $newTeam = false)
     {
         $userId = $this->getUserIdOrNewByEmail($email);
 
@@ -187,8 +156,19 @@ class UserManager
             ));
 
             try {
+                // Process commands
                 $this->commandBus->dispatch($command_add);
                 $this->commandBus->dispatch($command_promote);
+
+                // Notify the user
+                if(true === $newTeam)
+                {
+                    $this->emailManager->sendCreatedTeam($email);
+                }
+                else
+                {
+                    $this->emailManager->sendInviteUser($email);
+                }
             } catch (\Exception $exception) {
 
                 $this->logger->crit('The user could not be promoted.', array(

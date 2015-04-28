@@ -85,7 +85,7 @@ class TeamController extends AppControllerAbstract
             $userId = $this->get('user_manager')->inviteInTeam($email, $teamId);
 
             if(null !== $userId) {
-                $response['done'] = false;
+                $response['done'] = true;
             }
         }
 

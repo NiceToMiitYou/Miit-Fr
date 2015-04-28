@@ -255,7 +255,7 @@ class User implements Entity
     {
         if(true === is_string($this->id))
         {
-            $this->id = new UserId($this->id);
+            return new UserId($this->id);
         }
 
         return $this->id;
@@ -268,7 +268,7 @@ class User implements Entity
     {
         if(true === is_string($this->email))
         {
-            $this->email = new Email($this->email);
+            return new Email($this->email);
         }
 
         return $this->email;

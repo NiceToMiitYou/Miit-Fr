@@ -100,8 +100,8 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
     public function loadUserByUsername($username)
     {
         $query = $this->createQueryBuilder('u')
-                      ->where('u.locked = :locked')
-                      ->andWhere('u.email = :username') // The email is used instead of the username to login
+                      ->where('u.email = :username') // The email is used instead of the username to login
+                      ->andWhere('u.locked = :locked')
                       ->setParameter('locked',   false)
                       ->setParameter('username', $username)
                       ->getQuery();
