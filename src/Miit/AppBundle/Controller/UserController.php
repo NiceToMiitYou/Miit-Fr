@@ -98,7 +98,7 @@ class UserController extends AppControllerAbstract
     {
         $this->checkRole('USER');
 
-        $team = $this->get('team_manager')->getTeam();
+        $team = $this->getTeam();
 
         $form = $this->createForm('promote_user_type');
         $data = @json_decode($request->getContent(), true);

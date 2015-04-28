@@ -38,7 +38,7 @@ class TeamController extends AppControllerAbstract
 
         $response   = new JsonResponse();
 
-        $teamId     = $this->get('team_manager')->getTeam()->getId();
+        $teamId     = $this->getTeam()->getId();
         $users      = $this->get('user_repository')->findUsersByTeam($teamId);
 
         $context    = SerializationContext::create()->setGroups(array('list'));

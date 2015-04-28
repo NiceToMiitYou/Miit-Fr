@@ -20,10 +20,18 @@ abstract class AppControllerAbstract extends Controller
      */
     protected function checkRole($role)
     {
-        $team = $this->get('team_manager')->getTeam();
+        $team = $this->getTeam();
 
         if (false === $this->get('security.authorization_checker')->isGranted($role, $team)) {
             throw new NotFoundHttpException();
         }
+    }
+
+    /**
+     * @return Team
+     */
+    protected function getTeam()
+    {
+        return $this->get('team_manager')->getTeam();
     }
 }
