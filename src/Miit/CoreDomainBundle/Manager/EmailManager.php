@@ -81,7 +81,7 @@ class EmailManager
         $message->addPart($bodyText, 'text/plain', 'UTF8');
 
         $message->addTo($email->getValue());
-        $message->setFrom(array('no-reply@miit.fr' => 'Miit.fr'));      
+        $message->setFrom(array('no-reply@itevents.fr' => 'Miit.fr'));      
 
         $this->mailer->send($message);
         $this->mailer->getTransport()->stop();
@@ -114,5 +114,13 @@ class EmailManager
     public function sendInviteUser(Email $email)
     {
         $this->sendMessage($email, 'MiitFrontendBundle:mailing:inviteUser.html.twig');
+    }
+
+    /**
+     * @param Email $email
+     */
+    public function sendCreatedTeam(Email $email)
+    {
+        $this->sendMessage($email, 'MiitFrontendBundle:mailing:createdTeam.html.twig');
     }
 }

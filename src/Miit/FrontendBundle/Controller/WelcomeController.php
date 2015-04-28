@@ -67,7 +67,7 @@ class WelcomeController extends Controller
             if(null !== $teamId) {
 
                 // Invite or create the user in the new team
-                $userId = $userManager->inviteInTeam($email, $teamId, array('ADMIN', 'USER'));
+                $userId = $userManager->inviteInTeam($email, $teamId, array('ADMIN', 'USER'), true);
 
                 // If user created or/and invited
                 if(null !== $userId) {
