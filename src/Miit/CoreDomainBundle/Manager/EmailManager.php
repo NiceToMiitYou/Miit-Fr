@@ -14,6 +14,11 @@ use Monolog\Logger;
 class EmailManager
 {
     /**
+     * @var array
+     */
+    private $context;
+
+    /**
      * @var Logger
      */
     private $logger;
@@ -38,26 +43,45 @@ class EmailManager
         \Swift_Mailer $mailer,
         \Twig_Environment $twig
     ) {
-        $this->logger         = $logger;
-        $this->mailer         = $mailer;
-        $this->twig           = $twig;
+        $this->logger  = $logger;
+        $this->mailer  = $mailer;
+        $this->twig    = $twig;
+        $this->context = array();
+    }
+
+    /**
+     * Add to the context
+     * 
+     * @param string $key
+     * @param mixed  $value
+     */
+    public function add($key, $value)
+    {
+        $this->context[$key] = $value;
+    }
+
+    /**
+     * Reset the context
+     */
+    public function reset()
+    {
+        $this->context = array();
     }
 
     /**
      * @param string $template
-     * @param array  $context
      * 
      * @return array
      */
-    private function generateTemplate($template, $context = array())
+    private function generateTemplate($template)
     {
         // Generate HTML Template
         $context['html'] = true;
-        $bodyHtml = $this->twig->render($template, $context);
+        $bodyHtml = $this->twig->render($template, $this->context);
 
         // Generate NON-HTML Template
         $context['html'] = false;
-        $bodyText = $this->twig->render($template, $context);
+        $bodyText = $this->twig->render($template, $this->context);
 
         return array($bodyText, $bodyHtml);
     }
@@ -65,15 +89,14 @@ class EmailManager
     /**
      * @param Email  $email
      * @param string $template
-     * @param array  $context
      */
-    private function sendMessage(Email $email, $template, $context = array())
+    private function sendMessage(Email $email, $template)
     {
         if(!$this->mailer->getTransport()->isStarted()){
             $this->mailer->getTransport()->start();
         }
 
-        list($bodyText, $bodyHtml) = $this->generateTemplate($template, $context);
+        list($bodyText, $bodyHtml) = $this->generateTemplate($template);
 
         $message = $this->mailer->createMessage();
 
@@ -101,11 +124,9 @@ class EmailManager
      */
     public function sendNewUser(Email $email, $password)
     {
-        $context = array(
-            'password' => $password
-        );
+        $this->add('password', $password);
 
-        $this->sendMessage($email, 'MiitFrontendBundle:mailing:newUser.html.twig', $context);
+        $this->sendMessage($email, 'MiitFrontendBundle:mailing:newUser.html.twig');
     }
 
     /**

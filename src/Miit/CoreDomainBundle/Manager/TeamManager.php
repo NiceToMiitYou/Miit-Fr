@@ -41,15 +41,31 @@ class TeamManager
     private $teamRepository;
 
     /**
+     * @var EmailManager
+     */
+    private $emailManager;
+
+    /**
      * @param Logger              $logger
      * @param CommandBusInterface $commandBus
      * @param TeamRepository      $teamRepository
      */
-    public function __construct(Logger $logger, CommandBusInterface $commandBus, TeamRepository $teamRepository)
-    {
+    public function __construct(
+        Logger              $logger,
+        CommandBusInterface $commandBus,
+        TeamRepository      $teamRepository
+    ) {
         $this->logger         = $logger;
         $this->commandBus     = $commandBus;
         $this->teamRepository = $teamRepository;
+    }
+
+    /**
+     * @param EmailManager $emailManager
+     */
+    public function setEmailManager(EmailManager $emailManager)
+    {
+        $this->emailManager = $emailManager;
     }
 
     /**
@@ -68,6 +84,8 @@ class TeamManager
 
         try {
             $this->commandBus->dispatch($command);
+            $this->emailManager->add('team_name', $name);
+            $this->emailManager->add('team_slug', $slug);
         } catch (\Exception $exception) {
 
             $this->logger->crit('The team could not be created.', array(
@@ -88,6 +106,8 @@ class TeamManager
      */
     public function setCurrentTeam(TeamModel $team)
     {
+        $this->emailManager->add('team_name', $team->getName());
+        $this->emailManager->add('team_slug', $team->getSlug());
         $this->team = $team;
     }
 

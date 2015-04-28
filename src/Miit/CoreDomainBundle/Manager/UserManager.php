@@ -62,14 +62,20 @@ class UserManager
         Logger              $logger,
         CommandBusInterface $commandBus,
         UserRepository      $userRepository,
-        TeamRepository      $teamRepository,
-        EmailManager        $emailManager
+        TeamRepository      $teamRepository
     ) {
         $this->logger         = $logger;
         $this->commandBus     = $commandBus;
         $this->userRepository = $userRepository;
         $this->teamRepository = $teamRepository;
-        $this->emailManager   = $emailManager;
+    }
+
+    /**
+     * @param EmailManager $emailManager
+     */
+    public function setEmailManager(EmailManager $emailManager)
+    {
+        $this->emailManager = $emailManager;
     }
 
     /**
@@ -159,7 +165,7 @@ class UserManager
                 // Process commands
                 $this->commandBus->dispatch($command_add);
                 $this->commandBus->dispatch($command_promote);
-
+                
                 // Notify the user
                 if(true === $newTeam)
                 {
