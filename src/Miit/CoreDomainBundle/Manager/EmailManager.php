@@ -124,7 +124,7 @@ class EmailManager
      */
     public function sendNewUser(Email $email, $password)
     {
-        $this->add('password', $password);
+        $this->add('user_password', $password);
 
         $this->sendMessage($email, 'MiitFrontendBundle:mailing:newUser.html.twig');
     }
