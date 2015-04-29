@@ -76,11 +76,11 @@ class EmailManager
     private function generateTemplate($template)
     {
         // Generate HTML Template
-        $context['html'] = true;
+        $this->add('html', true);
         $bodyHtml = $this->twig->render($template, $this->context);
 
         // Generate NON-HTML Template
-        $context['html'] = false;
+        $this->add('html', false);
         $bodyText = $this->twig->render($template, $this->context);
 
         return array($bodyText, $bodyHtml);
