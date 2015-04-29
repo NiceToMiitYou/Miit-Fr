@@ -21,6 +21,10 @@ MiitComponents.MiitTeamContent = React.createClass({
                     </div>
                 </div>
 
+                <div className="mb20">
+                    <MiitComponents.UserList users={[MiitCurrentUser]} />
+                </div>
+
                 <div className="checkbox-field mb20">
                     <label>
                         <input type="radio" name="confid" className="option-input radio" />

@@ -1,4 +1,4 @@
-var ChangePassword = React.createClass({
+MiitComponents.ChangePassword = React.createClass({
     getDefaultProps: function() {
         return {
             placeholder: {

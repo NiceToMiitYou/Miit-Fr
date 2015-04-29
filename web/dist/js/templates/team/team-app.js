@@ -3,7 +3,7 @@ MiitComponents.TeamApp = React.createClass({displayName: "TeamApp",
         return (
             React.createElement("div", {className: "page bg-grey lighten-5"}, 
                 React.createElement(MiitComponents.MenuTeam, null), 
-                React.createElement(ChangePassword, null), 
+                React.createElement(MiitComponents.ChangePassword, null), 
 
                 React.createElement("div", {className: "main"}, 
                     React.createElement(MiitComponents.MiitTeamHeader, null), 
