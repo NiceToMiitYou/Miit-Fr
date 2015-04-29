@@ -22,7 +22,7 @@ MiitComponents.MiitTeamContent = React.createClass({displayName: "MiitTeamConten
                 ), 
 
                 React.createElement("div", {className: "mb20"}, 
-                    React.createElement(MiitComponents.UserList, {users: [MiitCurrentUser]})
+                    React.createElement(MiitComponents.UserList, {autoload: true})
                 ), 
 
                 React.createElement("div", {className: "checkbox-field mb20"}, 

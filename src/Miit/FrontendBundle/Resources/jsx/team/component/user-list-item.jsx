@@ -8,6 +8,10 @@ MiitComponents.UserListItem = React.createClass({
         };
     },
 
+    shouldComponentUpdate: function(nextProps, nextState) {
+        return nextProps.user.id !== this.props.user.id;
+    },
+
     render: function() {
         return (
             <div className="miit-component user-list-item">

@@ -1,10 +1,17 @@
 placeholder:
-    your.email: "Votre adresse mail"
+    your:
+        email: "Votre adresse mail"
+        password: "Votre mot de passe"
+
+    email.invite: "Entrez un email"
+
     team.name: "Nom de votre équipe"
-    your.password: "Votre mot de passe"
-    password.first: "Nouveau mot de passe"
-    password.second: "Comfirmer votre mot de passe"
+
+    password:
+        first: "Nouveau mot de passe"
+        second: "Comfirmer votre mot de passe"
 
 submit:
-    create.team: "Créer l'équipe"
     change.password: "Changer de mot de passe"
+    create.team: "Créer l'équipe"
+    invite.user: "Inviter dans l'équipe"
