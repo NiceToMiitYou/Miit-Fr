@@ -71,6 +71,7 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
         $query = $this->createQueryBuilder('u')
                       ->join('u.teams', 't')
                       ->where('t.id = :teamId')
+                      ->orderBy('u.name', 'ASC')
                       ->setParameter('teamId', $teamId->getValue())
                       ->getQuery();
 
