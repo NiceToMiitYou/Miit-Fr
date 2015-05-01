@@ -9,7 +9,6 @@ MiitComponents.UserListInvite = React.createClass({
     },
 
     getInitialState: function() {
-
         var initial = this.getDefaultErrors();
 
         initial['email'] = '';
@@ -37,6 +36,11 @@ MiitComponents.UserListInvite = React.createClass({
         
         this.setState(this.getDefaultErrors());
 
+        // Check if this is an admin
+        if(!MiitApp.utils.user.isAdmin()){
+            return;
+        }
+
         // Check if there is data
         if (!email) {
             this.setState({
@@ -54,7 +58,6 @@ MiitComponents.UserListInvite = React.createClass({
         }
 
         MiitApp.request.team.invite(email, function(data) {
-
             this.setState({
                 email: ''
             });
@@ -68,6 +71,11 @@ MiitComponents.UserListInvite = React.createClass({
     },
 
     render: function() {
+        // Check if this is an admin
+        if(!MiitApp.utils.user.isAdmin()){
+            return null;
+        }
+
         var cx = React.addons.classSet;
 
         var classes_invalid = cx({
