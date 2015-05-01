@@ -114,7 +114,7 @@ class EmailManager
             'template' => $template,
             'html'     => $bodyHtml,
             'text'     => $bodyText,
-            'data'     => $context,
+            'data'     => $this->context,
         ));
     }
 
