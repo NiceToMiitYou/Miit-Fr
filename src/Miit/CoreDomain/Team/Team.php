@@ -206,8 +206,9 @@ class Team implements Entity
     public static function getAllowedRoles()
     {
         return array(
+            'ADMIN',
             'USER',
-            'ADMIN'
+            'OWNER'
         );
     }
 

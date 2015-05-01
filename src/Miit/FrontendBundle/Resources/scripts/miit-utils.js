@@ -22,6 +22,22 @@ MiitApp.utils = (function() {
         };
     };
 
+    // Generate the validator for user's role
+    var isUserGenerator = function(role) {
+        return function(user) {
+            if(!user) {
+                user = MiitCurrentUser;
+            }
+
+            return user.roles.indexOf(role) >= 0
+        };
+    };
+
+    // Check if this is the same user
+    var isItMe = function(user) {
+        return MiitCurrentUser.id === ((user || {}).id || null)
+    };
+
     /**
      * Ajax part
      */
@@ -114,6 +130,13 @@ MiitApp.utils = (function() {
         ajax: {
             send: sendRequest,
             crsf: getCrsf
+        },
+
+        user: {
+            isAdmin: isUserGenerator('ADMIN'),
+            isUser:  isUserGenerator('USER'),
+            isOwner: isUserGenerator('OWNER'),
+            isItMe:  isItMe,
         },
 
         validator: {
