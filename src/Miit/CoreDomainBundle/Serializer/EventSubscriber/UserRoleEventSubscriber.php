@@ -4,6 +4,7 @@ namespace Miit\CoreDomainBundle\Serializer\EventSubscriber;
 
 use Miit\CoreDomain\Team\Team;
 
+use Miit\CoreDomainBundle\Entity\User;
 use Miit\CoreDomainBundle\Manager\TeamManager;
 
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
@@ -38,8 +39,7 @@ class UserRoleEventSubscriber implements EventSubscriberInterface
         return array(
             array(
                 'event'  => Events::POST_SERIALIZE,
-                'format' => 'json',
-                'type'   => 'Miit\\CoreDomainBundle\\Entity\\User',
+                'class'  => User::class,
                 'method' => 'onPostSerializeTaskJson',
             ),
         );
