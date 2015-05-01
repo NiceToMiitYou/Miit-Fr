@@ -44,12 +44,15 @@ class TeamController extends Controller
             return new RedirectResponse($url);
         }
 
-        $context = SerializationContext::create()->setGroups(array('owner'));
+        $user_context = SerializationContext::create()->setGroups(array('owner'));
+        $team_context = SerializationContext::create()->setGroups(array('details'));
 
         return $this->render('MiitFrontendBundle:team:index.html.twig', array(
             'team_name'    => $team->getName(),
-            'user_context' => $context,
-            'user'         => $user
+            'user_context' => $user_context,
+            'user'         => $user,
+            'team_context' => $team_context,
+            'team'         => $team
         ));
     }
 

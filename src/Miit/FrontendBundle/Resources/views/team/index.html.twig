@@ -18,13 +18,15 @@
         <script type="text/javascript" src="/dist/js/translations.js"></script>
         <script type="text/javascript" src="/dist/js/app.min.js"></script>
         <script type="text/javascript">
+        {# Include the user in the code #}
+        window.MiitCurrentUser = {{ user | serialize('json', user_context) | raw }};
+        {# Include the team in the code #}
+        window.MiitCurrentTeam = {{ team | serialize('json', team_context) | raw }};
         window.onload = function(){
             (function(r){
                 r.render(r.createElement(MiitComponents.TeamApp,null),document.getElementById('content'));
             })(React);
         };
-        {# Include the user in the code #}
-        window.MiitCurrentUser = {{ user | serialize('json', user_context) | raw }};
         </script>
     </body>
 </html>
