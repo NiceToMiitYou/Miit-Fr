@@ -156,10 +156,10 @@ class UserManager
                 );
             }
 
+            $teamRef = $this->teamRepository->getReference($teamId);
+
             $command_promote = new PromoteUserCommand($userId, $finalRoles);
-            $command_add     = new AddTeamUserCommand($userId, array(
-                $this->teamRepository->getReference($teamId)
-            ));
+            $command_add     = new AddTeamUserCommand($userId, $teamRef);
 
             try {
                 // Process commands
