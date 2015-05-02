@@ -30,7 +30,11 @@ final class RemoveTeamUserCommand implements Command
     public function __construct(UserId $userId, $teams)
     {
         $this->userId = $userId;
-        $this->teams  = $teams;
+        if(is_array($teams)) {
+            $this->teams = $teams;
+        } else {
+            $this->teams = array($teams);
+        }
     }
 
     /**

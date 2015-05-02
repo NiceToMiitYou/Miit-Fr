@@ -30,7 +30,11 @@ final class PromoteUserCommand implements Command
     public function __construct(UserId $userId, $roles)
     {
         $this->userId = $userId;
-        $this->roles  = $roles;
+        if(is_array($roles)) {
+            $this->roles = $roles;
+        } else {
+            $this->roles = array($roles);
+        }
     }
 
     /**

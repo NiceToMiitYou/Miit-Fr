@@ -45,7 +45,11 @@ final class CreateUserCommand implements Command
         $this->userId   = $userId;
         $this->name = (string) $name;
         $this->email    = $email;
-        $this->roles    = $roles;
+        if(is_array($roles)) {
+            $this->roles = $roles;
+        } else {
+            $this->roles = array($roles);
+        }
     }
 
     /**

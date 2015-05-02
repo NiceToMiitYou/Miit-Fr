@@ -30,7 +30,12 @@ final class AddUserTeamCommand implements Command
     public function __construct(TeamId $teamId, $users)
     {
         $this->teamId = $teamId;
-        $this->users  = $users;
+
+        if(is_array($users)) {
+            $this->users = $users;
+        } else {
+            $this->users = array($users);
+        }
     }
 
     /**
