@@ -13,9 +13,7 @@
         <div class="login-container valign-wrapper">
 
             <div class="login valign">
-                {% if error is defined and error %}
-                    <div>{{ error.message }}</div>
-                {% endif %}
+                
 
                 <img class="m-auto mb10" src="/img/logolight.png"/>
                 <!-- <h3>Bienvenue sur la plateforme  {{ team_name }}</h3> -->
@@ -27,6 +25,10 @@
                     <p>
                         Connectez-vous à la plateforme Miit en utilisant votre adresse e-mail comme identifiant.
                     </p>
+
+                    {% if error is defined and error %}
+                        <div class="errors text-red text-600 mt20 mb10"><i class="fa fa-exclamation-triangle"></i> {{ error.message }}</div>
+                    {% endif %}
 
                     <div class="input-field light">
                       <i class="fa fa-user"></i>
