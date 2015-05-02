@@ -21,6 +21,15 @@ interface TeamRepository extends Repository
     public function findTeamByTeamId(TeamId $teamId);
 
     /**
+     * Return the team based on his id
+     * 
+     * @param TeamId $teamId
+     * 
+     * @return Team
+     */
+    public function findTeamByTeamIdWithUsers(TeamId $teamId);
+
+    /**
      * Return the team based on his slug
      * 
      * @param string $slug

@@ -22,18 +22,28 @@ final class RemoveUserTeamCommandHandler extends TeamCommandHandlerAbstract
     {
         if($command instanceof RemoveUserTeamCommand) {
 
-            $team = $this->teamRepository->findTeamByTeamId(
+            $team = $this->teamRepository->findTeamByTeamIdWithUsers(
                 $command->getTeamId()
             );
 
             if(null !== $team) {
 
                 // Get the list of users
-                $users = $command->getUsers();
+                $users     = $command->getUsers();
+                $teamUsers = $team->getUsers();
 
-                // For each users
+                // For each teams
                 foreach ($users as $user) {
-                    $team->removeTeam($user);
+
+                    // For each user's team
+                    foreach ($teamUsers as $teamUser) {
+
+                        // Same id
+                        if($teamUser->getId()->getValue() === $user->getValue()) {
+                            $team->removeUser($teamUser);
+                            break;
+                        }
+                    }
                 }
 
                 // Persist the team

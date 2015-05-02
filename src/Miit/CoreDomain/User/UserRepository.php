@@ -42,6 +42,15 @@ interface UserRepository extends Repository
     public function findUsersByTeam(TeamId $teamId);
 
     /**
+     * Return the user based on his id
+     * 
+     * @param UserId $userid
+     * 
+     * @return User
+     */
+    public function findUserByUserIdWithTeams(UserId $userId);
+
+    /**
      * Return if the user is in the team
      * 
      * @param UserId $userId

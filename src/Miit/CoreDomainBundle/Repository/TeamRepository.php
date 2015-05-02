@@ -40,6 +40,26 @@ class TeamRepository extends EntityRepository implements TeamRepositoryInterface
     /**
      * {@inheritDoc}
      */
+    public function findTeamByTeamIdWithUsers(TeamId $teamId)
+    {
+        $query = $this->createQueryBuilder('t')
+                      ->where('t.id = :id')
+                      ->join('t.users', 'u')
+                      ->setParameter('id', $teamId->getValue())
+                      ->getQuery();
+
+        try {
+            $team = $query->getSingleResult();
+        } catch(NoResultException $e) {
+            $team = null;
+        }
+
+        return $team;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function findTeamBySlug($slug)
     {
         $query = $this->createQueryBuilder('t')

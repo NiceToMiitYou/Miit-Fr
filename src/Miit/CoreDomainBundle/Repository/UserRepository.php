@@ -66,15 +66,27 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
     /**
      * {@inheritDoc}
      */
-    public function findUserByUserIdAndTeamId(UserId $userId, TeamId $teamId)
+    public function findUsersByTeam(TeamId $teamId)
     {
         $query = $this->createQueryBuilder('u')
-                      ->select('u')
                       ->join('u.teams', 't')
-                      ->where('u.id = :userId')
-                      ->andWhere('t.id = :teamId')
-                      ->setParameter('userId', $userId->getValue())
+                      ->where('t.id = :teamId')
+                      ->orderBy('u.name', 'ASC')
                       ->setParameter('teamId', $teamId->getValue())
+                      ->getQuery();
+
+        return $query->getResult();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function findUserByUserIdWithTeams(UserId $userId)
+    {
+        $query = $this->createQueryBuilder('u')
+                      ->join('u.teams', 't')
+                      ->where('u.id = :id')
+                      ->setParameter('id', $userId->getValue())
                       ->getQuery();
 
         try {
@@ -89,16 +101,23 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
     /**
      * {@inheritDoc}
      */
-    public function findUsersByTeam(TeamId $teamId)
+    public function findUserByUserIdAndTeamId(UserId $userId, TeamId $teamId)
     {
         $query = $this->createQueryBuilder('u')
                       ->join('u.teams', 't')
-                      ->where('t.id = :teamId')
-                      ->orderBy('u.name', 'ASC')
+                      ->where('u.id = :userId')
+                      ->andWhere('t.id = :teamId')
+                      ->setParameter('userId', $userId->getValue())
                       ->setParameter('teamId', $teamId->getValue())
                       ->getQuery();
 
-        return $query->getResult();
+        try {
+            $user = $query->getSingleResult();
+        } catch(NoResultException $e) {
+            $user = null;
+        }
+
+        return $user;
     }
 
     /**
