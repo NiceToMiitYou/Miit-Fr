@@ -1,1 +1,71 @@
-// Test sass update
+html, body {
+	width: 100%;
+	height: 100%;
+}
+
+body.login-page {
+	background:url('/img/42H.jpg');
+	background-size: cover;
+	background-position: center;
+}
+
+a {
+	cursor: pointer;
+}
+
+.login-container {
+	  width: 400px;
+	  background-color: rgba(0, 0, 0, 0.15);
+	  border-radius: 0;
+	  height: 100%;
+	  color:#FFF;
+}
+
+.login {
+	width: 300px;
+	margin: auto;
+}
+
+.login p {
+	font-size: 13px;
+	line-height: 20px;
+	margin: 10px 0;
+}
+
+.login h2 {
+	font-family: 'Roboto Condensed', sans-serif;
+	line-height: 2em;
+	font-size: 1.2em;
+	font-weight: 100;
+	width: 50%;
+	text-align: center;
+	float: left;
+	text-transform: uppercase;
+	margin-bottom: 20px;
+}
+
+.login h2 a.active {
+	display: block;
+	background: rgba(255, 255, 255, 0.2);
+}
+
+.login h3 {
+	font-family: 'Roboto Condensed', sans-serif;
+	line-height: 2em;
+	font-size: 1.2em;
+	font-weight: 100;
+	text-align: center;
+	text-transform: uppercase;
+	margin-bottom: 20px;
+}
+
+.login .logo {
+	margin: auto;
+	display: block;
+}
+
+.login button {
+	margin-top: 30px;
+	width: 100%;
+
+}

@@ -351,7 +351,7 @@ html {
     border: 0;
     line-height: 32px;
     padding: 5px;
-    font-size: 1em;
+    font-size: 0.9em;
     font-weight: 500;
     background-color: transparent;
 }
@@ -363,6 +363,40 @@ html {
 .input-field input:focus  {
     border:0;
     outline: 0;
+}
+
+
+.input-field.light {
+
+  i {
+    color: #FFF
+  }
+
+  &:before {
+    background-color: #FFF;
+  }
+
+  input {
+
+    color: #FFF;
+
+    &::-webkit-input-placeholder {
+      color: #FFF;
+    }
+
+    &:-moz-placeholder { /* Firefox 18- */
+       color: #FFF;  
+    }
+
+    &::-moz-placeholder {  /* Firefox 19+ */
+       color: #FFF;  
+    }
+
+    &:-ms-input-placeholder {  
+       color: #FFF;  
+    }
+  }
+
 }
 
 .input-field:before {
@@ -412,6 +446,7 @@ html {
 }
 
 .checkbox-field label {
+  cursor: pointer;
 }
 
 .checkbox-field .option-input {
@@ -437,6 +472,14 @@ html {
   z-index: 1000;
   vertical-align: top;
   border: 2px solid #000;
+}
+
+.checkbox-field.light {
+
+   .option-input {
+      border-color:transparent;
+    }
+
 }
 
 .checkbox-field .option-input:hover { background: #EEE; }
