@@ -5,8 +5,7 @@ namespace Miit\CoreDomain\Team\CommandHandler;
 use DomainDrivenDesign\Domain\Command\Command;
 use DomainDrivenDesign\Domain\Command\CommandNotSupportedByHandler;
 
-use Miit\CoreDomain\User\User;
-use Miit\CoreDomain\User\Command\RemoveUserTeamCommand;
+use Miit\CoreDomain\Team\Command\RemoveUserTeamCommand;
 
 /**
  * Class RemoveUserTeamCommandHandler
@@ -60,6 +59,6 @@ final class RemoveUserTeamCommandHandler extends TeamCommandHandlerAbstract
      */
     public function supportedCommand()
     {
-        return 'Miit\CoreDomain\User\Command\RemoveUserTeamCommand';
+        return 'Miit\CoreDomain\Team\Command\RemoveUserTeamCommand';
     }
 }

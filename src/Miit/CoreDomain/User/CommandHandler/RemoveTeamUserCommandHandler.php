@@ -5,7 +5,6 @@ namespace Miit\CoreDomain\User\CommandHandler;
 use DomainDrivenDesign\Domain\Command\Command;
 use DomainDrivenDesign\Domain\Command\CommandNotSupportedByHandler;
 
-use Miit\CoreDomain\User\User;
 use Miit\CoreDomain\User\Command\RemoveTeamUserCommand;
 
 /**

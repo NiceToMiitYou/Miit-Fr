@@ -12,7 +12,7 @@ use DomainDrivenDesign\Domain\Model\Factory;
 interface TeamFactory extends Factory
 {
     /**
-     * Return a new instance of user
+     * Return a new instance of team
      * 
      * @param TeamId $teamId
      * @param string $slug

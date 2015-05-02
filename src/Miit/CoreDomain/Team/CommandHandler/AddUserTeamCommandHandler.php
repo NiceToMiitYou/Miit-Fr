@@ -5,8 +5,7 @@ namespace Miit\CoreDomain\Team\CommandHandler;
 use DomainDrivenDesign\Domain\Command\Command;
 use DomainDrivenDesign\Domain\Command\CommandNotSupportedByHandler;
 
-use Miit\CoreDomain\User\User;
-use Miit\CoreDomain\User\Command\AddUserTeamCommand;
+use Miit\CoreDomain\Team\Command\AddUserTeamCommand;
 
 /**
  * Class AddUserTeamCommandHandler
@@ -50,6 +49,6 @@ final class AddUserTeamCommandHandler extends TeamCommandHandlerAbstract
      */
     public function supportedCommand()
     {
-        return 'Miit\CoreDomain\User\Command\AddUserTeamCommand';
+        return 'Miit\CoreDomain\Team\Command\AddUserTeamCommand';
     }
 }
