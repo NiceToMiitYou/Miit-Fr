@@ -71,6 +71,7 @@ class TeamController extends Controller
      */
     public function loginAction(Request $request)
     {
+        $team    = $this->get('team_manager')->getTeam();
         $session = $request->getSession();
  
         // get the login error if there is one
@@ -83,6 +84,7 @@ class TeamController extends Controller
  
         return $this->render('MiitFrontendBundle:team:login.html.twig', array(
             'last_username' => $session->get(SecurityContext::LAST_USERNAME),
+            'team_name'     => $team->getName(),
             'error'         => $error,
         ));
     }
