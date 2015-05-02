@@ -2,14 +2,13 @@ MiitComponents.UserListInvite = React.createClass({displayName: "UserListInvite"
     getDefaultProps: function() {
         return {
             placeholder: {
-                email:  MiitTranslator.get('placeholder.email.invite', 'inputs')
+                email: MiitTranslator.get('placeholder.email.invite', 'inputs')
             },
             submit: MiitTranslator.get('submit.invite.user', 'inputs')
         };
     },
 
     getInitialState: function() {
-
         var initial = this.getDefaultErrors();
 
         initial['email'] = '';
@@ -37,6 +36,11 @@ MiitComponents.UserListInvite = React.createClass({displayName: "UserListInvite"
         
         this.setState(this.getDefaultErrors());
 
+        // Check if this is an admin
+        if(!MiitApp.utils.user.isAdmin()){
+            return;
+        }
+
         // Check if there is data
         if (!email) {
             this.setState({
@@ -54,7 +58,6 @@ MiitComponents.UserListInvite = React.createClass({displayName: "UserListInvite"
         }
 
         MiitApp.request.team.invite(email, function(data) {
-
             this.setState({
                 email: ''
             });
@@ -68,6 +71,11 @@ MiitComponents.UserListInvite = React.createClass({displayName: "UserListInvite"
     },
 
     render: function() {
+        // Check if this is an admin
+        if(!MiitApp.utils.user.isAdmin()){
+            return null;
+        }
+
         var cx = React.addons.classSet;
 
         var classes_invalid = cx({

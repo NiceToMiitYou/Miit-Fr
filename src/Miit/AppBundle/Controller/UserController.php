@@ -4,6 +4,9 @@ namespace Miit\AppBundle\Controller;
 
 use Miit\CoreDomain\User\UserId;
 use Miit\CoreDomain\User\Command\ChangePasswordUserCommand;
+use Miit\CoreDomain\User\Command\PromoteUserCommand;
+use Miit\CoreDomain\User\Command\DemoteUserCommand;
+use Miit\CoreDomain\Team\Team;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
@@ -76,7 +79,7 @@ class UserController extends AppControllerAbstract
     }
 
     /**
-     * @Route("/promote/{id}",
+     * @Route("/promote",
      *      host="{team_slug}.{domain}",
      *      name="app_user_promote_user",
      *      defaults={
@@ -85,12 +88,11 @@ class UserController extends AppControllerAbstract
      *      requirements={
      *          "_method":   "POST",
      *          "domain":    "%domain%",
-     *          "team_slug": ".{4,}",
-     *          "id":        "[0-9a-f]{8}-[0-9a-f]{4}-5[0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}"
+     *          "team_slug": ".{4,}"
      *      }
      * )
      */
-    public function promoteUserAction(Request $request, $id)
+    public function promoteUserAction(Request $request)
     {
         $this->checkRole('ADMIN');
 
@@ -101,8 +103,106 @@ class UserController extends AppControllerAbstract
         {
             $team        = $this->getTeam();
             $promoteUser = $form->getData();
+            $repository  = $this->get('user_repository');
 
-            die(var_dump($promoteUser));
+            $userId      = new UserId($promoteUser->id);
+
+            $user = $repository->findUserByUserIdAndTeamId($userId, $team->getId());
+
+            if($user !== null) {
+                $roles = array();
+
+                // If you promote an user of the role ADMIN
+                // be sure that USER is here
+                if(true === in_array('ADMIN', $promoteUser->roles, true)) {
+                    array_push($promoteUser->roles, 'USER');
+                }
+
+                // Use correct role specification
+                foreach ($promoteUser->roles as $role) {
+                    array_push($roles, $team->getRole($role));
+                }
+
+                try {
+                    $command = new PromoteUserCommand($userId, $roles);
+
+                    $this->get('command_bus')->dispatch($command);
+
+                    $response['done'] = true;
+                } catch(\Exception $exception) {
+                    $response['ex'] =  sprintf('%s', $exception);
+                    $response['errors'] = array('CANNOT_PROMOTE_USER');
+                }
+            } else {
+                $response['errors'] = array('NO_USER_FOUND');
+            }
+        } else {
+            $response['errors'] = $form->getErrors();
+        }
+
+        return new JsonResponse($response);
+    }
+
+    /**
+     * @Route("/demote",
+     *      host="{team_slug}.{domain}",
+     *      name="app_user_demote_user",
+     *      defaults={
+     *          "domain":    "%domain%"
+     *      },
+     *      requirements={
+     *          "_method":   "POST",
+     *          "domain":    "%domain%",
+     *          "team_slug": ".{4,}"
+     *      }
+     * )
+     */
+    public function demoteUserAction(Request $request)
+    {
+        $this->checkRole('ADMIN');
+
+        $form     = $this->validateForm('demote_user_type', $request);
+        $response = $this->getDefaultResponse();
+
+        if ($form->isValid())
+        {
+            $team       = $this->getTeam();
+            $demoteUser = $form->getData();
+            $repository = $this->get('user_repository');
+
+            $userId     = new UserId($demoteUser->id);
+
+            $user = $repository->findUserByUserIdAndTeamId($userId, $team->getId());
+
+            if($user !== null) {
+                $roles = array();
+
+                // If you demote an user of the role USER
+                // be sure that ADMIN is gone too
+                if(true === in_array('USER', $demoteUser->roles, true)) {
+                    array_push($demoteUser->roles, 'ADMIN');
+                }
+
+                // Use correct role specification
+                foreach ($demoteUser->roles as $role) {
+                    array_push($roles, $team->getRole($role));
+                }
+
+                try {
+                    $command = new DemoteUserCommand($userId, $roles);
+
+                    $this->get('command_bus')->dispatch($command);
+
+                    $response['done'] = true;
+                } catch(\Exception $exception) {
+                    $response['ex'] =  sprintf('%s', $exception);
+                    $response['errors'] = array('CANNOT_DEMOTE_USER');
+                }
+            } else {
+                $response['errors'] = array('NO_USER_FOUND');
+            }
+        } else {
+            $response['errors'] = $form->getErrors();
         }
 
         return new JsonResponse($response);

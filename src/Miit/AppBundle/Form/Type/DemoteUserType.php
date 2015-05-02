@@ -1,7 +1,7 @@
 <?php
 namespace Miit\AppBundle\Form\Type;
 
-use Miit\CoreDomain\Team\Team;
+use Miit\AppBundle\Model\User;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,10 +20,12 @@ class DemoteUserType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $builder->add('id', 'text');
+
         $builder->add('roles', 'choice', array(
-            'choices'   => Team::getAllowedRoles(),
-            'multiple'  => true,
-            'required'  => true
+            'choices'  => User::getAllowedRoles(),
+            'multiple' => true,
+            'required' => true
         ));
     }
 

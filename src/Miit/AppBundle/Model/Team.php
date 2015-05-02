@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @author Tacyniak Boris <boris.tacyniak@itevents.fr>
  */
 class Team
-{   
+{
     /**
      * @Assert\NotBlank(
      *      groups={"registration"}

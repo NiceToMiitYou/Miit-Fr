@@ -2,7 +2,8 @@ MiitComponents.UserList = React.createClass({displayName: "UserList",
     getDefaultProps: function() {
         return {
             users:    [],
-            autoload: false
+            autoload: false,
+            loading:  MiitTranslator.get('loading', 'team')
         };
     },
 
@@ -35,17 +36,19 @@ MiitComponents.UserList = React.createClass({displayName: "UserList",
     render: function() {
         this.refresh();
 
-        var loading = (this.props.autoload && !this.state.loaded)?(
-            React.createElement("div", null, "Loading...")
-        ) : null;
+        var loadingElement = null;
+
+        if(this.props.autoload && !this.state.loaded) {
+            loadingElement = (React.createElement("div", null, this.props.loading));
+        }
 
         return (
             React.createElement("div", {className: "miit-component user-list"}, 
                 React.createElement(MiitComponents.UserListHeader, null), 
                 this.props.users.map(function(user) {
-                    return React.createElement(MiitComponents.UserListItem, {user: user});
-                }), 
-                loading, 
+                    return React.createElement(MiitComponents.UserListItem, {user: user, onEdit: this.allowRefresh});
+                }.bind(this)), 
+                loadingElement, 
                 React.createElement(MiitComponents.UserListInvite, {onInvite: this.allowRefresh})
             )
         );

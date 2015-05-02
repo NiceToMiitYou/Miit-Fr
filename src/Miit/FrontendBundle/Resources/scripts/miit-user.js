@@ -25,12 +25,36 @@ MiitApp.request.user = (function(){
         // Request for CRSF
         MiitApp.utils.ajax.crsf('promote_user', function(token) {
 
-            // Register the user
-            MiitApp.utils.ajax.send('/app/user/promote/' + user_id, {
+            // Promote the user
+            MiitApp.utils.ajax.send('/app/user/promote', {
+                'id':     user_id,
                 'roles':  user_roles,
                 '_token': token
             }, cb);
         });
+    };
+
+    obj['demote'] = function(user_id, user_roles, cb) {
+
+        // Request for CRSF
+        MiitApp.utils.ajax.crsf('demote_user', function(token) {
+
+            // Demote the user
+            MiitApp.utils.ajax.send('/app/user/demote', {
+                'id':     user_id,
+                'roles':  user_roles,
+                '_token': token
+            }, cb);
+        });
+    };
+
+    obj['remove'] = function(user_id, cb) {
+
+        // Demote the user
+        MiitApp.utils.ajax.send('/app/user/remove', {
+            'id':  user_id,
+            '_token': token
+        }, cb);
     };
 
     obj['registration'] = function(email, team, cb) {

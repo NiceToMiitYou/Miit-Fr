@@ -49,6 +49,16 @@ interface UserRepository extends Repository
      * 
      * @return boolean
      */
+    public function findUserByUserIdAndTeamId(UserId $userId, TeamId $teamId);
+
+    /**
+     * Return if the user is in the team
+     * 
+     * @param UserId $userId
+     * @param TeamId $teamId
+     * 
+     * @return boolean
+     */
     public function isUserOfTeam(UserId $userId, TeamId $teamId);
 
     /**

@@ -46,8 +46,8 @@ MiitComponents.UserList = React.createClass({
             <div className="miit-component user-list">
                 <MiitComponents.UserListHeader />
                 {this.props.users.map(function(user) {
-                    return <MiitComponents.UserListItem user={user} />;
-                })}
+                    return <MiitComponents.UserListItem user={user} onEdit={this.allowRefresh} />;
+                }.bind(this))}
                 {loadingElement}
                 <MiitComponents.UserListInvite onInvite={this.allowRefresh} />
             </div>

@@ -2,6 +2,7 @@ MiitComponents.UserListItem = React.createClass({
     getDefaultProps: function() {
         return {
             user: {
+                id:    '',
                 name:  'unknow',
                 roles: []
             }
@@ -9,13 +10,15 @@ MiitComponents.UserListItem = React.createClass({
     },
 
     shouldComponentUpdate: function(nextProps, nextState) {
-        return nextProps.user.id !== this.props.user.id;
+        return nextProps.user.name !== this.props.user.name;
     },
 
     render: function() {
+
         return (
             <div className="miit-component user-list-item">
                 <span>{this.props.user.name}</span>
+                <MiitComponents.UserListItemRoles user={this.props.user} onAction={this.props.onEdit}/>
             </div>
         );
     }

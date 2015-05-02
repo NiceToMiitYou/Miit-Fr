@@ -66,6 +66,29 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
     /**
      * {@inheritDoc}
      */
+    public function findUserByUserIdAndTeamId(UserId $userId, TeamId $teamId)
+    {
+        $query = $this->createQueryBuilder('u')
+                      ->select('u')
+                      ->join('u.teams', 't')
+                      ->where('u.id = :userId')
+                      ->andWhere('t.id = :teamId')
+                      ->setParameter('userId', $userId->getValue())
+                      ->setParameter('teamId', $teamId->getValue())
+                      ->getQuery();
+
+        try {
+            $user = $query->getSingleResult();
+        } catch(NoResultException $e) {
+            $user = null;
+        }
+
+        return $user;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function findUsersByTeam(TeamId $teamId)
     {
         $query = $this->createQueryBuilder('u')

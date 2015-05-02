@@ -1,1 +1,7 @@
 loading: "Chargement..."
+
+user-list:
+    actions:
+        admin: "Administrateur"
+        user: "Utilisateur"
+        remove: "Supprimer"

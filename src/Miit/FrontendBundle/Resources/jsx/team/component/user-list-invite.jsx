@@ -2,7 +2,7 @@ MiitComponents.UserListInvite = React.createClass({
     getDefaultProps: function() {
         return {
             placeholder: {
-                email:  MiitTranslator.get('placeholder.email.invite', 'inputs')
+                email: MiitTranslator.get('placeholder.email.invite', 'inputs')
             },
             submit: MiitTranslator.get('submit.invite.user', 'inputs')
         };

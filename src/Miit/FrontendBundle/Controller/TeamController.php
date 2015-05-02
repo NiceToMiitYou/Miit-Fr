@@ -86,5 +86,4 @@ class TeamController extends Controller
             'error'         => $error,
         ));
     }
-
 }
