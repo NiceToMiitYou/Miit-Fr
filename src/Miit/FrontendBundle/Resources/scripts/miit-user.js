@@ -50,11 +50,15 @@ MiitApp.request.user = (function(){
 
     obj['remove'] = function(user_id, cb) {
 
-        // Demote the user
-        MiitApp.utils.ajax.send('/app/user/remove', {
-            'id':  user_id,
-            '_token': token
-        }, cb);
+        // Request for CRSF
+        MiitApp.utils.ajax.crsf('remove_user', function(token) {
+
+            // Demote the user
+            MiitApp.utils.ajax.send('/app/user/remove', {
+                'id':  user_id,
+                '_token': token
+            }, cb);
+        });
     };
 
     obj['registration'] = function(email, team, cb) {

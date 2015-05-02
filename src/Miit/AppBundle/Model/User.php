@@ -15,7 +15,7 @@ class User
 {
     /**
      * @Assert\Regex(
-     *      groups={"promote_user", "demote_user"},
+     *      groups={"promote_user", "demote_user", "remove_user"},
      *      pattern="/^[0-9a-f]{8}-[0-9a-f]{4}-5[0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$/",
      *      match=true
      * )

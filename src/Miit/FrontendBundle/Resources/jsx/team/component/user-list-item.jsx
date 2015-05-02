@@ -9,10 +9,6 @@ MiitComponents.UserListItem = React.createClass({
         };
     },
 
-    shouldComponentUpdate: function(nextProps, nextState) {
-        return nextProps.user.name !== this.props.user.name;
-    },
-
     render: function() {
 
         return (

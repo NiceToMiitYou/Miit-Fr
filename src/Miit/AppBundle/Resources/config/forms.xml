@@ -12,6 +12,7 @@
 
         <parameter key="promote_user_type.class">Miit\AppBundle\Form\Type\PromoteUserType</parameter>
         <parameter key="demote_user_type.class">Miit\AppBundle\Form\Type\DemoteUserType</parameter>
+        <parameter key="remove_user_type.class">Miit\AppBundle\Form\Type\RemoveUserType</parameter>
     </parameters>
 
     <services>
@@ -49,6 +50,12 @@
         <service id="app.form.type.demote_user"
                  class="%demote_user_type.class%">
             <tag name="form.type" alias="demote_user_type" />
+        </service>
+
+        <!-- Remove User Type -->
+        <service id="app.form.type.remove_user"
+                 class="%remove_user_type.class%">
+            <tag name="form.type" alias="remove_user_type" />
         </service>
     </services>
 </container>
