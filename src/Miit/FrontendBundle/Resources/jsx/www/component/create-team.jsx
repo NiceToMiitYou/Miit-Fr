@@ -83,14 +83,14 @@ MiitComponents.CreateTeam = React.createClass({
 
                     <div className="col1"></div>
 
-                    <div className="input-field col5 push0">
+                    <div className="input-field left-icon icon-transparent col5 push0">
                         <i className="fa fa-envelope-o"></i>
                         <input type="text" className={classes_email} placeholder={this.props.placeholder.email} ref="email" />
                     </div>
 
                     <div className="col1"></div>
 
-                    <div className="input-field col5">
+                    <div className="input-field left-icon icon-transparent col5">
                         <i className="fa fa-users"></i>
                         <input type="text" className={classes_team}  placeholder={this.props.placeholder.team}  ref="team" />
                     </div>

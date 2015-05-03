@@ -2,6 +2,7 @@
 @import url('http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300');
 @import url('http://fonts.googleapis.com/css?family=Open+Sans:400,300,600');
 
+@import 'grid';
 
 /* ---------------- BEGIN RESET CSS ---------------- */
 
@@ -72,6 +73,17 @@ html {
     padding: 0 30px;
 }
 
+#content {
+  height: 100%;
+  overflow: hidden;
+}
+
+
+.main {
+  overflow: auto;
+  height: 100%;
+}
+
 .page {
     height: 100%;
 
@@ -84,7 +96,7 @@ html {
 }
 
 .page .page-content {
-    margin-top: 5px;
+    margin-top: 50px;
 }
 .page.fullwidth {
     padding-left: 0;
@@ -97,8 +109,7 @@ html {
 }
 
 .page-content h2 {
-    font-size: 1.5em;
-    margin-top: 20px;
+    font-size: 1.4em;
     line-height: 1em;
     font-weight: 100;
 }
@@ -106,7 +117,6 @@ html {
 
 .page-content h3 {
     font-size: 1.05em;
-    margin-top: 15px;
     line-height: 1em;
     font-weight: 400;
 }
@@ -338,113 +348,84 @@ html {
 .input-field {
     margin-bottom: 15px;
     position: relative;
+    border: 1px solid #CBCBCB;
 
+    &.light {
+
+      i {
+        color: #FFF
+      }
+
+      &:before {
+        background-color: #FFF;
+      }
+
+      input {
+
+        color: #FFF;
+
+        &::-webkit-input-placeholder {
+          color: #FFF;
+        }
+
+        &:-moz-placeholder { /* Firefox 18- */
+           color: #FFF;  
+        }
+
+        &::-moz-placeholder {  /* Firefox 19+ */
+           color: #FFF;  
+        }
+
+        &:-ms-input-placeholder {  
+           color: #FFF;  
+        }
+      }
+
+    }
+}
+
+
+.input-field.left-icon {
+    padding-left: 52px;
+
+    &.icon-transparent {
+      padding-left: 45px;
+      i {
+        background-color: transparent;
+      }
+    }
 }
 
 .input-field i {
-    float: left;
-    position: absolute;
-    bottom: 13px;
-    margin: 0 3px;
+  position: absolute;
+  bottom: 13px;
+  left: 0;
+  width: 42px;
+  text-align: center;
+  top: 0;
+  bottom: 0;
+  line-height: 42px;
+  background: #E8E8E8;
 }
 
 .input-field input {
     width: 100%;
     border: 0;
     line-height: 32px;
-    padding: 5px;
+    padding: 5px 0;
     font-size: 0.9em;
     font-weight: 500;
     background-color: transparent;
+    padding-left: 20px
 }
 
 .input-field i + input {
-    margin-left: 22px;
+    padding-left: 0;
 }
 
 .input-field input:focus  {
     border:0;
     outline: 0;
-}
-
-
-.input-field.light {
-
-  i {
-    color: #FFF
-  }
-
-  &:before {
-    background-color: #FFF;
-  }
-
-  input {
-
-    color: #FFF;
-
-    &::-webkit-input-placeholder {
-      color: #FFF;
-    }
-
-    &:-moz-placeholder { /* Firefox 18- */
-       color: #FFF;  
-    }
-
-    &::-moz-placeholder {  /* Firefox 19+ */
-       color: #FFF;  
-    }
-
-    &:-ms-input-placeholder {  
-       color: #FFF;  
-    }
-  }
-
-}
-
-.input-field:before {
-    content: ' ';
-    display: block;
-    bottom: 0px;
-    height:1px;
-
-    -webkit-transition: width 800ms ease;
-    -moz-transition: width 800ms ease;
-    -o-transition: width 800ms ease;
-    transition: width 800ms ease;
-
-    background-color: #000;
-    width: 100%;
-    margin: auto;
-    position: absolute;
-
-}
-
-.input-field:after {
-    content: ' ';
-    display: block;
-    bottom: 0px;
-    height:2px;
-
-    -webkit-transition: width 800ms ease, background-color 800ms ease;
-    -moz-transition: width 800ms ease, background-color 800ms ease;
-    -o-transition: width 800ms ease, background-color 800ms ease;
-    transition: width 800ms ease, background-color 800ms ease;
-    background-color: #20bdd0;
-    width: 0%;
-    margin: auto;
-    position: absolute;
-}
-
-.input-field.isfocus:after  {
-    width: 100%;
-}
-
-.input-field.valid:after {
-    background-color: #179680;
-}
-
-.input-field.invalid:after {
-    background-color: #d73e4d;
 }
 
 .checkbox-field label {
@@ -618,6 +599,11 @@ click-wave { 0% {
   font-weight: 100;
   letter-spacing: .1em;
   text-transform: uppercase;
+
+  &.btn-large {
+    line-height: 32px;
+  }
+
 }
 /* line 18, ../sass/_buttons.scss */
 .btn:hover, .btn:focus {
@@ -1009,71 +995,47 @@ click-wave { 0% {
     margin: auto;
 }
 
-.mr5 {
-    margin-right: 5px!important;
-}
+@for $i from 1 through 10 {      
+  .ml#{$i * 5} {
+    margin-left: $i * 5px!important;
+  }    
+  .mr#{$i * 5} {
+    margin-right: $i * 5px!important;
+  }
+  .mt#{$i * 5} {
+    margin-top: $i * 5px!important;
+  }
+  .mb#{$i * 5} {
+    margin-bottom: $i * 5px!important;
+  }
 
-.mr10 {
-    margin-right: 10px!important;
-}
-
-.mr15 {
-    margin-right: 15px!important;
-}
-
-.mr20 {
-    margin-right: 20px!important;
-}
-
-
-
-.mb5 {
-    margin-bottom: 5px!important;
-}
-
-.mb10 {
-    margin-bottom: 10px!important;
-}
-
-.mb15 {
-    margin-bottom: 15px!important;
-}
-
-.mb20 {
-    margin-bottom: 20px!important;
-}
-
-.mb30 {
-    margin-bottom: 30px!important;
-}
-
-
-
-.mt5 {
-    margin-top: 5px!important;
-}
-
-.mt10 {
-    margin-top: 10px!important;
-}
-
-.mt15 {
-    margin-top: 15px!important;
-}
-
-.mt20 {
-    margin-top: 20px!important;
-}
-
-.mt30 {
-    margin-top: 30px!important;
-}
-
+  .pl#{$i * 5} {
+    padding-left: $i * 5px!important;
+  }    
+  .pr#{$i * 5} {
+    padding-right: $i * 5px!important;
+  }
+  .pt#{$i * 5} {
+    padding-top: $i * 5px!important;
+  }
+  .pb#{$i * 5} {
+    padding-bottom: $i * 5px!important;
+  }
+} 
 
 .panel {
-    width: 300px;
     background-color: #FFF;
-    padding: 20px;
+    border: 2px solid #EFEFEF;
+
+    .panel-title {
+      padding: 15px 20px;
+      background-color: #3498DB;
+      color: #FFF;
+    }
+
+    .panel-content {
+      padding: 20px;
+    }
 }
 
 .shadow-1 {
@@ -1320,7 +1282,7 @@ click-wave { 0% {
 /* ------------------------------------------------------ */
 /* ---------------- IE8 !!!!!!!!!!!!!!!! ---------------- */
 /* ------------------------------------------------------ */
-
+/*
 .input-field input {
     background-image:url(data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==);
-}
+}*/

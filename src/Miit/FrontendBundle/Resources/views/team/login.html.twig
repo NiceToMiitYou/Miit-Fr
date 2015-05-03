@@ -27,7 +27,7 @@
                 <h2 class="pull-right"><a>Inscription</a></h2> -->
 
                 <form action="{{ path('login_check') }}" method="post">
-                    <p>
+                    <p class="mb30">
                         Connectez-vous à la plateforme Miit en utilisant votre adresse e-mail comme identifiant.
                     </p>
 
@@ -35,12 +35,12 @@
                         <div class="errors text-red text-600 mt20 mb10"><i class="fa fa-exclamation-triangle"></i> {{ error.message }}</div>
                     {% endif %}
 
-                    <div class="input-field light">
+                    <div class="input-field left-icon icon-transparent light">
                       <i class="fa fa-user"></i>
                       <input placeholder="Adresse e-mail" id="username" name="_username" value="{{ last_username }}" type="text">
                       <!-- <label for="email">Adresse e-mail</label> -->
                     </div>
-                    <div class="input-field light">
+                    <div class="input-field left-icon icon-transparent light">
                        <i class="fa fa-key"></i>
                       <input placeholder="Mot de passe" type="password" id="password" name="_password">
                       <!-- <label for="password">Mot de passe</label> -->
