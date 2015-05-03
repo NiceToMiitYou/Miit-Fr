@@ -9,9 +9,9 @@ MiitComponents.UserAvatar = React.createClass({
         }
 
         return (
-            <div className="miit-component user-avatar">
-                <img src={user.avatar} />
-            </div>
+            <span className="miit-component user-avatar">
+                <img src={user.avatar} {...this.props} />
+            </span>
         );
     }
 });

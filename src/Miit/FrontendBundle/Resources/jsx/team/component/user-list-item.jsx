@@ -13,6 +13,7 @@ MiitComponents.UserListItem = React.createClass({
 
         return (
             <div className="miit-component user-list-item">
+                <MiitComponents.UserAvatar user={this.props.user} height="32px" />
                 <span>{this.props.user.name}</span>
                 <MiitComponents.UserListItemRoles user={this.props.user} onAction={this.props.onEdit}/>
             </div>
