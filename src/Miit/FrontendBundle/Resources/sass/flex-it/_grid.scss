@@ -4,8 +4,18 @@ $grid-max-width: 65em;
  
  
 // breakpoints
-$breakpoint-small: "only screen and (min-width: 20em)";
-$breakpoint-medium: "only screen and (min-width: 30em)";
+$breakpoint-xsmall: "only screen and (max-width: 768px)";
+$breakpoint-small: "only screen and (max-width: 992px)";
+$breakpoint-medium: "only screen and (max-width: 1199px)";
+$breakpoint-large: "only screen and (min-width: 1200px)";
+
+%clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
 
 *, *:after, *:before {
 	margin: 0;
@@ -27,13 +37,43 @@ $breakpoint-medium: "only screen and (min-width: 30em)";
 	min-height: 1px; 
 }   
 
-@media #{$breakpoint-medium} {
-	.wrapper {      
-		width: 95%;
-		max-width: $grid-max-width;     
-	}
+.wrapper {      
+	width: 95%;
+	max-width: $grid-max-width;     
+}
+@for $i from 1 through $grid-columns {      
+	.col#{$i} {         
+		width: 100% / $grid-columns * $i;   
+	}           
+}   
+
+@media #{$breakpoint-xsmall} {
 	@for $i from 1 through $grid-columns {      
-		.col#{$i} {         
+		.col#{$i}-xs {         
+			width: 100% / $grid-columns * $i;   
+		}           
+	}   
+}
+
+@media #{$breakpoint-small} {
+	@for $i from 1 through $grid-columns {      
+		.col#{$i}-sm {         
+			width: 100% / $grid-columns * $i;   
+		}           
+	}   
+}
+
+@media #{$breakpoint-medium} {
+	@for $i from 1 through $grid-columns {      
+		.col#{$i}-md {         
+			width: 100% / $grid-columns * $i;   
+		}           
+	}   
+}
+
+@media #{$breakpoint-large} {
+	@for $i from 1 through $grid-columns {      
+		.col#{$i}-lg {         
 			width: 100% / $grid-columns * $i;   
 		}           
 	}   

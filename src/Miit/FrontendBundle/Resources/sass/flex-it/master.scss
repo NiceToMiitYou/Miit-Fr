@@ -346,7 +346,6 @@ html {
 /* ---------------- BEGIN INPUT CSS ---------------- */
 
 .input-field {
-    margin-bottom: 15px;
     position: relative;
     border: 1px solid #CBCBCB;
 
@@ -426,6 +425,7 @@ html {
 .input-field input:focus  {
     border:0;
     outline: 0;
+    background: transparent;
 }
 
 .checkbox-field label {
@@ -742,7 +742,6 @@ click-wave { 0% {
 /* ---------------- BEGIN APP LIST CSS ---------------- */
 
 .app-list {
-    margin-top: 20px;
 }
 
 .app-list li {
@@ -1029,8 +1028,12 @@ click-wave { 0% {
 
     .panel-title {
       padding: 15px 20px;
-      background-color: #3498DB;
-      color: #FFF;
+      background-color: #E8E8E8;
+      color: #000;
+
+      i {
+        margin-right: 15px;
+      }
     }
 
     .panel-content {
@@ -1148,22 +1151,16 @@ click-wave { 0% {
         width: 0;
     }
 
+    .page {
+      margin-left: 0;
+    }
+
     .sidr-left .sl-wrapper {
         width: 250px;
     }
 
     .sidr-left .sl-header {
-        width: 210px;
-        line-height: 50px;
-        color: #FFF;
-        display: block;
-        font-size: 1.4em;
-        font-weight: 100;
-        padding: 0 20px;
-        -webkit-transition: background-color 500ms ease;
-        -moz-transition: background-color 500ms ease;
-        -o-transition: background-color 500ms ease;
-        transition: background-color 500ms ease;
+        padding: 0px;
     }
 
     .sidr-left .sl-header:hover {
@@ -1171,25 +1168,24 @@ click-wave { 0% {
     }
 
     .sidr-left .sl-header i.fa-bars {
-        margin-right: 10px;
-        font-size: 1.2em;
-    }
-
-    .sidr-left .sl-header i {
-        line-height: 50px;
+        margin-right: 0px;
+        width: 50px;
+        text-align: center;
     }
 
     .sidr-left .sl-label {
         color: #FFF;
         line-height: 2.3em;
-        padding: 0 10px;
+        padding: 0px;
         display: block;
         background: #16202A;
         
     }
 
     .sidr-left .sl-label i {
-        margin-right: 8px;
+        margin-right: 0;
+        width: 50px;
+        text-align: center;
     }
 
     .sidr-left ul.sl-list {
@@ -1201,37 +1197,14 @@ click-wave { 0% {
     }
 
     .sidr-left ul.sl-list li a {
-        color: #FFF;
-        font-size: 0.9em;
-        display: block;
-        line-height: 2.7em;
-        font-weight: 300;
-        padding-left: 15px;
-        position: relative;
-        -webkit-transition: background-color 500ms ease;
-        -moz-transition: background-color 500ms ease;
-        -o-transition: background-color 500ms ease;
-        transition: background-color 500ms ease;
+        padding-left: 0px;
     }
 
-    .sidr-left ul.sl-list li a:hover, .sidr-left ul.sl-list li a.active {
-        background-color: #33414D;
 
-    }
-
-    .sidr-left ul.sl-list li a.active::before {
-        content:"\A";
-        border-style: solid;
-        border-width: 7px 7px 7px 0;
-        border-color: transparent #fafafa transparent transparent;
-        position: absolute;
-        right: 0;
-        top: 50%;
-        margin-top: -7px;
-    }
 
     .sidr-left ul.sl-list li a i {
-        width: 25px;
+        width: 50px;
+        text-align: center;
     }
 
 
