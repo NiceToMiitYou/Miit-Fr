@@ -1,7 +1,5 @@
 MiitComponents.MenuTeam = React.createClass({
     render: function() {
-        var Link = MiitComponents.Link;
-
         return (
             <div className="sidr-left bg-blue-grey">
                 <div className="sl-wrapper">
