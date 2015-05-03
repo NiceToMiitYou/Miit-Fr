@@ -31,7 +31,7 @@ class TeamController extends Controller
      *      requirements={
      *          "domain":    "%domain%",
      *          "team_slug": ".{4,}",
-     *          "nothing":   "[a-zA-Z0-9-+_/\s]+"
+     *          "nothing":   "(?!(login|logout))[a-zA-Z0-9-+_/\s]+"
      *      }
      * )
      */
