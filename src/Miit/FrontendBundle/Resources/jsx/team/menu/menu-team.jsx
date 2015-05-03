@@ -26,7 +26,9 @@ MiitComponents.MenuTeam = React.createClass({
                     </ul>
 
                     <a className="sl-footer">
-                        <div className="avatar border-circle"><img src="http://www.mangashare.com/forums/customavatars/avatar68124_1.gif"/></div>
+                        <div className="avatar border-circle">
+                            <MiitComponents.UserAvatar />
+                        </div>
                         <span>John Random
                             <i className="fa fa-angle-up pull-right"></i>
                         </span>

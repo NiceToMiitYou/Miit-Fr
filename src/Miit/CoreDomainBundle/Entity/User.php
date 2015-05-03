@@ -195,7 +195,10 @@ class User extends UserModel implements UserInterface, EquatableInterface
      */
     public function getAvatarId()
     {
-        return sprintf('http://www.gravatar.com/avatar/%s', parent::getAvatarId());
+        return sprintf(
+            'https://secure.gravatar.com/avatar/%s?d=identicon',
+            parent::getAvatarId()
+        );
     }
 
     /**
