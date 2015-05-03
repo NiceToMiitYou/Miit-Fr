@@ -1,4 +1,4 @@
-var ChangePassword = React.createClass({
+MiitComponents.ChangePassword = React.createClass({
     getDefaultProps: function() {
         return {
             placeholder: {
@@ -81,14 +81,14 @@ var ChangePassword = React.createClass({
         }
 
         // Check if this is a correct format
-        if(!MiitUtils.validator.password(first)) {
+        if(!MiitApp.utils.validator.password(first)) {
             this.setState({
                 invalid_format: true
             });
             return;
         }
 
-        MiitUser.change_password(old, first, function(data) {
+        MiitApp.request.user.change_password(old, first, function(data) {
 
             // Reset value
             this.setState({
@@ -96,7 +96,7 @@ var ChangePassword = React.createClass({
                 value_first:  '',
                 value_second: ''
             });
-        });
+        }.bind(this));
 
         return;
     },

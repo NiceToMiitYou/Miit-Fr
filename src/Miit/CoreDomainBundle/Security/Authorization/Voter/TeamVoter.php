@@ -3,6 +3,8 @@
 namespace Miit\CoreDomainBundle\Security\Authorization\Voter;
 
 use Miit\CoreDomain\User\User as UserModel;
+use Miit\CoreDomain\Team\Team as TeamModel;
+use Miit\CoreDomain\User\UserRepository;
 
 use Miit\CoreDomainBundle\Manager\TeamManager;
 
@@ -17,8 +19,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class TeamVoter implements VoterInterface
 {
-    const ROLE_ADMIN = 'admin';
-    const ROLE_USER  = 'user';
+    const ROLE_ADMIN = 'ADMIN';
+    const ROLE_USER  = 'USER';
 
     /**
      * @var TeamManager
@@ -26,11 +28,18 @@ class TeamVoter implements VoterInterface
     private $teamManager;
 
     /**
-     * @param TeamManager $teamManager
+     * @var UserRepository
      */
-    public function __construct(TeamManager $teamManager)
+    private $userRepository;
+
+    /**
+     * @param TeamManager    $teamManager
+     * @param UserRepository $userRepository
+     */
+    public function __construct(TeamManager $teamManager, UserRepository $userRepository)
     {
-        $this->teamManager = $teamManager;
+        $this->teamManager    = $teamManager;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -48,22 +57,22 @@ class TeamVoter implements VoterInterface
             return VoterInterface::ACCESS_DENIED;
         }
 
+        if ($team instanceof TeamModel) {
+            $isInTeam = $this->userRepository->isUserOfTeam($user->getId(), $team->getId());
+
+            if(false === $isInTeam) {
+                return VoterInterface::ACCESS_DENIED;
+            }
+        }
+
         // extract the role
         $role = reset($attributes);
 
         switch ($role) {
             case TeamVoter::ROLE_USER:
-
-                $needed_role = $team->getUserRole();
-
-                if($user->hasRole($needed_role)) {
-                    return VoterInterface::ACCESS_GRANTED;
-                }
-                break;
-
             case TeamVoter::ROLE_ADMIN:
 
-                $needed_role = $team->getAdminRole();
+                $needed_role = $team->getRole($role);
 
                 if($user->hasRole($needed_role)) {
                     return VoterInterface::ACCESS_GRANTED;

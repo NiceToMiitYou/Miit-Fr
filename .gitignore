@@ -13,4 +13,5 @@
 /app/Resources/lib
 /src/DomainDrivenDesign/
 /node_modules/
+/web/dist/
 .phpintel/

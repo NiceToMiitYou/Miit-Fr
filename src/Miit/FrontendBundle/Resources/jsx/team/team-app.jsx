@@ -3,7 +3,7 @@ MiitComponents.TeamApp = React.createClass({
         return (
             <div className="page bg-grey lighten-5">
                 <MiitComponents.MenuTeam />
-                <ChangePassword />
+                {/* <MiitComponents.ChangePassword /> */}
 
                 <div className="main">
                     <MiitComponents.MiitTeamHeader />

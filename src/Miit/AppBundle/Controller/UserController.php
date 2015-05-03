@@ -4,20 +4,31 @@ namespace Miit\AppBundle\Controller;
 
 use Miit\CoreDomain\User\UserId;
 use Miit\CoreDomain\User\Command\ChangePasswordUserCommand;
+use Miit\CoreDomain\User\Command\PromoteUserCommand;
+use Miit\CoreDomain\User\Command\DemoteUserCommand;
+use Miit\CoreDomain\User\Command\RemoveTeamUserCommand;
+use Miit\CoreDomain\Team\Team;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-class UserController extends Controller
+/**
+ * Class UserController
+ * 
+ * @author Tacyniak Boris <boris.tacyniak@itevents.fr>
+ * 
+ * @Route("/user")
+ */
+class UserController extends AppControllerAbstract
 {
     /**
-     * @Route("/user/change_password",
+     * @Route("/change_password",
      *      host="{team_slug}.{domain}",
      *      name="app_user_change_password",
      *      defaults={
@@ -32,16 +43,11 @@ class UserController extends Controller
      */
     public function changePasswordAction(Request $request)
     {
-        $form = $this->createForm('user_change_password_type');
+        $form     = $this->validateForm('user_change_password_type', $request);
+        $response = $this->getDefaultResponse();
 
-        $form->handleRequest($request);
-   
-        $response = array(
-            'done' => false
-        );
-
-        if ($form->isValid()) {
-
+        if ($form->isValid())
+        {
             $user           = $this->getUser();
             $changePassword = $form->getData();
 
@@ -67,6 +73,211 @@ class UserController extends Controller
             }
         } else {
 
+            $response['errors'] = $form->getErrors();
+        }
+
+        return new JsonResponse($response);
+    }
+
+    /**
+     * @Route("/promote",
+     *      host="{team_slug}.{domain}",
+     *      name="app_user_promote_user",
+     *      defaults={
+     *          "domain":    "%domain%"
+     *      },
+     *      requirements={
+     *          "_method":   "POST",
+     *          "domain":    "%domain%",
+     *          "team_slug": ".{4,}"
+     *      }
+     * )
+     */
+    public function promoteUserAction(Request $request)
+    {
+        $this->checkRole('ADMIN');
+
+        $form     = $this->validateForm('promote_user_type', $request);
+        $response = $this->getDefaultResponse();
+
+        if ($form->isValid())
+        {
+            $team        = $this->getTeam();
+            $promoteUser = $form->getData();
+            $repository  = $this->get('user_repository');
+
+            $userId      = new UserId($promoteUser->id);
+
+            $user = $repository->findUserByUserIdAndTeamId($userId, $team->getId());
+
+            if($user !== null) {
+                $isOwner = $user->hasRole($team->getRole('OWNER'));
+
+                if(false === $isOwner) {
+                    $roles = array();
+
+                    // If you promote an user of the role ADMIN
+                    // be sure that USER is here
+                    if(true === in_array('ADMIN', $promoteUser->roles, true)) {
+                        array_push($promoteUser->roles, 'USER');
+                    }
+
+                    // Use correct role specification
+                    foreach ($promoteUser->roles as $role) {
+                        array_push($roles, $team->getRole($role));
+                    }
+
+                    try {
+                        $command = new PromoteUserCommand($userId, $roles);
+
+                        $this->get('command_bus')->dispatch($command);
+
+                        $response['done'] = true;
+                    } catch(\Exception $exception) {
+                        $response['errors'] = array('CANNOT_PROMOTE_USER');
+                    }
+                } else {
+                    $response['errors'] = array('USER_IS_OWNER');
+                }
+            } else {
+                $response['errors'] = array('NO_USER_FOUND');
+            }
+        } else {
+            $response['errors'] = $form->getErrors();
+        }
+
+        return new JsonResponse($response);
+    }
+
+    /**
+     * @Route("/demote",
+     *      host="{team_slug}.{domain}",
+     *      name="app_user_demote_user",
+     *      defaults={
+     *          "domain":    "%domain%"
+     *      },
+     *      requirements={
+     *          "_method":   "POST",
+     *          "domain":    "%domain%",
+     *          "team_slug": ".{4,}"
+     *      }
+     * )
+     */
+    public function demoteUserAction(Request $request)
+    {
+        $this->checkRole('ADMIN');
+
+        $form     = $this->validateForm('demote_user_type', $request);
+        $response = $this->getDefaultResponse();
+
+        if ($form->isValid())
+        {
+            $team       = $this->getTeam();
+            $demoteUser = $form->getData();
+            $repository = $this->get('user_repository');
+
+            $userId     = new UserId($demoteUser->id);
+
+            $user = $repository->findUserByUserIdAndTeamId($userId, $team->getId());
+
+            if($user !== null) {
+                $isOwner = $user->hasRole($team->getRole('OWNER'));
+
+                if(false === $isOwner) {
+                    $roles = array();
+
+                    // If you demote an user of the role USER
+                    // be sure that ADMIN is gone too
+                    if(true === in_array('USER', $demoteUser->roles, true)) {
+                        array_push($demoteUser->roles, 'ADMIN');
+                    }
+
+                    // Use correct role specification
+                    foreach ($demoteUser->roles as $role) {
+                        array_push($roles, $team->getRole($role));
+                    }
+
+                    try {
+                        $command = new DemoteUserCommand($userId, $roles);
+
+                        $this->get('command_bus')->dispatch($command);
+
+                        $response['done'] = true;
+                    } catch(\Exception $exception) {
+                        $response['errors'] = array('CANNOT_DEMOTE_USER');
+                    }
+                } else {
+                    $response['errors'] = array('USER_IS_OWNER');
+                }
+            } else {
+                $response['errors'] = array('NO_USER_FOUND');
+            }
+        } else {
+            $response['errors'] = $form->getErrors();
+        }
+
+        return new JsonResponse($response);
+    }
+
+    /**
+     * @Route("/remove",
+     *      host="{team_slug}.{domain}",
+     *      name="app_user_remove_user",
+     *      defaults={
+     *          "domain":    "%domain%"
+     *      },
+     *      requirements={
+     *          "_method":   "POST",
+     *          "domain":    "%domain%",
+     *          "team_slug": ".{4,}"
+     *      }
+     * )
+     */
+    public function removeUserAction(Request $request)
+    {
+        $this->checkRole('ADMIN');
+
+        $form     = $this->validateForm('remove_user_type', $request);
+        $response = $this->getDefaultResponse();
+
+        if ($form->isValid())
+        {
+            $team       = $this->getTeam();
+            $removeUser = $form->getData();
+            $repository = $this->get('user_repository');
+
+            $userId     = new UserId($removeUser->id);
+
+            $user = $repository->findUserByUserIdAndTeamId($userId, $team->getId());
+
+            if($user !== null) {
+                $isAdmin = $user->hasRole($team->getRole('ADMIN'));
+                $isOwner = $user->hasRole($team->getRole('OWNER'));
+
+                if(true === $isOwner)
+                {
+                    $response['errors'] = array('USER_IS_OWNER');
+                }
+                else if(true === $isAdmin)
+                {
+                    $response['errors'] = array('USER_IS_ADMIN');
+                }
+                else
+                {
+                    try {
+                        $command = new RemoveTeamUserCommand($userId, $team->getId());
+
+                        $this->get('command_bus')->dispatch($command);
+
+                        $response['done'] = true;
+                    } catch(\Exception $exception) {
+                        $response['errors'] = array('CANNOT_REMOVE_USER');
+                    }
+                }
+            } else {
+                $response['errors'] = array('NO_USER_FOUND');
+            }
+        } else {
             $response['errors'] = $form->getErrors();
         }
 

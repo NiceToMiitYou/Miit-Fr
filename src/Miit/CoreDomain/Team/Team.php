@@ -40,6 +40,13 @@ class Team implements Entity
     protected $locked;
 
     /**
+     * The list of users
+     * 
+     * @var array
+     */
+    protected $users;
+
+    /**
      * The creation date
      *
      * @var \DateTime
@@ -112,11 +119,42 @@ class Team implements Entity
     }
 
     /**
+     * @param string $user
+     * 
+     * Add the reference to an user
+     */
+    public function addUser($user)
+    {
+        if(false === $this->hasUser($user)) {
+            
+            // Push the user at the end of the array
+            array_push($this->users, $user);
+        }
+    }
+
+    /**
+     * @param string $user
+     * 
+     * Remove the reference to an user
+     */
+    public function removeUser($user)
+    {
+        if(true === $this->hasUser($user)) {
+
+            // Find the key
+            $key = array_search($user, $this->users);
+            
+            // Remove it
+            unset($this->users[$key]);
+        }
+    }
+
+    /**
      * @return boolean 
      */
     public function equals(Team $team)
     {
-        if($this->id->getValue() !== $team->getId()->getValue()) {
+        if($this->getId()->getValue() !== $team->getId()->getValue()) {
             return false;
         }
 
@@ -136,7 +174,7 @@ class Team implements Entity
     {
         if(true === is_string($this->id))
         {
-            $this->id = new TeamId($this->id);
+            return new TeamId($this->id);
         }
 
         return $this->id;
@@ -151,19 +189,45 @@ class Team implements Entity
     }
 
     /**
+     * @param string
+     * 
      * @return string
      */
-    public function getUserRole()
+    public function getRole($role)
     {
-        return sprintf('ROLE_USER_%s', strtoupper($this->id));
+        return self::getRoleDefinition($this->getId(), $role);
     }
 
     /**
+     * The list of allowed Roles
+     * 
+     * @var array 
+     */
+    public static function getAllowedRoles()
+    {
+        return array(
+            'ADMIN' => 'ADMIN',
+            'USER'  => 'USER',
+            'OWNER' => 'OWNER'
+        );
+    }
+
+    /**
+     * @param TeamId $teamId
+     * @param string $role
+     * 
      * @return string
      */
-    public function getAmindRole()
+    public static function getRoleDefinition(TeamId $teamId, $role)
     {
-        return sprintf('ROLE_ADMIN_%s', strtoupper($this->id));
+        if(true === in_array($role, self::getAllowedRoles(), true)) {
+
+            return strtoupper(
+                sprintf('ROLE_%s_%s', $role, $teamId)
+            );
+        }
+
+        return null;
     }
 
     /**
@@ -180,6 +244,24 @@ class Team implements Entity
     public function isLocked()
     {
         return (boolean) $this->locked;
+    }
+
+    /**
+     * @return array
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+    /**
+     * @param string $user
+     * 
+     * @return boolean
+     */
+    public function hasUser($user)
+    {
+        return in_array($user, $this->users, true);
     }
 
     /**

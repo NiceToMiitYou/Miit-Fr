@@ -4,6 +4,7 @@ namespace Miit\CoreDomainBundle\Entity;
 
 use Miit\CoreDomain\User\User as UserModel;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -11,12 +12,15 @@ use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 use Symfony\Component\Security\Core\Util\SecureRandom;
 
+use JMS\Serializer\Annotation\Groups;
+
 /**
  * Class User
  * 
  * @author Tacyniak Boris <boris.tacyniak@itevents.fr>
  * 
  * @ORM\Entity(repositoryClass="Miit\CoreDomainBundle\Repository\UserRepository")
+ * @ORM\Cache(usage="NONSTRICT_READ_WRITE")
  */
 class User extends UserModel implements UserInterface, EquatableInterface
 {
@@ -25,6 +29,8 @@ class User extends UserModel implements UserInterface, EquatableInterface
      * 
      * @ORM\Id
      * @ORM\Column(type="string", length=255, nullable=false)
+     * 
+     * @Groups({"owner", "list", "details"})
      */
     protected $id;
 
@@ -32,6 +38,8 @@ class User extends UserModel implements UserInterface, EquatableInterface
      * {@inheritDoc}
      * 
      * @ORM\Column(type="string", length=255, nullable=false, unique=true)
+     * 
+     * @Groups({"owner"})
      */
     protected $email;
 
@@ -39,6 +47,8 @@ class User extends UserModel implements UserInterface, EquatableInterface
      * {@inheritDoc}
      * 
      * @ORM\Column(type="string", length=32, nullable=false)
+     * 
+     * @Groups({"owner", "list", "details"})
      */
     protected $name;
 
@@ -67,13 +77,33 @@ class User extends UserModel implements UserInterface, EquatableInterface
      * {@inheritDoc}
      * 
      * @ORM\Column(type="boolean", nullable=false)
+     * 
+     * @Groups({"owner"})
      */
     protected $locked;
 
     /**
      * {@inheritDoc}
      * 
+     * @ORM\ManyToMany(targetEntity="Team", inversedBy="users")
+     * @ORM\JoinTable(name="users_teams")
+     */
+    protected $teams;
+
+    /**
+     * {@inheritDoc}
+     * 
+     * @ORM\ManyToMany(targetEntity="Miit", inversedBy="users")
+     * @ORM\JoinTable(name="users_miits")
+     */
+    protected $miits;
+
+    /**
+     * {@inheritDoc}
+     * 
      * @ORM\Column(type="datetime", nullable=true)
+     * 
+     * @Groups({"owner", "details"})
      */
     protected $registeredAt;
 
@@ -81,6 +111,8 @@ class User extends UserModel implements UserInterface, EquatableInterface
      * {@inheritDoc}
      * 
      * @ORM\Column(type="datetime", nullable=true)
+     * 
+     * @Groups({"owner"})
      */
     protected $updatedAt;
 
@@ -142,5 +174,47 @@ class User extends UserModel implements UserInterface, EquatableInterface
     public function isEqualTo(UserInterface $user)
     {
         return $this->email === $user->getUsername();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function __construct($id, $name, $email)
+    {
+        parent::__construct($id, $name, $email);
+
+        $this->teams = new ArrayCollection();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addTeam($team)
+    {
+        if(false === $this->hasTeam($team)) {
+            
+            // Push the team at the end of the array
+            $this->teams->add($team);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeTeam($team)
+    {
+        if(true === $this->hasTeam($team)) {
+
+            // Remove it
+            $this->teams->removeElement($team);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function hasTeam($team)
+    {
+        return $this->teams->contains($team);
     }
 }

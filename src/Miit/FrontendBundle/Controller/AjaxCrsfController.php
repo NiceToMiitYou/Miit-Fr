@@ -8,6 +8,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
+/**
+ * Class AjaxCrsfController
+ * 
+ * @author Tacyniak Boris <boris.tacyniak@itevents.fr>
+ */
 class AjaxCrsfController extends Controller
 {
     /**

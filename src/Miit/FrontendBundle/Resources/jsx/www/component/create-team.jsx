@@ -44,7 +44,7 @@ MiitComponents.CreateTeam = React.createClass({
         }
 
         // Check if this is a correct email
-        if(!MiitUtils.validator.email(email)) {
+        if(!MiitApp.utils.validator.email(email)) {
             this.setState({
                 invalid_email: true
             });
@@ -52,7 +52,7 @@ MiitComponents.CreateTeam = React.createClass({
         }
 
         // Check if this is a correct team name
-        if(!MiitUtils.validator.team(team)) {
+        if(!MiitApp.utils.validator.team(team)) {
             this.setState({
                 invalid_team: true
             });
@@ -60,7 +60,7 @@ MiitComponents.CreateTeam = React.createClass({
         }
 
         // Request for CRSF
-        MiitUser.registration(email, team, function(data) {
+        MiitApp.request.user.registration(email, team, function(data) {
             console.log(data);    
         });
 

@@ -4,29 +4,57 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <link rel="stylesheet" href="/dist/css/font-awesome/master.min.css" />
         <link rel="stylesheet" href="/dist/css/flex-it/master.min.css" />
-        <link rel="stylesheet" href="/dist/css/www/master.min.css" />
+        <link rel="stylesheet" href="/dist/css/team/master.min.css" />
         <title>{% trans from "common" %}www.homepage{% endtrans %} - Miit</title>
     </head>
-    <body>
-        <div id="content">
-            
-            {% if error is defined and error %}
-                <div>{{ error.message }}</div>
-            {% endif %}
+    <body class="login-page">
 
-            <form action="{{ path('login_check') }}" method="post">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="_username" value="{{ last_username }}" />
-
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="_password" />
-
-                <input type="checkbox" id="remember_me" name="_remember_me" checked />
-                <label for="remember_me">Keep me logged in</label>
-                
-                <input type="submit" name="login" />
-            </form>
+        <div class="bg-cover-img" >
+            <img src="/img/42H.jpg"/>
         </div>
+        <div class="login-container">
+
+            <div class="login">
+                
+
+                <img class="m-auto mb10" src="/img/logolight.png"/>
+                <!-- <h3>Bienvenue sur la plateforme  {{ team_name }}</h3> -->
+
+<!--                 <h2 class="pull-left"><a class="active">Connexion</a></h2>
+                <h2 class="pull-right"><a>Inscription</a></h2> -->
+
+                <form action="{{ path('login_check') }}" method="post">
+                    <p>
+                        Connectez-vous à la plateforme Miit en utilisant votre adresse e-mail comme identifiant.
+                    </p>
+
+                    {% if error is defined and error %}
+                        <div class="errors text-red text-600 mt20 mb10"><i class="fa fa-exclamation-triangle"></i> {{ error.message }}</div>
+                    {% endif %}
+
+                    <div class="input-field light">
+                      <i class="fa fa-user"></i>
+                      <input placeholder="Adresse e-mail" id="username" name="_username" value="{{ last_username }}" type="text">
+                      <!-- <label for="email">Adresse e-mail</label> -->
+                    </div>
+                    <div class="input-field light">
+                       <i class="fa fa-key"></i>
+                      <input placeholder="Mot de passe" type="password" id="password" name="_password">
+                      <!-- <label for="password">Mot de passe</label> -->
+                    </div>
+                    <br>
+                    <div class="checkbox-field light">
+                        <label>
+                          <input type="checkbox" id="remember_me" name="_remember_me" class="option-input checkbox">
+                          Se souvenir de moi
+                        </label>
+                    </div>
+
+                    <button class="btn btn-dark" type="submit" >Connexion</button>
+                </form>
+            </div>
+        </div>
+
         <script type="text/javascript" src="/dist/lib/es5-shim.min.js"></script>
         <script type="text/javascript" src="/dist/lib/react-with-addons.min.js"></script>
         <script type="text/javascript" src="/dist/js/translations.js"></script>

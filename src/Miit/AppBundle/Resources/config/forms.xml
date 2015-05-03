@@ -9,6 +9,10 @@
         <parameter key="registration_type.class">Miit\AppBundle\Form\Type\RegistrationType</parameter>
 
         <parameter key="user_change_password_type.class">Miit\AppBundle\Form\Type\UserChangePasswordType</parameter>
+
+        <parameter key="promote_user_type.class">Miit\AppBundle\Form\Type\PromoteUserType</parameter>
+        <parameter key="demote_user_type.class">Miit\AppBundle\Form\Type\DemoteUserType</parameter>
+        <parameter key="remove_user_type.class">Miit\AppBundle\Form\Type\RemoveUserType</parameter>
     </parameters>
 
     <services>
@@ -36,5 +40,22 @@
             <tag name="form.type" alias="user_change_password_type" />
         </service>
 
+        <!-- Promote User Type -->
+        <service id="app.form.type.promote_user"
+                 class="%promote_user_type.class%">
+            <tag name="form.type" alias="promote_user_type" />
+        </service>
+
+        <!-- Demote User Type -->
+        <service id="app.form.type.demote_user"
+                 class="%demote_user_type.class%">
+            <tag name="form.type" alias="demote_user_type" />
+        </service>
+
+        <!-- Remove User Type -->
+        <service id="app.form.type.remove_user"
+                 class="%remove_user_type.class%">
+            <tag name="form.type" alias="remove_user_type" />
+        </service>
     </services>
 </container>

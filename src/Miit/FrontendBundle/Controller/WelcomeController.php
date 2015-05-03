@@ -6,6 +6,7 @@ use Miit\CoreDomain\Common\Email;
 use Miit\CoreDomain\User\UserId;
 use Miit\CoreDomain\User\Command\RegisterUserCommand;
 use Miit\CoreDomain\User\Command\PromoteUserCommand;
+use Miit\CoreDomain\User\Command\AddTeamUserCommand;
 use Miit\CoreDomain\Team\TeamId;
 use Miit\CoreDomain\Team\Command\CreateTeamCommand;
 
@@ -14,8 +15,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Security\Core\Util\SecureRandom;
 
+/**
+ * Class WelcomeControlle
+ * 
+ * @author Tacyniak Boris <boris.tacyniak@itevents.fr>
+ */
 class WelcomeController extends Controller
 {
     /**
@@ -28,25 +33,19 @@ class WelcomeController extends Controller
 
     /**
      * @Route("/register",
-     *      host="{subdomain}.{domain}",
      *      name="welcome_register",
-     *      defaults={
-     *          "subdomain": "www",
-     *          "domain":    "%domain%"
-     *      },
      *      requirements={
-     *          "_method":   "POST",
-     *          "domain":    "%domain%",
-     *          "subdomain": "www"
+     *          "_method":   "POST"
      *      }
      * )
      */
     public function registerAction(Request $request)
     {
         $form = $this->createForm('registration_type');
+        $data = @json_decode($request->getContent(), true);
 
-        $form->handleRequest($request);
-   
+        $form->submit($data);
+
         $response = array(
             'done' => false
         );
@@ -54,55 +53,34 @@ class WelcomeController extends Controller
         if ($form->isValid()) {
 
             $registration = $form->getData();
+            $userManager  = $this->get('user_manager');
+            $teamManager  = $this->get('team_manager');
 
             // Process registration
-            $userId     = UserId::newInstance();
-            $email      = new Email($registration->user->email);
+            $email  = new Email($registration->user->email);
+            $name   = $registration->team->name;
 
-            $explode    = explode('@', $email->getValue());
-            $username   = reset($explode);
+            // Create the team
+            $teamId = $teamManager->createTeam($name);
 
-            $generator  = new SecureRandom();
-            $password   = bin2hex(
-                $generator->nextBytes(8)
-            );
+            // If team created
+            if(null !== $teamId) {
 
-            // Process team creation
-            $teamId     = TeamId::newInstance();
-            $name       = $registration->team->name;
-            $slug       = strtolower($name);
+                $roles  = array('OWNER', 'ADMIN', 'USER');
 
-            // Process roles for user
-            $role_user  = strtoupper('ROLE_USER_'  . $teamId->getValue());
-            $role_admin = strtoupper('ROLE_ADMIN_' . $teamId->getValue());
+                // Invite or create the user in the new team
+                $userId = $userManager->inviteInTeam($email, $teamId, $roles, true);
 
-            // Instanciate commands
-            $command_register_user = new RegisterUserCommand($userId, $username, $email, $password);
-
-            $command_create_team   = new CreateTeamCommand($teamId, $slug, $name);
-
-            $command_promote_user  = new PromoteUserCommand($userId, array(
-                $role_admin,
-                $role_user
-            ));
-
-            try {
-                $this->get('command_bus')->dispatch($command_register_user);
-
-                $this->get('user_manager')->sendNewUserEmail($email, $password);
-
-                $this->get('command_bus')->dispatch($command_create_team);
-
-                $this->get('command_bus')->dispatch($command_promote_user);
-
-                $response['done'] = true;
-
-            } catch(\Exception $e) {
-                $response['errors'] = array();
-                $response['errors'][] = $e->getMessage();
+                // If user created or/and invited
+                if(null !== $userId) {
+                    $response['done'] = true;
+                } else {
+                    $response['errors'] = array('USER_NOT_CREATED');
+                }
+            } else {
+                $response['errors'] = array('TEAM_NOT_CREATED');
             }
         } else {
-
             $response['errors'] = $form->getErrors();
         }
 

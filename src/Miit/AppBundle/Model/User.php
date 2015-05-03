@@ -2,6 +2,8 @@
 
 namespace Miit\AppBundle\Model;
 
+use Miit\CoreDomain\Team\Team;
+
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -11,6 +13,15 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User
 {
+    /**
+     * @Assert\Regex(
+     *      groups={"promote_user", "demote_user", "remove_user"},
+     *      pattern="/^[0-9a-f]{8}-[0-9a-f]{4}-5[0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$/",
+     *      match=true
+     * )
+     */
+    public $id;
+
     /**
      * @Assert\NotBlank(
      *      groups={"registration"}
@@ -42,4 +53,23 @@ class User
      * )
      */
     public $password_new;
+
+    /**
+     * @Assert\Choice(
+     *      groups={"promote_user", "demote_user"},
+     *      callback = "getAllowedRoles",
+     *      multiple = true
+     * )
+     */
+    public $roles;
+
+    /**
+     * Proxy for the list of roles
+     * 
+     * @return array
+     */
+    public static function getAllowedRoles() {
+        return Team::getAllowedRoles();
+    }
+
 }

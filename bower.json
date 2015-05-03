@@ -16,7 +16,8 @@
     "tests"
   ],
   "dependencies": {
-    "react": "~0.13.1",
-    "es5-shim": "~4.1.0"
+    "react": "~0.13.2",
+    "es5-shim": "~4.1.0",
+    "director": "~1.2.8"
   }
 }

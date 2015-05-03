@@ -52,7 +52,11 @@ final class RegisterUserCommand implements Command
         $this->name     = (string) $name;
         $this->email    = $email;
         $this->password = (string) $password;
-        $this->roles    = $roles;
+        if(is_array($roles)) {
+            $this->roles = $roles;
+        } else {
+            $this->roles = array($roles);
+        }
     }
 
     /**

@@ -11,6 +11,13 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
+use JMS\Serializer\SerializationContext;
+
+/**
+ * Class TeamController
+ * 
+ * @author Tacyniak Boris <boris.tacyniak@itevents.fr>
+ */
 class TeamController extends Controller
 {
     /**
@@ -29,15 +36,23 @@ class TeamController extends Controller
     public function indexAction(Request $request, $team_slug)
     {
         $team = $this->get('team_manager')->getTeam();
+        $user = $this->getUser();
 
-        if (false === $this->get('security.authorization_checker')->isGranted('user', $team)) {
+        if (false === $this->get('security.authorization_checker')->isGranted('USER', $team)) {
             $url = $this->generateUrl('welcome_login');
 
             return new RedirectResponse($url);
         }
 
+        $user_context = SerializationContext::create()->setGroups(array('owner'));
+        $team_context = SerializationContext::create()->setGroups(array('details'));
+
         return $this->render('MiitFrontendBundle:team:index.html.twig', array(
-            'team_name' => $team->getName()
+            'team_name'    => $team->getName(),
+            'user_context' => $user_context,
+            'user'         => $user,
+            'team_context' => $team_context,
+            'team'         => $team
         ));
     }
 
@@ -56,6 +71,7 @@ class TeamController extends Controller
      */
     public function loginAction(Request $request)
     {
+        $team    = $this->get('team_manager')->getTeam();
         $session = $request->getSession();
  
         // get the login error if there is one
@@ -68,8 +84,8 @@ class TeamController extends Controller
  
         return $this->render('MiitFrontendBundle:team:login.html.twig', array(
             'last_username' => $session->get(SecurityContext::LAST_USERNAME),
+            'team_name'     => $team->getName(),
             'error'         => $error,
         ));
     }
-
 }

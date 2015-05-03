@@ -6,10 +6,11 @@
     <parameters>
         <parameter key="user_repository.orm.class">Miit\CoreDomainBundle\Repository\UserRepository</parameter>
         <parameter key="team_repository.orm.class">Miit\CoreDomainBundle\Repository\TeamRepository</parameter>
+        <parameter key="miit_repository.orm.class">Miit\CoreDomainBundle\Repository\MiitRepository</parameter>
     </parameters>
 
     <services>
-        <!-- User user_repository Public -->
+        <!-- User Repository Public -->
         <service id="user_repository" alias="user_repository.orm"></service>
 
         <!-- User Repository Private -->
@@ -22,7 +23,7 @@
             <argument>MiitCoreDomainBundle:User</argument>
         </service>
         
-        <!-- Team team_repository Public -->
+        <!-- Team Repository Public -->
         <service id="team_repository" alias="team_repository.orm"></service>
 
         <!-- Team Repository Private -->
@@ -35,5 +36,18 @@
             <argument>MiitCoreDomainBundle:Team</argument>
         </service>
         
+        
+        <!-- Team Repository Public -->
+        <service id="miit_repository" alias="miit_repository.orm"></service>
+
+        <!-- Team Repository Private -->
+        <service id="miit_repository.orm"
+                 public="false"
+                 class="%miit_repository.orm.class%"
+                 factory-service="doctrine.orm.entity_manager"
+                 factory-method="getRepository">
+
+            <argument>MiitCoreDomainBundle:Miit</argument>
+        </service>
     </services>
 </container>

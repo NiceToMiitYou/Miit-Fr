@@ -4,7 +4,10 @@ namespace Miit\CoreDomainBundle\Entity;
 
 use Miit\CoreDomain\Team\Team as TeamModel;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * Class Team
@@ -12,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @author Tacyniak Boris <boris.tacyniak@itevents.fr>
  * 
  * @ORM\Entity(repositoryClass="Miit\CoreDomainBundle\Repository\TeamRepository")
+ * @ORM\Cache(usage="NONSTRICT_READ_WRITE")
  */
 class Team extends TeamModel
 {
@@ -20,6 +24,8 @@ class Team extends TeamModel
      * 
      * @ORM\Id
      * @ORM\Column(type="string", length=255, nullable=false)
+     * 
+     * @Groups({"list", "details"})
      */
     protected $id;
 
@@ -27,6 +33,8 @@ class Team extends TeamModel
      * {@inheritDoc}
      * 
      * @ORM\Column(type="string", length=255, nullable=false, unique=true)
+     * 
+     * @Groups({"list", "details"})
      */
     protected $slug;
 
@@ -34,20 +42,40 @@ class Team extends TeamModel
      * {@inheritDoc}
      * 
      * @ORM\Column(type="string", length=255, nullable=false)
+     * 
+     * @Groups({"list", "details"})
      */
     protected $name;
 
     /**
-     * {@inheritDoc}
+     * The list of users which they have subscribe
      * 
      * @ORM\Column(type="boolean", nullable=false)
+     * 
+     * @Groups({"details"})
      */
     protected $locked;
 
     /**
      * {@inheritDoc}
      * 
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="teams")
+     */
+    protected $users;
+
+    /**
+     * {@inheritDoc}
+     * 
+     * @ORM\OneToMany(targetEntity="Miit", mappedBy="team")
+     */
+    protected $miits;
+
+    /**
+     * {@inheritDoc}
+     * 
      * @ORM\Column(type="datetime", nullable=true)
+     * 
+     * @Groups({"details"})
      */
     protected $createdAt;
 
@@ -57,4 +85,46 @@ class Team extends TeamModel
      * @ORM\Column(type="datetime", nullable=true)
      */
     protected $updatedAt;
+
+    /**
+     * {@inheritDoc}
+     */
+    public function __construct($id, $slug, $name)
+    {
+        parent::__construct($id, $slug, $name);
+
+        $this->users = new ArrayCollection();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addUser($user)
+    {
+        if(false === $this->hasUser($user)) {
+            
+            // Push the user at the end of the array
+            $this->users->add($user);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeUser($user)
+    {
+        if(true === $this->hasUser($user)) {
+
+            // Remove it
+            $this->users->removeElement($user);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function hasUser($user)
+    {
+        return $this->users->contains($user);
+    }
 }

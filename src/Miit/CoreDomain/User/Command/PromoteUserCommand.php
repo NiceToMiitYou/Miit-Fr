@@ -25,12 +25,16 @@ final class PromoteUserCommand implements Command
 
     /**
      * @param UserId $userId
-     * @param string $role
+     * @param string $roles
      */
     public function __construct(UserId $userId, $roles)
     {
         $this->userId = $userId;
-        $this->roles  = $roles;
+        if(is_array($roles)) {
+            $this->roles = $roles;
+        } else {
+            $this->roles = array($roles);
+        }
     }
 
     /**

@@ -52,11 +52,16 @@ doctrine:
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
+        metadata_cache_driver: array
+        query_cache_driver: array
+        result_cache_driver: array
 
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"
+    auth_mode: "%mailer_auth_mode%"
     host:      "%mailer_host%"
+    port:      "%mailer_port%"
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
