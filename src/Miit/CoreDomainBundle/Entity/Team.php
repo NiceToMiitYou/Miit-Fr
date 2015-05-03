@@ -7,7 +7,7 @@ use Miit\CoreDomain\Team\Team as TeamModel;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
-use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Class Team
@@ -25,7 +25,7 @@ class Team extends TeamModel
      * @ORM\Id
      * @ORM\Column(type="string", length=255, nullable=false)
      * 
-     * @Groups({"list", "details"})
+     * @Serializer\Groups({"list", "details"})
      */
     protected $id;
 
@@ -34,7 +34,7 @@ class Team extends TeamModel
      * 
      * @ORM\Column(type="string", length=255, nullable=false, unique=true)
      * 
-     * @Groups({"list", "details"})
+     * @Serializer\Groups({"list", "details"})
      */
     protected $slug;
 
@@ -43,7 +43,7 @@ class Team extends TeamModel
      * 
      * @ORM\Column(type="string", length=255, nullable=false)
      * 
-     * @Groups({"list", "details"})
+     * @Serializer\Groups({"list", "details"})
      */
     protected $name;
 
@@ -52,7 +52,7 @@ class Team extends TeamModel
      * 
      * @ORM\Column(type="boolean", nullable=false)
      * 
-     * @Groups({"details"})
+     * @Serializer\Groups({"details"})
      */
     protected $locked;
 
@@ -75,7 +75,7 @@ class Team extends TeamModel
      * 
      * @ORM\Column(type="datetime", nullable=true)
      * 
-     * @Groups({"details"})
+     * @Serializer\Groups({"details"})
      */
     protected $createdAt;
 

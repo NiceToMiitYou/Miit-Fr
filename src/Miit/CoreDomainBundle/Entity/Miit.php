@@ -7,7 +7,7 @@ use Miit\CoreDomain\Miit\Miit as MiitModel;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
-use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Class Miit
@@ -25,7 +25,7 @@ class Miit extends MiitModel
      * @ORM\Id
      * @ORM\Column(type="string", length=255, nullable=false)
      * 
-     * @Groups({"list", "details"})
+     * @Serializer\Groups({"list", "details"})
      */
     protected $id;
 
@@ -34,7 +34,7 @@ class Miit extends MiitModel
      * 
      * @ORM\Column(type="string", length=255, nullable=false)
      * 
-     * @Groups({"list", "details"})
+     * @Serializer\Groups({"list", "details"})
      */
     protected $token;
 
@@ -43,7 +43,7 @@ class Miit extends MiitModel
      * 
      * @ORM\Column(type="string", length=255, nullable=false)
      * 
-     * @Groups({"list", "details"})
+     * @Serializer\Groups({"list", "details"})
      */
     protected $name;
 
@@ -52,7 +52,7 @@ class Miit extends MiitModel
      * 
      * @ORM\Column(type="integer", nullable=false)
      * 
-     * @Groups({"details"})
+     * @Serializer\Groups({"details"})
      */
     protected $state;
 
@@ -75,7 +75,7 @@ class Miit extends MiitModel
      * 
      * @ORM\Column(type="datetime", nullable=true)
      * 
-     * @Groups({"details"})
+     * @Serializer\Groups({"details"})
      */
     protected $createdAt;
 

@@ -26,7 +26,7 @@ MiitApp.utils = (function() {
     var isUserGenerator = function(role) {
         return function(user) {
             if(!user) {
-                user = MiitCurrentUser;
+                user = MiitApp.storage.shared.get('user');
             }
 
             return user.roles.indexOf(role) >= 0
@@ -35,7 +35,10 @@ MiitApp.utils = (function() {
 
     // Check if this is the same user
     var isItMe = function(user) {
-        return MiitCurrentUser.id === ((user || {}).id || null)
+        var me  = (MiitApp.storage.shared.get('user') || {}).id || null;
+        var you = (user || {}).id || null;
+
+        return me === you;
     };
 
     /**

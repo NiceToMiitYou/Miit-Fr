@@ -277,6 +277,15 @@ class User implements Entity
     /**
      * @return string
      */
+    public function getAvatarId() {
+        return md5(strtolower(
+            $this->getEmail()->getValue()
+        ));
+    }
+
+    /**
+     * @return string
+     */
     public function getName()
     {
         return $this->name;

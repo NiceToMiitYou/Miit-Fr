@@ -20,10 +20,14 @@ MiitApp.storage = (function(){
         this.expire = function(key, delay) {
             clearTimeout(timeoutId[key]);
 
-            // Set the timeout
-            timeoutId[key] = setTimeout(function() {
+            if(undefined !== delay && null !== delay) {
+                // Set the timeout
+                timeoutId[key] = setTimeout(function() {
+                    this.remove(key);
+                }.bind(this), delay);
+            } else {
                 this.remove(key);
-            }.bind(this), delay);
+            }
         };
 
         this.remove = function(key) {
