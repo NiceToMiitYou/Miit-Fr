@@ -3,11 +3,9 @@ MiitComponents.MiitTeamContent = React.createClass({
     return (
         <div className="page-content page-dashboard">
             <div className="container">
-                <h1 className="mb30">Dashboard</h1>
+                <h1 className="mb30">Configuration</h1>
 
-                <h2>Configuration</h2>
-
-                <h3 className="mt30 mb30"><i className="fa fa-lock pull-left "></i> Confidentialité</h3>
+                <h2 className="mt30 mb30"><i className="fa fa-lock pull-left "></i> Confidentialité</h2>
                 <div className="mb20">
                     <div className="checkbox-field mb20">
                         <label>
@@ -21,10 +19,6 @@ MiitComponents.MiitTeamContent = React.createClass({
                     </div>
                 </div>
 
-                <div className="mb20">
-                    <MiitComponents.UserList autoload={true} />
-                </div>
-
                 <div className="checkbox-field mb20">
                     <label>
                         <input type="radio" name="confid" className="option-input radio" />
@@ -34,13 +28,16 @@ MiitComponents.MiitTeamContent = React.createClass({
 
                 <p className="mb10">Votre Miit est privé et ne sera accessible qu aux personnes de votre choix</p>
 
+                <div className="mb20">
+                    <MiitComponents.UserList autoload={true} />
+                </div>
+
                 <div className="input-field pure-u-sm-1-3">
                     <i className="fa fa-user-plus"></i>
                     <input placeholder="Ajoutez une personne ou un cercle" type="text" />
                 </div>
 
-
-                <h3 className="mt30 mb30"><i className="fa fa-info pull-left "></i> Informations</h3>
+                <h2 className="mt30 mb30"><i className="fa fa-info pull-left "></i> Informations</h2>
 
                 <div className="input-field pure-u-sm-1-2 mb30">
                     <label>Titre</label>
@@ -52,7 +49,7 @@ MiitComponents.MiitTeamContent = React.createClass({
                     <textarea placeholder="Description" rows="6">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </textarea>
                 </div>
 
-                <h3 className="mt30"><i className="fa fa-circle-thin pull-left stat-open"></i> Status</h3>
+                <h2 className="mt30"><i className="fa fa-circle-thin pull-left stat-open"></i> Status</h2>
                 <p className="mt30 mb30"><i className="fa fa-info pull-left"></i> Votre Miit est ouvert est prêt à être utilisé</p>
                 <button className="btn mr20">Ouvert</button><button className="btn btn-warning mr20">Fermer</button><button className="btn btn-danger mr20">Supprimer</button>
 

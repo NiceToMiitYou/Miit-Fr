@@ -3,10 +3,24 @@ html, body {
 	height: 100%;
 }
 
-body.login-page {
-	background:url('/img/42H.jpg');
-	background-size: cover;
-	background-position: center;
+.bg-cover-img {
+	position: fixed;
+	z-index: -1;
+	top: -50%;
+	left: -50%;
+	width: 200%;
+	height: 200%;
+
+	img {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		margin: auto;
+		min-width: 50%;
+		min-height: 50%;
+	}
 }
 
 a {
@@ -16,14 +30,19 @@ a {
 .login-container {
 	  width: 400px;
 	  background-color: rgba(0, 0, 0, 0.15);
+	  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#4c000000', endColorstr='#4c000000'); /* IE */
 	  border-radius: 0;
 	  height: 100%;
 	  color:#FFF;
+	  position:relative;
+	  display: table;
 }
 
 .login {
-	width: 300px;
-	margin: auto;
+	display:table-cell;
+	vertical-align: middle;
+	padding-left: 35px;
+	padding-right: 35px;
 }
 
 .login .errors { 
@@ -31,7 +50,7 @@ a {
 }
 
 .login p {
-	font-size: 13px;
+	font-size: 14px;
 	line-height: 20px;
 	margin: 10px 0;
 }
