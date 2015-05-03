@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 use Symfony\Component\Security\Core\Util\SecureRandom;
 
-use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Class User
@@ -30,7 +30,7 @@ class User extends UserModel implements UserInterface, EquatableInterface
      * @ORM\Id
      * @ORM\Column(type="string", length=255, nullable=false)
      * 
-     * @Groups({"owner", "list", "details"})
+     * @Serializer\Groups({"owner", "list", "details"})
      */
     protected $id;
 
@@ -39,7 +39,7 @@ class User extends UserModel implements UserInterface, EquatableInterface
      * 
      * @ORM\Column(type="string", length=255, nullable=false, unique=true)
      * 
-     * @Groups({"owner"})
+     * @Serializer\Groups({"owner"})
      */
     protected $email;
 
@@ -48,7 +48,7 @@ class User extends UserModel implements UserInterface, EquatableInterface
      * 
      * @ORM\Column(type="string", length=32, nullable=false)
      * 
-     * @Groups({"owner", "list", "details"})
+     * @Serializer\Groups({"owner", "list", "details"})
      */
     protected $name;
 
@@ -78,7 +78,7 @@ class User extends UserModel implements UserInterface, EquatableInterface
      * 
      * @ORM\Column(type="boolean", nullable=false)
      * 
-     * @Groups({"owner"})
+     * @Serializer\Groups({"owner"})
      */
     protected $locked;
 
@@ -103,7 +103,7 @@ class User extends UserModel implements UserInterface, EquatableInterface
      * 
      * @ORM\Column(type="datetime", nullable=true)
      * 
-     * @Groups({"owner", "details"})
+     * @Serializer\Groups({"owner", "details"})
      */
     protected $registeredAt;
 
@@ -112,7 +112,7 @@ class User extends UserModel implements UserInterface, EquatableInterface
      * 
      * @ORM\Column(type="datetime", nullable=true)
      * 
-     * @Groups({"owner"})
+     * @Serializer\Groups({"owner"})
      */
     protected $updatedAt;
 
@@ -184,6 +184,18 @@ class User extends UserModel implements UserInterface, EquatableInterface
         parent::__construct($id, $name, $email);
 
         $this->teams = new ArrayCollection();
+    }
+
+    /**
+     * {@inheritDoc}
+     * 
+     * @Serializer\VirtualProperty
+     * @Serializer\SerializedName("avatar")
+     * @Serializer\Groups({"owner", "list", "details"})
+     */
+    public function getAvatarId()
+    {
+        return sprintf('http://www.gravatar.com/avatar/%s', parent::getAvatarId());
     }
 
     /**
