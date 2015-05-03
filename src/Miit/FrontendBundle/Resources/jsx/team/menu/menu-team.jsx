@@ -6,7 +6,6 @@ MiitComponents.MenuTeam = React.createClass({
                     <a className="sl-header bg-blue-grey darken-1">
                         <i className="fa fa-bars pull-left"></i>
                         Menu
-                        <i className="fa fa-angle-down pull-right"></i>
                     </a>
 
                     <span className="sl-label"><i className="mdi-action-favorite pull-left"></i> Favorites</span>
