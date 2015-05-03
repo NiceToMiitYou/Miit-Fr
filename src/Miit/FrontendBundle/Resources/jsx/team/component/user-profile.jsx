@@ -8,7 +8,7 @@ MiitComponents.UserProfile = React.createClass({
 
         return (
             <span className="miit-component user-profile">
-                <div className="avatar border-circle">
+                <div className="avatar">
                     <MiitComponents.UserAvatar user={user} />
                 </div>
                 <span>{ user.name }
