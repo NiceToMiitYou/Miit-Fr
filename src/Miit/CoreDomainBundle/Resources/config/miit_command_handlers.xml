@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="miit_handler.create.class">Miit\CoreDomain\Miit\CommandHandler\CreateMiitCommandHandler</parameter>
+        <parameter key="miit_handler.update.class">Miit\CoreDomain\Miit\CommandHandler\UpdateMiitCommandHandler</parameter>
+
+        <parameter key="miit_handler.add_user.class">Miit\CoreDomain\Miit\CommandHandler\AddUserMiitCommandHandler</parameter>
+        <parameter key="miit_handler.remove_user.class">Miit\CoreDomain\Miit\CommandHandler\RemoveUserMiitCommandHandler</parameter>
+    </parameters>
+
+    <services>
+        <!-- Team Handlers Public -->
+        <service id="miit_handler.create" class="%miit_handler.create.class%">
+            <tag name="command_bus.register" />
+            <argument type="service" id="miit_factory" />
+            <argument type="service" id="miit_repository" />
+        </service>
+        <service id="miit_handler.update" class="%miit_handler.update.class%">
+            <tag name="command_bus.register" />
+            <argument type="service" id="miit_factory" />
+            <argument type="service" id="miit_repository" />
+        </service>
+
+        <service id="miit_handler.add_user" class="%miit_handler.add_user.class%">
+            <tag name="command_bus.register" />
+            <argument type="service" id="miit_factory" />
+            <argument type="service" id="miit_repository" />
+        </service>
+        <service id="miit_handler.remove_user" class="%miit_handler.remove_user.class%">
+            <tag name="command_bus.register" />
+            <argument type="service" id="miit_factory" />
+            <argument type="service" id="miit_repository" />
+        </service>
+    </services>
+</container>

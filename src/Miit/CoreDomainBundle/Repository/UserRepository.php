@@ -35,13 +35,7 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
                       ->setParameter('id', $userId->getValue())
                       ->getQuery();
 
-        try {
-            $user = $query->getSingleResult();
-        } catch(NoResultException $e) {
-            $user = null;
-        }
-
-        return $user;
+        return $query->getOneOrNullResult();
     }
 
     /**
@@ -54,13 +48,7 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
                       ->setParameter('email', $email->getValue())
                       ->getQuery();
 
-        try {
-            $user = $query->getSingleResult();
-        } catch(NoResultException $e) {
-            $user = null;
-        }
-
-        return $user;
+        return $query->getOneOrNullResult();
     }
 
     /**
@@ -89,13 +77,7 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
                       ->setParameter('id', $userId->getValue())
                       ->getQuery();
 
-        try {
-            $user = $query->getSingleResult();
-        } catch(NoResultException $e) {
-            $user = null;
-        }
-
-        return $user;
+        return $query->getOneOrNullResult();
     }
 
     /**
@@ -111,13 +93,7 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
                       ->setParameter('teamId', $teamId->getValue())
                       ->getQuery();
 
-        try {
-            $user = $query->getSingleResult();
-        } catch(NoResultException $e) {
-            $user = null;
-        }
-
-        return $user;
+        return $query->getOneOrNullResult();
     }
 
     /**

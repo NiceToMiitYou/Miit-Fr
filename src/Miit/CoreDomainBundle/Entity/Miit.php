@@ -2,7 +2,7 @@
 
 namespace Miit\CoreDomainBundle\Entity;
 
-use Miit\CoreDomain\Team\Team as TeamModel;
+use Miit\CoreDomain\Miit\Miit as MiitModel;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,14 +10,14 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\Groups;
 
 /**
- * Class Team
+ * Class Miit
  * 
  * @author Tacyniak Boris <boris.tacyniak@itevents.fr>
  * 
- * @ORM\Entity(repositoryClass="Miit\CoreDomainBundle\Repository\TeamRepository")
+ * @ORM\Entity(repositoryClass="Miit\CoreDomainBundle\Repository\MiitRepository")
  * @ORM\Cache(usage="NONSTRICT_READ_WRITE")
  */
-class Team extends TeamModel
+class Miit extends MiitModel
 {
     /**
      * {@inheritDoc}
@@ -32,11 +32,11 @@ class Team extends TeamModel
     /**
      * {@inheritDoc}
      * 
-     * @ORM\Column(type="string", length=255, nullable=false, unique=true)
+     * @ORM\Column(type="string", length=255, nullable=false)
      * 
      * @Groups({"list", "details"})
      */
-    protected $slug;
+    protected $token;
 
     /**
      * {@inheritDoc}
@@ -48,27 +48,27 @@ class Team extends TeamModel
     protected $name;
 
     /**
-     * The list of users which they have subscribe
+     * {@inheritDoc}
      * 
-     * @ORM\Column(type="boolean", nullable=false)
+     * @ORM\Column(type="integer", nullable=false)
      * 
      * @Groups({"details"})
      */
-    protected $locked;
+    protected $state;
 
     /**
      * {@inheritDoc}
      * 
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="teams")
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="miits")
      */
     protected $users;
 
     /**
      * {@inheritDoc}
      * 
-     * @ORM\OneToMany(targetEntity="Miit", mappedBy="team")
+     * @ORM\ManyToOne(targetEntity="Team", inversedBy="miits")
      */
-    protected $miits;
+    protected $team;
 
     /**
      * {@inheritDoc}
@@ -89,9 +89,9 @@ class Team extends TeamModel
     /**
      * {@inheritDoc}
      */
-    public function __construct($id, $slug, $name)
+    public function __construct($id, $token, $name, $team, $public)
     {
-        parent::__construct($id, $slug, $name);
+        parent::__construct($id, $token, $name, $team, $public);
 
         $this->users = new ArrayCollection();
     }

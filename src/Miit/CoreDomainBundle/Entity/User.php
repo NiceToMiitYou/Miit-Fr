@@ -20,6 +20,7 @@ use JMS\Serializer\Annotation\Groups;
  * @author Tacyniak Boris <boris.tacyniak@itevents.fr>
  * 
  * @ORM\Entity(repositoryClass="Miit\CoreDomainBundle\Repository\UserRepository")
+ * @ORM\Cache(usage="NONSTRICT_READ_WRITE")
  */
 class User extends UserModel implements UserInterface, EquatableInterface
 {
@@ -88,6 +89,14 @@ class User extends UserModel implements UserInterface, EquatableInterface
      * @ORM\JoinTable(name="users_teams")
      */
     protected $teams;
+
+    /**
+     * {@inheritDoc}
+     * 
+     * @ORM\ManyToMany(targetEntity="Miit", inversedBy="users")
+     * @ORM\JoinTable(name="users_miits")
+     */
+    protected $miits;
 
     /**
      * {@inheritDoc}

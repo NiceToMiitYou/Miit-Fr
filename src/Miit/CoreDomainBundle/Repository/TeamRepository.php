@@ -28,13 +28,7 @@ class TeamRepository extends EntityRepository implements TeamRepositoryInterface
                       ->setParameter('id', $teamId->getValue())
                       ->getQuery();
 
-        try {
-            $team = $query->getSingleResult();
-        } catch(NoResultException $e) {
-            $team = null;
-        }
-
-        return $team;
+        return $query->getOneOrNullResult();
     }
 
     /**
@@ -48,13 +42,7 @@ class TeamRepository extends EntityRepository implements TeamRepositoryInterface
                       ->setParameter('id', $teamId->getValue())
                       ->getQuery();
 
-        try {
-            $team = $query->getSingleResult();
-        } catch(NoResultException $e) {
-            $team = null;
-        }
-
-        return $team;
+        return $query->getOneOrNullResult();
     }
 
     /**
@@ -67,13 +55,7 @@ class TeamRepository extends EntityRepository implements TeamRepositoryInterface
                       ->setParameter('slug', $slug)
                       ->getQuery();
 
-        try {
-            $team = $query->getSingleResult();
-        } catch(NoResultException $e) {
-            $team = null;
-        }
-
-        return $team;
+        return $query->getOneOrNullResult();
     }
 
     /**
