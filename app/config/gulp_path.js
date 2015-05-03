@@ -24,11 +24,13 @@ module.exports = {
     SASS_FLEX_MASTER:    config.FRONTEND_RESOURCES + 'sass/flex-it/master.scss',
     SASS_WWW_MASTER:     config.FRONTEND_RESOURCES + 'sass/www/master.scss',
     SASS_TEAM_MASTER:    config.FRONTEND_RESOURCES + 'sass/team/master.scss',
+    SASS_IE8_MASTER:     config.FRONTEND_RESOURCES + 'sass/ie8/master.scss',
     SASS_APPS_MASTER:    config.APPS_RESOURCES     + 'sass/master.scss',
     SASS_AWESOME_DIST:   config.DIST + 'css/font-awesome/',
     SASS_FLEX_DIST:      config.DIST + 'css/flex-it/',
     SASS_WWW_DIST:       config.DIST + 'css/www/',
     SASS_TEAM_DIST:      config.DIST + 'css/team/',
+    SASS_IE8_DIST:       config.DIST + 'css/ie8/',
     SASS_APPS_DIST:      config.DIST + 'css/apps/',
 
     // Compile JSX templates 
