@@ -2,26 +2,3 @@
 body {
     background-color: #f4f4f4;
 }
-
-.user-list {
-	line-height: 2em;
-
-
-	.user-list-header {
-		font-weight: bold;
-
-		& > span {
-			display: inline-block;
-			width: 200px;
-		}
-	}
-
-	.user-list-item {
-
-		& > span {
-			display: inline-block;
-			width: 200px;
-		}
-
-	}
-}
