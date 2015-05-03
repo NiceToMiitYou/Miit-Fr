@@ -18,7 +18,6 @@ MiitComponents.CreateTeam = React.createClass({
         return {
             missing_email: false,
             missing_team:  false,
-            missing_terms: false,
             invalid_email: false,
             invalid_team:  false
         };
@@ -29,16 +28,14 @@ MiitComponents.CreateTeam = React.createClass({
 
         var email = React.findDOMNode(this.refs.email).value.trim();
         var team  = React.findDOMNode(this.refs.team).value.trim();
-        var terms = React.findDOMNode(this.refs.terms).checked;
 
         this.setState(this.getDefaultErrors());
 
         // Check if there is data
-        if (!email || !team || !terms) {
+        if (!email || !team) {
             this.setState({
                 missing_email: !email,
-                missing_team:  !team,
-                missing_terms: !terms
+                missing_team:  !team
             });
             return;
         }
@@ -78,10 +75,6 @@ MiitComponents.CreateTeam = React.createClass({
         var classes_team = cx({
             'invalid':  this.state.missing_team ||
                         this.state.invalid_team
-        });
-
-        var classes_terms = cx({
-            'invalid': this.state.missing_terms
         });
 
         return (
