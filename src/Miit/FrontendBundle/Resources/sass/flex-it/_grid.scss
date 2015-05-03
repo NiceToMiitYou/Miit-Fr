@@ -1,0 +1,40 @@
+// grid variables
+$grid-columns: 16;
+$grid-max-width: 65em;
+ 
+ 
+// breakpoints
+$breakpoint-small: "only screen and (min-width: 20em)";
+$breakpoint-medium: "only screen and (min-width: 30em)";
+
+*, *:after, *:before {
+	margin: 0;
+	padding: 0;
+} 
+
+.wrapper {
+	width: 100%;
+	margin: 0 auto;
+}
+
+.wrapper, .row {
+	@extend %clearfix;
+}
+
+[class*='col'] {
+	float: left;
+	width: 100%;
+	min-height: 1px; 
+}   
+
+@media #{$breakpoint-medium} {
+	.wrapper {      
+		width: 95%;
+		max-width: $grid-max-width;     
+	}
+	@for $i from 1 through $grid-columns {      
+		.col#{$i} {         
+			width: 100% / $grid-columns * $i;   
+		}           
+	}   
+}

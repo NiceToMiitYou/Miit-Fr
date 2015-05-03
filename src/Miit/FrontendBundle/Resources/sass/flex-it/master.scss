@@ -344,6 +344,9 @@ html {
     position: absolute;
     bottom: 13px;
     margin: 0 3px;
+    width: 18px;
+    text-align: center;
+    color:#1E2D3A;
 }
 
 .input-field input {
@@ -354,7 +357,54 @@ html {
     font-size: 1em;
     font-weight: 500;
     background-color: transparent;
+
+    &::-webkit-input-placeholder {
+      color: #1E2D3A;
+    }
+
+    &:-moz-placeholder { /* Firefox 18- */
+       color: #1E2D3A;  
+    }
+
+    &::-moz-placeholder {  /* Firefox 19+ */
+       color: #1E2D3A;  
+    }
+
+    &:-ms-input-placeholder {  
+       color: #1E2D3A;  
+    }
 }
+
+.input-field.white {
+
+
+    &:before {
+      background-color: #FFF;
+    }
+
+    i {
+      color: #FFF;
+    }
+
+   input {
+      &::-webkit-input-placeholder {
+        color: #FFF;
+      }
+
+      &:-moz-placeholder { /* Firefox 18- */
+         color: #FFF;  
+      }
+
+      &::-moz-placeholder {  /* Firefox 19+ */
+         color: #FFF;  
+      }
+
+      &:-ms-input-placeholder {  
+         color: #FFF;  
+      }
+    }
+}
+
 
 .input-field i + input {
     margin-left: 22px;
@@ -376,7 +426,7 @@ html {
     -o-transition: width 800ms ease;
     transition: width 800ms ease;
 
-    background-color: #000;
+    background-color: #1E2D3A;
     width: 100%;
     margin: auto;
     position: absolute;
@@ -1238,3 +1288,6 @@ click-wave { 0% {
 /* ------------------------------------------------------ */
 /* ---------------- END RESPONSIVE CSS ---------------- */
 /* ------------------------------------------------------ */
+
+
+@import "grid";

@@ -86,11 +86,25 @@ MiitComponents.CreateTeam = React.createClass({
 
         return (
             <form className="miit-component create-team" onSubmit={this.handleSubmit}>
-                <div>
-                    <input type="text"     className={classes_email} placeholder={this.props.placeholder.email} ref="email" />
-                    <input type="text"     className={classes_team}  placeholder={this.props.placeholder.team}  ref="team" />
-                    <input type="checkbox" className={classes_terms} ref="terms" />
-                    <input type="submit" value={this.props.submit} />
+                <div className="wrapper">
+
+                    <div className="col1"></div>
+
+                    <div className="input-field col5 push0">
+                        <i className="fa fa-envelope-o"></i>
+                        <input type="text" className={classes_email} placeholder={this.props.placeholder.email} ref="email" />
+                    </div>
+
+                    <div className="col1"></div>
+
+                    <div className="input-field col5">
+                        <i className="fa fa-users"></i>
+                        <input type="text" className={classes_team}  placeholder={this.props.placeholder.team}  ref="team" />
+                    </div>
+
+                    <div className="col1"></div>
+
+                    <button type="submit" className="btn btn-dark mt5">{this.props.submit}</button>
                 </div>
             </form>
         );

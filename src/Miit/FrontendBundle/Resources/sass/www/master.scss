@@ -1,4 +1,48 @@
 // Test sass
+
+body, html {
+    height: 100%;
+}
+
 body {
     background-color: #f4f4f4;
+}
+
+.header {
+
+	.menu {
+		padding: 15px 0;
+
+		a {
+			line-height: 30px
+		}
+	}
+
+	.logo {
+		font-size: 1.8em;
+		font-weight: 100;
+		line-height: 30px;
+
+	 	img {
+			height: 30px;
+			float: left;
+			margin-right: 7px;
+		}
+	}
+
+	.banner {
+
+
+		h1 {
+			font-weight: 100;
+			font-size: 3em;
+		}
+
+		span {
+			max-width: 600px;
+			display: block;
+			line-height: 1.4em;
+		}
+	}
+
 }
