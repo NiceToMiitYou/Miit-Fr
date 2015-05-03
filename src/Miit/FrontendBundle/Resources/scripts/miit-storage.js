@@ -42,7 +42,11 @@ MiitApp.storage = (function(){
 
         this.getName = function() {
             return name;
-        }
+        };
+
+        this.getData = function() {
+            return internal;
+        };
     }
 
     var obj = {};
