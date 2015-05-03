@@ -21,15 +21,17 @@ use JMS\Serializer\SerializationContext;
 class TeamController extends Controller
 {
     /**
-     * @Route("/",
+     * @Route("/{nothing}",
      *      host="{team_slug}.{domain}",
      *      name="team_home",
      *      defaults={
-     *          "domain":    "%domain%"
+     *          "domain":    "%domain%",
+     *          "nothing":   ""
      *      },
      *      requirements={
      *          "domain":    "%domain%",
-     *          "team_slug": ".{4,}"
+     *          "team_slug": ".{4,}",
+     *          "nothing":   "[a-zA-Z0-9-+_/\s]+"
      *      }
      * )
      */

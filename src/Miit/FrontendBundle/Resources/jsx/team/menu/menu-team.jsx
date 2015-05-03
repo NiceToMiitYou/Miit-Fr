@@ -1,5 +1,7 @@
 MiitComponents.MenuTeam = React.createClass({
     render: function() {
+        var Link = MiitComponents.Link;
+
         return (
             <div className="sidr-left bg-blue-grey">
                 <div className="sl-wrapper">
@@ -15,10 +17,10 @@ MiitComponents.MenuTeam = React.createClass({
                     <MiitComponents.MenuLabel icon="fa-map-marker" label="Miits" />
 
                     <ul className="sl-list">
-                        <li><a className="active"><i className="fa fa-circle-thin pull-left stat-open"></i> Miit ouvert</a></li>
-                        <li><a><i className="fa fa-circle-thin pull-left stat-ready"></i> Miit prêt</a></li>
-                        <li><a><i className="fa fa-circle-thin pull-left stat-config"></i> Miit en configuration</a></li>
-                        <li><a><i className="fa fa-plus pull-left"></i> Créer un Miit</a></li>
+                        <li><Link href="#/test2/slug-test" className="active"><i className="fa fa-circle-thin pull-left stat-open"></i> Miit ouvert</Link></li>
+                        <li><Link href="#/test" ><i className="fa fa-circle-thin pull-left stat-ready"></i> Miit prêt</Link></li>
+                        <li><Link href="#/test2/plop"><i className="fa fa-circle-thin pull-left stat-config"></i> Miit en configuration</Link></li>
+                        <li><Link href="/test2/plop"><i className="fa fa-plus pull-left"></i> Créer un Miit</Link></li>
                     </ul>
 
                     <MiitComponents.MenuUserProfile />
