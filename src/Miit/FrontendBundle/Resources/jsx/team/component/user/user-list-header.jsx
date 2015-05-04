@@ -2,8 +2,9 @@ MiitComponents.UserListHeader = React.createClass({
     getDefaultProps: function() {
         return {
             text: {
-                avatar:   'Avatar',
+                avatar: 'Avatar',
                 name:   'Name',
+                email:  'Email'.
                 action: 'Action'
             }
         };
@@ -21,6 +22,7 @@ MiitComponents.UserListHeader = React.createClass({
             <div className="miit-component user-list-header">
                 <span>{this.props.text.avatar}</span>
                 <span>{this.props.text.name}</span>
+                <span>{this.props.text.email}</span>
                 {actionElement}
             </div>
         );
