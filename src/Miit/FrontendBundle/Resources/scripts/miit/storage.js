@@ -1,6 +1,5 @@
-MiitApp.storage = (function(){
-    "use strict";
-
+(function(){
+    // Database class
     function Database(name) {
         var timeoutId = {};
         var internal  = {};
@@ -49,13 +48,16 @@ MiitApp.storage = (function(){
         };
     }
 
-    var obj = {};
+    var MiitStorage = injector.resolve(
+        function() {
+            return {
+                create: function(name) {
+                    return new Database(name);
+                },
+                shared: new Database('shared')
+            };
+        }
+    );
 
-    obj['create'] = function(name) {
-        return new Database(name);
-    };
-
-    obj['shared'] = new Database('shared');
-
-    return obj;
+    injector.register('miit-storage', MiitStorage);
 })();
