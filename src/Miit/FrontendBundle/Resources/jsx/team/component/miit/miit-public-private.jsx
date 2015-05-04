@@ -63,7 +63,6 @@ MiitComponents.MiitPublicPrivate = React.createClass({
                     </div>
                 </If>
 
-                
                 <If test={!this.state.miit.public}>
                     <p className="mb10">{this.props.text.isPrivate}</p>
                 </If>
