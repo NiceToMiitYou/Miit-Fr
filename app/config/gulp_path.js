@@ -54,6 +54,7 @@ module.exports = {
         config.BOWER + 'react/react-with-addons.min.js',
         config.BOWER + 'director/build/director.min.js',
         config.BOWER + 'Chart.js/Chart.min.js',
+        config.BOWER + 'flux/dist/Flux.js',
         config.BOWER + 'ExplorerCanvas/excanvas.js'
     ],
     LIBS_DIST:           config.DIST + 'lib/'

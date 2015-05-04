@@ -20,6 +20,7 @@
     "es5-shim": "~4.1.0",
     "director": "~1.2.8",
     "ExplorerCanvas": "*",
-    "Chart.js": "~1.0.2"
+    "Chart.js": "~1.0.2",
+    "flux": "~2.0.2"
   }
 }
