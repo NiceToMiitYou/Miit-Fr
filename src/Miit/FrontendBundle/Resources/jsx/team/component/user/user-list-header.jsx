@@ -4,7 +4,7 @@ MiitComponents.UserListHeader = React.createClass({
             text: {
                 avatar: 'Avatar',
                 name:   'Name',
-                email:  'Email'.
+                email:  'Email',
                 action: 'Action'
             }
         };
