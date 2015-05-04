@@ -20,7 +20,6 @@ MiitComponents.UserProfile = React.createClass({
     },
 
     onEnter: function() {
-
         this.setState({
             open: !this.state.open
         });
