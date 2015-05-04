@@ -52,7 +52,9 @@ module.exports = {
         config.BOWER + 'es5-shim/es5-shim.min.js',
         config.BOWER + 'es5-shim/es5-shim.map',
         config.BOWER + 'react/react-with-addons.min.js',
-        config.BOWER + 'director/build/director.min.js'
+        config.BOWER + 'director/build/director.min.js',
+        config.BOWER + 'Chart.js/Chart.min.js',
+        config.BOWER + 'ExplorerCanvas/excanvas.js'
     ],
     LIBS_DIST:           config.DIST + 'lib/'
 };
