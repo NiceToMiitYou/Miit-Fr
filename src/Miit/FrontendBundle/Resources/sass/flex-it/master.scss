@@ -121,6 +121,21 @@ html {
     font-weight: 400;
 }
 
+.page-content .panel h3 {
+  font-size: 1.15em;
+  line-height: 1em;
+  font-weight: bold;
+  border-bottom: 1px solid #E8E8E8;
+  padding-bottom: 10px;
+}
+
+.page-content .miit-title-edit {
+    color: #20BDD0;
+    font-size: 0.6em;
+    vertical-align: middle;
+    margin-left: 4px;
+}
+
 .page-content p {
     font-size: .9em
 }
@@ -281,6 +296,7 @@ html {
     display: block;
     line-height: 2.7em;
     font-weight: 300;
+    text-decoration: none;
     padding-left: 15px;
     position: relative;
     -webkit-transition: background-color 500ms ease;
@@ -324,8 +340,6 @@ html {
 
 .sidr-left .sl-footer span {
     line-height: 40px;
-    display: block;
-    
 }
 
 .sidr-left .sl-footer .avatar {
@@ -639,6 +653,11 @@ click-wave { 0% {
 /* line 47, ../sass/_buttons.scss */
 .btn.btn-link:before, .btn:active:before, .btn.active:before, .btn.disabled:before, .btn[disabled]:before, fieldset[disabled] .btn:before {
   opacity: 0;
+}
+
+.btn.disabled, .btn[disabled], fieldset[disabled] .btn {
+  background-color: #E8E8E8!important;
+  cursor: default!important;
 }
 /* line 55, ../sass/_buttons.scss */
 .btn.btn-primary {

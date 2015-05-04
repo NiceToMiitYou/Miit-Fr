@@ -97,17 +97,26 @@ MiitComponents.UserListItemRoles = React.createClass({
             disable: !IAmAdmin || userIsMe || userIsAdmin
         });
 
+
         return (
             <span className="miit-component user-list-item-roles">
-                <span onClick={this.handleClick.bind(this, 'USER')}   className={user_active} >
-                    {this.props.text.user}
-                </span>
-                <span onClick={this.handleClick.bind(this, 'ADMIN')}  className={admin_active}>
-                    {this.props.text.admin}
-                </span>
-                <span onClick={this.handleClick.bind(this, 'REMOVE')} className={remove_active}>
-                    {this.props.text.remove}
-                </span>
+                <div className="checkbox-field pull-left" onClick={this.handleClick.bind(this, 'USER')} >
+                    <label>
+                        <input type="checkbox" className="option-input checkbox" checked={userIsUser}/>
+                        {this.props.text.user}
+                    </label>
+                </div>
+
+                <div className="checkbox-field pull-left ml20" onClick={this.handleClick.bind(this, 'ADMIN')} >
+                    <label>
+                        <input type="checkbox" className="option-input checkbox" checked={userIsAdmin}/>
+                        {this.props.text.admin}
+                    </label>
+                </div>
+
+                <button onClick={this.handleClick.bind(this, 'REMOVE')} className='btn btn-danger ml20' disabled={remove_active}>
+                    <i className="fa fa-trash-o"></i>
+                </button>
             </span>
         );
     }
