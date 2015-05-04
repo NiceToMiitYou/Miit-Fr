@@ -323,7 +323,7 @@ html {
     font-size: 1em;
 }
 
-.sidr-left .sl-footer  span {
+.sidr-left .sl-footer span {
     line-height: 40px;
 }
 
@@ -638,6 +638,11 @@ click-wave { 0% {
 /* line 47, ../sass/_buttons.scss */
 .btn.btn-link:before, .btn:active:before, .btn.active:before, .btn.disabled:before, .btn[disabled]:before, fieldset[disabled] .btn:before {
   opacity: 0;
+}
+
+.btn.disabled, .btn[disabled], fieldset[disabled] .btn {
+  background-color: #E8E8E8!important;
+  cursor: default!important;
 }
 /* line 55, ../sass/_buttons.scss */
 .btn.btn-primary {
