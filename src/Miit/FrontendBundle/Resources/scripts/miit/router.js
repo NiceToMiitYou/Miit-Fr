@@ -2,11 +2,11 @@
     var MiitRouter = injector.resolve(
         ['miit-storage'],
         function(MiitStorage) {
-            var router, routes;
+            var router, routes = MiitStorage.create('routes');
             
             return {
                 init: function() {
-                    router = Router(this.routes().getData());
+                    router = Router(routes.getData());
 
                     router.configure({
                         html5history: true,
@@ -17,10 +17,7 @@
                     router.init();
                 },
 
-                routes: function() {
-                    routes = routes || MiitStorage.create('routes');
-                    return routes;
-                },
+                routes: routes,
 
                 setRoute: function(path) {
                     if(router) {
