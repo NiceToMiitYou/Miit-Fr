@@ -49,38 +49,9 @@ MiitComponents.MiitTeamContent = React.createClass({
                 <div className="panel" >
                     <h2 className="panel-title"><i className="fa fa-lock pull-left "></i> Accès</h2>
                     <div className="panel-content">
-                        <div className="mb30">
-                            <div className="checkbox-field mb20 ">
-                                <label>
-                                    <input type="radio" name="confid" className="option-input radio" defaultChecked={true} />
-                                    Publique
-                                </label>
-                            </div>
-                            <p className="mb10">Votre Miit est publique et accessible a tout le monde via l URL :</p>
-                            <div className="row">
-                                <div className="col8 col16-md">
-                                    <div className="input-field left-icon">
-                                        <i className="fa fa-link"></i>
-                                        <input value="https://sncf.miit.fr/XBM56T" type="text" disabled />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="checkbox-field mb20">
-                            <label>
-                                <input type="radio" name="confid" className="option-input radio" />
-                                Privé
-                            </label>
-                        </div>
-
-                        <p className="mb10">Votre Miit est privé et ne sera accessible qu{"'"}aux personnes de votre choix</p>
-
-                        <div>
-                            <MiitComponents.UserList autoload={true} />
-                        </div>
-
+                        <MiitComponents.UserList autoload={true} />
                         
+                        <MiitComponents.MiitPublicPrivate />                     
                     </div>
                 </div>
                 
