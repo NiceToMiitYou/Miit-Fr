@@ -26,11 +26,7 @@ MiitComponents.UserProfile = React.createClass({
     },
 
     render: function() {
-        var user = this.props.user;
-
-        if(!this.props.user) {
-            user = MiitApp.storage.shared.get('user');
-        }
+        var user = MiitApp.storage.shared.get('user');
 
         return (
             <span className="miit-component user-profile">
@@ -40,6 +36,7 @@ MiitComponents.UserProfile = React.createClass({
                 <span onMouseLeave={this.onLeave} onClick={this.onEnter}>
                     { user.name }
                     <i className="fa fa-angle-up pull-right"></i>
+                    
                     <If test={this.state.open}>
                         <div className="dropdown-profile">
                             <Link href="/logout" external={true}>
