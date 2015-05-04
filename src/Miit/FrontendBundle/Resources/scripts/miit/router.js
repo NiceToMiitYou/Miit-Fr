@@ -6,7 +6,7 @@
             
             return {
                 init: function() {
-                    router = Router(routes.getData());
+                    router = Router(this.routes().getData());
 
                     router.configure({
                         html5history: true,
