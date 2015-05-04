@@ -92,12 +92,12 @@ MiitComponents.UserListInvite = React.createClass({
             <div className="miit-component user-list-invite mt20">
                 <form onSubmit={this.handleSubmit}>
 
-                    <div className="input-field left-icon col5">
+                    <div className="input-field left-icon col7 col16-sm">
                         <i className="fa fa-user-plus"></i>
                         <input type="text" className={classes_invalid} placeholder={this.props.placeholder.email} valueLink={valueLinkEmail} />
                     </div>
-                        <button type="submit" className="btn btn-info btn-large ml15">{this.props.submit}</button>
 
+                    <button type="submit" className="btn btn-info btn-large ml15">{this.props.submit}</button>
                 </form>
             </div>
         );
