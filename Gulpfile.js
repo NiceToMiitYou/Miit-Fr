@@ -2,6 +2,7 @@ var gulp       = require('gulp');
 var bower      = require('gulp-bower');
 var clean      = require('gulp-clean');
 var concat     = require('gulp-concat');
+var jshint     = require('gulp-jshint');
 var minify     = require('gulp-minify-css');
 var sass       = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
@@ -10,7 +11,6 @@ var rename     = require('gulp-rename');
 var gutil      = require('gulp-util');
 var uglify     = require('gulp-uglify');
 var wrap       = require('gulp-wrap');
-
 
 // Load the configuration
 var config = require('./app/config/gulp_config.js');
@@ -109,6 +109,10 @@ gulp.task('concat-uglify', ['clean', 'compile-jsx'], function() {
 
     // Uglify all scripts
     gulp.src( all )
+        // JSHint all files
+        .pipe(jshint())
+        .pipe(jshint.reporter('default'))
+
         // Source map init
         .pipe(sourcemaps.init())
 

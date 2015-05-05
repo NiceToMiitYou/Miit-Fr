@@ -8,7 +8,9 @@
   },
   "author": "Tacyniak Boris <boris.tacyniak@itevents.fr>",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "gulp-jshint": "^1.10.0"
+  },
   "devDependencies": {
     "gulp": "^3.8.11",
     "gulp-bower": "0.0.10",
