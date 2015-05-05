@@ -14,9 +14,9 @@ MiitComponents.UserChangePassword = React.createClass({
 
         var initial = this.getDefaultErrors();
 
-        initial['value_old']    = '';
-        initial['value_first']  = '';
-        initial['value_second'] = '';
+        initial.value_old    = '';
+        initial.value_first  = '';
+        initial.value_second = '';
 
         return initial;
     },

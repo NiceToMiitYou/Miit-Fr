@@ -3,7 +3,7 @@ window.MiitApp = (function() {
         ['miit-utils', 'miit-storage', 'miit-router', 'miit-applications', 'miit-requests'],
         function(MiitUtils, MiitStorage, MiitRouter, MiitApplications, MiitRequests) {
             var VERSION   = '0.0.0';
-            var COPYRIGTH = 'All rigths reserved to ITEvents.'
+            var COPYRIGTH = 'All rigths reserved to ITEvents.';
 
             // Initiliaze all application
             MiitApplications.init();

@@ -29,7 +29,7 @@
                     user = MiitApp.storage.shared.get('user');
                 }
 
-                return user.roles.indexOf(role) >= 0
+                return user.roles.indexOf(role) >= 0;
             };
         };
 
@@ -47,16 +47,16 @@
 
         // get the list of HttpRequestHandlers
         var XMLHttpFactories = [
-            function () {return new XMLHttpRequest()},
-            function () {return new ActiveXObject('Msxml2.XMLHTTP')},
-            function () {return new ActiveXObject('Msxml3.XMLHTTP')},
-            function () {return new ActiveXObject('Microsoft.XMLHTTP')}
+            function () {return new XMLHttpRequest();},
+            function () {return new ActiveXObject('Msxml2.XMLHTTP');},
+            function () {return new ActiveXObject('Msxml3.XMLHTTP');},
+            function () {return new ActiveXObject('Microsoft.XMLHTTP');}
         ];
 
         // Generator of HttpRequestHandler
         function createXMLHTTPObject() {
             var xmlhttp = false;
-            for (var i=0;i<XMLHttpFactories.length;i++) {
+            for (var i = 0; i < XMLHttpFactories.length; i++) {
                 try {
                     xmlhttp = XMLHttpFactories[i]();
                 }
@@ -107,7 +107,7 @@
             if (req.readyState == 4) return;
 
             req.send(JSON.stringify(postData));
-        }
+        };
 
         // Get CRSF token to validate Form.
         var getCrsf = function(intention, cb) {
@@ -126,7 +126,7 @@
                     cb(data.token);
                 }
             });
-        }
+        };
 
         // Return the public object
         return {

@@ -40,7 +40,7 @@ var injector = (function() {
                         instances[d] = dependencies[d]();
                     }
 
-                    args.push(instances[d] && d != '' ? instances[d] : a.shift());
+                    args.push(instances[d] && d !== '' ? instances[d] : a.shift());
                 }
 
                 return func.apply(scope || {}, args);

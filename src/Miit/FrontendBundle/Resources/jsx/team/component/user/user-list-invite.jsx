@@ -11,7 +11,7 @@ MiitComponents.UserListInvite = React.createClass({
     getInitialState: function() {
         var initial = this.getDefaultErrors();
 
-        initial['email'] = '';
+        initial.email = '';
 
         return initial;
     },

@@ -10,7 +10,7 @@
                 }
                 onReady();
             }
-        }
+        };
     }
 
     var MiitApplications = injector.resolve(
