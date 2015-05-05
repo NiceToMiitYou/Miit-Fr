@@ -44,9 +44,13 @@
                 },
 
                 init: function() {
-                    applications.forEach(function(app){
-                        app.configure();
-                    });
+                    if(applications.length === 0) {
+                        onReady();
+                    } else {
+                        applications.forEach(function(app){
+                            app.configure();
+                        });
+                    }
                 }
             };
         }

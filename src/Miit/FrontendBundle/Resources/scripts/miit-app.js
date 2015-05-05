@@ -1,12 +1,12 @@
 window.MiitApp = (function() {
     var MiitApp = injector.resolve(
-        ['miit-utils', 'miit-storage', 'miit-router', 'miit-request'],
-        function(MiitUtils, MiitStorage, MiitRouter, MiitRequest) {
+        ['miit-utils', 'miit-storage', 'miit-router', 'miit-applications', 'miit-request'],
+        function(MiitUtils, MiitStorage, MiitRouter, MiitApplications, MiitRequest) {
             var VERSION   = '0.0.0';
             var COPYRIGTH = 'All rigths reserved to ITEvents.'
 
-            // Initiliaze the router
-            MiitRouter.init();
+            // Initiliaze all application
+            MiitApplications.init();
 
             return {
                 COPYRIGTH: COPYRIGTH,
