@@ -1,4 +1,4 @@
-(function(React){
+(function(React, Flux, Router){
 window.MiitComponents = {};
 <%= contents %>
-})(React);
+})(React, Flux, Router);
