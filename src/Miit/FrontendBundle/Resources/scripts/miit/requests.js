@@ -1,6 +1,6 @@
 (function(){
-    var MiitRequest = injector.resolve(
-        ['miit-user', 'miit-team'],
+    var MiitRequests = injector.resolve(
+        ['miit-user-request', 'miit-team-request'],
         function(MiitUser, MiitTeam) {
             return {
                 user: MiitUser,
@@ -9,5 +9,5 @@
         }
     );
 
-    injector.register('miit-request', MiitRequest);
+    injector.register('miit-requests', MiitRequests);
 })();

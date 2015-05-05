@@ -24,5 +24,5 @@
         }
     );
 
-    injector.register('miit-team', MiitTeam);
+    injector.register('miit-team-request', MiitTeam);
 })();

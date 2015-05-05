@@ -57,7 +57,7 @@ MiitComponents.UserListInvite = React.createClass({
             return;
         }
 
-        MiitApp.request.team.invite(email, function(data) {
+        MiitApp.requests.team.invite(email, function(data) {
             this.setState({
                 email: ''
             });

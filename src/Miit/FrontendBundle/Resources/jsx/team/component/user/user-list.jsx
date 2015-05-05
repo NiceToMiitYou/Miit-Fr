@@ -16,7 +16,7 @@ MiitComponents.UserList = React.createClass({
     refresh: function() {
         if(this.props.autoload && !this.state.loaded ) {
 
-            MiitApp.request.team.users(function(data){
+            MiitApp.requests.team.users(function(data){
 
                 this.props.users = data;
 

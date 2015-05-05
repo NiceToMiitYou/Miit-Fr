@@ -36,7 +36,7 @@ MiitComponents.UserListItemRoles = React.createClass({
             action = 'demote';
         }
 
-        MiitApp.request.user[action](this.props.user.id, [role], this.onAction);
+        MiitApp.requests.user[action](this.props.user.id, [role], this.onAction);
     },
 
     handleClick: function(action, e) {
@@ -70,7 +70,7 @@ MiitComponents.UserListItemRoles = React.createClass({
                 break;
 
             case 'REMOVE':
-                MiitApp.request.user.remove(this.props.user.id, this.onAction);
+                MiitApp.requests.user.remove(this.props.user.id, this.onAction);
                 break;
         }
     },

@@ -88,7 +88,7 @@ MiitComponents.UserChangePassword = React.createClass({
             return;
         }
 
-        MiitApp.request.user.change_password(old, first, function(data) {
+        MiitApp.requests.user.change_password(old, first, function(data) {
 
             // Reset value
             this.setState({

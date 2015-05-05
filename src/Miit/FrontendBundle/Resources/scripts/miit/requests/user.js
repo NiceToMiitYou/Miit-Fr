@@ -83,5 +83,5 @@
         }
     );
 
-    injector.register('miit-user', MiitUser);
+    injector.register('miit-user-request', MiitUser);
 })();
