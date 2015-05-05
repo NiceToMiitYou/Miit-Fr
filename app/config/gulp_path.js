@@ -44,6 +44,7 @@ module.exports = {
     // Libs of the scripts
     SCRIPTS_ALL: [
         config.FRONTEND_RESOURCES + 'scripts/lib/injector.js',
+        config.FRONTEND_RESOURCES + 'scripts/lib/event-emitter.js',
         config.FRONTEND_RESOURCES + 'scripts/lib/**/*.js',
         config.FRONTEND_RESOURCES + 'scripts/constants/**/*.js',
         config.FRONTEND_RESOURCES + 'scripts/miit/**/*.js',
