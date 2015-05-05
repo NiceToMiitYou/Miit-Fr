@@ -7,22 +7,24 @@
         return Object(val);
     }
 
-    var ObjectAssign = Object.assign || function (target, source) {
-        var from;
-        var keys;
-        var to = ToObject(target);
+    var ObjectAssign = injector.resolve([], function() {
+        return Object.assign || function (target, source) {
+            var from;
+            var keys;
+            var to = ToObject(target);
 
-        for (var s = 1; s < arguments.length; s++) {
-            from = arguments[s];
-            keys = Object.keys(Object(from));
+            for (var s = 1; s < arguments.length; s++) {
+                from = arguments[s];
+                keys = Object.keys(Object(from));
 
-            for (var i = 0; i < keys.length; i++) {
-                to[keys[i]] = from[keys[i]];
+                for (var i = 0; i < keys.length; i++) {
+                    to[keys[i]] = from[keys[i]];
+                }
             }
-        }
 
-        return to;
-    };
+            return to;
+        };
+    });
 
     injector.register('object-assign', ObjectAssign);
 })();
