@@ -24,5 +24,5 @@
         return to;
     };
 
-    injector.register('object-assign', keyMirror);
+    injector.register('object-assign', ObjectAssign);
 })();
