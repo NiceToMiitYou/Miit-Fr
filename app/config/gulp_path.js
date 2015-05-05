@@ -46,7 +46,7 @@ module.exports = {
         config.FRONTEND_RESOURCES + 'scripts/lib/injector.js',
         config.FRONTEND_RESOURCES + 'scripts/lib/event-emitter.js',
         config.FRONTEND_RESOURCES + 'scripts/lib/**/*.js',
-        config.FRONTEND_RESOURCES + 'scripts/constants/**/*.js',
+        config.FRONTEND_RESOURCES + 'scripts/miit/constants/**/*.js',
         config.FRONTEND_RESOURCES + 'scripts/miit/**/*.js',
         config.APPS_RESOURCES     + 'scripts/**/*.js',
         config.FRONTEND_RESOURCES + 'scripts/miit-app.js'
