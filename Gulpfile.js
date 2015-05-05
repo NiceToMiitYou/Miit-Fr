@@ -107,11 +107,15 @@ gulp.task('concat-uglify', ['clean', 'compile-jsx'], function() {
 
     all.push(path.JSX_DIST_ALL);
 
-    // Uglify all scripts
-    gulp.src( all )
-        // JSHint all files
+    // JSHint all scripts
+    gulp.src(all)
+        // JSHint
         .pipe(jshint())
-        .pipe(jshint.reporter('default'))
+        // Report all errors
+        .pipe(jshint.reporter('default'));
+
+    // Uglify all scripts
+    gulp.src(all)
 
         // Source map init
         .pipe(sourcemaps.init())
