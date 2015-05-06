@@ -15,7 +15,9 @@ var Link = React.createClass({
 
     render: function() {
         return (
-            <a{...this.props} onClick={this.onClick}>{this.props.children}</a>
+            <a {...this.props} onClick={this.onClick}>
+                {this.props.children}
+            </a>
         );
     }
 });

@@ -20,7 +20,7 @@
             var user = Storage.shared.get('user');
 
             return (
-                <a className="sl-footer miit-component user-profile">
+                <span className="sl-footer miit-component user-profile">
                     <div className="avatar">
                         <MiitComponents.UserAvatar user={user} />
                     </div>
@@ -29,7 +29,7 @@
                             {this.props.text.logout}
                         </Link> 
                     </Dropdown>
-                </a>
+                </span>
             );
         }
     });

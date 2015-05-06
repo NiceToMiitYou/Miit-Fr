@@ -7,7 +7,7 @@ var Dropdown = React.createClass({
 
     getInitialState: function () {
         return {
-            open: false  
+            open: false
         };
     },
 
@@ -24,9 +24,7 @@ var Dropdown = React.createClass({
     },
 
     render: function() {
-        var cx = React.addons.classSet;
-
-        var classes = cx('fa', 'fa-angle-' + this.props.angle, 'pull-right');
+        var classes = classNames('fa', 'fa-angle-' + this.props.angle, 'pull-right');
 
         return (
             <span onMouseLeave={this.onLeave} onClick={this.onEnter} className="miit-component dropdown">
