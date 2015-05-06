@@ -31,9 +31,9 @@ var Dropdown = React.createClass({
                 <If test={this.props.label}>
                     <span className="dropdown-label">
                         {this.props.label}
+                        <i className={classes}></i>
                     </span>
                 </If>
-                <i className={classes}></i>
 
                 <If test={this.state.open}>
                     <div className="dropdown-inner">
