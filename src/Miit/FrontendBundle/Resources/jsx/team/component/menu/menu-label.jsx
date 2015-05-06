@@ -1,9 +1,7 @@
 (function(){
     MiitComponents.MenuLabel = React.createClass({
         render: function() {
-            var cx = React.addons.classSet;
-            
-            var classes = cx('pull-left', 'fa', this.props.icon || '');
+            var classes = classNames('pull-left', 'fa', this.props.icon || '');
             
             return (
                 <span className="miit-component menu-label sl-label">

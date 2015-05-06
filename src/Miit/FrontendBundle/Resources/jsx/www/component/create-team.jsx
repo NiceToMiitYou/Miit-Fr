@@ -77,14 +77,12 @@
         },
 
         render: function() {
-            var cx = React.addons.classSet;
-
-            var classes_email = cx({
+            var classes_email = classNames({
                 'invalid': this.state.missing_email ||
                            this.state.invalid_email
             });
 
-            var classes_team = cx({
+            var classes_team = classNames({
                 'invalid':  this.state.missing_team ||
                             this.state.invalid_team
             });

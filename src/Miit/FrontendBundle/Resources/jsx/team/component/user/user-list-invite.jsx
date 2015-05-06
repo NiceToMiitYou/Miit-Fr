@@ -88,9 +88,7 @@
                 return null;
             }
 
-            var cx = React.addons.classSet;
-
-            var classes_invalid = cx({
+            var classes_invalid = classNames({
                 'invalid': this.state.missing_email ||
                            this.state.invalid_email
             });

@@ -12,7 +12,8 @@
 
         getInitialState: function() {
             return {
-                loaded: false
+                loaded: false,
+                users:  this.props.users
             };
         },
 
@@ -27,10 +28,9 @@
 
                 TeamRequest.users(function(data){
 
-                    this.props.users = data;
-
                     this.setState({
-                        loaded: true
+                        loaded: true,
+                        users: data
                     });
                 }.bind(this));
             }
@@ -54,8 +54,8 @@
             return (
                 <div className="miit-component user-list">
                     <MiitComponents.UserListHeader />
-                    {this.props.users.map(function(user) {
-                        return <MiitComponents.UserListItem user={user} onEdit={this.allowRefresh} />;
+                    {this.state.users.map(function(user) {
+                        return <MiitComponents.UserListItem key={user.id} user={user} onEdit={this.allowRefresh} />;
                     }.bind(this))}
                     {loadingElement}
                     <MiitComponents.UserListInvite onInvite={this.allowRefresh} />
