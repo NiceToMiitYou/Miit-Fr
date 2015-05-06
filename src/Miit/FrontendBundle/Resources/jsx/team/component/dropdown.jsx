@@ -12,6 +12,7 @@ var Dropdown = React.createClass({
     getInitialState: function () {
         return {
             open: false
+
         };
     },
 
@@ -28,13 +29,13 @@ var Dropdown = React.createClass({
     },
 
     render: function() {
-        var classes = classNames('fa', 'fa-angle-' + this.props.angle, 'pull-right');
-
+        var clIcon = classNames('fa', 'fa-angle-' + this.props.angle, 'pull-right');
+        var clDropdown = classNames('miit-component', 'dropdown', {open:this.state.open, close:this.state.open});
         return (
-            <span onMouseLeave={this.onLeave} onClick={this.onEnter} className="miit-component dropdown">
+            <span onMouseLeave={this.onLeave} onClick={this.onEnter} className={clDropdown}>
                 <span className="dropdown-label">
                     {this.props.label}
-                    <i className={classes}></i>
+                    <i className={clIcon}></i>
                 </span>
                 
                 <If test={this.state.open}>
