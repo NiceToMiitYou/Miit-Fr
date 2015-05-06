@@ -1,5 +1,9 @@
 var Dropdown = React.createClass({
-   getDefaultProps: function() {
+    propTypes: {
+        label: React.PropTypes.string.isRequired
+    },
+
+    getDefaultProps: function() {
         return {
             angle: 'down'
         };
@@ -28,13 +32,11 @@ var Dropdown = React.createClass({
 
         return (
             <span onMouseLeave={this.onLeave} onClick={this.onEnter} className="miit-component dropdown">
-                <If test={this.props.label}>
-                    <span className="dropdown-label">
-                        {this.props.label}
-                        <i className={classes}></i>
-                    </span>
-                </If>
-
+                <span className="dropdown-label">
+                    {this.props.label}
+                    <i className={classes}></i>
+                </span>
+                
                 <If test={this.state.open}>
                     <div className="dropdown-inner">
                         {this.props.children}
