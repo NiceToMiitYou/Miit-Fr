@@ -330,15 +330,14 @@ html {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 210px;
+    width: 100%;
     color: #FFF;
     display: block;
     font-weight: 100;
-    padding: 15px 20px;
     font-size: 1em;
 }
 
-.sidr-left .sl-footer span {
+.sidr-left .sl-footer > span {
     line-height: 40px;
 }
 
@@ -347,7 +346,14 @@ html {
     overflow: hidden;
     height: 40px;
     float: left;
-    margin-right: 12px;
+    padding: 15px;
+}
+
+.sidr-left .sl-footer .dropdown-label {
+  display: block;
+  z-index: 9;
+  position: relative;
+  padding: 15px 20px;
 }
 
 .sidr-left .sl-footer .avatar img {
@@ -1242,7 +1248,6 @@ click-wave { 0% {
     .sidr-left .sl-footer span {
         line-height: 40px;
         display: block;
-        
     }
 
     .sidr-left .sl-footer .avatar {

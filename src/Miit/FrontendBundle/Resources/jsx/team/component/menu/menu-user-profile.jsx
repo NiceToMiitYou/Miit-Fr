@@ -25,9 +25,14 @@
                         <MiitComponents.UserAvatar user={user} />
                     </div>
                     <Dropdown label={ user.name } angle="up">
-                        <Link href="/logout" external={true}>
-                            {this.props.text.logout}
-                        </Link> 
+                        <ul className="sl-list">
+                            <li>
+                                <Link href="/logout" external={true}>
+                                    <i className="fa fa-sign-out"></i>
+                                    {this.props.text.logout}
+                                </Link> 
+                            </li> 
+                        </ul>
                     </Dropdown>
                 </a>
             );
