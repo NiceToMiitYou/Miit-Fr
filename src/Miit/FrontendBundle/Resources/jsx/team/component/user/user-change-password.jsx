@@ -113,23 +113,21 @@
         },
 
         render: function() {
-            var cx = React.addons.classSet;
-
             var value_old      = this.state.value_old;
-            var classes_old    = cx({
+            var classes_old    = classNames({
                 'invalid': this.state.missing_old ||
                            this.state.invalid_old
             });
 
             var value_first    = this.state.value_first;
-            var classes_first  = cx({
+            var classes_first  = classNames({
                 'invalid': this.state.missing_first ||
                            this.state.invalid_same  ||
                            this.state.invalid_format
             });
 
             var value_second   = this.state.value_second;
-            var classes_second = cx({
+            var classes_second = classNames({
                 'invalid': this.state.missing_second ||
                            this.state.invalid_repeated
             });

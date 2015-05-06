@@ -88,24 +88,22 @@
         },
 
         render: function() {
-            var cx = React.addons.classSet;
-
             var IAmAdmin    = Utils.user.isAdmin();
             var userIsAdmin = Utils.user.isAdmin(this.props.user);
             var userIsUser  = Utils.user.isUser(this.props.user);
             var userIsMe    = Utils.user.isItMe(this.props.user);
 
-            var user_active = cx({
+            var user_active = classNames({
                 disable: !IAmAdmin || userIsMe || userIsAdmin,
                 active:  userIsUser
             });
 
-            var admin_active = cx({
+            var admin_active = classNames({
                 disable: !IAmAdmin || userIsMe,
                 active:  userIsAdmin
             });
 
-            var remove_active = cx({
+            var remove_active = classNames({
                 disable: !IAmAdmin || userIsMe || userIsAdmin
             });
 
@@ -113,14 +111,14 @@
                 <span className="miit-component user-list-item-roles">
                     <div className="checkbox-field pull-left" onClick={this.handleClick.bind(this, 'USER')} >
                         <label>
-                            <input type="checkbox" className="option-input checkbox" checked={userIsUser}/>
+                            <input type="checkbox" className="option-input checkbox" checked={userIsUser} readOnly/>
                             {this.props.text.user}
                         </label>
                     </div>
 
                     <div className="checkbox-field pull-left ml20" onClick={this.handleClick.bind(this, 'ADMIN')} >
                         <label>
-                            <input type="checkbox" className="option-input checkbox" checked={userIsAdmin}/>
+                            <input type="checkbox" className="option-input checkbox" checked={userIsAdmin} readOnly/>
                             {this.props.text.admin}
                         </label>
                     </div>
