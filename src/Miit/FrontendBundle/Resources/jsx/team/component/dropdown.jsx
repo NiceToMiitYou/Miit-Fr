@@ -12,7 +12,6 @@ var Dropdown = React.createClass({
     getInitialState: function () {
         return {
             open: false
-
         };
     },
 
