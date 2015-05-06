@@ -1,17 +1,27 @@
-MiitComponents.UserAvatar = React.createClass({
-    render: function() {
-        var user = this.props.user;
+(function(){
+    var Storage;
 
-        if(!this.props.user) {
-            user = MiitApp.storage.shared.get('user') || {
-                avatar: '/img/logo-miit-light.png'
-            };
+    MiitComponents.UserAvatar = React.createClass({
+        componentWillMount: function() {
+            if(!Storage) {
+                Storage = MiitApp.get('miit-storage');
+            }
+        },
+
+        render: function() {
+            var user = this.props.user;
+
+            if(!user) {
+                user = Storage.shared.get('user') || {
+                    avatar: '/img/logo-miit-light.png'
+                };
+            }
+
+            return (
+                <span className="miit-component user-avatar">
+                    <img src={user.avatar} {...this.props} />
+                </span>
+            );
         }
-
-        return (
-            <span className="miit-component user-avatar">
-                <img src={user.avatar} {...this.props} />
-            </span>
-        );
-    }
-});
+    });
+})();

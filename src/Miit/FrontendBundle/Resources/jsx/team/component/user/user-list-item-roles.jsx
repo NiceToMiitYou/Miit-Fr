@@ -1,123 +1,135 @@
-MiitComponents.UserListItemRoles = React.createClass({
-    getDefaultProps: function() {
-        return {
-            text: {
-                admin:  MiitTranslator.get('user-list.actions.admin', 'team'),
-                user:   MiitTranslator.get('user-list.actions.user', 'team'),
-                remove: MiitTranslator.get('user-list.actions.remove', 'team')
-            },
-            user: {
-                id:    '',
-                roles: []
+(function() {
+    var Utils, UserRequest;
+
+    MiitComponents.UserListItemRoles = React.createClass({
+        getDefaultProps: function() {
+            return {
+                text: {
+                    admin:  MiitTranslator.get('user-list.actions.admin', 'team'),
+                    user:   MiitTranslator.get('user-list.actions.user', 'team'),
+                    remove: MiitTranslator.get('user-list.actions.remove', 'team')
+                },
+                user: {
+                    id:    '',
+                    roles: []
+                }
+            };
+        },
+
+        getInitialState: function() {
+            return {
+                loading: false
+            };
+        },
+
+        componentWillMount: function() {
+            if(!Utils) {
+                Utils = MiitApp.get('miit-utils');
             }
-        };
-    },
+            if(!UserRequest) {
+                UserRequest = MiitApp.get('miit-user-request');
+            }
+        },
 
-    getInitialState: function() {
-        return {
-            loading: false
-        };
-    },
+        onAction: function(data) {
+            this.setState({
+                loading: false
+            });
 
-    onAction: function(data) {
-        this.setState({
-            loading: false
-        });
+            if(typeof this.props.onAction === 'function') {
+                this.props.onAction();
+            }
+        },
 
-        if(typeof this.props.onAction === 'function') {
-            this.props.onAction();
+        toggleRole: function(role, cb) {
+            var action = 'promote';
+
+            if(this.props.user.roles.indexOf(role) >= 0) {
+                action = 'demote';
+            }
+
+            UserRequest[action](this.props.user.id, [role], this.onAction);
+        },
+
+        handleClick: function(action, e) {
+            e.preventDefault();
+
+            // Don't load twice
+            if(this.state.loading)
+                return;
+
+            var IAmAdmin    = Utils.user.isAdmin();
+            var userIsOwner = Utils.user.isOwner(this.props.user);
+            var userIsAdmin = Utils.user.isAdmin(this.props.user);
+            var userIsMe    = Utils.user.isItMe(this.props.user);
+
+            // Check if I am an admin and not myself or an owner
+            if(!IAmAdmin || userIsMe || userIsOwner)
+                return;
+
+            // Check if I want to remove an admin
+            if(action === 'REMOVE' && userIsAdmin)
+                return;
+
+            this.setState({
+                loading: true
+            });
+
+            switch(action) {
+                case 'ADMIN':
+                case 'USER':
+                    this.toggleRole(action);
+                    break;
+
+                case 'REMOVE':
+                    UserRequest.remove(this.props.user.id, this.onAction);
+                    break;
+            }
+        },
+
+        render: function() {
+            var cx = React.addons.classSet;
+
+            var IAmAdmin    = Utils.user.isAdmin();
+            var userIsAdmin = Utils.user.isAdmin(this.props.user);
+            var userIsUser  = Utils.user.isUser(this.props.user);
+            var userIsMe    = Utils.user.isItMe(this.props.user);
+
+            var user_active = cx({
+                disable: !IAmAdmin || userIsMe || userIsAdmin,
+                active:  userIsUser
+            });
+
+            var admin_active = cx({
+                disable: !IAmAdmin || userIsMe,
+                active:  userIsAdmin
+            });
+
+            var remove_active = cx({
+                disable: !IAmAdmin || userIsMe || userIsAdmin
+            });
+
+            return (
+                <span className="miit-component user-list-item-roles">
+                    <div className="checkbox-field pull-left" onClick={this.handleClick.bind(this, 'USER')} >
+                        <label>
+                            <input type="checkbox" className="option-input checkbox" checked={userIsUser}/>
+                            {this.props.text.user}
+                        </label>
+                    </div>
+
+                    <div className="checkbox-field pull-left ml20" onClick={this.handleClick.bind(this, 'ADMIN')} >
+                        <label>
+                            <input type="checkbox" className="option-input checkbox" checked={userIsAdmin}/>
+                            {this.props.text.admin}
+                        </label>
+                    </div>
+
+                    <button onClick={this.handleClick.bind(this, 'REMOVE')} className='btn btn-danger ml20' disabled={remove_active}>
+                        <i className="fa fa-trash-o"></i>
+                    </button>
+                </span>
+            );
         }
-    },
-
-    toggleRole: function(role, cb) {
-        var action = 'promote';
-
-        if(this.props.user.roles.indexOf(role) >= 0) {
-            action = 'demote';
-        }
-
-        MiitApp.requests.user[action](this.props.user.id, [role], this.onAction);
-    },
-
-    handleClick: function(action, e) {
-        e.preventDefault();
-
-        // Don't load twice
-        if(this.state.loading)
-            return;
-
-        var IAmAdmin    = MiitApp.utils.user.isAdmin();
-        var userIsOwner = MiitApp.utils.user.isOwner(this.props.user);
-        var userIsAdmin = MiitApp.utils.user.isAdmin(this.props.user);
-        var userIsMe    = MiitApp.utils.user.isItMe(this.props.user);
-
-        // Check if I am an admin and not myself or an owner
-        if(!IAmAdmin || userIsMe || userIsOwner)
-            return;
-
-        // Check if I want to remove an admin
-        if(action === 'REMOVE' && userIsAdmin)
-            return;
-
-        this.setState({
-            loading: true
-        });
-
-        switch(action) {
-            case 'ADMIN':
-            case 'USER':
-                this.toggleRole(action);
-                break;
-
-            case 'REMOVE':
-                MiitApp.requests.user.remove(this.props.user.id, this.onAction);
-                break;
-        }
-    },
-
-    render: function() {
-        var cx = React.addons.classSet;
-
-        var IAmAdmin    = MiitApp.utils.user.isAdmin();
-        var userIsAdmin = MiitApp.utils.user.isAdmin(this.props.user);
-        var userIsUser  = MiitApp.utils.user.isUser(this.props.user);
-        var userIsMe    = MiitApp.utils.user.isItMe(this.props.user);
-
-        var user_active = cx({
-            disable: !IAmAdmin || userIsMe || userIsAdmin,
-            active:  userIsUser
-        });
-
-        var admin_active = cx({
-            disable: !IAmAdmin || userIsMe,
-            active:  userIsAdmin
-        });
-
-        var remove_active = cx({
-            disable: !IAmAdmin || userIsMe || userIsAdmin
-        });
-
-
-        return (
-            <span className="miit-component user-list-item-roles">
-                <div className="checkbox-field pull-left" onClick={this.handleClick.bind(this, 'USER')} >
-                    <label>
-                        <input type="checkbox" className="option-input checkbox" checked={userIsUser}/>
-                        {this.props.text.user}
-                    </label>
-                </div>
-
-                <div className="checkbox-field pull-left ml20" onClick={this.handleClick.bind(this, 'ADMIN')} >
-                    <label>
-                        <input type="checkbox" className="option-input checkbox" checked={userIsAdmin}/>
-                        {this.props.text.admin}
-                    </label>
-                </div>
-
-                <button onClick={this.handleClick.bind(this, 'REMOVE')} className='btn btn-danger ml20' disabled={remove_active}>
-                    <i className="fa fa-trash-o"></i>
-                </button>
-            </span>
-        );
-    }
-});
+    });
+})();

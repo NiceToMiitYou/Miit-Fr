@@ -1,56 +1,66 @@
-MiitComponents.UserList = React.createClass({
-    getDefaultProps: function() {
-        return {
-            users:    [],
-            autoload: false,
-            loading:  MiitTranslator.get('loading', 'team')
-        };
-    },
+(function(){
+    var TeamRequest;
 
-    getInitialState: function() {
-        return {
-            loaded: false
-        };
-    },
+    MiitComponents.UserList = React.createClass({
+        getDefaultProps: function() {
+            return {
+                users:    [],
+                autoload: false,
+                loading:  MiitTranslator.get('loading', 'team')
+            };
+        },
 
-    refresh: function() {
-        if(this.props.autoload && !this.state.loaded ) {
+        getInitialState: function() {
+            return {
+                loaded: false
+            };
+        },
 
-            MiitApp.requests.team.users(function(data){
+        componentWillMount: function() {
+            if(!TeamRequest) {
+                TeamRequest = MiitApp.get('miit-team-request');
+            }
+        },
 
-                this.props.users = data;
+        refresh: function() {
+            if(this.props.autoload && !this.state.loaded ) {
 
-                this.setState({
-                    loaded: true
-                });
-            }.bind(this));
+                TeamRequest.users(function(data){
+
+                    this.props.users = data;
+
+                    this.setState({
+                        loaded: true
+                    });
+                }.bind(this));
+            }
+        },
+
+        allowRefresh: function() {
+            this.setState({
+                loaded: false
+            });
+        },
+
+        render: function() {
+            this.refresh();
+
+            var loadingElement = null;
+
+            if(this.props.autoload && !this.state.loaded) {
+                loadingElement = (<div>{this.props.loading}</div>);
+            }
+
+            return (
+                <div className="miit-component user-list">
+                    <MiitComponents.UserListHeader />
+                    {this.props.users.map(function(user) {
+                        return <MiitComponents.UserListItem user={user} onEdit={this.allowRefresh} />;
+                    }.bind(this))}
+                    {loadingElement}
+                    <MiitComponents.UserListInvite onInvite={this.allowRefresh} />
+                </div>
+            );
         }
-    },
-
-    allowRefresh: function() {
-        this.setState({
-            loaded: false
-        });
-    },
-
-    render: function() {
-        this.refresh();
-
-        var loadingElement = null;
-
-        if(this.props.autoload && !this.state.loaded) {
-            loadingElement = (<div>{this.props.loading}</div>);
-        }
-
-        return (
-            <div className="miit-component user-list">
-                <MiitComponents.UserListHeader />
-                {this.props.users.map(function(user) {
-                    return <MiitComponents.UserListItem user={user} onEdit={this.allowRefresh} />;
-                }.bind(this))}
-                {loadingElement}
-                <MiitComponents.UserListInvite onInvite={this.allowRefresh} />
-            </div>
-        );
-    }
-});
+    });
+})();
