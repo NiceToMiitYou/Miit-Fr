@@ -16,7 +16,7 @@ use Doctrine\ORM\NoResultException;
  * 
  * @author Tacyniak Boris <boris.tacyniak@itevents.fr>
  */
-class TeamRepository extends EntityRepository implements TeamRepositoryInterface
+class TeamRepository extends CachedRepository implements TeamRepositoryInterface
 {
     /**
      * {@inheritDoc}

@@ -23,7 +23,7 @@ use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
  * 
  * @author Tacyniak Boris <boris.tacyniak@itevents.fr>
  */
-class UserRepository extends EntityRepository implements UserRepositoryInterface, UserProviderInterface
+class UserRepository extends CachedRepository implements UserRepositoryInterface, UserProviderInterface
 {
     /**
      * {@inheritDoc}

@@ -16,7 +16,7 @@ use Doctrine\ORM\NoResultException;
  * 
  * @author Tacyniak Boris <boris.tacyniak@itevents.fr>
  */
-class MiitRepository extends EntityRepository implements MiitRepositoryInterface
+class MiitRepository extends CachedRepository implements MiitRepositoryInterface
 {
     /**
      * {@inheritDoc}
