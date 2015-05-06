@@ -28,8 +28,12 @@ var Dropdown = React.createClass({
     },
 
     render: function() {
-        var clIcon = classNames('fa', 'fa-angle-' + this.props.angle, 'pull-right');
-        var clDropdown = classNames('miit-component', 'dropdown', {open:this.state.open, close:this.state.open});
+        var icon = 'fa-angle-' + this.props.angle;
+        var open = { open: this.state.open };
+
+        var clIcon     = classNames('pull-right', 'fa', icon);
+        var clDropdown = classNames('miit-component', 'dropdown', open);
+
         return (
             <span onMouseLeave={this.onLeave} onClick={this.onEnter} className={clDropdown}>
                 <span className="dropdown-label">
