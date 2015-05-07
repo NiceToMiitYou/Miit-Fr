@@ -23,7 +23,13 @@
             if(!Router) {
                 Router = MiitApp.get('miit-router');
                 Router.routes.set('/([a-zA-Z0-9_\-]{0,})', function(mainPage) {
-                    PageActions.changeMainPage(mainPage || defaultPage);
+                    var page = mainPage || defaultPage;
+
+                    // Set the current active page of the menu
+                    ActiveGroups['menu-team'] = page;
+
+                    // Set the current active page                
+                    PageActions.changeMainPage(page);
                 });
             }
         },
