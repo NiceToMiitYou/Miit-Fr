@@ -9,7 +9,7 @@ var Link = React.createClass({
             target     = target.substr(target.indexOf('#') + 1);
             
             // Set the route in the router
-            MiitApp.router.setRoute(target);
+            injector.get('miit-router').setRoute(target);
         }
     },
 
