@@ -20,7 +20,6 @@
 
             // The PageStore Object
             var PageStore = ObjectAssign({}, EventEmitter.prototype, {
-                // Return the 
                 getCurrentMainPage: function() {
                     return PageStorage.get('main-' + CurrentMainPage);
                 },
