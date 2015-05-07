@@ -20,6 +20,15 @@
 
             UserStore.dispatchToken = MiitDispatcher.register(function(action){
 
+                switch(action.type) {
+                    case ActionTypes.CHANGE_PASSWORD_USER_COMPLETED:
+                        UserStore.emitPasswordChanged();
+                        break;
+                    case ActionTypes.CHANGE_PASSWORD_USER_ERROR:
+                        UserStore.emitPasswordNotChanged();
+                        break;
+                }
+
             });
 
             return UserStore;

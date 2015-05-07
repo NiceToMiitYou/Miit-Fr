@@ -1,5 +1,5 @@
 (function(){
-    var Utils, UserRequest;
+    var Utils, UserActions, UserStore;
 
     MiitComponents.UserChangePassword = React.createClass({
         getDefaultProps: function() {
@@ -39,9 +39,37 @@
             if(!Utils) {
                 Utils = MiitApp.get('miit-utils');
             }
-            if(!UserRequest) {
-                UserRequest = MiitApp.get('miit-user-request');
+            if(!UserStore) {
+                UserStore = MiitApp.get('miit-user-store');
             }
+            if(!UserActions) {
+                UserActions = MiitApp.get('miit-user-actions');
+            }
+        },
+
+        componentDidMount: function() {
+            UserStore.addPasswordChangedListener(this._onChanged);
+            UserStore.addPasswordNotChangedListener(this._onError);
+        },
+
+        componentWillUnmount: function() {
+            UserStore.removePasswordChangedListener(this._onChanged);
+            UserStore.removePasswordNotChangedListener(this._onError);
+        },
+
+        _onChanged: function() {
+            if(this.isMounted()) {
+                // Reset value
+                this.setState({
+                    value_old:    '',
+                    value_first:  '',
+                    value_second: ''
+                });
+            }
+        },
+
+        _onError: function() {
+            console.log('password not changed.');
         },
         
         handleChange: function(e) {
@@ -99,15 +127,7 @@
                 return;
             }
 
-            UserRequest.change_password(old, first, function(data) {
-
-                // Reset value
-                this.setState({
-                    value_old:    '',
-                    value_first:  '',
-                    value_second: ''
-                });
-            }.bind(this));
+            UserActions.changePassword(old, first);
 
             return;
         },

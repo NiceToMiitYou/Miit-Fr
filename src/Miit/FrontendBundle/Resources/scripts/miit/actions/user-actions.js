@@ -21,7 +21,7 @@
             return {
                 changePassword: function(password_old, password_new) {
                     // Request the server
-                    MiitUserRequest.change_password(password_new, password_old, onPasswordChanged);
+                    MiitUserRequest.change_password(password_old, password_new, onPasswordChanged);
                 }
             };
         }
