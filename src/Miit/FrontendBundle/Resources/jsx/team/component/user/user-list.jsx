@@ -28,10 +28,12 @@
 
                 TeamRequest.users(function(data){
 
-                    this.setState({
-                        loaded: true,
-                        users: data
-                    });
+                    if(this.isMounted()) {
+                        this.setState({
+                            loaded: true,
+                            users: data
+                        });
+                    }
                 }.bind(this));
             }
         },

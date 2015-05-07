@@ -28,13 +28,16 @@
         <script type="text/javascript" src="/dist/js/app.min.js"></script>
         <script type="text/javascript">
         window.onload = function(){
+            // Set default value to initialize the storage
             var Storage = MiitApp.get('miit-storage');
             Storage.shared.set('user', {{ user | serialize('json', user_context) | raw }});
             Storage.shared.set('team', {{ team | serialize('json', team_context) | raw }});
             
-            (function(r){
-                r.render(r.createElement(MiitComponents.TeamApp,null),document.getElementById('content'));
-            })(React);
+            // Render the TeamApp component
+            React.render(React.createElement(MiitComponents.TeamApp,null),document.getElementById('content'));
+
+            // Initialize the Application
+            MiitApp.init();
         };
         </script>
     </body>
