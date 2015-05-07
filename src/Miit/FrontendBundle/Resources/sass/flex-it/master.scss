@@ -305,8 +305,6 @@ html {
     width: 0;
 }
 
-.sidr-left ul.sl-list li a
-
 .sidr-left ul.sl-list li a i {
     width: 25px;
 }
@@ -544,10 +542,17 @@ html {
 
   }
 
-  .light {
+  &.light {
 
      .option-input {
         border:none;
+
+        &::before {
+          width: 17px;
+          height: 17px;
+          line-height: 17px;
+        }
+
       }
 
   }
