@@ -10,6 +10,7 @@
         }
     });
 
-    var PageStore = MiitApp.get('miit-page-store');
-    PageStore.registerPage('home', (<MiitComponents.MiitPage />));
+    MiitApp
+        .get('miit-page-store')
+        .registerMainPage('home', (<MiitComponents.MiitPage />));
 })();

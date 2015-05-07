@@ -22,19 +22,27 @@
             var PageStore = ObjectAssign({}, EventEmitter.prototype, {
                 // Return the 
                 getCurrentMainPage: function() {
-                    return PageStorage.get(CurrentMainPage);
+                    return PageStorage.get('main-' + CurrentMainPage);
                 },
 
                 getCurrentMiitPage: function() {
-                    return PageStorage.get(CurrentMiitPage);
+                    return PageStorage.get('miit-' + CurrentMiitPage);
                 },
 
                 getCurrentApplicationPage: function() {
-                    return PageStorage.get(CurrentApplicationPage);
+                    return PageStorage.get('application-' + CurrentApplicationPage);
                 },
 
-                registerPage: function(name, component) {
-                    PageStorage.set(name, component);
+                registerMainPage: function(name, component) {
+                    PageStorage.set('main-' + name, component);
+                },
+
+                registerMiitPage: function(name, component) {
+                    PageStorage.set('miit-' + name, component);
+                },
+
+                registerApplicationPage: function(name, component) {
+                    PageStorage.set('application-' + name, component);
                 }
             });
 
