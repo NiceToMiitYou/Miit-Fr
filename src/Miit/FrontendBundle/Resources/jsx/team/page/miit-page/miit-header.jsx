@@ -1,5 +1,5 @@
 (function(){
-    MiitComponents.MiitTeamHeader = React.createClass({
+    MiitComponents.MiitHeader = React.createClass({
         render: function() {
             return (
                 <div className="page-header z-depth-1">

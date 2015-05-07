@@ -4,10 +4,12 @@ var injector = (function() {
         var dependencies = {};
         var instances = {};
 
+        // Register a service
         this.register = function(key, value) {
             dependencies[key] = value;
         };
 
+        // Resolve all dependencies for a service
         this.resolve = function() {
             var func, deps, scope, args = [];
 
@@ -45,6 +47,15 @@ var injector = (function() {
 
                 return func.apply(scope || {}, args);
             };
+        };
+
+        // Get on service
+        this.get = function(serviceName) {
+            var proxyService = this.resolve(serviceName, function(service) {
+                return service;
+            });
+
+            return proxyService();
         };
     }
 

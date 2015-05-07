@@ -1,5 +1,5 @@
 (function(){
-    MiitComponents.MiitTeamContent = React.createClass({
+    MiitComponents.MiitContent = React.createClass({
         getDefaultProps: function () {
             return {
                 text: {
