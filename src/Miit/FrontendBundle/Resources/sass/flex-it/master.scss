@@ -85,8 +85,8 @@ html {
 }
 
 .page {
-    height: 100%;
 
+    height: 100%;
     -webkit-transition: margin-left 500ms ease;
     -moz-transition: margin-left 500ms ease;
     -o-transition: margin-left 500ms ease;
@@ -225,93 +225,84 @@ html {
     -o-transition: width 500ms ease;
     transition: width 500ms ease;
     z-index: 9;
+
+    .sl-wrapper {
+        width: 250px;
+    }
+
+    .sl-header {
+        width: 210px;
+        line-height: 50px;
+        color: #FFF;
+        display: block;
+        font-size: 1.4em;
+        font-weight: 100;
+        padding: 0 20px;
+        -webkit-transition: background-color 500ms ease;
+        -moz-transition: background-color 500ms ease;
+        -o-transition: background-color 500ms ease;
+        transition: background-color 500ms ease;
+
+        &:hover {
+            background-color: #33414D!important;
+        }
+
+        i.fa-bars {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        i {
+            line-height: 50px;
+        }
+    }
+
+    .sl-label {
+        color: #FFF;
+        line-height: 2.3em;
+        padding: 0 10px;
+        display: block;
+        background: #16202A;
+        
+    }
+
+    ul.sl-list {
+        li {
+            a {
+                color: #FFF;
+                font-size: 0.9em;
+                display: block;
+                line-height: 2.7em;
+                font-weight: 300;
+                text-decoration: none;
+                padding-left: 15px;
+                position: relative;
+                -webkit-transition: background-color 500ms ease;
+                -moz-transition: background-color 500ms ease;
+                -o-transition: background-color 500ms ease;
+                transition: background-color 500ms ease;
+
+                &:hover, &.active {
+                    background-color: #33414D;
+                }
+
+                &.active::before {
+                    content:"\A";
+                    border-style: solid;
+                    border-width: 7px 7px 7px 0;
+                    border-color: transparent #fafafa transparent transparent;
+                    position: absolute;
+                    right: 0;
+                    top: 50%;
+                    margin-top: -7px;
+                }
+            }
+        }
+    }
 }
 
 .page.fullwidth .sidr-left {
     width: 0;
-}
-
-.sidr-left .sl-wrapper {
-    width: 250px;
-}
-
-.sidr-left .sl-header {
-    width: 210px;
-    line-height: 50px;
-    color: #FFF;
-    display: block;
-    font-size: 1.4em;
-    font-weight: 100;
-    padding: 0 20px;
-    -webkit-transition: background-color 500ms ease;
-    -moz-transition: background-color 500ms ease;
-    -o-transition: background-color 500ms ease;
-    transition: background-color 500ms ease;
-}
-
-.sidr-left .sl-header:hover {
-    background-color: #33414D!important;
-}
-
-.sidr-left .sl-header i.fa-bars {
-    margin-right: 10px;
-    font-size: 1.2em;
-}
-
-.sidr-left .sl-header i {
-    line-height: 50px;
-}
-
-.sidr-left .sl-label {
-    color: #FFF;
-    line-height: 2.3em;
-    padding: 0 10px;
-    display: block;
-    background: #16202A;
-    
-}
-
-.sidr-left .sl-label i {
-    margin-right: 8px;
-}
-
-.sidr-left ul.sl-list {
-    
-}
-
-.sidr-left ul.sl-list li {
-    
-}
-
-.sidr-left ul.sl-list li a {
-    color: #FFF;
-    font-size: 0.9em;
-    display: block;
-    line-height: 2.7em;
-    font-weight: 300;
-    text-decoration: none;
-    padding-left: 15px;
-    position: relative;
-    -webkit-transition: background-color 500ms ease;
-    -moz-transition: background-color 500ms ease;
-    -o-transition: background-color 500ms ease;
-    transition: background-color 500ms ease;
-}
-
-.sidr-left ul.sl-list li a:hover, .sidr-left ul.sl-list li a.active {
-    background-color: #33414D;
-
-}
-
-.sidr-left ul.sl-list li a.active::before {
-    content:"\A";
-    border-style: solid;
-    border-width: 7px 7px 7px 0;
-    border-color: transparent #fafafa transparent transparent;
-    position: absolute;
-    right: 0;
-    top: 50%;
-    margin-top: -7px;
 }
 
 .sidr-left ul.sl-list li a i {
@@ -540,7 +531,7 @@ html {
 
       }
 
-      .radio { 
+      &.radio { 
         border-radius: 50%; 
         
         &::after { 
@@ -551,10 +542,17 @@ html {
 
   }
 
-  .light {
+  &.light {
 
      .option-input {
         border:none;
+
+        &::before {
+          width: 17px;
+          height: 17px;
+          line-height: 17px;
+        }
+
       }
 
   }
@@ -1139,31 +1137,29 @@ click-wave { 0% {
     figure, figcaption, footer, header, hgroup, 
     menu, nav, output, ruby, section, summary,
     time, mark, audio, video, button {
-        margin: 0;
-        padding: 0;
-        border: 0;
-        vertical-align: baseline;
         font-size: 98.5%;
     }
 
 
     .page {
         margin-left: 200px;
-    }
 
-    .page .page-header {
-        height: 42px;
-    }
-    .page .page-header h1 {
-        line-height: 42px;
-        font-size: 1.1em;
-    }
-    .page .page-header .ph-btn-list li {
-        padding: 0 17px;
-    }
+        .page-header {
+            height: 42px;
 
-    .page .page-header .ph-btn-list li a {
-        line-height: 42px;
+            h1 {
+                line-height: 42px;
+                font-size: 1.1em;
+            }
+
+            .ph-btn-list li {
+                padding: 0 17px;
+
+                a {
+                    line-height: 42px;
+                }
+            }
+        }
     }
 
 
@@ -1171,32 +1167,28 @@ click-wave { 0% {
 
     .sidr-left {
         width: 200px;
+
+        .sl-wrapper {
+            width: 200px;
+        }
+
+        .sl-header {
+            width: 160px;
+            line-height: 42px;
+
+            i {
+                line-height: 42px;
+            }
+        }
+
+        ul.sl-list li a {
+            padding-left: 12px; 
+            i {
+                width: 22px;
+            }    
+        }
     }
 
-    .sidr-left .sl-wrapper {
-        width: 200px;
-    }
-
-    .sidr-left .sl-header {
-        width: 160px;
-        line-height: 42px;
-    }
-
-    .sidr-left .sl-header i {
-        line-height: 42px;
-    }
-
-    .sidr-left .sl-footer {
-        width: 160px;
-    }
-
-    .sidr-left ul.sl-list li a {
-        padding-left: 12px;     
-    }
-
-    .sidr-left ul.sl-list li a i {
-        width: 22px;
-    }
     /* ---------------- END LEFT SIDEBAR CSS ---------------- */
 
 
@@ -1272,19 +1264,6 @@ click-wave { 0% {
     .sidr-left ul.sl-list li a i {
         width: 50px;
         text-align: center;
-    }
-
-
-    .sidr-left .sl-footer {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 210px;
-        color: #FFF;
-        display: block;
-        font-weight: 100;
-        padding: 15px 20px;
-        font-size: 1em;
     }
 
     .sidr-left .sl-footer span {
