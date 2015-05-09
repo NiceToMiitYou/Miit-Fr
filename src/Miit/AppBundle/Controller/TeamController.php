@@ -62,8 +62,6 @@ class TeamController extends AppControllerAbstract
         $context  = SerializationContext::create()->setGroups(array('default', 'list'));
         $data     = $serializer->serialize($DTO, 'json', $context);
         
-        die($data);
-
         $response->setContent($data);
 
         return $response;

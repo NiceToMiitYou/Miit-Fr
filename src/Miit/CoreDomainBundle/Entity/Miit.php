@@ -52,7 +52,7 @@ class Miit extends MiitModel
      * 
      * @ORM\Column(type="integer", nullable=false)
      * 
-     * @Serializer\Groups({"details"})
+     * @Serializer\Groups({"list", "details"})
      */
     protected $state;
 
@@ -83,6 +83,8 @@ class Miit extends MiitModel
      * {@inheritDoc}
      * 
      * @ORM\Column(type="datetime", nullable=true)
+     * 
+     * @Serializer\Groups({"details"})
      */
     protected $updatedAt;
 

@@ -69,6 +69,21 @@ class UserRepository extends CachedRepository implements UserRepositoryInterface
     /**
      * {@inheritDoc}
      */
+    public function findUsersByMiit(MiitId $miitId)
+    {
+        $query = $this->createQueryBuilder('u')
+                      ->join('u.miits', 't')
+                      ->where('t.id = :miitId')
+                      ->orderBy('u.name', 'ASC')
+                      ->setParameter('miitId', $miitId->getValue())
+                      ->getQuery();
+
+        return $query->getResult();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function findUserByUserIdWithTeams(UserId $userId)
     {
         $query = $this->createQueryBuilder('u')

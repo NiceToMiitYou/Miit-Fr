@@ -40,7 +40,7 @@ class MiitRepository extends CachedRepository implements MiitRepositoryInterface
         $query = $this->createQueryBuilder('m')
                       ->where('m.token = :token')
                       ->andWhere('m.team = :teamId')
-                      ->setParameter('teamId', $teamId)
+                      ->setParameter('teamId', $teamId->getValue())
                       ->setParameter('token', $token)
                       ->getQuery();
 
