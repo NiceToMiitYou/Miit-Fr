@@ -7,6 +7,7 @@ use Miit\CoreDomain\User\UserRepository as UserRepositoryInterface;
 use Miit\CoreDomain\User\User as UserModel;
 use Miit\CoreDomain\User\UserId;
 use Miit\CoreDomain\Team\TeamId;
+use Miit\CoreDomain\Miit\MiitId;
 
 use Miit\CoreDomainBundle\Entity\User;
 
