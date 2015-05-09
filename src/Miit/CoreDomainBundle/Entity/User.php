@@ -21,6 +21,8 @@ use JMS\Serializer\Annotation as Serializer;
  * 
  * @ORM\Entity(repositoryClass="Miit\CoreDomainBundle\Repository\UserRepository")
  * @ORM\Cache(usage="NONSTRICT_READ_WRITE")
+ * 
+ * @Serializer\ExclusionPolicy("none")
  */
 class User extends UserModel implements UserInterface, EquatableInterface
 {
@@ -70,6 +72,8 @@ class User extends UserModel implements UserInterface, EquatableInterface
      * {@inheritDoc}
      * 
      * @ORM\Column(type="array", nullable=true)
+     * 
+     * @Serializer\Exclude
      */
     protected $roles;
 
@@ -87,6 +91,8 @@ class User extends UserModel implements UserInterface, EquatableInterface
      * 
      * @ORM\ManyToMany(targetEntity="Team", inversedBy="users")
      * @ORM\JoinTable(name="users_teams")
+     * 
+     * @Serializer\Exclude
      */
     protected $teams;
 
@@ -95,6 +101,8 @@ class User extends UserModel implements UserInterface, EquatableInterface
      * 
      * @ORM\ManyToMany(targetEntity="Miit", inversedBy="users")
      * @ORM\JoinTable(name="users_miits")
+     * 
+     * @Serializer\Exclude
      */
     protected $miits;
 

@@ -1,5 +1,5 @@
 (function(){
-    var Utils;
+    var UserStore;
 
     MiitComponents.UserListHeader = React.createClass({
         getDefaultProps: function() {
@@ -14,8 +14,8 @@
         },
         
         componentWillMount: function() {
-            if(!Utils) {
-                Utils = MiitApp.get('miit-utils');
+            if(!UserStore) {
+                UserStore = MiitApp.get('miit-user-store');
             }
         },
 
@@ -23,7 +23,7 @@
             var actionElement = null;
 
             // Check if this is an admin
-            if(Utils.user.isAdmin()){
+            if(UserStore.isAdmin()){
                 actionElement = (<span>{this.props.text.action}</span>);
             }
 

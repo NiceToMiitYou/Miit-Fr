@@ -19,6 +19,47 @@
                             '_token': token
                         }, cb);
                     });
+                },
+
+                promote: function(user_id, user_roles, cb) {
+
+                    // Request for CRSF
+                    MiitUtils.ajax.crsf('promote_user', function(token) {
+
+                        // Promote the user
+                        MiitUtils.ajax.send('/app/team/promote', {
+                            'id':     user_id,
+                            'roles':  user_roles,
+                            '_token': token
+                        }, cb);
+                    });
+                },
+
+                demote: function(user_id, user_roles, cb) {
+
+                    // Request for CRSF
+                    MiitUtils.ajax.crsf('demote_user', function(token) {
+
+                        // Demote the user
+                        MiitUtils.ajax.send('/app/team/demote', {
+                            'id':     user_id,
+                            'roles':  user_roles,
+                            '_token': token
+                        }, cb);
+                    });
+                },
+
+                remove: function(user_id, cb) {
+
+                    // Request for CRSF
+                    MiitUtils.ajax.crsf('remove_user', function(token) {
+
+                        // Demote the user
+                        MiitUtils.ajax.send('/app/team/remove', {
+                            'id':  user_id,
+                            '_token': token
+                        }, cb);
+                    });
                 }
             };
         }

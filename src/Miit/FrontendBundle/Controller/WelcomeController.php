@@ -74,6 +74,7 @@ class WelcomeController extends Controller
                 // If user created or/and invited
                 if(null !== $userId) {
                     $response['done'] = true;
+                    $response['slug'] = $teamManager->slugOf($name);
                 } else {
                     $response['errors'] = array('USER_NOT_CREATED');
                 }

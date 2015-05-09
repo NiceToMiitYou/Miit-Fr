@@ -24,25 +24,6 @@
                 };
             };
 
-            // Generate the validator for user's role
-            var isUserGenerator = function(role) {
-                return function(user) {
-                    if(!user) {
-                        user = MiitStorage.shared.get('user');
-                    }
-
-                    return user.roles.indexOf(role) >= 0;
-                };
-            };
-
-            // Check if this is the same user
-            var isItMe = function(user) {
-                var me  = (MiitStorage.shared.get('user') || {}).id || null;
-                var you = (user || {}).id || null;
-
-                return me === you;
-            };
-
             /**
              * Ajax part
              */
@@ -135,13 +116,6 @@
                 ajax: {
                     send: sendRequest,
                     crsf: getCrsf
-                },
-
-                user: {
-                    isAdmin: isUserGenerator('ADMIN'),
-                    isUser:  isUserGenerator('USER'),
-                    isOwner: isUserGenerator('OWNER'),
-                    isItMe:  isItMe,
                 },
 
                 validator: {

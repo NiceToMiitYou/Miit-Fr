@@ -1,5 +1,5 @@
 (function(){
-    var Utils, TeamRequest;
+    var Utils, UserStore, TeamStore, TeamActions;
 
     MiitComponents.UserListInvite = React.createClass({
         getDefaultProps: function() {
@@ -30,9 +30,25 @@
             if(!Utils) {
                 Utils = MiitApp.get('miit-utils');
             }
-            if(!TeamRequest) {
-                TeamRequest = MiitApp.get('miit-team-request');
+            if(!UserStore) {
+                UserStore = MiitApp.get('miit-user-store');
             }
+            if(!TeamStore) {
+                TeamStore = MiitApp.get('miit-team-store');
+            }
+            if(!TeamActions) {
+                TeamActions = MiitApp.get('miit-team-actions');
+            }
+        },
+
+        componentDidMount: function() {
+            TeamStore.addInvitedListener(this._onInvited);
+            TeamStore.addNotInvitedListener(this._onError);
+        },
+
+        componentWillUnmount: function() {
+            TeamStore.removeInvitedListener(this._onInvited);
+            TeamStore.removeNotInvitedListener(this._onError);
         },
 
         handleChange: function(newValue) {
@@ -49,7 +65,7 @@
             this.setState(this.getDefaultErrors());
 
             // Check if this is an admin
-            if(!Utils.user.isAdmin()){
+            if(!UserStore.isAdmin()){
                 return;
             }
 
@@ -69,22 +85,28 @@
                 return;
             }
 
-            TeamRequest.invite(email, function(data) {
-                this.setState({
-                    email: ''
-                });
-
-                if(typeof this.props.onInvite === 'function') {
-                    this.props.onInvite(email);
-                }
-            }.bind(this));
+            TeamActions.invite(email);
 
             return;
         },
 
+        _onInvited: function() {
+            this.setState({
+                email: ''
+            });
+
+            if(typeof this.props.onInvite === 'function') {
+                this.props.onInvite(email);
+            }
+        },
+
+        _onError: function() {
+            console.log('Can not invite the user.');
+        },
+
         render: function() {
             // Check if this is an admin
-            if(!Utils.user.isAdmin()){
+            if(!UserStore.isAdmin()){
                 return null;
             }
 

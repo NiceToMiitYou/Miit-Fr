@@ -69,16 +69,23 @@ class TeamManager
     }
 
     /**
+     * @param string $name
+     */
+    public function slugOf($name)
+    {
+        $slugify = new Slugify();
+        return $slugify->slugify($name);
+    }
+
+    /**
      * @param string name
      * 
      * @return TeamId
      */
     public function createTeam($name)
     {
-        $slugify = new Slugify();
-
         $teamId  = TeamId::newInstance();
-        $slug    = $slugify->slugify($name);
+        $slug    = $this->slugOf($name);
 
         $command = new CreateTeamCommand($teamId, $slug, $name);
 

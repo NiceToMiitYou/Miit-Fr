@@ -16,7 +16,7 @@
                     <MiitComponents.UserAvatar user={this.props.user} />
                     <span className="pl10">{this.props.user.name}</span>
                     <span className="pl10">{this.props.user.email}</span>
-                    <MiitComponents.UserListItemRoles user={this.props.user} onAction={this.props.onEdit}/>
+                    <MiitComponents.UserListItemRoles user={this.props.user}/>
                 </div>
             );
         }

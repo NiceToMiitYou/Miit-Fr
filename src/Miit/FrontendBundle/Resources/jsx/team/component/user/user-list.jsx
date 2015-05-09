@@ -1,55 +1,71 @@
 (function(){
-    var TeamRequest;
+    var TeamStore, TeamActions;
 
     MiitComponents.UserList = React.createClass({
         getDefaultProps: function() {
             return {
                 users:    [],
-                autoload: false,
                 loading:  MiitTranslator.get('loading', 'team')
             };
         },
 
         getInitialState: function() {
             return {
-                loaded: false,
-                users:  this.props.users
+                users:  [],
+                loaded: false
             };
         },
 
         componentWillMount: function() {
-            if(!TeamRequest) {
-                TeamRequest = MiitApp.get('miit-team-request');
+            if(!TeamStore) {
+                TeamStore = MiitApp.get('miit-team-store');
+            }
+            if(!TeamActions) {
+                TeamActions = MiitApp.get('miit-team-actions');
             }
         },
 
-        refresh: function() {
-            if(this.props.autoload && !this.state.loaded ) {
-
-                TeamRequest.users(function(data){
-
-                    if(this.isMounted()) {
-                        this.setState({
-                            loaded: true,
-                            users: data
-                        });
-                    }
-                }.bind(this));
-            }
+        componentDidMount: function() {
+            // Invited
+            TeamStore.addInvitedListener(this._refresh);
+            // Promoted
+            TeamStore.addPromotedListener(this._refresh);
+            // Demoted
+            TeamStore.addDemotedListener(this._refresh);
+            // Removed
+            TeamStore.addRemovedListener(this._refresh);
+            // Refresh
+            TeamStore.addRefreshedListener(this._refresh);
+            // Refresh the list
+            TeamActions.refresh();
         },
 
-        allowRefresh: function() {
-            this.setState({
-                loaded: false
-            });
+        componentWillUnmount: function() {
+            // Invited
+            TeamStore.removeInvitedListener(this._refresh);
+            // Promoted
+            TeamStore.removePromotedListener(this._refresh);
+            // Demoted
+            TeamStore.removeDemotedListener(this._refresh);
+            // Removed
+            TeamStore.removeRemovedListener(this._refresh);
+            // Refresh
+            TeamStore.removeRefreshedListener(this._refresh);
+        },
+
+        _refresh: function() {
+            if(this.isMounted()) {
+                this.setState({
+                    users:  TeamStore.getUsers().sortBy('name'),
+                    loaded: true
+                });
+            }
         },
 
         render: function() {
-            this.refresh();
-
             var loadingElement = null;
 
-            if(this.props.autoload && !this.state.loaded) {
+            if(this.state.loaded === false) {
                 loadingElement = (<div>{this.props.loading}</div>);
             }
 
@@ -57,7 +73,7 @@
                 <div className="miit-component user-list">
                     <MiitComponents.UserListHeader />
                     {this.state.users.map(function(user) {
-                        return <MiitComponents.UserListItem key={user.id} user={user} onEdit={this.allowRefresh} />;
+                        return <MiitComponents.UserListItem key={user.id} user={user} />;
                     }.bind(this))}
                     {loadingElement}
                     <MiitComponents.UserListInvite onInvite={this.allowRefresh} />

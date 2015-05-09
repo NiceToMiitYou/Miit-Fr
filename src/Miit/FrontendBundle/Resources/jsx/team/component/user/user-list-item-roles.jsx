@@ -1,5 +1,5 @@
 (function() {
-    var Utils, UserRequest;
+    var UserStore, TeamStore, TeamActions;
 
     MiitComponents.UserListItemRoles = React.createClass({
         getDefaultProps: function() {
@@ -23,22 +23,54 @@
         },
 
         componentWillMount: function() {
-            if(!Utils) {
-                Utils = MiitApp.get('miit-utils');
+            if(!UserStore) {
+                UserStore = MiitApp.get('miit-user-store');
             }
-            if(!UserRequest) {
-                UserRequest = MiitApp.get('miit-user-request');
+            if(!TeamStore) {
+                TeamStore = MiitApp.get('miit-team-store');
+            }
+            if(!TeamActions) {
+                TeamActions = MiitApp.get('miit-team-actions');
             }
         },
 
-        onAction: function(data) {
-            this.setState({
-                loading: false
-            });
+        componentDidMount: function() {
+            // Promote
+            TeamStore.addPromotedListener(this._onPromoted);
+            TeamStore.addNotPromotedListener(this._onError);
+            // Demote
+            TeamStore.addDemotedListener(this._onDemoted);
+            TeamStore.addNotDemotedListener(this._onError);
+        },
 
-            if(typeof this.props.onAction === 'function') {
-                this.props.onAction();
+        componentWillUnmount: function() {
+            // Promote
+            TeamStore.removePromotedListener(this._onPromoted);
+            TeamStore.removeNotPromotedListener(this._onError);
+            // Demote
+            TeamStore.removeDemotedListener(this._onDemoted);
+            TeamStore.removeNotDemotedListener(this._onError);
+        },
+
+        _stopLoading: function() {
+            if(this.isMounted()) {
+                this.setState({
+                    loading: false
+                });
             }
+        },
+
+        _onPromoted: function() {
+            this._stopLoading();
+        },
+
+        _onDemoted: function() {
+            this._stopLoading();
+        },
+
+        _onError: function() {
+            this._stopLoading();
+            console.log('Can not promote or demote the user.');
         },
 
         toggleRole: function(role, cb) {
@@ -48,7 +80,7 @@
                 action = 'demote';
             }
 
-            UserRequest[action](this.props.user.id, [role], this.onAction);
+            TeamActions[action](this.props.user.id, [role]);
         },
 
         handleClick: function(action, e) {
@@ -58,10 +90,10 @@
             if(this.state.loading)
                 return;
 
-            var IAmAdmin    = Utils.user.isAdmin();
-            var userIsOwner = Utils.user.isOwner(this.props.user);
-            var userIsAdmin = Utils.user.isAdmin(this.props.user);
-            var userIsMe    = Utils.user.isItMe(this.props.user);
+            var IAmAdmin    = UserStore.isAdmin();
+            var userIsOwner = UserStore.isOwner(this.props.user);
+            var userIsAdmin = UserStore.isAdmin(this.props.user);
+            var userIsMe    = UserStore.isItMe(this.props.user);
 
             // Check if I am an admin and not myself or an owner
             if(!IAmAdmin || userIsMe || userIsOwner)
@@ -82,16 +114,16 @@
                     break;
 
                 case 'REMOVE':
-                    UserRequest.remove(this.props.user.id, this.onAction);
+                    TeamActions.remove(this.props.user.id);
                     break;
             }
         },
 
         render: function() {
-            var IAmAdmin    = Utils.user.isAdmin();
-            var userIsAdmin = Utils.user.isAdmin(this.props.user);
-            var userIsUser  = Utils.user.isUser(this.props.user);
-            var userIsMe    = Utils.user.isItMe(this.props.user);
+            var IAmAdmin    = UserStore.isAdmin();
+            var userIsAdmin = UserStore.isAdmin(this.props.user);
+            var userIsUser  = UserStore.isUser(this.props.user);
+            var userIsMe    = UserStore.isItMe(this.props.user);
 
             var user_active = classNames({
                 disable: !IAmAdmin || userIsMe || userIsAdmin,

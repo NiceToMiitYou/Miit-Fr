@@ -1,5 +1,5 @@
 (function(){
-    var Storage;
+    var UserStore;
 
     MiitComponents.MenuUserProfile = React.createClass({
        getDefaultProps: function() {
@@ -11,13 +11,13 @@
         },
 
         componentWillMount: function() {
-            if(!Storage) {
-                Storage = MiitApp.get('miit-storage');
+            if(!UserStore) {
+                UserStore = MiitApp.get('miit-user-store');
             }
         },
 
         render: function() {
-            var user = Storage.shared.get('user');
+            var user = UserStore.getUser();
 
             return (
                 <span className="sl-footer miit-component user-profile">

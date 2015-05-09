@@ -1,5 +1,10 @@
 (function(){
-    var Util, UserRequest;
+    var Utils, UserRequest;
+
+    function getDomainName(hostName)
+    {
+        return hostName.substring(hostName.lastIndexOf('.', hostName.lastIndexOf('.') - 1) + 1);
+    }
 
     MiitComponents.CreateTeam = React.createClass({
         getDefaultProps: function() {
@@ -68,9 +73,17 @@
                 return;
             }
 
-            // Request for CRSF
             UserRequest.registration(email, team, function(data) {
-                console.log(data);    
+                if(data.done) {
+                    /** Redirect the user to the team
+                    var scheme = window.location.protocol + '//';
+                    var domain = getDomainName(window.location.host);
+
+                    var url = scheme + data.slug + '.' + domain;
+
+                    window.location = url;
+                    */
+                }   
             });
 
             return;
