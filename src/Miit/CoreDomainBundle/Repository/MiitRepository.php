@@ -5,6 +5,7 @@ namespace Miit\CoreDomainBundle\Repository;
 use Miit\CoreDomain\Miit\MiitRepository as MiitRepositoryInterface;
 use Miit\CoreDomain\Miit\Miit as MiitModel;
 use Miit\CoreDomain\Miit\MiitId;
+use Miit\CoreDomain\Team\TeamId;
 
 use Miit\CoreDomainBundle\Entity\Miit;
 
@@ -34,10 +35,12 @@ class MiitRepository extends CachedRepository implements MiitRepositoryInterface
     /**
      * {@inheritDoc}
      */
-    public function findMiitByToken($token)
+    public function findMiitByTeamAndToken(TeamId $teamId, $token)
     {
         $query = $this->createQueryBuilder('m')
                       ->where('m.token = :token')
+                      ->andWhere('m.team = :teamId')
+                      ->setParameter('teamId', $teamId)
                       ->setParameter('token', $token)
                       ->getQuery();
 

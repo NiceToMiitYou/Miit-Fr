@@ -2,6 +2,8 @@
 
 namespace Miit\CoreDomain\Miit;
 
+use Miit\CoreDomain\Team\TeamId;
+
 use DomainDrivenDesign\Domain\Model\Repository;
 
 /**
@@ -27,7 +29,7 @@ interface MiitRepository extends Repository
      * 
      * @return Miit
      */
-    public function findMiitByToken($token);
+    public function findMiitByTeamAndToken(TeamId $teamId, $token);
 
     /**
      * Persist the given User

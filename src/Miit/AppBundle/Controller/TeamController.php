@@ -72,7 +72,7 @@ class TeamController extends AppControllerAbstract
     /**
      * @Route("/invite",
      *      host="{team_slug}.{domain}",
-     *      name="app_user_invite_user",
+     *      name="app_team_invite",
      *      defaults={
      *          "domain":    "%domain%"
      *      },
@@ -123,7 +123,7 @@ class TeamController extends AppControllerAbstract
     /**
      * @Route("/promote",
      *      host="{team_slug}.{domain}",
-     *      name="app_user_promote_user",
+     *      name="app_team_promote_user",
      *      defaults={
      *          "domain":    "%domain%"
      *      },
@@ -193,7 +193,7 @@ class TeamController extends AppControllerAbstract
     /**
      * @Route("/demote",
      *      host="{team_slug}.{domain}",
-     *      name="app_user_demote_user",
+     *      name="app_team_demote_user",
      *      defaults={
      *          "domain":    "%domain%"
      *      },
@@ -263,7 +263,7 @@ class TeamController extends AppControllerAbstract
     /**
      * @Route("/remove",
      *      host="{team_slug}.{domain}",
-     *      name="app_user_remove_user",
+     *      name="app_team_remove_user",
      *      defaults={
      *          "domain":    "%domain%"
      *      },
