@@ -154,24 +154,10 @@
 
             return (
                 <form className="miit-component change-password" onSubmit={this.handleSubmit}>
-                    <div className="row">
-                        <div className="col6 col16-sm">
-                            <div className="input-field mb10">
-                              <input type="password" className={classes_old}    value={value_old}    placeholder={this.props.placeholder.old}    onChange={this.handleChange} name="old" />
-                            </div>
-
-                            <div className="input-field  mb10">
-                                <input type="password" className={classes_first}  value={value_first}  placeholder={this.props.placeholder.first}  onChange={this.handleChange} name="first" />
-                            </div>
-
-                            <div className="input-field mb10">
-                                <input type="password" className={classes_second} value={value_second} placeholder={this.props.placeholder.second} onChange={this.handleChange} name="second" />
-                            </div>
-                        </div>     
-                    </div>
-                    <div className="row mt10">
+                        <input type="password" className={classes_old + " mb10"}    value={value_old}    placeholder={this.props.placeholder.old}    onChange={this.handleChange} name="old" />
+                        <input type="password" className={classes_first + " mb10"}  value={value_first}  placeholder={this.props.placeholder.first}  onChange={this.handleChange} name="first" />
+                        <input type="password" className={classes_second + " mb10"} value={value_second} placeholder={this.props.placeholder.second} onChange={this.handleChange} name="second" />
                         <button className="btn btn-warning" type="submit">{this.props.submit}</button>     
-                    </div> 
                 </form>
             );
         }

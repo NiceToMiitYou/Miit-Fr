@@ -121,10 +121,8 @@
 
             return (
                 <form className="miit-component user-update" onSubmit={this.handleSubmit}>
-                    <div>
                         <input type="text" className={classes_name} value={value_name} placeholder={this.props.placeholder.name} onChange={this.handleChange} name="name" />
-                        <input type="submit" value={this.props.submit} />           
-                    </div>
+                    <button type="submit" className="btn btn-info mt20">{this.props.submit}</button> 
                 </form>
             );
         }

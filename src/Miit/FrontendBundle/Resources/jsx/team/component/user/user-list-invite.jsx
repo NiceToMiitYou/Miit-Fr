@@ -124,7 +124,7 @@
                 <div className="miit-component user-list-invite mt20">
                     <form onSubmit={this.handleSubmit}>
 
-                        <div className="input-field left-icon col7 col16-sm">
+                        <div className="input-field left-icon col-md-7 mb10">
                             <i className="fa fa-user-plus"></i>
                             <input type="text" className={classes_invalid} placeholder={this.props.placeholder.email} valueLink={valueLinkEmail} />
                         </div>

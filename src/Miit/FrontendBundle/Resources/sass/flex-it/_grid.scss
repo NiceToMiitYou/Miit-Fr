@@ -1,86 +1,84 @@
-// grid variables
-$grid-columns: 16;
-$grid-max-width: 65em;
- 
- 
-// breakpoints
-$breakpoint-xsmall: "only screen and (max-width: 768px)";
-$breakpoint-small: "only screen and (max-width: 992px)";
-$breakpoint-medium: "only screen and (max-width: 1199px)";
-$breakpoint-large: "only screen and (min-width: 1200px)";
+//
+// Grid system
+// --------------------------------------------------
 
-%clearfix {
-  &:after {
-    content: "";
-    display: table;
-    clear: both;
+
+// Container widths
+//
+// Set the container width, and override it for fixed navbars in media queries.
+
+.container {
+  @include container-fixed;
+
+  @media (min-width: $screen-sm-min) {
+    width: $container-sm;
+  }
+  @media (min-width: $screen-md-min) {
+    width: $container-md;
+  }
+  @media (min-width: $screen-lg-min) {
+    width: $container-lg;
   }
 }
 
-*, *:after, *:before {
-	margin: 0;
-	padding: 0;
-} 
 
-.wrapper {
-	width: 100%;
-	margin: 0 auto;
+// Fluid container
+//
+// Utilizes the mixin meant for fixed width containers, but without any defined
+// width for fluid, full width layouts.
+
+.container-fluid {
+  @include container-fixed;
 }
 
-.wrapper, .row {
-	@extend %clearfix;
+
+// Row
+//
+// Rows contain and clear the floats of your columns.
+
+.row {
+  @include make-row;
 }
 
-[class*='col'] {
-	float: left;
-	width: 100%;
-	min-height: 1px; 
-}   
 
-.wrapper {      
-	width: 95%;
-	max-width: $grid-max-width;     
+// Columns
+//
+// Common styles for small and large grid columns
+
+@include make-grid-columns;
+
+
+// Extra small grid
+//
+// Columns, offsets, pushes, and pulls for extra small devices like
+// smartphones.
+
+@include make-grid(xs);
+
+
+// Small grid
+//
+// Columns, offsets, pushes, and pulls for the small device range, from phones
+// to tablets.
+
+@media (min-width: $screen-sm-min) {
+  @include make-grid(sm);
 }
 
-@for $i from 1 through $grid-columns {      
-	.col#{$i} {         
-		width: 100% / $grid-columns * $i;   
-	}  
 
-	.push#{$i} {         
-		margin-left: 100% / $grid-columns * $i!important;   
-	}
+// Medium grid
+//
+// Columns, offsets, pushes, and pulls for the desktop device range.
 
-}   
-
-@media #{$breakpoint-xsmall} {
-	@for $i from 1 through $grid-columns {      
-		.col#{$i}-xs {         
-			width: 100% / $grid-columns * $i;   
-		}           
-	}   
+@media (min-width: $screen-md-min) {
+  @include make-grid(md);
 }
 
-@media #{$breakpoint-small} {
-	@for $i from 1 through $grid-columns {      
-		.col#{$i}-sm {         
-			width: 100% / $grid-columns * $i;   
-		}           
-	}   
-}
 
-@media #{$breakpoint-medium} {
-	@for $i from 1 through $grid-columns {      
-		.col#{$i}-md {         
-			width: 100% / $grid-columns * $i;   
-		}           
-	}   
-}
+// Large grid
+//
+// Columns, offsets, pushes, and pulls for the large desktop device range.
 
-@media #{$breakpoint-large} {
-	@for $i from 1 through $grid-columns {      
-		.col#{$i}-lg {         
-			width: 100% / $grid-columns * $i;   
-		}           
-	}   
+@media (min-width: $screen-lg-min) {
+  @include make-grid(lg);
 }

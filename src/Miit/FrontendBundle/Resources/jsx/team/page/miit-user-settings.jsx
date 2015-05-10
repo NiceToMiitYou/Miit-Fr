@@ -32,18 +32,23 @@
             var user = UserStore.getUser();
 
             return (
-                <div className="page-content page-dashboard">
-                    <div className="container">
+                <div className="page-content">
+                    <div className="container-fluid">
                         <h1 className="pt25">{user.name}</h1>
                         
                         <div className="panel mt30" >
                             <h2 className="panel-title"><i className="fa fa-th pull-left "></i>{this.props.text.informations}</h2>
                             <div className="panel-content">
                                 <div className="row">
-                                    <h3 className="mb20"><i className="fa fa-key pull-left"></i> Modifier vos informations</h3>
-                                    <MiitComponents.UserUpdate />
-                                    <h3 className="mb20 mt40"><i className="fa fa-key pull-left"></i> Changer de mot de passe</h3>
-                                    <MiitComponents.UserChangePassword />
+                                    <div className="col-md-7 mb20">
+                                        <h3 className="mb20"><i className="fa fa-key pull-left"></i> Modifier vos informations</h3>
+                                        <MiitComponents.UserUpdate />
+                                    </div>
+
+                                    <div className="col-md-5">
+                                        <h3 className="mb20"><i className="fa fa-key pull-left"></i> Changer de mot de passe</h3>
+                                        <MiitComponents.UserChangePassword />
+                                    </div>
                                 </div>
                             </div>
                         </div>
