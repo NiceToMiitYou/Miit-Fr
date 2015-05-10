@@ -41,10 +41,16 @@ $breakpoint-large: "only screen and (min-width: 1200px)";
 	width: 95%;
 	max-width: $grid-max-width;     
 }
+
 @for $i from 1 through $grid-columns {      
 	.col#{$i} {         
 		width: 100% / $grid-columns * $i;   
-	}           
+	}  
+
+	.push#{$i} {         
+		margin-left: 100% / $grid-columns * $i!important;   
+	}
+
 }   
 
 @media #{$breakpoint-xsmall} {
