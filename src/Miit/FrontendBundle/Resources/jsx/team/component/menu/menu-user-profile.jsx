@@ -18,6 +18,18 @@
             }
         },
 
+        componentDidMount: function() {
+            UserStore.addUserUpdatedListener(this._onChanged);
+        },
+
+        componentWillUnmount: function() {
+            UserStore.removeUserUpdatedListener(this._onChanged);
+        },
+
+        _onChanged: function() {
+            this.forceUpdate();
+        },
+
         render: function() {
             var user = UserStore.getUser();
 

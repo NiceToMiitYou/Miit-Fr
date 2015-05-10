@@ -15,6 +15,9 @@
             // Regex for password
             var RegexPassword = /^.{6,32}$/;
 
+            // Regex for user name
+            var RegexUserName = /^[0-9a-zA-Z_\'\-\. ]{4,42}$/i;
+
             // Generate the validator for a regex
             var validatorGenerator = function(re) {
                 // Return the validation function
@@ -121,7 +124,8 @@
                 validator: {
                     email:    validatorGenerator(RegexEmail),
                     password: validatorGenerator(RegexPassword),
-                    team:     validatorGenerator(RegexTeamName)
+                    team:     validatorGenerator(RegexTeamName),
+                    user:     validatorGenerator(RegexUserName)
                 }
             };
         }

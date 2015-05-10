@@ -43,7 +43,7 @@
                     MiitUserRequest.change_password(password_old, password_new, onPasswordChanged);
                 },
 
-                changePassword: function(name) {
+                update: function(name) {
                     // Request the server
                     MiitUserRequest.update(name, onUpdated.bind({}, name));
                 },
