@@ -2,25 +2,25 @@
     var Me;
 
     // Generate the validator for user's role
-    var _isUserGenerator = function(role) {
+    function _isUserGenerator(role) {
         return function(user) {
             var roles = (user || Me || {}).roles || [];
 
             return roles.indexOf(role) >= 0;
         };
-    };
+    }
 
     // Check if this is the same user
-    var _isItMe = function(user) {
+    function _isItMe(user) {
         var me  = (Me || {}).id || null;
         var you = (user || {}).id || null;
 
         return me === you;
-    };
+    }
 
-    var _update = function(name) {
+    function _update(name) {
         Me.name = name;
-    };
+    }
 
     var MiitUserStore = injector.resolve(
         ['object-assign', 'key-mirror', 'miit-storage', 'miit-dispatcher', 'miit-user-constants'],

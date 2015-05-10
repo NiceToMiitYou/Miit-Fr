@@ -6,6 +6,9 @@
                 ActionTypes: KeyMirror({
                     REFRESH_USERS_COMPLETED: null,
                     REFRESH_USERS_ERROR: null,
+                    // Update Actions
+                    UPDATE_TEAM_COMPLETED: null,
+                    UPDATE_TEAM_ERROR: null,
                     // Invite Actions
                     INVITE_USER_COMPLETED: null,
                     INVITE_USER_ERROR: null,

@@ -13,7 +13,7 @@ class Team
 {
     /**
      * @Assert\NotBlank(
-     *      groups={"registration"}
+     *      groups={"registration", "update"}
      * )
      * @Assert\Length(
      *      min=4,

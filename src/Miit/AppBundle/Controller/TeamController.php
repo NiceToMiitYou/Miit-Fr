@@ -8,6 +8,7 @@ use Miit\CoreDomain\User\Command\PromoteUserCommand;
 use Miit\CoreDomain\User\Command\DemoteUserCommand;
 use Miit\CoreDomain\User\Command\RemoveTeamUserCommand;
 use Miit\CoreDomain\Team\Team;
+use Miit\CoreDomain\Team\Command\UpdateTeamCommand;
 
 use Miit\CoreDomainBundle\Annotation\Permissions;
 
@@ -66,6 +67,52 @@ class TeamController extends AppControllerAbstract
         $response->setContent($data);
 
         return $response;
+    }
+
+    /**
+     * @Route("/update",
+     *      host="{team_slug}.{domain}",
+     *      name="app_team_update",
+     *      defaults={
+     *          "domain":    "%domain%"
+     *      },
+     *      requirements={
+     *          "_method":   "POST",
+     *          "domain":    "%domain%",
+     *          "team_slug": ".{4,}"
+     *      }
+     * )
+     * @Permissions(perm="ADMIN")
+     */
+    public function updateAction(Request $request)
+    {
+        $form     = $this->validateForm('team_update_type', $request);
+        $response = $this->getDefaultResponse();
+
+        if ($form->isValid())
+        {
+            $team   = $this->getTeam();
+            $update = $form->getData();
+
+            $teamId = $team->getId();
+            $name   = $update->name;
+
+            $command = new UpdateTeamCommand($teamId, $name);
+
+            try {
+                $this->get('command_bus')->dispatch($command);
+
+                $response['done'] = true;
+            } catch (\Exception $e) {
+
+                $response['errors'][] = $e->getMessage();
+            }
+        } else {
+
+            $response['errors'] = $form->getErrors();
+        }
+
+        return new JsonResponse($response);
     }
 
     /**

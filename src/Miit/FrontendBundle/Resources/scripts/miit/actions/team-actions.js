@@ -50,6 +50,17 @@
                 MiitDispatcher.dispatch(action);
             };
 
+            // Handle update
+            var onUpdated = function(name, data) {
+                var action = {
+                    type: (data.done) ? ActionTypes.UPDATE_TEAM_COMPLETED :
+                                        ActionTypes.UPDATE_TEAM_ERROR,
+                    name: name
+                };
+
+                MiitDispatcher.dispatch(action);
+            };
+
             // Handle refresh
             var onRefresh = function(data) {
                 var action = {
@@ -64,6 +75,10 @@
             return {
                 refresh: function() {
                     MiitTeamRequest.users(onRefresh);
+                },
+
+                update: function(name) {
+                    MiitTeamRequest.update(name, onUpdated.bind({}, name));
                 },
 
                 invite: function(email) {

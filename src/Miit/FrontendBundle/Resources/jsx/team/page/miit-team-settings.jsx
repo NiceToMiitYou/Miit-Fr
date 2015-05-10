@@ -16,6 +16,18 @@
             }
         },
 
+        componentDidMount: function() {
+            TeamStore.addTeamUpdatedListener(this._onChanged);
+        },
+
+        componentWillUnmount: function() {
+            TeamStore.removeTeamUpdatedListener(this._onChanged);
+        },
+
+        _onChanged: function() {
+            this.forceUpdate();
+        },
+
         render: function() {
             var team = TeamStore.getTeam();
 
@@ -26,7 +38,8 @@
                         
                         <div className="panel mt30" >
                             <h2 className="panel-title"><i className="fa fa-th pull-left "></i>Title</h2>
-                           
+                            <h3 className="mb20"><i className="fa fa-key pull-left"></i> Modifier les informations</h3>
+                            <MiitComponents.TeamUpdate />
                         </div>
                     </div>
                 </div>

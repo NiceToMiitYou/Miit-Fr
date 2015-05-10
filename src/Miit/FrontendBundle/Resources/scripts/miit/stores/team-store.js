@@ -1,6 +1,10 @@
 (function(){
     var Users = [], Team;
 
+    function _update(name) {
+        Team.name = name;
+    }
+
     function _addUser(user) {
         var index = Users.indexBy('id', user.id || '');
         
@@ -64,6 +68,9 @@
             Team = MiitStorage.shared.get('team');
 
             var events = KeyMirror({
+                // Tean updated
+                TEAM_UPDATED: null,
+                TEAM_NOT_UPDATED: null,
                 // Users refreshed
                 REFRESHED: null,
                 NOT_REFRESHED: null,
@@ -102,6 +109,9 @@
             TeamStore.generateNamedFunctions(events.REFRESHED);
             TeamStore.generateNamedFunctions(events.NOT_REFRESHED);
 
+            TeamStore.generateNamedFunctions(events.TEAM_UPDATED);
+            TeamStore.generateNamedFunctions(events.TEAM_NOT_UPDATED);
+
             TeamStore.generateNamedFunctions(events.INVITED);
             TeamStore.generateNamedFunctions(events.NOT_INVITED);
 
@@ -123,6 +133,14 @@
                         break;
                     case ActionTypes.REFRESH_USERS_ERROR:
                         TeamStore.emitNotRefreshed();
+                        break;
+
+                    case ActionTypes.UPDATE_TEAM_COMPLETED:
+                        _update(action.name);
+                        TeamStore.emitTeamUpdated();
+                        break;
+                    case ActionTypes.UPDATE_TEAM_ERROR:
+                        TeamStore.emitTeamNotUpdated();
                         break;
 
                     case ActionTypes.INVITE_USER_COMPLETED:

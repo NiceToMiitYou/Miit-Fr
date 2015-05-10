@@ -21,6 +21,19 @@
                     });
                 },
 
+                update: function(name, cb) {
+
+                    // Request for CRSF
+                    MiitUtils.ajax.crsf('update', function(token) {
+
+                        // Update the user
+                        MiitUtils.ajax.send('/app/team/update', {
+                            'name':   name,
+                            '_token': token
+                        }, cb);
+                    });
+                },
+
                 promote: function(user_id, user_roles, cb) {
 
                     // Request for CRSF
