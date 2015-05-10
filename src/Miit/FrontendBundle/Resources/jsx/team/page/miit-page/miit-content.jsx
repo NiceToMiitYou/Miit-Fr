@@ -12,7 +12,7 @@
 
         render: function() {
             return (
-                <div className="page-content page-dashboard">
+                <div className="page-content page-dashboard mt50">
                     <div className="container">
                         <h1 className="pt25">{this.props.text.configuration} - Miitic <a className="miit-title-edit"><i className="fa fa-pencil"></i></a></h1>
                         <div className="dropdown">
