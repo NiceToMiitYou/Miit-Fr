@@ -27,11 +27,9 @@ final class UpdateUserCommandHandler extends UserCommandHandlerAbstract
             );
 
             if(null !== $user) {
+                $name = $command->getName();
 
-                $user->update(
-                    $command->getName(),
-                    $command->getEmail()
-                );
+                $user->update($name);
 
                 // Persist the user
                 $this->userRepository->persist($user);

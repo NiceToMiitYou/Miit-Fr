@@ -31,20 +31,6 @@ abstract class AppControllerAbstract extends Controller
     }
 
     /**
-     * Throw a not found Exception on invalid role
-     * 
-     * @param string $role
-     */
-    protected function checkRole($role)
-    {
-        $team = $this->getTeam();
-
-        if (false === $this->get('security.authorization_checker')->isGranted($role, $team)) {
-            throw new NotFoundHttpException();
-        }
-    }
-
-    /**
      * @return Team
      */
     protected function getTeam()

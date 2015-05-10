@@ -9,6 +9,7 @@
         <parameter key="registration_type.class">Miit\AppBundle\Form\Type\RegistrationType</parameter>
 
         <parameter key="user_change_password_type.class">Miit\AppBundle\Form\Type\UserChangePasswordType</parameter>
+        <parameter key="user_update_type.class">Miit\AppBundle\Form\Type\UpdateUserType</parameter>
 
         <parameter key="promote_user_type.class">Miit\AppBundle\Form\Type\PromoteUserType</parameter>
         <parameter key="demote_user_type.class">Miit\AppBundle\Form\Type\DemoteUserType</parameter>
@@ -38,6 +39,12 @@
         <service id="app.form.type.user_change_password"
                  class="%user_change_password_type.class%">
             <tag name="form.type" alias="user_change_password_type" />
+        </service>
+
+        <!-- User Update Type -->
+        <service id="app.form.type.user_update"
+                 class="%user_update_type.class%">
+            <tag name="form.type" alias="user_update_type" />
         </service>
 
         <!-- Promote User Type -->

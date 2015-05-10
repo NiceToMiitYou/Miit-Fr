@@ -14,6 +14,17 @@
                 MiitDispatcher.dispatch(action);
             };
 
+            // Handle update
+            var onUpdated = function(name, data) {
+                var action = {
+                    type: (data.done) ? ActionTypes.UPDATE_USER_COMPLETED :
+                                        ActionTypes.UPDATE_USER_ERROR,
+                    name: name
+                };
+
+                MiitDispatcher.dispatch(action);
+            };
+
             // Handle register
             var onRegistered = function(email, team, data) {
                 var action = {
@@ -26,62 +37,20 @@
                 MiitDispatcher.dispatch(action);
             };
 
-            // Handle promote
-            var onPromoted = function(id, roles, data) {
-                var action = {
-                    type: (data.done) ? ActionTypes.PROMOTE_USER_COMPLETED :
-                                        ActionTypes.PROMOTE_USER_ERROR,
-                    id: id,
-                    roles: roles
-                };
-
-                MiitDispatcher.dispatch(action);
-            };
-
-            // Handle demote
-            var onDemoted = function(id, roles, data) {
-                var action = {
-                    type: (data.done) ? ActionTypes.DEMOTE_USER_COMPLETED :
-                                        ActionTypes.DEMOTE_USER_ERROR,
-                    id: id,
-                    roles: roles
-                };
-
-                MiitDispatcher.dispatch(action);
-            };
-
-            // Handle remove
-            var onRemoved = function(id, data) {
-                var action = {
-                    type: (data.done) ? ActionTypes.REMOVE_USER_COMPLETED :
-                                        ActionTypes.REMOVE_USER_ERROR,
-                    id: id
-                };
-
-                MiitDispatcher.dispatch(action);
-            };
-
             return {
                 changePassword: function(password_old, password_new) {
                     // Request the server
                     MiitUserRequest.change_password(password_old, password_new, onPasswordChanged);
                 },
 
+                changePassword: function(name) {
+                    // Request the server
+                    MiitUserRequest.update(name, onUpdated.bind({}, name));
+                },
+
                 register: function(email, team) {
                     MiitUserRequest.registration(email, team, onRegistered.bind({}, email, team));
                 },
-
-                promote: function(id, roles) {
-                    MiitUserRequest.promote(id, roles, onPromoted.bind({}, id, roles));
-                },
-
-                demote: function(id, roles) {
-                    MiitUserRequest.demote(id, roles, onDemoted.bind({}, id, roles));
-                },
-
-                remove: function(id) {
-                    MiitUserRequest.remove(id, onRemoved.bind({}, id));
-                }
             };
         }
     );

@@ -20,6 +20,19 @@
                     });
                 },
 
+                update: function(name, cb) {
+
+                    // Request for CRSF
+                    MiitUtils.ajax.crsf('update', function(token) {
+
+                        // Update the user
+                        MiitUtils.ajax.send('/app/user/update', {
+                            'name':   name,
+                            '_token': token
+                        }, cb);
+                    });
+                },
+
                 registration: function(email, team, cb) {
 
                     // Request for CRSF

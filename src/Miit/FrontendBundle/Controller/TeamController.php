@@ -2,6 +2,8 @@
 
 namespace Miit\FrontendBundle\Controller;
 
+use Miit\CoreDomainBundle\Annotation\Permissions;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -34,17 +36,12 @@ class TeamController extends Controller
      *          "nothing":   "(?!(login|logout))[a-zA-Z0-9-+_/\s]+"
      *      }
      * )
+     * @Permissions(perm="user", redirect=true)
      */
     public function indexAction(Request $request, $team_slug)
     {
         $team = $this->get('team_manager')->getTeam();
         $user = $this->getUser();
-
-        if (false === $this->get('security.authorization_checker')->isGranted('USER', $team)) {
-            $url = $this->generateUrl('welcome_login');
-
-            return new RedirectResponse($url);
-        }
 
         $user_context = SerializationContext::create()->setGroups(array('owner'));
         $team_context = SerializationContext::create()->setGroups(array('details'));

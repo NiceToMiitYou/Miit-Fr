@@ -23,8 +23,9 @@ interface MiitRepository extends Repository
     public function findMiitByMiitId(MiitId $miitId);
 
     /**
-     * Return the team based on his slug
+     * Return the miit based on his token and team id
      * 
+     * @param TeamId $teamId
      * @param string $token
      * 
      * @return Miit

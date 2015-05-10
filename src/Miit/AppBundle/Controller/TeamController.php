@@ -9,6 +9,8 @@ use Miit\CoreDomain\User\Command\DemoteUserCommand;
 use Miit\CoreDomain\User\Command\RemoveTeamUserCommand;
 use Miit\CoreDomain\Team\Team;
 
+use Miit\CoreDomainBundle\Annotation\Permissions;
+
 use Miit\AppBundle\DTO\UserList;
 use Miit\AppBundle\DTO\UserInvite;
 
@@ -41,11 +43,10 @@ class TeamController extends AppControllerAbstract
      *          "team_slug": ".{4,}"
      *      }
      * )
+     * @Permissions(perm="USER")
      */
     public function listUsersAction(Request $request)
     {
-        $this->checkRole('USER');
-
         $serializer = $this->get('jms_serializer');
 
         $response = new JsonResponse();
@@ -80,11 +81,10 @@ class TeamController extends AppControllerAbstract
      *          "team_slug": ".{4,}"
      *      }
      * )
+     * @Permissions(perm="ADMIN")
      */
     public function inviteUserAction(Request $request)
     {
-        $this->checkRole('ADMIN');
-
         $form       = $this->validateForm('user_registration_type', $request);
         $serializer = $this->get('jms_serializer');
 
@@ -131,11 +131,10 @@ class TeamController extends AppControllerAbstract
      *          "team_slug": ".{4,}"
      *      }
      * )
+     * @Permissions(perm="ADMIN")
      */
     public function promoteUserAction(Request $request)
     {
-        $this->checkRole('ADMIN');
-
         $form     = $this->validateForm('promote_user_type', $request);
         $response = $this->getDefaultResponse();
 
@@ -201,11 +200,10 @@ class TeamController extends AppControllerAbstract
      *          "team_slug": ".{4,}"
      *      }
      * )
+     * @Permissions(perm="ADMIN")
      */
     public function demoteUserAction(Request $request)
     {
-        $this->checkRole('ADMIN');
-
         $form     = $this->validateForm('demote_user_type', $request);
         $response = $this->getDefaultResponse();
 
@@ -271,11 +269,10 @@ class TeamController extends AppControllerAbstract
      *          "team_slug": ".{4,}"
      *      }
      * )
+     * @Permissions(perm="ADMIN")
      */
     public function removeUserAction(Request $request)
     {
-        $this->checkRole('ADMIN');
-
         $form     = $this->validateForm('remove_user_type', $request);
         $response = $this->getDefaultResponse();
 

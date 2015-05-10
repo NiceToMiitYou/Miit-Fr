@@ -141,12 +141,10 @@ class User implements Entity
 
     /**
      * @param string $name
-     * @param Email  $email
      */
-    public function update($name, Email $email)
+    public function update($name)
     {
         $this->name      = $name;
-        $this->email     = $email;
         $this->updatedAt = new \DateTime();
     }
 
@@ -330,7 +328,7 @@ class User implements Entity
      */
     public function hasRole($role)
     {
-        return in_array($role, $this->roles, true);
+        return in_array($role, $this->getRoles(), true);
     }
 
     /**

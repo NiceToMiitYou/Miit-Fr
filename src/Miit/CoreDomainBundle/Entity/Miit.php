@@ -15,6 +15,9 @@ use JMS\Serializer\Annotation as Serializer;
  * @author Tacyniak Boris <boris.tacyniak@itevents.fr>
  * 
  * @ORM\Entity(repositoryClass="Miit\CoreDomainBundle\Repository\MiitRepository")
+ * @ORM\Table(name="Miit", indexes= {
+ *      @ORM\Index(name="token_idx", columns={"token"})
+ * })
  * @ORM\Cache(usage="NONSTRICT_READ_WRITE")
  */
 class Miit extends MiitModel

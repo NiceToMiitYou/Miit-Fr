@@ -2,7 +2,7 @@
     var Me;
 
     // Generate the validator for user's role
-    var isUserGenerator = function(role) {
+    var _isUserGenerator = function(role) {
         return function(user) {
             var roles = (user || Me || {}).roles || [];
 
@@ -11,11 +11,15 @@
     };
 
     // Check if this is the same user
-    var isItMe = function(user) {
+    var _isItMe = function(user) {
         var me  = (Me || {}).id || null;
         var you = (user || {}).id || null;
 
         return me === you;
+    };
+
+    var _update = function(name) {
+        Me.name = name;
     };
 
     var MiitUserStore = injector.resolve(
@@ -26,9 +30,12 @@
             Me = MiitStorage.shared.get('user');
 
             var events = KeyMirror({
-                // Event on password Change
+                // Event on password change
                 PASSWORD_CHANGED: null,
-                PASSWORD_NOT_CHANGED: null
+                PASSWORD_NOT_CHANGED: null,
+                // Event on update
+                USER_UPDATED: null,
+                USER_NOT_UPDATED: null,
             });
 
             var UserStore = ObjectAssign({}, EventEmitter.prototype, {
@@ -36,17 +43,20 @@
                     return Me;
                 },
 
-                isAdmin: isUserGenerator('ADMIN'),
+                isAdmin: _isUserGenerator('ADMIN'),
                 
-                isUser:  isUserGenerator('USER'),
+                isUser:  _isUserGenerator('USER'),
                 
-                isOwner: isUserGenerator('OWNER'),
+                isOwner: _isUserGenerator('OWNER'),
                 
-                isItMe:  isItMe
+                isItMe:  _isItMe
             });
 
             UserStore.generateNamedFunctions(events.PASSWORD_CHANGED);
             UserStore.generateNamedFunctions(events.PASSWORD_NOT_CHANGED);
+
+            UserStore.generateNamedFunctions(events.USER_UPDATED);
+            UserStore.generateNamedFunctions(events.USER_NOT_UPDATED);
 
             UserStore.dispatchToken = MiitDispatcher.register(function(action){
 
@@ -56,6 +66,14 @@
                         break;
                     case ActionTypes.CHANGE_PASSWORD_USER_ERROR:
                         UserStore.emitPasswordNotChanged();
+                        break;
+
+                    case ActionTypes.UPDATE_USER_COMPLETED:
+                        _update(action.name);
+                        UserStore.emitUserUpdated();
+                        break;
+                    case ActionTypes.UPDATE_USER_ERROR:
+                        UserStore.emitUserNotUpdated();
                         break;
                 }
             });

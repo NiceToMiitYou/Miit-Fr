@@ -5,6 +5,7 @@
 
     <parameters>
         <parameter key="team_event_listener.class">Miit\CoreDomainBundle\EventListener\CurrentTeamListener</parameter>
+        <parameter key="annotation_listener.class">Miit\CoreDomainBundle\AnnotationDriver\AnnotationDriver</parameter>
     </parameters>
 
     <services>
@@ -17,6 +18,16 @@
             <tag name="kernel.event_listener" 
                  method="onKernelRequest" 
                  event="kernel.request" />
+        </service>
+
+        <!-- Annotation Event Listener -->
+        <service id="annotation_listener" class="%annotation_listener.class%">
+            <argument type="service" id="annotation_reader" />
+            <argument type="service" id="team_manager" />
+
+            <tag name="kernel.event_listener" 
+                 method="onKernelController" 
+                 event="kernel.controller" />
         </service>
     </services>
 </container>

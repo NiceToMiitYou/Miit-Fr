@@ -7,6 +7,9 @@
                     // Change Password Actions
                     CHANGE_PASSWORD_USER_COMPLETED: null,
                     CHANGE_PASSWORD_USER_ERROR: null,
+                    // Update Actions
+                    UPDATE_USER_COMPLETED: null,
+                    UPDATE_USER_ERROR: null,
                     // Register Actions
                     REGISTER_USER_COMPLETED: null,
                     REGISTER_USER_ERROR: null

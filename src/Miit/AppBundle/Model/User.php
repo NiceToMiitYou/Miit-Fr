@@ -34,6 +34,18 @@ class User
 
     /**
      * @Assert\NotBlank(
+     *      groups={"update"}
+     * )
+     * @Assert\Regex(
+     *      groups={"update"},
+     *      pattern="/^[0-9a-zA-Z_\'\-\. ]{4,42}$/",
+     *      match=true
+     * )
+     */
+    public $name;
+
+    /**
+     * @Assert\NotBlank(
      *      groups={"change_password"}
      * )
      * @Assert\Length(
