@@ -28,6 +28,7 @@
                             <h2 className="panel-title"><i className="fa fa-th pull-left "></i>{this.props.text.informations}</h2>
                             <div className="panel-content">
                                 <div className="row">
+                                    <h3 className="mb20"><i className="fa fa-key pull-left"></i> Changer de mot de passe</h3>
                                     <MiitComponents.UserChangePassword />
                                 </div>
                             </div>
