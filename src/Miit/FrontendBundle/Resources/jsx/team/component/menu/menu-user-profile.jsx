@@ -5,7 +5,9 @@
        getDefaultProps: function() {
             return {
                 text: {
-                    logout:    'Déconnexion'
+                    logout:    'Déconnexion',
+                    profile:   'Modifier mon profile',
+                    team:   'Modifier la team'
                 }
             };
         },
@@ -26,6 +28,20 @@
                     </div>
                     <Dropdown label={ user.name } angle="up">
                         <ul className="sl-list">
+                            <li>
+                                <Link href="/me">
+                                    <i className="fa fa-user"></i>
+                                    {this.props.text.profile}
+                                </Link> 
+                            </li>
+                            <If test={UserStore.isAdmin() }>
+                                <li>
+                                    <Link href="/us">
+                                        <i className="fa fa-users"></i>
+                                        {this.props.text.team}
+                                    </Link> 
+                                </li>
+                            </If>
                             <li>
                                 <Link href="/logout" external={true}>
                                     <i className="fa fa-sign-out"></i>
