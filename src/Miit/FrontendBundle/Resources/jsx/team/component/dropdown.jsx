@@ -1,4 +1,6 @@
 var Dropdown = React.createClass({
+    timeoutId: null,
+
     propTypes: {
         label: React.PropTypes.string.isRequired
     },
@@ -23,13 +25,26 @@ var Dropdown = React.createClass({
         return angle;
     },
 
+    _onLeave: function() {
+        if(this.isMounted()) {
+            this.setState({
+                open: false
+            });
+        }
+    },
+
     onLeave: function() {
-        this.setState({
-            open: false
-        });
+        this.timeoutId = setTimeout(this._onLeave, 675);
     },
 
     onEnter: function() {
+        if(this.state.open) {
+            clearTimeout(this.timeoutId);
+        }
+    },
+
+    onClick: function() {
+        this.onEnter();
         this.setState({
             open: !this.state.open
         });
@@ -43,7 +58,7 @@ var Dropdown = React.createClass({
         var clDropdown = classNames('miit-component', 'dropdown', open);
 
         return (
-            <span onMouseLeave={this.onLeave} onClick={this.onEnter} className={clDropdown}>
+            <span onMouseLeave={this.onLeave} onMouseEnter={this.onEnter} onClick={this.onClick} className={clDropdown}>
                 <span className="dropdown-label">
                     {this.props.label}
                     <i className={clIcon}></i>
