@@ -23,6 +23,9 @@
             if(!TeamActions) {
                 TeamActions = MiitApp.get('miit-team-actions');
             }
+            this.setState({
+                users: TeamStore.getUsers()
+            });
         },
 
         componentDidMount: function() {

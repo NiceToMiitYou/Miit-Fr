@@ -39,17 +39,17 @@
             }
             if(!TeamStore) {
                 TeamStore = MiitApp.get('miit-team-store');
-                // First define the user name
-                var team  = TeamStore.getTeam();
-
-                this.setState({
-                    value_name:   team.name,
-                    value_public: team.public
-                });
             }
             if(!TeamActions) {
                 TeamActions = MiitApp.get('miit-team-actions');
             }
+            // First define the user name
+            var team  = TeamStore.getTeam();
+
+            this.setState({
+                value_name:   team.name,
+                value_public: team.public
+            });
         },
 
         componentDidMount: function() {
@@ -118,7 +118,7 @@
             }
 
             // Check if the old is the same as the old
-            if(name === team.name) {
+            if(publix === team.public && name === team.name) {
                 this.setState({
                     invalid_same: true
                 });
@@ -183,7 +183,9 @@
                     </If>
 
                     <div>
-                        <input type="submit" value={this.props.submit} />
+                        <button type="submit" className="btn btn-info mt20">
+                            {this.props.submit}
+                        </button>
                     </div>
                 </form>
             );
