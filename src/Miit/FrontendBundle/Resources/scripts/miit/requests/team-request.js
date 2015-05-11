@@ -32,7 +32,7 @@
                         };
 
                         if(publix) {
-                            data['public'] = 'public';
+                            data.public = 'public';
                         }
 
                         // Update the user
