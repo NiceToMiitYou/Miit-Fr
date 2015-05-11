@@ -20,7 +20,10 @@ class TeamUpdateType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name',   'text');
-        $builder->add('public', 'checkbox');
+        $builder->add('public', 'checkbox', array(
+            'value'    => 'public',
+            'required' => false
+        ));
     }
 
     /**
