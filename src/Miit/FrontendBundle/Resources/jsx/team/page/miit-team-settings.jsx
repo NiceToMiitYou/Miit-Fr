@@ -38,8 +38,12 @@
                         
                         <div className="panel mt30" >
                             <h2 className="panel-title"><i className="fa fa-th pull-left "></i>Title</h2>
+                            
                             <h3 className="mb20"><i className="fa fa-key pull-left"></i> Modifier les informations</h3>
                             <MiitComponents.TeamUpdate />
+
+                            <h3 className="mt40 mb10"><i className="fa fa-users pull-left"></i> Liste des utilisateurs</h3>
+                            <MiitComponents.UserList autoload={true} />
                         </div>
                     </div>
                 </div>

@@ -59,12 +59,7 @@
 
                         <div className="panel" >
                             <h2 className="panel-title"><i className="fa fa-exchange pull-left "></i> {this.props.text.access}</h2>
-                            <div className="panel-content">
-                                <h3><i className="fa fa-lock pull-left"></i> Confidentialité</h3>
-                                <MiitComponents.MiitPublicPrivate />
-
-                                <h3 className="mt40 mb10"><i className="fa fa-users pull-left"></i> Liste des utilisateurs</h3>
-                                <MiitComponents.UserList autoload={true} />                 
+                            <div className="panel-content">               
                             </div>
                         </div>
                         

@@ -7,6 +7,12 @@
                 placeholder: {
                     name: "Nom de l'équipe"
                 },
+                text: {
+                    public:    'Publique',
+                    isPublic:  'Votre Miit est publique et accessible a tout le monde via l\'URL suivante',
+                    private:   'Privé',
+                    isPrivate: 'Votre Miit est privé et ne sera accessible qu\'aux personnes de votre choix'
+                },
                 submit: "Modifier"
             };
         },
@@ -83,6 +89,16 @@
                 this.setState(update);
             }
         },
+        
+        handlePublic: function(value) {
+            this.setState({
+                value_public: value
+            });
+        },
+
+        generateUrl: function() {
+            return window.location.protocol + '//' + window.location.hostname + '/';
+        },
 
         handleSubmit: function(e) {
             e.preventDefault();
@@ -135,8 +151,39 @@
             return (
                 <form className="miit-component user-update" onSubmit={this.handleSubmit}>
                     <div>
-                        <input type="text" className={classes_name} value={value_name} placeholder={this.props.placeholder.name} onChange={this.handleChange} name="name" />
-                        <input type="submit" value={this.props.submit} />           
+                        <input type="text" className={classes_name} value={value_name} placeholder={this.props.placeholder.name} onChange={this.handleChange} name="name" />           
+                    </div>
+
+                    <div className="checkbox-field mb20">
+                        <label>
+                            <input type="radio" name="confid" className="option-input radio" defaultChecked={value_public} onChange={this.handlePublic.bind(this, true)} />
+                            {this.props.text.public}
+                        </label>
+                        <label className="ml40">
+                            <input type="radio" name="confid" className="option-input radio" defaultChecked={!value_public} onChange={this.handlePublic.bind(this, false)}/>
+                            {this.props.text.private}
+                        </label>
+                    </div>
+
+                    <If test={value_public}>
+                        <div className="row mb20">
+                            <p className="mb10">{this.props.text.isPublic}</p>
+                            
+                            <div className="col8 col16-md">
+                                <div className="input-field left-icon">
+                                    <i className="fa fa-link"></i>
+                                    <input value={this.generateUrl()} type="text" disabled />
+                                </div>
+                            </div>
+                        </div>
+                    </If>
+
+                    <If test={!value_public}>
+                        <p className="mb10">{this.props.text.isPrivate}</p>
+                    </If>
+
+                    <div>
+                        <input type="submit" value={this.props.submit} />
                     </div>
                 </form>
             );
