@@ -1,5 +1,4 @@
 var gulp       = require('gulp');
-var bower      = require('gulp-bower');
 var clean      = require('gulp-clean');
 var concat     = require('gulp-concat');
 var jshint     = require('gulp-jshint');
@@ -17,12 +16,7 @@ var config = require('./app/config/gulp_config.js');
 var path   = require('./app/config/gulp_path.js');
 
 // Default tasks
-gulp.task('default', ['bower', 'copy', 'watch', 'build']);
-
-gulp.task('bower', ['clean'], function() {
-    // Bower install
-    bower().pipe(gulp.dest(config.BOWER));
-});
+gulp.task('default', ['copy', 'watch', 'build']);
 
 gulp.task('clean', function() {
     // Clean the dist folder
@@ -30,7 +24,7 @@ gulp.task('clean', function() {
         .pipe(clean({force: true}));
 });
 
-gulp.task('copy', ['clean', 'bower'], function() {
+gulp.task('copy', ['clean'], function() {
     // Copy libs
     gulp.src(path.LIBS_ALL)
         // Copy all libs files in LIBS_DIST
