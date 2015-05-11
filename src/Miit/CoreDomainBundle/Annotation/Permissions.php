@@ -20,4 +20,9 @@ class Permissions
      * @var boolean
      */
     public $redirect = false;
+
+    /**
+     * @var boolean
+     */
+    public $strict = false;
 }

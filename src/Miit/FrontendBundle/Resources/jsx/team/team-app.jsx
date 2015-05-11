@@ -1,5 +1,5 @@
 (function(){
-    var Router, PageStore, PageActions;
+    var Router, TeamStore, TeamActions, PageStore, PageActions;
 
     var defaultPage = 'home';
 
@@ -18,6 +18,15 @@
             // Get the page actions
             if(!PageActions) {
                 PageActions = MiitApp.get('miit-page-actions');
+            }
+            // Get the page store
+            if(!TeamStore) {
+                TeamStore = MiitApp.get('miit-team-store');
+            }
+            // Get the page actions
+            if(!TeamActions) {
+                TeamActions = MiitApp.get('miit-team-actions');
+                TeamActions.refresh();
             }
             // Get the router and handle page change
             if(!Router) {

@@ -12,6 +12,7 @@ window.MiitApp = (function() {
                     return injector.get(serviceName);
                 },
                 init: function() {
+                    // Initialize the router
                     MiitRouter.init();
                 }
             };

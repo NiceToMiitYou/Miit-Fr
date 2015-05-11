@@ -43,6 +43,11 @@ class TeamVoter implements VoterInterface
     public function vote(TokenInterface $token, $team, array $attributes)
     {
         // If not a team, DENIED
+        if (!$this->supportsAttribute($attributes)) {
+            return VoterInterface::ACCESS_DENIED;
+        }
+
+        // If not a team, DENIED
         if (!$team instanceof TeamModel) {
             return VoterInterface::ACCESS_DENIED;
         }
@@ -50,40 +55,30 @@ class TeamVoter implements VoterInterface
         // Retrieve the user
         $user = $token->getUser();
 
-        // make sure there is a user object (i.e. that the user is logged in)
-        if(!$team->isPublic()) {
-            if (
-                !$user instanceof UserInterface &&
-                !$user instanceof UserModel
-            ) {
-                return VoterInterface::ACCESS_DENIED;
-            }
-
-            $isInTeam = $this->userRepository->isUserOfTeam($user->getId(), $team->getId());
-
-            if(false === $isInTeam) {
-                return VoterInterface::ACCESS_DENIED;
-            }
-        }
-
         // extract the role
-        $role = reset($attributes);
+        $role   = $attributes['role'];
+        $strict = $attributes['strict'];
 
         switch ($role) {
             case TeamVoter::ROLE_USER:
                 // Access Granted if the team is public
-                if($team->isPublic()) {
+                if($team->isPublic() && false === $strict)
+                {
                     return VoterInterface::ACCESS_GRANTED;
                 }
 
             case TeamVoter::ROLE_ADMIN:
-                // Access Granted if the team is public
-                if($team->isPublic()) {
-                    $isInTeam = $this->userRepository->isUserOfTeam($user->getId(), $team->getId());
+                if (
+                    !$user instanceof UserInterface &&
+                    !$user instanceof UserModel
+                ) {
+                    return VoterInterface::ACCESS_DENIED;
+                }
 
-                    if(false === $isInTeam) {
-                        return VoterInterface::ACCESS_DENIED;
-                    }
+                $isInTeam = $this->userRepository->isUserOfTeam($user->getId(), $team->getId());
+
+                if(false === $isInTeam) {
+                    return VoterInterface::ACCESS_DENIED;
                 }
 
                 $needed_role = $team->getRole($role);
@@ -100,14 +95,21 @@ class TeamVoter implements VoterInterface
     /**
      * {@inheritDoc}
      */
-    public function supportsAttribute($attribute)
+    public function supportsAttribute($attributes)
     {
+        if(
+            !array_key_exists('role', $attributes) || 
+            !array_key_exists('strict', $attributes)
+        ) {
+            return false;
+        }
+
         $allowed = array(
             TeamVoter::ROLE_ADMIN,
             TeamVoter::ROLE_USER
         );
 
-        return in_array($attribute, $allowed);
+        return in_array($attributes['role'], $allowed);
     }
 
     /**

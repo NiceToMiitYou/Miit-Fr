@@ -38,9 +38,7 @@ var Dropdown = React.createClass({
     },
 
     onEnter: function() {
-        if(this.state.open) {
-            clearTimeout(this.timeoutId);
-        }
+        clearTimeout(this.timeoutId);
     },
 
     onClick: function() {

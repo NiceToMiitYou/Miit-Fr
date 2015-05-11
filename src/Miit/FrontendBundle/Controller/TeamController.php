@@ -36,7 +36,7 @@ class TeamController extends Controller
      *          "nothing":   "(?!(login|logout))[a-zA-Z0-9-+_/\s]+"
      *      }
      * )
-     * @Permissions(perm="user", redirect=true)
+     * @Permissions(perm="USER", redirect=true)
      */
     public function indexAction(Request $request, $team_slug)
     {
@@ -47,7 +47,7 @@ class TeamController extends Controller
             $token = $this->get('security.context')->getToken();
             $user  = array(
                 'id'    => 'none',
-                'name'  => $token->getUsername(),
+                'name'  => 'Anonyme',
                 'roles' => array('ANONYM')
             );
         }

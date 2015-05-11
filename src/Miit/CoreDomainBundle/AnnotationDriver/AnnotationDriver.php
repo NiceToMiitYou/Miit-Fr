@@ -62,12 +62,18 @@ class AnnotationDriver
             //Found our annotation
             if($configuration instanceof Permissions)
             {
-                $role     = strtoupper($configuration->perm);
+                $role     = $configuration->perm;
                 $redirect = $configuration->redirect;
+                $strict   = $configuration->strict;
                 $team     = $this->teamManager->getTeam();
                 $checker  = $controllerObject->get('security.authorization_checker');
 
-                if (false === $checker->isGranted($role, $team))
+                $attributes = array(
+                    'role'   => $role,
+                    'strict' => $strict
+                );
+
+                if (false === $checker->isGranted($attributes, $team))
                 {
                     if($redirect)
                     {
