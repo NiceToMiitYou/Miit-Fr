@@ -5,6 +5,7 @@
         getDefaultProps: function () {
             return {
                 text: {
+                    applications:  'Applications',
                     informations: 'Informations'
                 }  
             };
@@ -43,6 +44,38 @@
                     <div className="container">
                         <h1 className="pt25">{team.name}</h1>
                         
+                        <div className="panel mb30" >
+                            <h2 className="panel-title"><i className="fa fa-th pull-left "></i> {this.props.text.applications}</h2>
+                            <div className="panel-content">
+                                <div className="row">
+                                    <ul className="app-list">
+
+                                        <li>
+                                            <a>
+                                                <i className="fa fa-weixin bg-blue"></i>
+                                                <span>Chat</span>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a>
+                                                <i className="fa fa-question bg-green"></i>
+                                                <span>Quizz</span>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a className="add-app">
+                                                <i className="fa fa-plus bg-blue-grey"></i>
+                                                <span>Ajouter une App</span>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
                         <div className="panel mt30" >
                             <h2 className="panel-title"><i className="fa fa-th pull-left "></i>Title</h2>
                             
