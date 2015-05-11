@@ -150,7 +150,7 @@
 
             return (
                 <form className="miit-component user-update" onSubmit={this.handleSubmit}>
-                    <div>
+                    <div className="mb20">
                         <input type="text" className={classes_name} value={value_name} placeholder={this.props.placeholder.name} onChange={this.handleChange} name="name" />           
                     </div>
 
