@@ -43,13 +43,15 @@
                     return Me;
                 },
 
-                isAdmin: _isUserGenerator('ADMIN'),
+                isAdmin:  _isUserGenerator('ADMIN'),
                 
-                isUser:  _isUserGenerator('USER'),
+                isAnonym: _isUserGenerator('ANONYM'),
+
+                isUser:   _isUserGenerator('USER'),
                 
-                isOwner: _isUserGenerator('OWNER'),
+                isOwner:  _isUserGenerator('OWNER'),
                 
-                isItMe:  _isItMe
+                isItMe:   _isItMe
             });
 
             UserStore.generateNamedFunctions(events.PASSWORD_CHANGED);

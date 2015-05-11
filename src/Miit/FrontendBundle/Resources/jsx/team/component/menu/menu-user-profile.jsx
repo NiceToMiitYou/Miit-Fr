@@ -5,9 +5,10 @@
        getDefaultProps: function() {
             return {
                 text: {
-                    logout:    'Déconnexion',
-                    profile:   'Modifier mon profile',
-                    team:   'Modifier la team'
+                    logout:  'Déconnexion',
+                    login:   'Connexion',
+                    profile: 'Modifier mon profile',
+                    team:    'Modifier l\'équipe'
                 }
             };
         },
@@ -40,13 +41,7 @@
                     </div>
                     <Dropdown label={ user.name } angle="up">
                         <ul className="sl-list">
-                            <li>
-                                <Link href="/me">
-                                    <i className="fa fa-user"></i>
-                                    {this.props.text.profile}
-                                </Link> 
-                            </li>
-                            <If test={UserStore.isAdmin() }>
+                            <If test={UserStore.isAdmin()}>
                                 <li>
                                     <Link href="/settings">
                                         <i className="fa fa-users"></i>
@@ -54,12 +49,28 @@
                                     </Link> 
                                 </li>
                             </If>
-                            <li>
-                                <Link href="/logout" external={true}>
-                                    <i className="fa fa-sign-out"></i>
-                                    {this.props.text.logout}
-                                </Link> 
-                            </li> 
+                            <If test={UserStore.isUser()}>
+                                <li>
+                                    <Link href="/me">
+                                        <i className="fa fa-user"></i>
+                                        {this.props.text.profile}
+                                    </Link> 
+                                </li>
+                                <li>
+                                    <Link href="/logout" external={true}>
+                                        <i className="fa fa-sign-out"></i>
+                                        {this.props.text.logout}
+                                    </Link> 
+                                </li>
+                            </If>
+                            <If test={UserStore.isAnonym()}>
+                                <li>
+                                    <Link href="/login" external={true}>
+                                        <i className="fa fa-sign-in"></i>
+                                        {this.props.text.login}
+                                    </Link> 
+                                </li>
+                            </If>
                         </ul>
                     </Dropdown>
                 </span>

@@ -6,14 +6,7 @@
                     <div className="sl-wrapper">
                         <MiitComponents.MenuHeader />
 
-                        <MiitComponents.MenuLabel icon="fa-heart" label="Favorites" />
-
-                        <ul className="sl-list">
-                            <li><a><i className="fa fa-weixin pull-left"></i>Chat miit</a></li>
-                            <li><a><i className="fa fa-question pull-left"></i>Quizz : Que pensez-vous...</a></li>
-                        </ul>
-
-                        <MiitComponents.MenuLabel icon="fa-map-marker" label="Miits" />
+                        <MiitComponents.MenuLabel icon="fa-map-marker" label="Applications" />
 
                         <ul className="sl-list">
                             <li>

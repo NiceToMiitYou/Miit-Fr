@@ -1,5 +1,5 @@
 (function(){
-    var TeamStore;
+    var UserStore, TeamStore;
 
     MiitComponents.MiitTeamSettings = React.createClass({
         getDefaultProps: function () {
@@ -11,6 +11,9 @@
         },
 
         componentWillMount: function() {
+            if(!UserStore) {
+                UserStore = MiitApp.get('miit-user-store');
+            }
             if(!TeamStore) {
                 TeamStore = MiitApp.get('miit-team-store');
             }
@@ -29,6 +32,10 @@
         },
 
         render: function() {
+            if(!UserStore.isAdmin()) {
+                return null;
+            }
+
             var team = TeamStore.getTeam();
 
             return (

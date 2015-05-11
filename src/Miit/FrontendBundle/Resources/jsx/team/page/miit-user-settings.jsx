@@ -29,6 +29,10 @@
         },
 
         render: function() {
+            if(!UserStore.isUser()) {
+                return null;
+            }
+
             var user = UserStore.getUser();
 
             return (
