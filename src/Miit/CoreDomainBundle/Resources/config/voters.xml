@@ -10,8 +10,7 @@
     <services>
         <service id="security.access.post_document_voter"
             class="%team_voter.class%" public="false">
-            
-            <argument type="service" id="team_manager" />
+
             <argument type="service" id="user_repository" />
             <tag name="security.voter" />
         </service>

@@ -23,22 +23,15 @@ class TeamVoter implements VoterInterface
     const ROLE_USER  = 'USER';
 
     /**
-     * @var TeamManager
-     */
-    private $teamManager;
-
-    /**
      * @var UserRepository
      */
     private $userRepository;
 
     /**
-     * @param TeamManager    $teamManager
      * @param UserRepository $userRepository
      */
-    public function __construct(TeamManager $teamManager, UserRepository $userRepository)
+    public function __construct(UserRepository $userRepository)
     {
-        $this->teamManager    = $teamManager;
         $this->userRepository = $userRepository;
     }
 
