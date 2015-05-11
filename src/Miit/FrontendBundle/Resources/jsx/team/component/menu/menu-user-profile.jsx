@@ -56,6 +56,8 @@
                                         {this.props.text.profile}
                                     </Link> 
                                 </li>
+                            </If>
+                            <If test={UserStore.isUser()}>
                                 <li>
                                     <Link href="/logout" external={true}>
                                         <i className="fa fa-sign-out"></i>

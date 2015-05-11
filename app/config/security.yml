@@ -38,6 +38,7 @@ security:
 
         # redirect after login
         main:
+            anonymous: ~
             pattern:  ^/
             host: ".%domain%"
             form_login:
@@ -61,7 +62,5 @@ security:
     # of your application based on roles, ip, host or methods
     # http://symfony.com/doc/current/cookbook/security/access_control.html
     access_control:
-        - { host: miit.fr, path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
-        - { host: .miit.fr, path: ^/, roles: ROLE_USER }
-        - { host: miit.dev, path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { host: .miit.dev, path: ^/, roles: ROLE_USER }
+        - { host: .miit.fr, path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        - { host: .miit.dev, path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }

@@ -43,6 +43,15 @@ class TeamController extends Controller
         $team = $this->get('team_manager')->getTeam();
         $user = $this->getUser();
 
+        if(null === $user && $team->isPublic()) {
+            $token = $this->get('security.context')->getToken();
+            $user  = array(
+                'id'    => 'none',
+                'name'  => $token->getUsername(),
+                'roles' => array('ANONYM')
+            );
+        }
+
         $user_context = SerializationContext::create()->setGroups(array('owner'));
         $team_context = SerializationContext::create()->setGroups(array('details'));
 
@@ -84,6 +93,7 @@ class TeamController extends Controller
         return $this->render('MiitFrontendBundle:team:login.html.twig', array(
             'last_username' => $session->get(SecurityContext::LAST_USERNAME),
             'team_name'     => $team->getName(),
+            'team_public'   => $team->isPublic(),
             'error'         => $error,
         ));
     }
