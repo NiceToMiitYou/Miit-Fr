@@ -40,15 +40,14 @@
             var team = TeamStore.getTeam();
 
             return (
-                <div className="page-content page-dashboard">
-                    <div className="container">
+                    <div className="container-fluid">
                         <h1 className="pt25">{team.name}</h1>
                         
-                        <div className="panel mb30" >
+                        <div className="panel mb30 mt30" >
                             <h2 className="panel-title"><i className="fa fa-th pull-left "></i> {this.props.text.applications}</h2>
                             <div className="panel-content">
                                 <div className="row">
-                                    <ul className="app-list">
+                                    <ul className="app-list col-md-12">
 
                                         <li>
                                             <a>
@@ -78,15 +77,15 @@
 
                         <div className="panel mt30" >
                             <h2 className="panel-title"><i className="fa fa-th pull-left "></i>Title</h2>
-                            
-                            <h3 className="mb20"><i className="fa fa-key pull-left"></i> Modifier les informations</h3>
-                            <MiitComponents.TeamUpdate />
+                            <div className="panel-content">
+                                <h3 className="mb20"><i className="fa fa-key pull-left"></i> Modifier les informations</h3>
+                                <MiitComponents.TeamUpdate />
 
-                            <h3 className="mt40 mb10"><i className="fa fa-users pull-left"></i> Liste des utilisateurs</h3>
-                            <MiitComponents.UserList autoload={true} />
+                                <h3 className="mt40 mb10"><i className="fa fa-users pull-left"></i> Liste des utilisateurs</h3>
+                                <MiitComponents.UserList autoload={true} />
+                            </div>
                         </div>
                     </div>
-                </div>
             );
         }
     });

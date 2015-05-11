@@ -36,7 +36,6 @@
             var user = UserStore.getUser();
 
             return (
-                <div className="page-content">
                     <div className="container-fluid">
                         <h1 className="pt25">{user.name}</h1>
                         
@@ -57,7 +56,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
             );
         }
     });
