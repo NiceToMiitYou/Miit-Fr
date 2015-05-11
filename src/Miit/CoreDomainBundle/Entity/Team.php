@@ -48,7 +48,7 @@ class Team extends TeamModel
     protected $name;
 
     /**
-     * The list of users which they have subscribe
+     * {@inheritDoc}
      * 
      * @ORM\Column(type="boolean", nullable=false)
      * 
@@ -59,16 +59,18 @@ class Team extends TeamModel
     /**
      * {@inheritDoc}
      * 
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="teams")
+     * @ORM\Column(type="boolean", nullable=false)
+     * 
+     * @Serializer\Groups({"list", "details"})
      */
-    protected $users;
+    protected $public;
 
     /**
      * {@inheritDoc}
      * 
-     * @ORM\OneToMany(targetEntity="Miit", mappedBy="team")
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="teams")
      */
-    protected $miits;
+    protected $users;
 
     /**
      * {@inheritDoc}

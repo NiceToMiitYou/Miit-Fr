@@ -6,7 +6,6 @@
     <parameters>
         <parameter key="user_factory.class">Miit\CoreDomainBundle\Factory\UserFactory</parameter>
         <parameter key="team_factory.class">Miit\CoreDomainBundle\Factory\TeamFactory</parameter>
-        <parameter key="miit_factory.class">Miit\CoreDomainBundle\Factory\MiitFactory</parameter>
     </parameters>
 
     <services>
@@ -15,8 +14,5 @@
 
         <!-- Team Factory -->
         <service id="team_factory" class="%team_factory.class%"></service>
-
-        <!-- Miit Factory -->
-        <service id="miit_factory" class="%miit_factory.class%"></service>
     </services>
 </container>

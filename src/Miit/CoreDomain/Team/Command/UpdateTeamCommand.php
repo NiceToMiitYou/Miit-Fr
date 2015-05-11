@@ -24,13 +24,19 @@ final class UpdateTeamCommand implements Command
     private $name;
 
     /**
+     * @var boolean
+     */
+    private $public;
+
+    /**
      * @param TeamId $teamId
      * @param string $name
      */
-    public function __construct(TeamId $teamId, $name)
+    public function __construct(TeamId $teamId, $name, $public)
     {
         $this->teamId = $teamId;
-        $this->name   = (string) $name;
+        $this->name   = (string)  $name;
+        $this->public = (boolean) $public;
     }
 
     /**
@@ -47,5 +53,13 @@ final class UpdateTeamCommand implements Command
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getPublic()
+    {
+        return $this->public;
     }
 }

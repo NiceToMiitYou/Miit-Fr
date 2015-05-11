@@ -51,11 +51,12 @@
             };
 
             // Handle update
-            var onUpdated = function(name, data) {
+            var onUpdated = function(name, publix, data) {
                 var action = {
                     type: (data.done) ? ActionTypes.UPDATE_TEAM_COMPLETED :
                                         ActionTypes.UPDATE_TEAM_ERROR,
-                    name: name
+                    name:   name,
+                    public: publix
                 };
 
                 MiitDispatcher.dispatch(action);
@@ -77,8 +78,8 @@
                     MiitTeamRequest.users(onRefresh);
                 },
 
-                update: function(name) {
-                    MiitTeamRequest.update(name, onUpdated.bind({}, name));
+                update: function(name, publix) {
+                    MiitTeamRequest.update(name, publix, onUpdated.bind({}, name, publix));
                 },
 
                 invite: function(email) {

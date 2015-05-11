@@ -96,8 +96,9 @@ class TeamController extends AppControllerAbstract
 
             $teamId = $team->getId();
             $name   = $update->name;
+            $public = $update->public;
 
-            $command = new UpdateTeamCommand($teamId, $name);
+            $command = new UpdateTeamCommand($teamId, $name, $public);
 
             try {
                 $this->get('command_bus')->dispatch($command);

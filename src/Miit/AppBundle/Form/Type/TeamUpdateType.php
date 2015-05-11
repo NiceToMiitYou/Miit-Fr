@@ -8,18 +8,19 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Class UpdateUserType
+ * Class TeamUpdateType
  * 
  * @author Tacyniak Boris <boris.tacyniak@itevents.fr>
  */
-class UpdateUserType extends AbstractType
+class TeamUpdateType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', 'text');
+        $builder->add('name',   'text');
+        $builder->add('public', 'checkbox');
     }
 
     /**
@@ -28,7 +29,7 @@ class UpdateUserType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class'        => 'Miit\AppBundle\Model\User',
+            'data_class'        => 'Miit\AppBundle\Model\Team',
             'validation_groups' => array('update'),
             'csrf_protection'   => true,
             'csrf_field_name'   => '_token',
@@ -41,6 +42,6 @@ class UpdateUserType extends AbstractType
      */
     public function getName()
     {
-        return 'user_update_type';
+        return 'team_update_type';
     }
 }

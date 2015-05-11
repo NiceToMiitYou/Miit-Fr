@@ -21,4 +21,15 @@ class Team
      * )
      */
     public $name;
+
+    /**
+     * @Assert\NotBlank(
+     *      groups={"update"}
+     * )
+     * @Assert\Type(
+     *      type="bool",
+     *      groups={"update"}
+     * )
+     */
+    public $public;
 }

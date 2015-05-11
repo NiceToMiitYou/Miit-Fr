@@ -7,10 +7,10 @@
         <parameter key="user_registration_type.class">Miit\AppBundle\Form\Type\UserRegistrationType</parameter>
         <parameter key="team_registration_type.class">Miit\AppBundle\Form\Type\TeamRegistrationType</parameter>
         <parameter key="registration_type.class">Miit\AppBundle\Form\Type\RegistrationType</parameter>
-        <parameter key="team_update_type.class">Miit\AppBundle\Form\Type\UpdateTeamType</parameter>
+        <parameter key="team_update_type.class">Miit\AppBundle\Form\Type\TeamUpdateType</parameter>
 
         <parameter key="user_change_password_type.class">Miit\AppBundle\Form\Type\UserChangePasswordType</parameter>
-        <parameter key="user_update_type.class">Miit\AppBundle\Form\Type\UpdateUserType</parameter>
+        <parameter key="user_update_type.class">Miit\AppBundle\Form\Type\UserUpdateType</parameter>
 
         <parameter key="promote_user_type.class">Miit\AppBundle\Form\Type\PromoteUserType</parameter>
         <parameter key="demote_user_type.class">Miit\AppBundle\Form\Type\DemoteUserType</parameter>

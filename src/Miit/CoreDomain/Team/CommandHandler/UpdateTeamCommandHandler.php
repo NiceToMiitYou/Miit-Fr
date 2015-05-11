@@ -26,7 +26,10 @@ final class UpdateTeamCommandHandler extends TeamCommandHandlerAbstract
                 $command->getTeamId()
             );
 
-            $team->update($command->getName());
+            $name   = $command->getName();
+            $public = $command->getPublic();
+
+            $team->update($name, $public);
 
             // Persist the team
             $this->teamRepository->persist($team);

@@ -32,7 +32,6 @@ class MiitCoreDomainExtension extends Extension
             'event_listeners.xml',
             'user_command_handlers.xml',
             'team_command_handlers.xml',
-            'miit_command_handlers.xml',
             'command_bus.xml'
         );
 

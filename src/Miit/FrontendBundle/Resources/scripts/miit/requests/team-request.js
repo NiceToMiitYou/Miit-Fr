@@ -21,7 +21,7 @@
                     });
                 },
 
-                update: function(name, cb) {
+                update: function(name, publix, cb) { // Use "publiX" for reserved word "public"
 
                     // Request for CRSF
                     MiitUtils.ajax.crsf('update', function(token) {
@@ -29,6 +29,7 @@
                         // Update the user
                         MiitUtils.ajax.send('/app/team/update', {
                             'name':   name,
+                            'public': (publix) ? 'true' : 'false',
                             '_token': token
                         }, cb);
                     });

@@ -8,11 +8,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Class UpdateTeamType
+ * Class UserUpdateType
  * 
  * @author Tacyniak Boris <boris.tacyniak@itevents.fr>
  */
-class UpdateTeamType extends AbstractType
+class UserUpdateType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -28,7 +28,7 @@ class UpdateTeamType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class'        => 'Miit\AppBundle\Model\Team',
+            'data_class'        => 'Miit\AppBundle\Model\User',
             'validation_groups' => array('update'),
             'csrf_protection'   => true,
             'csrf_field_name'   => '_token',
@@ -41,6 +41,6 @@ class UpdateTeamType extends AbstractType
      */
     public function getName()
     {
-        return 'team_update_type';
+        return 'user_update_type';
     }
 }

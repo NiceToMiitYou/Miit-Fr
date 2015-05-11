@@ -1,8 +1,9 @@
 (function(){
     var Users = [], Team;
 
-    function _update(name) {
-        Team.name = name;
+    function _update(name, publix) {
+        Team.name   = name;
+        Team.public = publix;
     }
 
     function _addUser(user) {
@@ -136,7 +137,7 @@
                         break;
 
                     case ActionTypes.UPDATE_TEAM_COMPLETED:
-                        _update(action.name);
+                        _update(action.name, action.public);
                         TeamStore.emitTeamUpdated();
                         break;
                     case ActionTypes.UPDATE_TEAM_ERROR:

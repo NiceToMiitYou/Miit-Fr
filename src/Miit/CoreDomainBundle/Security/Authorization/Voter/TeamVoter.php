@@ -70,6 +70,11 @@ class TeamVoter implements VoterInterface
 
         switch ($role) {
             case TeamVoter::ROLE_USER:
+                // Access Granted if the team is public
+                if($team->isPublic()) {
+                    return VoterInterface::ACCESS_GRANTED;
+                }
+
             case TeamVoter::ROLE_ADMIN:
 
                 $needed_role = $team->getRole($role);

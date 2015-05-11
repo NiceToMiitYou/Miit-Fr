@@ -43,15 +43,6 @@ interface UserRepository extends Repository
     public function findUsersByTeam(TeamId $teamId);
 
     /**
-     * Return the list of user based on the miit
-     * 
-     * @param MiitId $miitId
-     * 
-     * @return array
-     */
-    public function findUsersByMiit(MiitId $miitId);
-
-    /**
      * Return the user based on his id
      * 
      * @param UserId $userid

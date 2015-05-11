@@ -33,6 +33,13 @@
             }
             if(!TeamStore) {
                 TeamStore = MiitApp.get('miit-team-store');
+                // First define the user name
+                var team  = TeamStore.getTeam();
+
+                this.setState({
+                    value_name:   team.name,
+                    value_public: team.public
+                });
             }
             if(!TeamActions) {
                 TeamActions = MiitApp.get('miit-team-actions');
@@ -51,9 +58,12 @@
 
         _onChanged: function() {
             if(this.isMounted()) {
-                // Reset value
+                // Be sure that is set
+                var team  = TeamStore.getTeam();
+
                 this.setState({
-                    value_name: ''
+                    value_name:   team.name,
+                    value_public: team.public
                 });
             }
         },
@@ -77,8 +87,9 @@
         handleSubmit: function(e) {
             e.preventDefault();
 
-            var name = this.state.value_name;
-            var team = TeamStore.getTeam();
+            var name   = this.state.value_name;
+            var publix = this.state.value_public;
+            var team   = TeamStore.getTeam();
             
             this.setState(this.getDefaultErrors());
 
@@ -106,7 +117,7 @@
                 return;
             }
 
-            TeamActions.update(name);
+            TeamActions.update(name, publix);
 
             return;
         },
@@ -118,6 +129,8 @@
                            this.state.invalid_same ||
                            this.state.invalid_format
             });
+
+            var value_public = this.state.value_public;
 
             return (
                 <form className="miit-component user-update" onSubmit={this.handleSubmit}>

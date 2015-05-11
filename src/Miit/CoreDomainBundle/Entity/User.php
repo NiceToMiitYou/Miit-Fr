@@ -99,16 +99,6 @@ class User extends UserModel implements UserInterface, EquatableInterface
     /**
      * {@inheritDoc}
      * 
-     * @ORM\ManyToMany(targetEntity="Miit", inversedBy="users")
-     * @ORM\JoinTable(name="users_miits")
-     * 
-     * @Serializer\Exclude
-     */
-    protected $miits;
-
-    /**
-     * {@inheritDoc}
-     * 
      * @ORM\Column(type="datetime", nullable=true)
      * 
      * @Serializer\Groups({"owner", "details"})

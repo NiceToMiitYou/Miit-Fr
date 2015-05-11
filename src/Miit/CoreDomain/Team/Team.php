@@ -33,6 +33,13 @@ class Team implements Entity
     protected $name;
 
     /**
+     * Define if the miit is public
+     * 
+     * @var boolean
+     */
+    protected $public;
+
+    /**
      * Define if the team is locked
      * 
      * @var boolean
@@ -73,6 +80,7 @@ class Team implements Entity
         $this->slug   = (string) $slug;
         $this->name   = (string) $name;
         $this->locked = false;
+        $this->public = false;
     }
 
     /**
@@ -94,9 +102,10 @@ class Team implements Entity
     /**
      * @param string $username
      */
-    public function update($name)
+    public function update($name, $public)
     {
         $this->name      = $name;
+        $this->public    = $public;
         $this->updatedAt = new \DateTime();
     }
 
@@ -244,6 +253,14 @@ class Team implements Entity
     public function isLocked()
     {
         return (boolean) $this->locked;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isPublic()
+    {
+        return (boolean) $this->public;
     }
 
     /**
