@@ -28,7 +28,7 @@
                     // Set the current active page of the menu
                     ActiveGroups['menu-team'] = page;
 
-                    // Set the current active page                
+                    // Set the current active page          
                     PageActions.changeMainPage(page);
                 });
             }
@@ -43,9 +43,20 @@
         },
 
         _onChange: function() {
-            this.setState({
-                page: PageStore.getCurrentMainPage()
-            });
+            var page = PageStore.getCurrentMainPage();
+
+            if(!page)
+            {
+                setTimeout(function(){
+                    PageActions.changeMainPage('not-found');
+                }, 0);
+            }
+            else if(this.isMounted())
+            {
+                this.setState({
+                    page: page
+                });
+            }
         },
 
         render: function() {

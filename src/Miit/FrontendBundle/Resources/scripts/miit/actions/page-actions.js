@@ -14,21 +14,10 @@
                     MiitDispatcher.dispatch(action);
                 },
 
-                changeMiitPage: function(main, miit) {
-                    var action = {
-                        type: ActionTypes.CHANGE_MIIT_PAGE_COMPLETED,
-                        mainPage: main,
-                        miitPage: miit
-                    };
-
-                    MiitDispatcher.dispatch(action);
-                },
-
                 changeApplicationPage: function(main, miit, application) {
                     var action = {
                         type: ActionTypes.CHANGE_APPLICATION_PAGE_COMPLETED,
                         mainPage: main,
-                        miitPage: miit,
                         applicationPage: application
                     };
 
