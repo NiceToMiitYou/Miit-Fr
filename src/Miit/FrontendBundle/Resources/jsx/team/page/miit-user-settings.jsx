@@ -6,7 +6,7 @@
             return {
                 text: {
                     informations: 'Informations'
-                }  
+                }
             };
         },
 
@@ -30,7 +30,7 @@
 
         render: function() {
             if(!UserStore.isUser()) {
-                return null;
+                return <MiitComponents.MiitNotFound />;
             }
 
             var user = UserStore.getUser();

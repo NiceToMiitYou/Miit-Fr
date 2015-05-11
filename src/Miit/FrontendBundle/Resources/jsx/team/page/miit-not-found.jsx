@@ -1,5 +1,5 @@
 (function(){
-    MiitComponents.MiitHome = React.createClass({
+    MiitComponents.MiitNotFound = React.createClass({
         getDefaultProps: function () {
             return {
                 title: 'Cette page n\existe pas.',
@@ -26,5 +26,5 @@
 
     MiitApp
         .get('miit-page-store')
-        .registerMainPage('not-found', (<MiitComponents.MiitHome />));
+        .registerMainPage('not-found', (<MiitComponents.MiitNotFound />));
 })();

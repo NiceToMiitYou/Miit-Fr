@@ -7,7 +7,7 @@
                 text: {
                     applications:  'Applications',
                     informations: 'Informations'
-                }  
+                }
             };
         },
 
@@ -34,7 +34,7 @@
 
         render: function() {
             if(!UserStore.isAdmin()) {
-                return null;
+                return <MiitComponents.MiitNotFound />;
             }
 
             var team = TeamStore.getTeam();
