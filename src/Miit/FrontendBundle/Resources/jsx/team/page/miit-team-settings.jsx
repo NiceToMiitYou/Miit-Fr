@@ -53,5 +53,5 @@
 
     MiitApp
         .get('miit-page-store')
-        .registerMainPage('us', (<MiitComponents.MiitTeamSettings />));
+        .registerMainPage('settings', (<MiitComponents.MiitTeamSettings />));
 })();

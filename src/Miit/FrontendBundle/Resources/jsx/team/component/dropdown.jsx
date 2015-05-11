@@ -15,6 +15,14 @@ var Dropdown = React.createClass({
         };
     },
 
+    toggleAngle: function() {
+        var angle = this.props.angle;
+        if(this.state.open) {
+            return (angle === 'up') ? 'down': 'up';
+        }
+        return angle;
+    },
+
     onLeave: function() {
         this.setState({
             open: false
@@ -28,7 +36,7 @@ var Dropdown = React.createClass({
     },
 
     render: function() {
-        var icon = 'fa-angle-' + this.props.angle;
+        var icon = 'fa-angle-' + this.toggleAngle();
         var open = { open: this.state.open };
 
         var clIcon     = classNames('pull-right', 'fa', icon);

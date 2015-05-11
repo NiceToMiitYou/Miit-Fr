@@ -48,7 +48,7 @@
                             </li>
                             <If test={UserStore.isAdmin() }>
                                 <li>
-                                    <Link href="/us">
+                                    <Link href="/settings">
                                         <i className="fa fa-users"></i>
                                         {this.props.text.team}
                                     </Link> 
