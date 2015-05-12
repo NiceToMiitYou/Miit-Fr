@@ -101,7 +101,7 @@ html {
     -moz-transition: margin-left 500ms ease;
     -o-transition: margin-left 500ms ease;
     transition: margin-left 500ms ease;
-    margin-left: 250px;
+    margin-left: 430px;
     position: relative;
 
     &.fullwidth {
@@ -224,7 +224,7 @@ html {
     top: 0;
     bottom: 0;
     left: 0;
-    width: 250px;
+    width: 110px;
     overflow: hidden;
 
     -webkit-transition: width 500ms ease;
@@ -234,17 +234,17 @@ html {
     z-index: 9;
 
     .sl-wrapper {
-        width: 250px;
+        width: 100%;
     }
 
     .sl-header {
-        width: 210px;
-        line-height: 50px;
+        width: 100%;
+        line-height: 3.4em;
         color: #FFF;
         display: block;
         font-size: 1.4em;
         font-weight: 100;
-        padding: 0 20px;
+        text-align: center;
         -webkit-transition: background-color 500ms ease;
         -moz-transition: background-color 500ms ease;
         -o-transition: background-color 500ms ease;
@@ -276,14 +276,15 @@ html {
     ul.sl-list {
         li {
             a {
-                color: #FFF;
+                color: #D2D2D2;
                 font-size: 0.9em;
                 display: block;
-                line-height: 2.7em;
+                line-height: 2em;
                 font-weight: 300;
                 text-decoration: none;
-                padding-left: 15px;
                 position: relative;
+                text-align: center;
+                padding: 15px 5px 5px 5px;
                 -webkit-transition: background-color 500ms ease;
                 -moz-transition: background-color 500ms ease;
                 -o-transition: background-color 500ms ease;
@@ -291,31 +292,39 @@ html {
 
                 &:hover, &.active {
                     background-color: #33414D;
+                    color: #FFF;
                 }
 
                 &.active::before {
                     content:"\A";
                     border-style: solid;
                     border-width: 7px 7px 7px 0;
-                    border-color: transparent #fafafa transparent transparent;
+                    border-color: transparent rgb(44,132,217) transparent transparent;
                     position: absolute;
                     right: 0;
                     top: 50%;
                     margin-top: -7px;
                 }
+
+                i {
+                    display: block;
+                    width: 60px;
+                    line-height: 60px;
+                    margin: auto;
+                    background: #4BAD4F;
+                    color: #FFF;
+                    font-size: 1.5em;
+                    border-radius: 5%;
+                }
+
+                span {
+                  display: block;
+                  margin-top: 5px;
+                }
             }
         }
     }
 }
-
-.page.fullwidth .sidr-left {
-    width: 0;
-}
-
-.sidr-left ul.sl-list li a i {
-    width: 25px;
-}
-
 
 .sidr-left .sl-footer {
     position: absolute;
@@ -326,6 +335,7 @@ html {
     display: block;
     font-weight: 100;
     font-size: 1em;
+    text-align: center;
     background: #16202A;
 }
 
@@ -382,6 +392,106 @@ html {
     width: 100%;
 }
 
+
+.sidr-sub {
+
+  width: 320px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 110px;
+  background: #2c84d9;
+  color: #FFF;
+  z-index: 9;
+  padding-top: 25px;
+  font-weight: 100;
+
+  .submenu-header {
+
+    font-size: 1.4em;
+    display: block;
+    padding: 5px 20px;
+
+    i:not(.pull-right) {
+      margin-right: 15px;
+    }
+
+  }
+
+  .sb-list {
+
+    margin-top: 20px;
+    border-bottom: 1px solid #498ED0;
+
+    li {
+      
+      border-top: 1px solid #498ED0;
+
+      a {
+        color: #D8DDE0;
+        text-decoration: none;
+        padding: 11px 20px;
+        display: block;
+        position: relative;
+
+        i:not(.pull-right) {
+          margin-right: 15px;
+          float: left;
+          font-size: 1.5em;
+          margin-top: 5px;
+        }
+
+        .actions {
+          position: absolute;
+          right: 20px;
+          top: 18px;
+        }
+
+        span {
+          font-weight: 500;
+        }
+
+        span.peoples {
+          display: block;
+          margin-top: 5px;
+          font-size: 0.7em;
+          font-weight: 100;
+        }
+
+        i.pull-right {
+          margin-left: 15px;
+        }
+
+        &.active, &:hover {
+          color: #FFF;
+          background: #498ED0;
+        }
+      }
+
+    }
+
+    li:last-child {
+
+      a {
+
+        span {
+          font-weight: 100;
+        }
+
+        i:not(.pull-right) {
+          margin-right: 15px;
+          float: left;
+          font-size: 1em;
+          margin-top: 0;
+        }
+
+      }
+
+    }
+
+  }
+
+}
 /* ---------------- END LEFT SIDEBAR CSS ---------------- */
 
 
@@ -960,6 +1070,10 @@ click-wave { 0% {
     background-color: #2ecc71!important;
 }
 
+.bg-red {
+    background-color: #d73e4d!important;
+}
+
 .bg-blue-grey {
     background-color: #1e2d3a!important;
 }
@@ -1157,7 +1271,7 @@ click-wave { 0% {
 
 
     .page {
-        margin-left: 200px;
+        margin-left: 430px;
 
         .page-header {
             height: 42px;
@@ -1180,29 +1294,6 @@ click-wave { 0% {
 
     /* ---------------- BEGIN LEFT SIDEBAR CSS ---------------- */
 
-    .sidr-left {
-        width: 200px;
-
-        .sl-wrapper {
-            width: 200px;
-        }
-
-        .sl-header {
-            width: 160px;
-            line-height: 42px;
-
-            i {
-                line-height: 42px;
-            }
-        }
-
-        ul.sl-list li a {
-            padding-left: 12px; 
-            i {
-                width: 22px;
-            }    
-        }
-    }
 
     /* ---------------- END LEFT SIDEBAR CSS ---------------- */
 
@@ -1227,10 +1318,6 @@ click-wave { 0% {
 
     .page {
       margin-left: 0;
-    }
-
-    .sidr-left .sl-wrapper {
-        width: 250px;
     }
 
     .sidr-left .sl-header {

@@ -72,6 +72,7 @@
             return (
                 <div className="page bg-grey lighten-5">
                     <MiitComponents.MenuTeam />
+                    <MiitComponents.SubMenuTeam />
 
                     <div className="main">
                         {this.state.page}

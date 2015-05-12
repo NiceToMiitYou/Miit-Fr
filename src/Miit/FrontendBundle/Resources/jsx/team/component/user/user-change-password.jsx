@@ -154,9 +154,9 @@
 
             return (
                 <form className="miit-component change-password" onSubmit={this.handleSubmit}>
-                        <input type="password" className={classes_old + " mb10"}    value={value_old}    placeholder={this.props.placeholder.old}    onChange={this.handleChange} name="old" />
-                        <input type="password" className={classes_first + " mb10"}  value={value_first}  placeholder={this.props.placeholder.first}  onChange={this.handleChange} name="first" />
-                        <input type="password" className={classes_second + " mb10"} value={value_second} placeholder={this.props.placeholder.second} onChange={this.handleChange} name="second" />
+                        <input type="password" className={classes_old + " mb15"}    value={value_old}    placeholder={this.props.placeholder.old}    onChange={this.handleChange} name="old" />
+                        <input type="password" className={classes_first + " mb15"}  value={value_first}  placeholder={this.props.placeholder.first}  onChange={this.handleChange} name="first" />
+                        <input type="password" className={classes_second + " mb20"} value={value_second} placeholder={this.props.placeholder.second} onChange={this.handleChange} name="second" />
                         <button className="btn btn-warning" type="submit">{this.props.submit}</button>     
                 </form>
             );
