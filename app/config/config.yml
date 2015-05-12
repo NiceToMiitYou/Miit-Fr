@@ -65,3 +65,15 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+
+fos_oauth_server:
+    db_driver:           orm
+    client_class:        Miit\CoreDomainBundle\Entity\Client
+    access_token_class:  Miit\CoreDomainBundle\Entity\AccessToken
+    refresh_token_class: Miit\CoreDomainBundle\Entity\RefreshToken
+    auth_code_class:     Miit\CoreDomainBundle\Entity\AuthCode
+    service:
+        user_provider: user_repository
+        options:
+            supported_scopes: user

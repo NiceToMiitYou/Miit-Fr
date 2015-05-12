@@ -54,6 +54,17 @@ security:
                 path:     /
                 domain:   ~
 
+        oauth_token:
+            host: "api.%domain%"
+            pattern: ^/oauth/v2/token
+            security: false
+
+        api:
+            host:       "api.%domain%"
+            pattern:    ^/
+            fos_oauth:  true
+            stateless:  true
+
         default:
             anonymous: ~
 
