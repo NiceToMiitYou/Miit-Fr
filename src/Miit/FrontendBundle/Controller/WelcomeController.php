@@ -24,7 +24,27 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class WelcomeController extends Controller
 {
     /**
-     * @Route("/", name="welcome_home")
+     * @Route("/",
+     *      host="{subdomain}.{domain}",
+     *      defaults={
+     *          "domain":    "%domain%",
+     *          "subdomain": "www"
+     *      },
+     *      requirements={
+     *          "domain":    "%domain%",
+     *          "subdomain": "www"
+     *      }
+     * )
+     * @Route("/",
+     *      host="{domain}",
+     *      name="welcome_home",
+     *      defaults={
+     *          "domain":    "%domain%"
+     *      },
+     *      requirements={
+     *          "domain":    "%domain%"
+     *      }
+     * )
      */
     public function indexAction(Request $request)
     {
@@ -33,9 +53,26 @@ class WelcomeController extends Controller
 
     /**
      * @Route("/register",
-     *      name="welcome_register",
+     *      host="{subdomain}.{domain}",
+     *      defaults={
+     *          "domain":    "%domain%",
+     *          "subdomain": "www"
+     *      },
      *      requirements={
-     *          "_method":   "POST"
+     *          "_method":   "POST",
+     *          "domain":    "%domain%",
+     *          "subdomain": "www"
+     *      }
+     * )
+     * @Route("/register",
+     *      name="welcome_register",
+     *      host="{domain}",
+     *      defaults={
+     *          "domain":    "%domain%"
+     *      },
+     *      requirements={
+     *          "_method":   "POST",
+     *          "domain":    "%domain%"
      *      }
      * )
      */
