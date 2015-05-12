@@ -10,6 +10,6 @@ services:
 
 
     miit.api.oauth.realtime_extension:
-        class: Miit\ApiBundle\OAuth\BingoGrantExtension
+        class: Miit\ApiBundle\OAuth\RealTimeGrantExtension
         tags:
             - { name: fos_oauth_server.grant_extension, uri: 'realtime_type' }
