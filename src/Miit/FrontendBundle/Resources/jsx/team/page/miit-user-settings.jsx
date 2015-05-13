@@ -34,10 +34,11 @@
             }
 
             var user = UserStore.getUser();
+            var name = UserStore.getName(user);
 
             return (
                     <div className="container-fluid">
-                        <h1 className="pt25">{user.name}</h1>
+                        <h1 className="pt25">{name}</h1>
                         
                         <div className="panel mt30" >
                             <h2 className="panel-title"><i className="fa fa-th pull-left "></i>{this.props.text.informations}</h2>

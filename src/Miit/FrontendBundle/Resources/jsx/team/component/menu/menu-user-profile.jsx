@@ -33,13 +33,14 @@
 
         render: function() {
             var user = UserStore.getUser();
+            var name = UserStore.getName(user);
 
             return (
                 <span className="sl-footer miit-component user-profile">
                     <div className="avatar">
                         <MiitComponents.UserAvatar user={user} />
                     </div>
-                    <Dropdown label={ user.name } angle="up">
+                    <Dropdown label={ name } angle="up">
                         <ul className="sl-list">
                             <If test={UserStore.isAdmin()}>
                                 <li>
