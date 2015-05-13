@@ -47,7 +47,6 @@ class TeamController extends Controller
         $user = $this->getUser();
 
         if(null === $user && $team->isPublic()) {
-            $token   = $this->get('security.context')->getToken();
             $session = $request->getSession();
             
             if(false === $session->has('virtual_id')) {
