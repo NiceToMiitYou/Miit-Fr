@@ -3,15 +3,12 @@
 namespace Miit\CoreDomainBundle\Entity;
 
 use Miit\CoreDomain\Common\UUID;
-use Miit\CoreDomain\User\User;
-use Miit\CoreDomain\Team\Team;
-
-use FOS\OAuthServerBundle\Entity\RefreshToken as BaseRefreshToken;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Miit\CoreDomainBundle\Repository\SessionTokenRepository")
+ * @ORM\Cache(usage="NONSTRICT_READ_WRITE")
  */
 class SessionToken
 {
@@ -78,5 +75,13 @@ class SessionToken
     public function getTeam()
     {
         return $this->team;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isValid()
+    {
+        return new \Datetime() < $this->expire;
     }
 }
