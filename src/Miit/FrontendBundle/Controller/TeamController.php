@@ -58,8 +58,6 @@ class TeamController extends Controller
 
             $user  = array(
                 'id'     => $id,
-                'name'   => 'Anonymous',
-                'roles'  => array('ANONYM'),
                 'avatar' => User::generateAvatarId(sha1($id))
             );
         }

@@ -12,12 +12,8 @@
 
     function _isAnonymous(userTmp) {
         var user  = (user || Me || { id: '' });
-        var roles = user.roles || [];
 
-        return (
-             0  <=  roles.indexOf('ANONYM') ||
-            '4' === user.id.charAt(14)
-        );
+        return '4' === user.id.charAt(14);
     }
 
     // Check if this is the same user
@@ -59,14 +55,14 @@
                 getUser: function() {
                     return Me;
                 },
+                
+                isOwner:  _isUserGenerator('OWNER'),
 
                 isAdmin:  _isUserGenerator('ADMIN'),
-                
-                isAnonym: _isAnonymous,
 
                 isUser:   _isUserGenerator('USER'),
                 
-                isOwner:  _isUserGenerator('OWNER'),
+                isAnonym: _isAnonymous,
                 
                 isItMe:   _isItMe,
 
