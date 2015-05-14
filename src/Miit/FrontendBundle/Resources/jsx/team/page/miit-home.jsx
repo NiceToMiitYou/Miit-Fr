@@ -9,7 +9,13 @@
         render: function() {
             return (
                     <div className="container-fluid">
-                        <h1 className="pt25">{this.props.title}</h1>
+                        <div className="page-header">
+                            <a href="#" className="minimize-menu">
+                                <i className="fa fa-bars"></i>
+                            </a>
+                            <h1>{this.props.title}</h1>
+                            <MiitComponents.Clock />
+                        </div>
                     </div>
             );
         }
