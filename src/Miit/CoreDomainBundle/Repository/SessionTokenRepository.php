@@ -23,17 +23,13 @@ class SessionTokenRepository extends CachedRepository
     public function findSessionTokenByUserIdAndTeamId(UserId $userId, TeamId $teamId)
     {
         $query = $this->createQueryBuilder('st')
-                      ->join('st.user', 'u')
-                      ->join('st.team', 't')
-                      ->where('u.id = :userId')
-                      ->andWhere('t.id = :teamId')
+                      ->where('st.user = :userId')
+                      ->andWhere('st.team = :teamId')
                       ->orderBy('st.expire', 'DESC')
                       ->setMaxResults(1)
                       ->setParameter('userId', $userId->getValue())
                       ->setParameter('teamId', $teamId->getValue())
                       ->getQuery();
-
-        $this->setCache($query);
 
         return $query->getOneOrNullResult();
     }
@@ -48,11 +44,9 @@ class SessionTokenRepository extends CachedRepository
     public function findSessionTokenByIdAndUserIdAndTeamId($tokenId, UserId $userId, TeamId $teamId)
     {
         $query = $this->createQueryBuilder('st')
-                      ->join('st.user', 'u')
-                      ->join('st.team', 't')
                       ->where('st.id = :id')
-                      ->andWhere('u.id = :userId')
-                      ->andWhere('t.id = :teamId')
+                      ->andWhere('st.user = :userId')
+                      ->andWhere('st.team = :teamId')
                       ->orderBy('st.expire', 'DESC')
                       ->setMaxResults(1)
                       ->setParameter('id',     $tokenId)
