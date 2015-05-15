@@ -2,7 +2,7 @@
     MiitComponents.MiitNotFound = React.createClass({
         getDefaultProps: function () {
             return {
-                title: 'Cette page n\existe pas.',
+                title: 'Cette page n\'existe pas.',
                 text: {
                     home: 'Retour à l\'accueil'
                 }
