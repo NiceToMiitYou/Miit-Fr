@@ -74,11 +74,13 @@
                                     <span className="notification">18</span>
                                 </Link>
                             </li>
-                            <li>
-                                <Link href="/test2/plop">
-                                    <i className="fa fa-plus pull-left"></i> Ajouter une App
-                                </Link>
-                            </li>
+                            <If test={UserStore.isAdmin()}>
+                                <li>
+                                    <Link href="/test2/plop">
+                                        <i className="fa fa-plus pull-left"></i> Ajouter une App
+                                    </Link>
+                                </li>
+                            </If>
                         </ul>
 
                     </div>
