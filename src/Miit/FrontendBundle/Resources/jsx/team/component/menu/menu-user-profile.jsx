@@ -36,46 +36,12 @@
             var name = UserStore.getName(user);
 
             return (
-                <span className="sl-footer miit-component user-profile">
+                <span className="miit-component user-profile">
                     <div className="avatar">
                         <MiitComponents.UserAvatar user={user} />
                     </div>
-                    <Dropdown label={ name } angle="up">
-                        <ul className="sl-list">
-                            <If test={UserStore.isAdmin()}>
-                                <li>
-                                    <Link href="/settings">
-                                        <i className="fa fa-users"></i>
-                                        {this.props.text.team}
-                                    </Link> 
-                                </li>
-                            </If>
-                            <If test={UserStore.isUser()}>
-                                <li>
-                                    <Link href="/me">
-                                        <i className="fa fa-user"></i>
-                                        {this.props.text.profile}
-                                    </Link> 
-                                </li>
-                            </If>
-                            <If test={UserStore.isUser()}>
-                                <li>
-                                    <Link href="/logout" external={true}>
-                                        <i className="fa fa-sign-out"></i>
-                                        {this.props.text.logout}
-                                    </Link> 
-                                </li>
-                            </If>
-                            <If test={UserStore.isAnonym()}>
-                                <li>
-                                    <Link href="/login" external={true}>
-                                        <i className="fa fa-sign-in"></i>
-                                        {this.props.text.login}
-                                    </Link> 
-                                </li>
-                            </If>
-                        </ul>
-                    </Dropdown>
+                    <span className="username">{ name }</span>
+                    <span><i className="fa fa-circle-thin stat-open mr5"></i> Connecté</span>
                 </span>
             );
         }

@@ -41,7 +41,13 @@
 
             return (
                     <div className="container-fluid">
-                        <h1 className="pt25">{team.name}</h1>
+                        <div className="page-header">
+                            <a href="#" className="minimize-menu">
+                                <i className="fa fa-bars"></i>
+                            </a>
+                            <h1>{team.name}</h1>
+                            <MiitComponents.Clock />
+                        </div>
                         
                         <div className="panel mb30 mt30" >
                             <h2 className="panel-title"><i className="fa fa-th pull-left "></i> {this.props.text.applications}</h2>
@@ -76,7 +82,7 @@
                         </div>
 
                         <div className="panel mt30" >
-                            <h2 className="panel-title"><i className="fa fa-th pull-left "></i>Title</h2>
+                            <h2 className="panel-title"><i className="fa fa-info pull-left "></i>{this.props.text.informations}</h2>
                             <div className="panel-content">
                                 <h3 className="mb20"><i className="fa fa-key pull-left"></i> Modifier les informations</h3>
                                 <MiitComponents.TeamUpdate />

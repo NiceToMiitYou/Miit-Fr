@@ -38,7 +38,13 @@
 
             return (
                     <div className="container-fluid">
-                        <h1 className="pt25">{name}</h1>
+                        <div className="page-header">
+                            <a href="#" className="minimize-menu">
+                                <i className="fa fa-bars"></i>
+                            </a>
+                            <h1>{name}</h1>
+                            <MiitComponents.Clock />
+                        </div>
                         
                         <div className="panel mt30" >
                             <h2 className="panel-title"><i className="fa fa-th pull-left "></i>{this.props.text.informations}</h2>

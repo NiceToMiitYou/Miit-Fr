@@ -13,7 +13,17 @@
     </head>
     <body>
         <div id="content">
-            {% trans from "team" %}loading{% endtrans %}
+            <div class="sidr-left bg-blue-grey"></div>
+            <div class="page">
+                <div class="page-header"></div>
+                <div class="loading-content">
+                    <div class="loading">
+                        <img src="/img/logo-miit-outter.png"/>
+                        <img class="inner" src="/img/logo-miit-inner.png"/>
+                    </div><br>
+                    {% trans from "team" %}loading{% endtrans %}
+                </div>
+            </div>
         </div>
 
         <!--[if lt IE 9]>
