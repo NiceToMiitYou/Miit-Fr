@@ -40,14 +40,14 @@
                             </If>
                             <If test={UserStore.isUser()}>
                                 <li>
-                                    <Link href="/logout">
+                                    <Link href="/logout" external={true} >
                                         <i className="fa fa-sign-out pull-left"></i> {this.props.text.disconnect}
                                     </Link>
                                 </li>
                             </If>
                             <If test={UserStore.isAnonym()}>
                                 <li>
-                                    <Link href="/login">
+                                    <Link href="/login" external={true} >
                                         <i className="fa fa-sign-in pull-left"></i> {this.props.text.connect}
                                     </Link>
                                 </li>
