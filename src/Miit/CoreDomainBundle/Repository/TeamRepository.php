@@ -8,9 +8,6 @@ use Miit\CoreDomain\Team\TeamId;
 
 use Miit\CoreDomainBundle\Entity\Team;
 
-use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\NoResultException;
-
 /**
  * Class TeamRepository
  * 

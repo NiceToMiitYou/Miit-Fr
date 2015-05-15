@@ -17,6 +17,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
+            new FOS\OAuthServerBundle\FOSOAuthServerBundle(),
             new Miit\CoreDomainBundle\MiitCoreDomainBundle(),
             new Miit\FrontendBundle\MiitFrontendBundle(),
             new Miit\AppBundle\MiitAppBundle(),

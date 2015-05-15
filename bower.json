@@ -21,6 +21,7 @@
     "director": "~1.2.8",
     "ExplorerCanvas": "*",
     "Chart.js": "~1.0.2",
-    "flux": "~2.0.2"
+    "flux": "~2.0.2",
+    "async": "~0.9.2"
   }
 }

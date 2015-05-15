@@ -6,6 +6,7 @@
     <parameters>
         <parameter key="user_repository.orm.class">Miit\CoreDomainBundle\Repository\UserRepository</parameter>
         <parameter key="team_repository.orm.class">Miit\CoreDomainBundle\Repository\TeamRepository</parameter>
+        <parameter key="session_token_repository.orm.class">Miit\CoreDomainBundle\Repository\SessionTokenRepository</parameter>
     </parameters>
 
     <services>
@@ -33,6 +34,19 @@
                  factory-method="getRepository">
 
             <argument>MiitCoreDomainBundle:Team</argument>
+        </service>
+        
+        <!-- SessionToken Repository Public -->
+        <service id="session_token_repository" alias="session_token_repository.orm"></service>
+
+        <!-- SessionToken Repository Private -->
+        <service id="session_token_repository.orm"
+                 public="false"
+                 class="%session_token_repository.orm.class%"
+                 factory-service="doctrine.orm.entity_manager"
+                 factory-method="getRepository">
+
+            <argument>MiitCoreDomainBundle:SessionToken</argument>
         </service>
     </services>
 </container>

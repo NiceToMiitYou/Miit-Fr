@@ -1,5 +1,5 @@
 (function(){
-    var Me;
+    var Me, Utils;
 
     // Generate the validator for user's role
     function _isUserGenerator(role) {
@@ -10,12 +10,25 @@
         };
     }
 
+    function _isAnonymous(userTmp) {
+        var user  = (user || Me || { id: '' });
+
+        return '4' === user.id.charAt(14);
+    }
+
     // Check if this is the same user
     function _isItMe(user) {
         var me  = (Me || {}).id || null;
         var you = (user || {}).id || null;
 
         return me === you;
+    }
+
+    function _getName(user) {
+        if(_isAnonymous(user)) {
+            return MiitTranslator.get('user.anonymous',  'common');
+        }
+        return user.name;
     }
 
     function _update(name) {
@@ -27,7 +40,7 @@
         function(ObjectAssign, KeyMirror, MiitStorage, MiitDispatcher, MiitUserConstants) {
             var ActionTypes = MiitUserConstants.ActionTypes;
 
-            Me = MiitStorage.shared.get('user');
+            Me    = MiitStorage.shared.get('user');
 
             var events = KeyMirror({
                 // Event on password change
@@ -42,16 +55,18 @@
                 getUser: function() {
                     return Me;
                 },
+                
+                isOwner:  _isUserGenerator('OWNER'),
 
                 isAdmin:  _isUserGenerator('ADMIN'),
-                
-                isAnonym: _isUserGenerator('ANONYM'),
 
                 isUser:   _isUserGenerator('USER'),
                 
-                isOwner:  _isUserGenerator('OWNER'),
+                isAnonym: _isAnonymous,
                 
-                isItMe:   _isItMe
+                isItMe:   _isItMe,
+
+                getName:  _getName
             });
 
             UserStore.generateNamedFunctions(events.PASSWORD_CHANGED);

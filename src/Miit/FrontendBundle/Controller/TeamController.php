@@ -2,7 +2,10 @@
 
 namespace Miit\FrontendBundle\Controller;
 
+use Miit\CoreDomain\Common\UUID;
+
 use Miit\CoreDomainBundle\Annotation\Permissions;
+use Miit\CoreDomainBundle\Entity\User;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
@@ -44,11 +47,17 @@ class TeamController extends Controller
         $user = $this->getUser();
 
         if(null === $user && $team->isPublic()) {
-            $token = $this->get('security.context')->getToken();
+            $session = $request->getSession();
+            
+            if(false === $session->has('virtual_id')) {
+                $session->set('virtual_id', UUID::v4());
+            }
+
+            $id = $session->get('virtual_id');
+
             $user  = array(
-                'id'    => 'none',
-                'name'  => 'Anonyme',
-                'roles' => array('ANONYM')
+                'id'     => $id,
+                'avatar' => User::generateAvatarId(sha1($id))
             );
         }
 
