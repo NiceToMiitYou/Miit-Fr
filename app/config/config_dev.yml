@@ -37,3 +37,4 @@ monolog:
 #    delivery_address: me@example.com
 parameters:
     domain: miit.dev
+    ws_port: 8080

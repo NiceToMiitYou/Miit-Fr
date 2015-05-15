@@ -33,6 +33,7 @@ twig:
     strict_variables: "%kernel.debug%"
     globals:
         domain: "%domain%"
+        ws_port: "%ws_port%"
 
 # Doctrine Configuration
 doctrine:

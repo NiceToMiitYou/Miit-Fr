@@ -31,11 +31,18 @@
 
         this.remove = function(key) {
             delete internal[key];
+            delete timeoutId[key];
             return this;
         };
 
         this.clear = function() {
-            internal = {};
+            // Clear all timeout
+            for(var i in timeoutId) {
+                clearTimeout(timeoutId[i]);
+            }
+            // Clear all data
+            internal  = {};
+            timeoutId = {};
             return this;
         };
 

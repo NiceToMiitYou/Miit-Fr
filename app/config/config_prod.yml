@@ -26,3 +26,4 @@ monolog:
 
 parameters:
     domain: miit.dev
+    ws_port: 443

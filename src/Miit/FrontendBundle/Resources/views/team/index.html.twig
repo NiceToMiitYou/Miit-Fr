@@ -33,6 +33,7 @@
             var Storage = MiitApp.get('miit-storage');
             Storage.shared.set('user', {{ user | serialize('json', user_context) | raw }});
             Storage.shared.set('team', {{ team | serialize('json', team_context) | raw }});
+            Storage.shared.set('ws_url', '//ws.{{ domain }}:{{ ws_port }}');
             
             // Render the TeamApp component
             React.render(React.createElement(MiitComponents.TeamApp,null),document.getElementById('content'));
