@@ -82,7 +82,7 @@
                         </div>
 
                         <div className="panel mt30" >
-                            <h2 className="panel-title"><i className="fa fa-th pull-left "></i>Title</h2>
+                            <h2 className="panel-title"><i className="fa fa-info pull-left "></i>{this.props.text.informations}</h2>
                             <div className="panel-content">
                                 <h3 className="mb20"><i className="fa fa-key pull-left"></i> Modifier les informations</h3>
                                 <MiitComponents.TeamUpdate />

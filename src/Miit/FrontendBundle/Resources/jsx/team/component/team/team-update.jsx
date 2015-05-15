@@ -166,7 +166,7 @@
                     </div>
 
                     <If test={value_public}>
-                        <div className="row mb20">
+                        <div className="mb20">
                             <p className="mb10">{this.props.text.isPublic}</p>
                             
                             <div className="col8 col16-md">

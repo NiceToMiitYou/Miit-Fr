@@ -252,7 +252,7 @@ html {
 
     .sl-header {
         width: 100%;
-        line-height: 55px;
+        line-height: 53px;
         color: #FFF;
         display: block;
         letter-spacing: 1px;
@@ -830,7 +830,7 @@ click-wave { 0% {
   font-family: 'Open Sans',sans-serif;
 
   &.btn-large {
-    line-height: 32px;
+    line-height: 28px;
   }
 
 }
@@ -1183,6 +1183,43 @@ click-wave { 0% {
 /* ---------------- BEGIN HELPERS CSS ---------------- */
 /* ------------------------------------------------- */
 
+.loading-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  margin-left: -50px;
+  margin-top: -50px;
+
+  .loading {
+    margin: auto;
+  }
+}
+
+.loading {
+  position: relative;
+  width: 80px;
+  height: 80px;
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    -webkit-animation: counter-rotate 1.5s infinite;
+    -moz-animation: counter-rotate 1.5s infinite;
+    animation: counter-rotate 1.5s infinite;
+  }
+
+  img.inner {
+    -webkit-animation: rotate 1.5s infinite;
+    -moz-animation: rotate 1.5s infinite;
+    animation: rotate 1.5s infinite;
+  }
+
+}
+
 
 .border-circle {
     -webkit-border-radius: 50%; 
@@ -1266,6 +1303,7 @@ click-wave { 0% {
       padding: 12px 20px;
       color: #000;
       font-size: 1.2em;
+      background-color: #E8E8E8;
       i {
         margin-right: 15px;
         margin-top: 1px;
@@ -1274,6 +1312,7 @@ click-wave { 0% {
 
     .panel-content {
       padding: 25px;
+      border: 1px solid #E8E8E8;
     }
 }
 
@@ -1288,6 +1327,128 @@ click-wave { 0% {
   line-height: 55px;
   padding-right: 15px;
   font-weight: 100;
+}
+
+@-webkit-keyframes 
+rotate { 0% {
+  -moz-transform: rotate(0deg);  /* FF3.5/3.6 */
+  -o-transform: rotate(0deg);  /* Opera 10.5 */
+  -webkit-transform: rotate(0deg);  /* Saf3.1+ */
+  transform: rotate(0deg);  /* Newer browsers (incl IE9) */
+}
+ 100% {
+  -moz-transform: rotate(360deg);  /* FF3.5/3.6 */
+  -o-transform: rotate(360deg);  /* Opera 10.5 */
+  -webkit-transform: rotate(360deg);  /* Saf3.1+ */
+  transform: rotate(360deg);  /* Newer browsers (incl IE9) */
+}
+}
+
+@-moz-keyframes 
+rotate { 0% {
+  -moz-transform: rotate(0deg);  /* FF3.5/3.6 */
+  -o-transform: rotate(0deg);  /* Opera 10.5 */
+  -webkit-transform: rotate(0deg);  /* Saf3.1+ */
+  transform: rotate(0deg);  /* Newer browsers (incl IE9) */
+}
+ 100% {
+  -moz-transform: rotate(360deg);  /* FF3.5/3.6 */
+  -o-transform: rotate(360deg);  /* Opera 10.5 */
+  -webkit-transform: rotate(360deg);  /* Saf3.1+ */
+  transform: rotate(360deg);  /* Newer browsers (incl IE9) */
+}
+}
+
+@-o-keyframes 
+rotate { 0% {
+  -moz-transform: rotate(0deg);  /* FF3.5/3.6 */
+  -o-transform: rotate(0deg);  /* Opera 10.5 */
+  -webkit-transform: rotate(0deg);  /* Saf3.1+ */
+  transform: rotate(0deg);  /* Newer browsers (incl IE9) */
+}
+ 100% {
+  -moz-transform: rotate(360deg);  /* FF3.5/3.6 */
+  -o-transform: rotate(360deg);  /* Opera 10.5 */
+  -webkit-transform: rotate(360deg);  /* Saf3.1+ */
+  transform: rotate(360deg);  /* Newer browsers (incl IE9) */
+}
+}
+
+@keyframes 
+rotate { 0% {
+  -moz-transform: rotate(0deg);  /* FF3.5/3.6 */
+  -o-transform: rotate(0deg);  /* Opera 10.5 */
+  -webkit-transform: rotate(0deg);  /* Saf3.1+ */
+  transform: rotate(0deg);  /* Newer browsers (incl IE9) */
+}
+ 100% {
+  -moz-transform: rotate(360deg);  /* FF3.5/3.6 */
+  -o-transform: rotate(360deg);  /* Opera 10.5 */
+  -webkit-transform: rotate(360deg);  /* Saf3.1+ */
+  transform: rotate(360deg);  /* Newer browsers (incl IE9) */
+}
+}
+
+
+
+@-webkit-keyframes 
+counter-rotate { 0% {
+  -moz-transform: rotate(0deg);  /* FF3.5/3.6 */
+  -o-transform: rotate(0deg);  /* Opera 10.5 */
+  -webkit-transform: rotate(0deg);  /* Saf3.1+ */
+  transform: rotate(0deg);  /* Newer browsers (incl IE9) */
+}
+ 100% {
+  -moz-transform: rotate(-360deg);  /* FF3.5/3.6 */
+  -o-transform: rotate(-360deg);  /* Opera 10.5 */
+  -webkit-transform: rotate(-360deg);  /* Saf3.1+ */
+  transform: rotate(-360deg);  /* Newer browsers (incl IE9) */
+}
+}
+
+@-moz-keyframes 
+counter-rotate { 0% {
+  -moz-transform: rotate(0deg);  /* FF3.5/3.6 */
+  -o-transform: rotate(0deg);  /* Opera 10.5 */
+  -webkit-transform: rotate(0deg);  /* Saf3.1+ */
+  transform: rotate(0deg);  /* Newer browsers (incl IE9) */
+}
+ 100% {
+  -moz-transform: rotate(-360deg);  /* FF3.5/3.6 */
+  -o-transform: rotate(-360deg);  /* Opera 10.5 */
+  -webkit-transform: rotate(-360deg);  /* Saf3.1+ */
+  transform: rotate(-360deg);  /* Newer browsers (incl IE9) */
+}
+}
+
+@-o-keyframes 
+counter-rotate { 0% {
+  -moz-transform: rotate(0deg);  /* FF3.5/3.6 */
+  -o-transform: rotate(0deg);  /* Opera 10.5 */
+  -webkit-transform: rotate(0deg);  /* Saf3.1+ */
+  transform: rotate(0deg);  /* Newer browsers (incl IE9) */
+}
+ 100% {
+  -moz-transform: rotate(-360deg);  /* FF3.5/3.6 */
+  -o-transform: rotate(-360deg);  /* Opera 10.5 */
+  -webkit-transform: rotate(-360deg);  /* Saf3.1+ */
+  transform: rotate(-360deg);  /* Newer browsers (incl IE9) */
+}
+}
+
+@keyframes 
+counter-rotate { 0% {
+  -moz-transform: rotate(0deg);  /* FF3.5/3.6 */
+  -o-transform: rotate(0deg);  /* Opera 10.5 */
+  -webkit-transform: rotate(0deg);  /* Saf3.1+ */
+  transform: rotate(0deg);  /* Newer browsers (incl IE9) */
+}
+ 100% {
+  -moz-transform: rotate(-360deg);  /* FF3.5/3.6 */
+  -o-transform: rotate(-360deg);  /* Opera 10.5 */
+  -webkit-transform: rotate(-360deg);  /* Saf3.1+ */
+  transform: rotate(-360deg);  /* Newer browsers (incl IE9) */
+}
 }
 
 /* ------------------------------------------------- */
