@@ -8,7 +8,8 @@
             var ActionTypes = MiitSessionConstants.ActionTypes;
 
             var events = KeyMirror({
-                SESSION_RENEWED: null
+                SESSION_RENEWED: null,
+                SESSION_EXPIRED: null
             });
 
             // The PageStore Object
@@ -28,16 +29,18 @@
                     case ActionTypes.SESSION_DESTROY:
                         window.reload(true);
                         break;
+
                     case ActionTypes.SESSION_EXPIRE:
                         if(action.session === SessionId) {
                             SessionId = 'EXPIRED';
-                            SessionStore.emitExpired();
+                            SessionStore.emitSessionExpired();
                         }
                         break;
+
                     case ActionTypes.SESSION_RENEW:
                         if(action.session !== SessionId) {
                             SessionId = action.session;
-                            SessionStore.emitRenewed();
+                            SessionStore.emitSessionRenewed();
                         }
                         break;
                 }
