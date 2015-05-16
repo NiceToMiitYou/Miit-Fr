@@ -37,6 +37,13 @@
             if(!UserActions) {
                 UserActions = MiitApp.get('miit-user-actions');
             }
+            
+            var user = UserStore.getUser();
+
+            // Reset value
+            this.setState({
+                value_name: user.name
+            });
         },
 
         componentDidMount: function() {
@@ -51,9 +58,11 @@
 
         _onChanged: function() {
             if(this.isMounted()) {
+                var user = UserStore.getUser();
+
                 // Reset value
                 this.setState({
-                    value_name: ''
+                    value_name: user.name
                 });
             }
         },

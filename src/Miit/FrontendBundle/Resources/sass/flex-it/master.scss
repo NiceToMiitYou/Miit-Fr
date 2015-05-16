@@ -285,7 +285,7 @@ html {
         }
 
         i {
-            line-height: 50px;
+            line-height: 55px;
         }
     }
 
@@ -622,11 +622,11 @@ input {
       position: absolute;
       bottom: 13px;
       left: 0;
-      width: 42px;
+      width: 38px;
       text-align: center;
       top: 0;
       bottom: 0;
-      line-height: 42px;
+      line-height:38px;
       background: #E8E8E8;
     }
 
@@ -1105,6 +1105,9 @@ click-wave { 0% {
 
 /* ---------------- BEGIN BACKGROUND COLOR CSS ---------------- */
 
+.bg-white {
+    background-color: #FFF!important;
+}
 
 .bg-blue {
     background-color: #3498db!important;

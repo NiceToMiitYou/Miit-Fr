@@ -2,3 +2,72 @@
 body {
     background-color: #f4f4f4;
 }
+
+h3 {
+	font-weight: 100;
+	font-size: 1.3em;
+}
+
+.header {
+	background: url(/img/background-www.jpg);
+	background-size: cover;
+
+	.menu {
+		background: rgba(30, 45, 58, 0.76);
+		color: #FFF;
+		padding: 10px 20px;
+
+		.logo {
+			font-size: 2em;
+			line-height: 35px;
+
+			img {
+				height: 35px;
+				float: left;
+				margin-right: 8px;
+			}
+		}
+
+		a.pull-right {
+			float: right;
+			line-height: 35px;
+		}
+
+	}
+
+	.banner {
+		padding: 100px 30px;
+		color: #FFF;
+
+		h1 {
+			font-size: 3em;
+			font-weight: 100;
+		}
+
+		span {
+			display: block;
+			max-width: 550px;
+			line-height: 1.3em;
+		}
+	}
+}
+
+.feature {
+
+	color: #1E2D3A;
+	margin-top: 20px;
+	
+	i {
+		float: left;
+		margin-right: 20px,
+	}
+
+	p {
+		  font-size: 0.9em;
+		  font-weight: 100;
+		  margin-top: 10px;
+		  line-height: 1.3em;
+		
+	}
+
+}
