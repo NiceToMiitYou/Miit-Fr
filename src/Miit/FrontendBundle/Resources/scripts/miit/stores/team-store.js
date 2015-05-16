@@ -66,8 +66,6 @@
         function(ObjectAssign, KeyMirror, MiitStorage, MiitDispatcher, MiitTeamConstants) {
             var ActionTypes = MiitTeamConstants.ActionTypes;
 
-            Team = MiitStorage.shared.get('team');
-
             var events = KeyMirror({
                 // Tean updated
                 TEAM_UPDATED: null,
@@ -91,6 +89,9 @@
 
             var TeamStore = ObjectAssign({}, EventEmitter.prototype, {
                 getTeam: function() {
+                    if(!Team) {
+                        Team = MiitStorage.shared.get('team');
+                    }
                     return Team;
                 },
 

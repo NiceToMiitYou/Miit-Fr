@@ -40,8 +40,6 @@
         function(ObjectAssign, KeyMirror, MiitStorage, MiitDispatcher, MiitUserConstants) {
             var ActionTypes = MiitUserConstants.ActionTypes;
 
-            Me    = MiitStorage.shared.get('user');
-
             var events = KeyMirror({
                 // Event on password change
                 PASSWORD_CHANGED: null,
@@ -53,6 +51,9 @@
 
             var UserStore = ObjectAssign({}, EventEmitter.prototype, {
                 getUser: function() {
+                    if(!Me) {
+                        Me = MiitStorage.shared.get('user');
+                    }
                     return Me;
                 },
                 

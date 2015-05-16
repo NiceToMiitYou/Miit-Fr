@@ -28,7 +28,6 @@
                                 break;
                         }
 
-
                         MiitDispatcher.dispatch(action);
                     });
                 }
