@@ -57,6 +57,8 @@ module.exports = {
     LIBS_ALL: [
         config.BOWER + 'es5-shim/es5-shim.min.js',
         config.BOWER + 'es5-shim/es5-shim.map',
+        config.BOWER + 'es5-shim/es5-sham.min.js',
+        config.BOWER + 'es5-shim/es5-sham.map',
         config.BOWER + 'react/react-with-addons.js',
         config.BOWER + 'react/react-with-addons.min.js',
         config.BOWER + 'async/lib/async.js',
