@@ -1238,6 +1238,10 @@ click-wave { 0% {
     float: left;
 }
 
+.clearfix {
+  clear: both;
+}
+
 .valign-wrapper {
   display: -webkit-box;
   display: -moz-box;
