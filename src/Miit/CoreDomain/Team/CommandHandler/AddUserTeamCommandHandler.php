@@ -32,7 +32,7 @@ final class AddUserTeamCommandHandler extends TeamCommandHandlerAbstract
 
                 // For each users
                 foreach ($users as $user) {
-                    $team->addTeam($user);
+                    $team->addUser($user);
                 }
 
                 // Persist the team
