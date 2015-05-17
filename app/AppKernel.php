@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new FOS\OAuthServerBundle\FOSOAuthServerBundle(),
             new Miit\CoreDomainBundle\MiitCoreDomainBundle(),
             new Miit\FrontendBundle\MiitFrontendBundle(),
+            new Miit\ApiBundle\MiitApiBundle(),
             new Miit\AppBundle\MiitAppBundle(),
         );
 
