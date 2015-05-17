@@ -24,7 +24,9 @@ class RealTimeGrantExtension implements GrantExtensionInterface
         }
 
         if ($inputData['f22bc372e4297549cb8660226b5d7df1617f94bf'] === '423b3a6f2421a58bd22d4815cb91d98c12c8ba6e') {
-            return true;
+            return array(
+                'scope' => 'api realtime'
+            );
         }
 
         return false;

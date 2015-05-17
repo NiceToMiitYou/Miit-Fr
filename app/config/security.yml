@@ -74,7 +74,12 @@ security:
     # of your application based on roles, ip, host or methods
     # http://symfony.com/doc/current/cookbook/security/access_control.html
     access_control:
-        - { host: .miit.fr, path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
-        - { host: .miit.fr, path: ^/app/user/, roles: ROLE_USER }
-        - { host: .miit.dev, path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { host: .miit.dev, path: ^/app/user/, roles: ROLE_USER }
+        - { host: .miit.fr,     path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        - { host: .miit.fr,     path: ^/app/user/, roles: ROLE_USER }
+        - { host: api.miit.fr,  path: ^/, role: ROLE_API }
+        - { host: api.miit.fr,  path: ^/realtime/, role: ROLE_REALTIME }
+
+        - { host: .miit.dev,    path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { host: .miit.dev,    path: ^/app/user/, roles: ROLE_USER }
+        - { host: api.miit.dev,  path: ^/, role: ROLE_API }
+        - { host: api.miit.dev, path: ^/realtime/, role: ROLE_REALTIME }

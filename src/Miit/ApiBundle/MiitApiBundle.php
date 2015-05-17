@@ -9,7 +9,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  * 
  * @author Tacyniak Boris <boris.tacyniak@itevents.fr>
  */
-class ApiBundle extends Bundle
+class MiitApiBundle extends Bundle
 {   
     /**
      * {@inheritdoc}
