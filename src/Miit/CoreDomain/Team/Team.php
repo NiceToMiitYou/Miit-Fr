@@ -54,6 +54,13 @@ class Team implements Entity
     protected $users;
 
     /**
+     * The list of application
+     * 
+     * @var array
+     */
+    protected $applications;
+
+    /**
      * The creation date
      *
      * @var \DateTime
@@ -76,11 +83,14 @@ class Team implements Entity
      */
     public function __construct(TeamId $id, $slug, $name)
     {
-        $this->id     = $id;
-        $this->slug   = (string) $slug;
-        $this->name   = (string) $name;
-        $this->locked = false;
-        $this->public = false;
+        $this->id           = $id;
+        $this->slug         = (string) $slug;
+        $this->name         = (string) $name;
+        $this->locked       = false;
+        $this->public       = false;
+        $this->applications = array(
+            'APP_CHAT', 'APP_QUIZZ', 'APP_DOCUMENTS'
+        );
     }
 
     /**
@@ -155,6 +165,37 @@ class Team implements Entity
             
             // Remove it
             unset($this->users[$key]);
+        }
+    }
+
+    /**
+     * @param string $application
+     * 
+     * Add the reference to an application
+     */
+    public function addApplication($application)
+    {
+        if(false === $this->hasApplication($application)) {
+            
+            // Push the application at the end of the array
+            array_push($this->applications, $application);
+        }
+    }
+
+    /**
+     * @param string $application
+     * 
+     * Remove the reference to an application
+     */
+    public function removeApplication($application)
+    {
+        if(true === $this->hasApplication($application)) {
+
+            // Find the key
+            $key = array_search($application, $this->applications);
+            
+            // Remove it
+            unset($this->applications[$key]);
         }
     }
 
@@ -279,6 +320,24 @@ class Team implements Entity
     public function hasUser($user)
     {
         return in_array($user, $this->users, true);
+    }
+
+    /**
+     * @return array
+     */
+    public function getApplications()
+    {
+        return $this->applications;
+    }
+
+    /**
+     * @param string $application
+     * 
+     * @return boolean
+     */
+    public function hasApplication($application)
+    {
+        return in_array($application, $this->applications, true);
     }
 
     /**

@@ -75,6 +75,15 @@ class Team extends TeamModel
     /**
      * {@inheritDoc}
      * 
+     * @ORM\Column(type="array", nullable=true)
+     * 
+     * @Serializer\Groups({"details"})
+     */
+    protected $applications;
+
+    /**
+     * {@inheritDoc}
+     * 
      * @ORM\Column(type="datetime", nullable=true)
      * 
      * @Serializer\Groups({"details"})
