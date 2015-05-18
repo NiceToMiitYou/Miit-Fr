@@ -267,6 +267,10 @@ html {
         -o-transition: background-color 500ms ease;
         transition: background-color 500ms ease;
 
+        a {
+          color: #FFF;
+        }
+
         i.fa {
             margin-left: 10px;
             margin-right: 8px;
