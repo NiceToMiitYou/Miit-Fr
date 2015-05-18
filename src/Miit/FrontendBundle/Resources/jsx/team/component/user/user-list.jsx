@@ -7,7 +7,8 @@
                 users:   [],
                 loading: MiitTranslator.get('loading', 'team'),
                 headers: true,
-                invite:  true
+                invite:  true,
+                roles:   true
             };
         },
 
@@ -80,7 +81,7 @@
                         <MiitComponents.UserListHeader />
                     </If>
                     {this.state.users.map(function(user) {
-                        return <MiitComponents.UserListItem key={user.id} user={user} />;
+                        return <MiitComponents.UserListItem key={user.id} user={user} roles={this.props.roles} />;
                     }.bind(this))}
                     {loadingElement}
                     <If test={this.props.invite}>

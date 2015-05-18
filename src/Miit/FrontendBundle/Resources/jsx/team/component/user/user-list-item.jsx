@@ -8,7 +8,8 @@
                     id:    '',
                     name:  'unknow',
                     roles: []
-                }
+                },
+                roles: true
             };
         },
 
@@ -26,7 +27,7 @@
                     <If test={UserStore.isUser()}>
                         <span className="pl10">{this.props.user.email}</span>
                     </If>
-                    <If test={UserStore.isAdmin()}>
+                    <If test={this.props.roles && UserStore.isAdmin()}>
                         <MiitComponents.UserListItemRoles user={this.props.user}/>
                     </If>
                 </div>
