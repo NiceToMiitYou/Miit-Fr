@@ -16,7 +16,7 @@
                             <h1>{this.props.title}</h1>
                             <MiitComponents.Clock />
 
-                            <div className="dialog-container">
+                            <div className="dialog-container hide">
                                 <div className="notification-dialog nd-info">
                                     <span>Lorem ipsum dolor sit amet, consectetur adipiscing.</span>
                                 </div>
