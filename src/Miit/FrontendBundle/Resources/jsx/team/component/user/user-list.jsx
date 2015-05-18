@@ -70,11 +70,7 @@
         },
 
         render: function() {
-            var loadingElement = null;
 
-            if(this.state.loaded === false) {
-                loadingElement = (<div>{this.props.loading}</div>);
-            }
 
             return (
                 <div className="miit-component user-list">
@@ -84,7 +80,9 @@
                     {this.state.users.map(function(user) {
                         return <MiitComponents.UserListItem key={user.id} user={user} email={this.props.emails} roles={this.props.roles} />;
                     }.bind(this))}
-                    {loadingElement}
+                    <If test={!this.state.loaded}>
+                        <MiitComponents.Loading />
+                    </If>
                     <If test={this.props.invite}>
                         <MiitComponents.UserListInvite onInvite={this.allowRefresh} />
                     </If>
