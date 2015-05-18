@@ -102,6 +102,7 @@ html {
     -o-transition: margin-left 500ms ease;
     transition: margin-left 500ms ease;
     margin-left: 220px;
+    padding-top:55px;
     position: relative;
 
     &.fullwidth {
@@ -148,11 +149,12 @@ html {
     .page-header {
         background-color: #2980b9;
         position: fixed;
+        z-index: 9999;
+        top:0;
+        left: 220px;
         width: 100%;
         color: #FFF;
         height: 55px;
-        margin-left: -25px;
-        margin-right: -25px;
           -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.06),0 -10px 10px 0 rgba(0, 0, 0, 0.06);
           -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.06),0 -10px 10px 0 rgba(0, 0, 0, 0.06);
           box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.06),0 -10px 10px 0 rgba(0, 0, 0, 0.06);
@@ -584,25 +586,6 @@ html {
       }
     }
 
-  }
-
-  .loading-container {
-    margin-left: 10px;
-
-    div {
-      display: inline-block;
-      color: #5c798f;
-      line-height: 35px;
-      font-size: 13px;
-    }
-
-    .loading {
-      width: 35px;
-      height: 35px;
-      display: inline-block;
-      margin-right: 10px;
-      float: left;
-    }
   }
 
 }
@@ -1487,7 +1470,8 @@ click-wave { 0% {
 }
 
 .clock {
-  float: right;
+  position: fixed;
+  right: 0;
   line-height: 55px;
   padding-right: 15px;
   font-weight: 100;
