@@ -8,7 +8,8 @@
                 loading: MiitTranslator.get('loading', 'team'),
                 headers: true,
                 invite:  true,
-                roles:   true
+                roles:   true,
+                emails:  true
             };
         },
 
@@ -78,10 +79,10 @@
             return (
                 <div className="miit-component user-list">
                     <If test={this.props.headers}>
-                        <MiitComponents.UserListHeader />
+                        <MiitComponents.UserListHeader email={this.props.emails} roles={this.props.roles} />
                     </If>
                     {this.state.users.map(function(user) {
-                        return <MiitComponents.UserListItem key={user.id} user={user} roles={this.props.roles} />;
+                        return <MiitComponents.UserListItem key={user.id} user={user} email={this.props.emails} roles={this.props.roles} />;
                     }.bind(this))}
                     {loadingElement}
                     <If test={this.props.invite}>

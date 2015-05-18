@@ -9,6 +9,7 @@
                     name:  'unknow',
                     roles: []
                 },
+                email: true,
                 roles: true
             };
         },
@@ -24,7 +25,7 @@
                 <div className="miit-component user-list-item">
                     <MiitComponents.UserAvatar user={this.props.user} />
                     <span className="pl10">{this.props.user.name}</span>
-                    <If test={UserStore.isUser()}>
+                    <If test={this.props.email && UserStore.isUser()}>
                         <span className="pl10">{this.props.user.email}</span>
                     </If>
                     <If test={this.props.roles && UserStore.isAdmin()}>
