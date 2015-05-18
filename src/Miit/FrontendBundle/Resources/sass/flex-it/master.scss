@@ -972,6 +972,90 @@ click-wave { 0% {
 
 /* ---------------- END BUTTONS CSS ---------------- */
 
+/* ---------------- BEGIN NOTIFICATION CSS ---------------- */
+
+.dialog-container {
+
+  position: fixed;
+  right: 15px;
+  top: 15px;
+
+  .notification-dialog {
+    width: 350px;
+    padding: 20px;
+    padding-left: 70px;
+    position: relative;
+    margin-bottom: 10px;
+    font-weight: 100;
+    background-color: #1e2d3a;
+    -webkit-box-shadow: 0px 0px 6px -2px rgba(0, 0, 0, 1);
+    -moz-box-shadow: 0px 0px 6px -2px rgba(0, 0, 0, 1);
+    box-shadow: 0px 0px 6px -2px rgba(0, 0, 0, 1);
+
+    &::before {
+      position: absolute;
+      left: 0;
+      width: 50px;
+      top: 50%;
+      bottom: 0;
+      text-align: center;
+      font: normal normal normal 14px/1 FontAwesome;
+      font-size: 1.4em;
+      line-height: 50px;
+      margin-top: -25px;
+      content :"\f0f3";
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 50px;
+      top: 0;
+      bottom: 0;
+      background-color: rgba(255,255,255,0.15);
+      text-align: center;
+      font-size: 1.4em;
+    }
+
+    &.nd-info {
+      background: #3498db;
+
+      &::before {
+        content: "\f129";
+      }
+    }
+
+    &.nd-valid {
+      background: #2ecc71;
+
+      &::before {
+        content: "\f00c";
+      }
+    }
+
+    &.nd-danger {
+      background: #e74c3c;
+
+      &::before {
+        content: "\f00d";
+      }
+    }
+
+    &.nd-warning {
+      background: #f39c12;
+
+      &::before {
+        content: "\f071";
+      }
+    }
+
+  }
+
+}
+
+
+/* ---------------- END NOTIFICATION CSS ---------------- */
 
 /* ---------------- BEGIN APP LIST CSS ---------------- */
 
