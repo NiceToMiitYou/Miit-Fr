@@ -4,8 +4,10 @@
     MiitComponents.UserList = React.createClass({
         getDefaultProps: function() {
             return {
-                users:    [],
-                loading:  MiitTranslator.get('loading', 'team')
+                users:   [],
+                loading: MiitTranslator.get('loading', 'team'),
+                headers: true,
+                invite:  true
             };
         },
 
@@ -74,12 +76,16 @@
 
             return (
                 <div className="miit-component user-list">
-                    <MiitComponents.UserListHeader />
+                    <If test={this.props.headers}>
+                        <MiitComponents.UserListHeader />
+                    </If>
                     {this.state.users.map(function(user) {
                         return <MiitComponents.UserListItem key={user.id} user={user} />;
                     }.bind(this))}
                     {loadingElement}
-                    <MiitComponents.UserListInvite onInvite={this.allowRefresh} />
+                    <If test={this.props.invite}>
+                        <MiitComponents.UserListInvite onInvite={this.allowRefresh} />
+                    </If>
                 </div>
             );
         }
