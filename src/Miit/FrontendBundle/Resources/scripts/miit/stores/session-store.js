@@ -12,7 +12,7 @@
                 SESSION_EXPIRED: null
             });
 
-            // The PageStore Object
+            // The SessionStore Object
             var SessionStore = ObjectAssign({}, EventEmitter.prototype, {
                 getSessionId: function() {
                     return SessionId;
