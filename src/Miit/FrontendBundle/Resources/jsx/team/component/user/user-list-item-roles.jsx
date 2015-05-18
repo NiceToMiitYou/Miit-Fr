@@ -121,6 +121,11 @@
 
         render: function() {
             var IAmAdmin    = UserStore.isAdmin();
+
+            if(false === IAmAdmin) {
+                return null;
+            }
+
             var userIsAdmin = UserStore.isAdmin(this.props.user);
             var userIsUser  = UserStore.isUser(this.props.user);
             var userIsMe    = UserStore.isItMe(this.props.user);

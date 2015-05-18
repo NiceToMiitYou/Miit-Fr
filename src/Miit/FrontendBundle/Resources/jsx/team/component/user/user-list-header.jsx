@@ -20,19 +20,16 @@
         },
 
         render: function() {
-            var actionElement = null;
-
-            // Check if this is an admin
-            if(UserStore.isAdmin()){
-                actionElement = (<span>{this.props.text.action}</span>);
-            }
-
             return (
                 <div className="miit-component user-list-header">
                     <span>{this.props.text.avatar}</span>
                     <span>{this.props.text.name}</span>
-                    <span>{this.props.text.email}</span>
-                    {actionElement}
+                    <If test={UserStore.isUser()}>
+                        <span>{this.props.text.email}</span>
+                    </If>
+                    <If test={UserStore.isAdmin()}>
+                        <span>{this.props.text.action}</span>
+                    </If>
                 </div>
             );
         }
