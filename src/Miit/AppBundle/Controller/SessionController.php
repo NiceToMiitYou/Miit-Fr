@@ -67,7 +67,6 @@ class SessionController extends AppControllerAbstract
 
             $response['done'] = true;
         } catch (\Exception $e) {
-            die(var_dump($e));
             $response['errors'][] = $e->getMessage();
         }
 

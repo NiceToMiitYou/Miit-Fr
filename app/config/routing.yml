@@ -17,6 +17,22 @@ miit_api:
     resource: "@MiitApiBundle/Controller"
     type:     annotation
 
+miit_api_root:
+    host:     "api.%domain%"
+    pattern: /
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route:     welcome_home
+        permanent: true
+
+miit_api_login:
+    host:     "api.%domain%"
+    pattern: /login
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route:     welcome_home
+        permanent: true
+
 miit_app:
     prefix:   /app
     resource: "@MiitAppBundle/Controller"
