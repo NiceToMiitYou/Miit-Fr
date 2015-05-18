@@ -5,21 +5,21 @@ namespace Miit\CoreDomain\Team\CommandHandler;
 use DomainDrivenDesign\Domain\Command\Command;
 use DomainDrivenDesign\Domain\Command\CommandNotSupportedByHandler;
 
-use Miit\CoreDomain\Team\Command\AddUserTeamCommand;
+use Miit\CoreDomain\Team\Command\AddApplicationTeamCommand;
 
 /**
- * Class AddUserTeamCommandHandler
+ * Class AddApplicationTeamCommandHandler
  * 
  * @author Tacyniak Boris <boris.tacyniak@itevents.fr>
  */
-final class AddUserTeamCommandHandler extends TeamCommandHandlerAbstract
+final class AddApplicationTeamCommandHandler extends TeamCommandHandlerAbstract
 {
     /**
      * {@inheritdoc}
      */
     public function handle(Command $command)
     {
-        if($command instanceof AddUserTeamCommand) {
+        if($command instanceof AddApplicationTeamCommand) {
 
             $team = $this->teamRepository->findTeamByTeamId(
                 $command->getTeamId()
@@ -27,12 +27,12 @@ final class AddUserTeamCommandHandler extends TeamCommandHandlerAbstract
 
             if(null !== $team) {
 
-                // Get the list of users
-                $users = $command->getUsers();
+                // Get the list of applications
+                $applications = $command->getApplications();
 
-                // For each users
-                foreach ($users as $user) {
-                    $team->addUser($user);
+                // For each applications
+                foreach ($applications as $application) {
+                    $team->addApplication($application);
                 }
 
                 // Persist the team
@@ -49,6 +49,6 @@ final class AddUserTeamCommandHandler extends TeamCommandHandlerAbstract
      */
     public function supportedCommand()
     {
-        return 'Miit\CoreDomain\Team\Command\AddUserTeamCommand';
+        return 'Miit\CoreDomain\Team\Command\AddApplicationTeamCommand';
     }
 }

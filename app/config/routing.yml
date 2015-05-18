@@ -6,15 +6,21 @@ logout:
     pattern:  /logout
 
 fos_oauth_server_token:
+    host:     "api.%domain%"
     resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"
 
 fos_oauth_server_authorize:
     resource: "@FOSOAuthServerBundle/Resources/config/routing/authorize.xml"
 
+miit_api:
+    host:     "api.%domain%"
+    resource: "@MiitApiBundle/Controller"
+    type:     annotation
+
 miit_app:
+    prefix:   /app
     resource: "@MiitAppBundle/Controller"
     type:     annotation
-    prefix:   /app
 
 miit_frontend:
     resource: "@MiitFrontendBundle/Controller"

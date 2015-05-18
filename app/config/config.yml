@@ -79,4 +79,4 @@ fos_oauth_server:
     service:
         user_provider: user_repository
         options:
-            supported_scopes: user
+            supported_scopes: api

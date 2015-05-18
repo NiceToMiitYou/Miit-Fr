@@ -12,4 +12,4 @@ services:
     miit.api.oauth.realtime_extension:
         class: Miit\ApiBundle\OAuth\RealTimeGrantExtension
         tags:
-            - { name: fos_oauth_server.grant_extension, uri: 'realtime_type' }
+            - { name: fos_oauth_server.grant_extension, uri: 'http://ws.miit.fr/' }

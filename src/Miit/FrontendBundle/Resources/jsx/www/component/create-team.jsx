@@ -104,7 +104,7 @@
                 <form className="miit-component create-team" onSubmit={this.handleSubmit}>
                     
                         <div className="row pt20 pb20">
-                            <div className="col-md-6">
+                            <div className="col-md-6 mb10">
                                 <div className="input-field left-icon icon-transparent push0">
                                     <i className="fa fa-envelope-o"></i>
                                     <input type="text" className={classes_email} placeholder={this.props.placeholder.email} ref="email" />
