@@ -76,6 +76,8 @@
                     <div className="main">
                         {this.state.page}
                     </div>
+
+                    <MiitComponents.NotificationsContainer />
                 </div>
             );
         }

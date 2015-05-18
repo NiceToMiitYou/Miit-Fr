@@ -5,6 +5,19 @@
                 title: 'Welcome'
             };
         },
+        
+        // [TO REMOVE] Exemple de notifications 
+        componentWillMount: function() {
+            setTimeout(function(){
+                MiitApp.get('miit-notifications-actions').new('valid', 'Bienvenue sur la page d\'accueil!');
+            }, 250);
+            setTimeout(function(){
+                MiitApp.get('miit-notifications-actions').new('info', 'Bienvenue sur la page d\'accueil!');
+            }, 1250);
+            setTimeout(function(){
+                MiitApp.get('miit-notifications-actions').new('danger', 'Bienvenue sur la page d\'accueil!');
+            }, 4250);
+        },
 
         render: function() {
             return (

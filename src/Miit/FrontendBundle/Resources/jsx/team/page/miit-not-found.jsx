@@ -11,13 +11,13 @@
 
         render: function() {
             return (
-                    <div className="container-fluid">
-                        <h1 className="pt25">{this.props.title}</h1>
+                <div className="container-fluid">
+                    <h1 className="pt25">{this.props.title}</h1>
 
-                        <div className="mt50">
-                            <Link href="/">{this.props.text.home}</Link>
-                        </div>
+                    <div className="mt50">
+                        <Link href="/">{this.props.text.home}</Link>
                     </div>
+                </div>
             );
         }
     });
