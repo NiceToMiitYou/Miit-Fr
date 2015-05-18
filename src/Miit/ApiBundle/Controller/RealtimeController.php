@@ -61,6 +61,9 @@ class RealtimeController extends Controller
                 }
                 else if(false === $isAnonym)
                 {
+                    $teamManager = $this->get('team_manager');
+                    $teamManager->setCurrentTeam($team);
+
                     $sessionRepository = $this->get('session_token_repository');
 
                     $userId = new UserId($userId);
