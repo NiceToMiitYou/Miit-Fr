@@ -40,8 +40,6 @@ class User extends UserModel implements UserInterface, EquatableInterface
      * {@inheritDoc}
      * 
      * @ORM\Column(type="string", length=255, nullable=false, unique=true)
-     * 
-     * @Serializer\Groups({"owner", "list", "details"})
      */
     protected $email;
 

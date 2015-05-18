@@ -7,6 +7,8 @@ use Miit\CoreDomain\Team\Team;
 use Miit\CoreDomainBundle\Entity\User;
 use Miit\CoreDomainBundle\Manager\TeamManager;
 
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\Events;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
@@ -24,10 +26,25 @@ class UserRoleEventSubscriber implements EventSubscriberInterface
     private $teamManager;
 
     /**
-     * @param TeamManager $teamManager
+     * @var TokenStorageInterface
      */
-    public function __construct(TeamManager $teamManager)
+    private $context;
+
+    /**
+     * @var User
+     */
+    public function getUser()
     {
+        return $this->storage->getToken()->getUser();
+    }
+
+    /**
+     * @param TokenStorageInterface $storage
+     * @param TeamManager           $teamManager
+     */
+    public function __construct(TokenStorageInterface $storage, TeamManager $teamManager)
+    {
+        $this->storage     = $storage;
         $this->teamManager = $teamManager;
     }
 
@@ -60,6 +77,7 @@ class UserRoleEventSubscriber implements EventSubscriberInterface
 
         $allowed = Team::getAllowedRoles();
 
+        // Transform roles
         foreach ($allowed as $tmp) {
             $role = $team->getRole($tmp);
 
@@ -68,6 +86,14 @@ class UserRoleEventSubscriber implements EventSubscriberInterface
             }
         }
 
+        // Add roles
         $event->getVisitor()->addData('roles', $roles);
+
+        // Add email if not anonym
+        if($this->getUser() instanceof User)
+        {
+            $email = $user->getEmail()->getValue();
+            $event->getVisitor()->addData('email', $email);
+        }
     }
 }
