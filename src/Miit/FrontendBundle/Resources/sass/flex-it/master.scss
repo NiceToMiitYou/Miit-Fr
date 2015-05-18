@@ -542,6 +542,35 @@ html {
 /* ---------------- END LEFT SIDEBAR CSS ---------------- */
 
 
+/* ---------------- BEGIN RIGHT SIDEBAR CSS ---------------- */
+
+.sidr-right {
+  position: fixed;
+  right: 0;
+  top: 55px;
+  bottom: 0;
+  width: 250px;
+  border-left: 1px solid #EEE;
+  background: #FFF;
+
+  .sr-label {
+
+  }
+
+  .user-list {
+
+    .user-list-item {
+      padding: 5px 10px;
+      border-top: 0;
+    }
+
+  }
+
+}
+
+/* ---------------- END RIGHT SIDEBAR CSS ---------------- */
+
+
 /* ---------------- BEGIN INPUT CSS ---------------- */
 
 input {
@@ -979,6 +1008,7 @@ click-wave { 0% {
   position: fixed;
   right: 15px;
   top: 15px;
+  z-index: 999;
 
   .notification-dialog {
     width: 350px;

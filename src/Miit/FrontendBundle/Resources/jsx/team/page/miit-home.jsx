@@ -34,6 +34,11 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div className="sidr-right">
+                            <span className="sr-label">Utilisateurs</span>
+                            <MiitComponents.UserList headers={false} invite={false} roles={false} emails={false}/>
+                        </div>
                     </div>
             );
         }
