@@ -37,6 +37,18 @@ security:
             host: "www.%domain%"
             security: false
 
+        oauth_token:
+            host: "api.%domain%"
+            pattern: ^/oauth/v2/token
+            security: false
+
+        api:
+            host:       "api.%domain%"
+            pattern:    ^/
+            fos_oauth:  true
+            stateless:  true
+            anonymous:  false
+
         # redirect after login
         main:
             anonymous: ~
@@ -54,18 +66,6 @@ security:
                 lifetime: 31536000
                 path:     /
                 domain:   ~
-
-        oauth_token:
-            host: "api.%domain%"
-            pattern: ^/oauth/v2/token
-            security: false
-
-        api:
-            host:       "api.%domain%"
-            pattern:    ^/
-            fos_oauth:  true
-            stateless:  true
-            anonymous:  false
 
         default:
             anonymous: ~
