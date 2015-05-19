@@ -1030,7 +1030,8 @@ click-wave { 0% {
   position: fixed;
   right: 15px;
   top: 15px;
-  z-index: 999;
+  z-index: 99999;
+  color: #FFF;
 
   .notification-dialog {
     width: 350px;
