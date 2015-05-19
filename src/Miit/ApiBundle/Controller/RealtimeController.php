@@ -58,6 +58,10 @@ class RealtimeController extends Controller
                 if(true === $isAnonym && true === $team->isPublic())
                 {
                     $DTO->type = 'SESSION_ANONYM';
+                    $DTO->user = array(
+                        'id'    => $userId
+                    );
+                    $DTO->team = $team;
                 }
                 else if(false === $isAnonym)
                 {
@@ -79,6 +83,7 @@ class RealtimeController extends Controller
                         {
                             $DTO->type = 'SESSION_VALID';
                             $DTO->user = $token->getUser();
+                            $DTO->team = $team;
                         }
                     }
                 }

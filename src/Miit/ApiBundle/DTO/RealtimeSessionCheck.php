@@ -24,6 +24,12 @@ class RealtimeSessionCheck extends DefaultAbstract
     public $user;
 
     /**
+     * @var Team
+     * @Serializer\Groups({"default"})
+     */
+    public $team;
+
+    /**
      * Constructor of the Default DTO
      */
     public function __construct()
