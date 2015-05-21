@@ -1,5 +1,5 @@
 (function(){
-    var TeamStore, TeamActions;
+    var TeamStore, TeamActions, UserStatusStore, UserStatusActions;
 
     MiitComponents.UserList = React.createClass({
         getDefaultProps: function() {
@@ -26,6 +26,12 @@
             }
             if(!TeamActions) {
                 TeamActions = MiitApp.get('miit-team-actions');
+            }
+            if(!UserStatusStore) {
+                UserStatusStore = MiitApp.get('miit-user-status-store');
+            }
+            if(!UserStatusActions) {
+                UserStatusActions = MiitApp.get('miit-user-status-actions');
             }
             this.setState({
                 users: TeamStore.getUsers()

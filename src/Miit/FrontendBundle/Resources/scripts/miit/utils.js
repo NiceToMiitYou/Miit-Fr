@@ -78,15 +78,11 @@
                 req.open(method, url, true);
                 
                 if(postData) {
-                    req.setRequestHeader('Content-type','application/json');
+                    req.setRequestHeader('Content-type', 'application/json');
                 }
 
                 req.onreadystatechange = function () {
                     if (req.readyState != 4) return;
-                    if (req.status != 200 && req.status != 304) {
-                        return;
-                    }
-
                     var result;
 
                     try {
@@ -94,7 +90,7 @@
                     } catch(e) { }
 
                     if(typeof cb === 'function') {
-                        cb(result);
+                        cb(result, req);
                     }
                 };
                 

@@ -1,7 +1,7 @@
 window.MiitApp = (function() {
     var MiitApp = injector.resolve(
         ['miit-router'],
-        function(MiitRouter) {
+        function(MiitRouter, MiitRealtime) {
             var VERSION   = '0.0.0';
             var COPYRIGTH = 'All rigths reserved to ITEvents.';
 

@@ -5,6 +5,8 @@ namespace Miit\ApiBundle\Controller;
 use Miit\CoreDomain\User\UserId;
 use Miit\CoreDomain\Team\TeamId;
 
+use Miit\CoreDomainBundle\Entity\User;
+
 use Miit\ApiBundle\DTO\RealtimeSessionCheck;
 
 use Miit\CoreDomainBundle\Entity\SessionToken;
@@ -59,7 +61,8 @@ class RealtimeController extends Controller
                 {
                     $DTO->type = 'SESSION_ANONYM';
                     $DTO->user = array(
-                        'id'    => $userId
+                        'id'     => $userId,
+                        'avatar' => User::generateAvatarId(sha1($id))
                     );
                     $DTO->team = $team;
                 }

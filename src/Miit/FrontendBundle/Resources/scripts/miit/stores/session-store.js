@@ -2,10 +2,12 @@
     var SessionId;
 
     var MiitSessionStore = injector.resolve(
-        ['object-assign', 'key-mirror', 'miit-dispatcher', 'miit-session-constants'],
-        function(ObjectAssign, KeyMirror, MiitDispatcher, MiitSessionConstants) {
+        ['object-assign', 'key-mirror', 'miit-dispatcher', 'miit-storage', 'miit-session-constants'],
+        function(ObjectAssign, KeyMirror, MiitDispatcher, MiitStorage, MiitSessionConstants) {
             // All action types
             var ActionTypes = MiitSessionConstants.ActionTypes;
+    
+            SessionId = MiitStorage.shared.get('token');
 
             var events = KeyMirror({
                 SESSION_RENEWED: null,
@@ -45,6 +47,10 @@
                         break;
                 }
             });
+
+            setTimeout(function(){
+                SessionStore.emitSessionRenewed();
+            }, 250);
 
             return SessionStore;
         }

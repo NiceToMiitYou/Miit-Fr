@@ -6,6 +6,7 @@ use Miit\CoreDomain\Common\UUID;
 
 use Miit\CoreDomainBundle\Annotation\Permissions;
 use Miit\CoreDomainBundle\Entity\User;
+use Miit\CoreDomainBundle\Entity\SessionToken;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
@@ -59,6 +60,23 @@ class TeamController extends Controller
                 'id'     => $id,
                 'avatar' => User::generateAvatarId(sha1($id))
             );
+
+            $tokenId = $id;
+        } else {
+            $repository = $this->get('session_token_repository');
+            
+            $teamId = $team->getId();
+            $userId = $user->getId();
+
+            $token = $repository->findSessionTokenByUserIdAndTeamId($userId, $teamId);
+            
+            if(null === $token || !$token->isValid()) {
+                // Generate a new token
+                $token = new SessionToken($user, $team);
+                $repository->persist($token);
+            }
+
+            $tokenId = $token->getId();
         }
 
         $user_context = SerializationContext::create()->setGroups(array('owner'));
@@ -69,7 +87,8 @@ class TeamController extends Controller
             'user_context' => $user_context,
             'user'         => $user,
             'team_context' => $team_context,
-            'team'         => $team
+            'team'         => $team,
+            'token'        => $tokenId
         ));
     }
 

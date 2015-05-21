@@ -1,5 +1,5 @@
 (function(){
-    var UserStore;
+    var UserStore, UserStatusStore;
 
     MiitComponents.UserListItem = React.createClass({
         getDefaultProps: function() {
@@ -18,9 +18,27 @@
             if(!UserStore) {
                 UserStore = MiitApp.get('miit-user-store');
             }
+            if(!UserStatusStore) {
+                UserStatusStore = MiitApp.get('miit-user-status-store');
+            }
+        },
+
+        componentDidMount: function() {
+            UserStatusStore.addStatusChangedListener(this._onChanged);
+        },
+
+        componentWillUnmount: function() {
+            UserStatusStore.removeStatusChangedListener(this._onChanged);
+        },
+
+        _onChanged: function() {
+            console.log('changed');
+            this.forceUpdate();
         },
 
         render: function() {
+            var status = UserStatusStore.getUserStatusByUserId(this.props.user.id);
+
             return (
                 <div className="miit-component user-list-item">
                     <MiitComponents.UserAvatar user={this.props.user} />
