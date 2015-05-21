@@ -62,7 +62,7 @@ class RealtimeController extends Controller
                     $DTO->type = 'SESSION_ANONYM';
                     $DTO->user = array(
                         'id'     => $userId,
-                        'avatar' => User::generateAvatarId(sha1($id))
+                        'avatar' => User::generateAvatarId(sha1($userId))
                     );
                     $DTO->team = $team;
                 }
