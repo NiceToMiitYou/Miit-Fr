@@ -36,18 +36,20 @@ h3 {
 	}
 
 	.banner {
-		padding: 100px 30px;
+		padding: 160px 30px;
 		color: #FFF;
 
 		h1 {
-			font-size: 3em;
+			font-size: 3.4em;
 			font-weight: 100;
 		}
 
 		span {
 			display: block;
-			max-width: 550px;
+			max-width: 80%;
 			line-height: 1.3em;
+			font-size: 1.2em;
+			font-weight: 100;
 		}
 	}
 }
