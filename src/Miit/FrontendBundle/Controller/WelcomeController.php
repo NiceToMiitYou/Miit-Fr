@@ -10,6 +10,8 @@ use Miit\CoreDomain\User\Command\AddTeamUserCommand;
 use Miit\CoreDomain\Team\TeamId;
 use Miit\CoreDomain\Team\Command\CreateTeamCommand;
 
+use Miit\CoreDomainBundle\Entity\NewsLetter;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -118,6 +120,67 @@ class WelcomeController extends Controller
             } else {
                 $response['errors'] = array('TEAM_NOT_CREATED');
             }
+        } else {
+            $response['errors'] = $form->getErrors();
+        }
+
+        return new JsonResponse($response);
+    }
+
+    /**
+     * @Route("/newsletter",
+     *      host="{subdomain}.{domain}",
+     *      defaults={
+     *          "domain":    "%domain%",
+     *          "subdomain": "www"
+     *      },
+     *      requirements={
+     *          "_method":   "POST",
+     *          "domain":    "%domain%",
+     *          "subdomain": "www"
+     *      }
+     * )
+     * @Route("/newsletter",
+     *      name="welcome_newsletter",
+     *      host="{domain}",
+     *      defaults={
+     *          "domain":    "%domain%"
+     *      },
+     *      requirements={
+     *          "_method":   "POST",
+     *          "domain":    "%domain%"
+     *      }
+     * )
+     */
+    public function newsLetterAction(Request $request)
+    {
+        $form = $this->createForm('news_letter_type');
+        $data = @json_decode($request->getContent(), true);
+
+        $form->submit($data);
+
+        $response = array(
+            'done' => false
+        );
+
+        if ($form->isValid()) {
+
+            $repository = $this->get('news_letter_repository');
+
+            $newsletter = $form->getData();
+            // Process registration
+            $email = new Email($newsletter->email);
+
+            try {
+                $new = new NewsLetter($email);
+
+                $repository->persist($new);
+            } catch(\Exception $e) {
+                // Don't throw, probably already exist, do not notfiy client
+            }
+
+            $response['done'] = true;
+
         } else {
             $response['errors'] = $form->getErrors();
         }

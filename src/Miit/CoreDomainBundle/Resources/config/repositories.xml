@@ -7,6 +7,7 @@
         <parameter key="user_repository.orm.class">Miit\CoreDomainBundle\Repository\UserRepository</parameter>
         <parameter key="team_repository.orm.class">Miit\CoreDomainBundle\Repository\TeamRepository</parameter>
         <parameter key="session_token_repository.orm.class">Miit\CoreDomainBundle\Repository\SessionTokenRepository</parameter>
+        <parameter key="news_letter_repository.orm.class">Miit\CoreDomainBundle\Repository\NewsLetterRepository</parameter>
     </parameters>
 
     <services>
@@ -47,6 +48,19 @@
                  factory-method="getRepository">
 
             <argument>MiitCoreDomainBundle:SessionToken</argument>
+        </service>
+        
+        <!-- NewsLetter Repository Public -->
+        <service id="news_letter_repository" alias="news_letter_repository.orm"></service>
+
+        <!-- NewsLetter Repository Private -->
+        <service id="news_letter_repository.orm"
+                 public="false"
+                 class="%news_letter_repository.orm.class%"
+                 factory-service="doctrine.orm.entity_manager"
+                 factory-method="getRepository">
+
+            <argument>MiitCoreDomainBundle:NewsLetter</argument>
         </service>
     </services>
 </container>

@@ -9,6 +9,8 @@
         <parameter key="registration_type.class">Miit\AppBundle\Form\Type\RegistrationType</parameter>
         <parameter key="team_update_type.class">Miit\AppBundle\Form\Type\TeamUpdateType</parameter>
 
+        <parameter key="news_letter_type.class">Miit\AppBundle\Form\Type\NewsLetterType</parameter>
+
         <parameter key="user_change_password_type.class">Miit\AppBundle\Form\Type\UserChangePasswordType</parameter>
         <parameter key="user_update_type.class">Miit\AppBundle\Form\Type\UserUpdateType</parameter>
 
@@ -40,6 +42,12 @@
         <service id="app.form.type.team_update"
                  class="%team_update_type.class%">
             <tag name="form.type" alias="team_update_type" />
+        </service>
+
+        <!-- NewsLetter Update Type -->
+        <service id="app.form.type.news_letter"
+                 class="%news_letter_type.class%">
+            <tag name="form.type" alias="news_letter_type" />
         </service>
 
         <!-- User Change Password Type -->
