@@ -29,7 +29,7 @@
         },
 
         render: function() {
-            if(!UserStore.isUser()) {
+            if(UserStore.isAnonym()) {
                 return <MiitComponents.MiitNotFound />;
             }
 

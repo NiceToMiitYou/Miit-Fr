@@ -31,14 +31,14 @@
                         <MiitComponents.MenuUserProfile />
 
                         <ul className="sl-list mb10">
-                            <If test={UserStore.isUser()}>
+                            <If test={!UserStore.isAnonym()}>
                                 <li>
                                     <Link href="#/me" activeGroup="menu-team" activeName="me">
                                         <i className="fa fa-cogs pull-left"></i> {this.props.text.my_account}
                                     </Link>
                                 </li>
                             </If>
-                            <If test={UserStore.isUser()}>
+                            <If test={!UserStore.isAnonym()}>
                                 <li>
                                     <Link href="/logout" external={true} >
                                         <i className="fa fa-sign-out pull-left"></i> {this.props.text.disconnect}
