@@ -1,5 +1,5 @@
 (function(){
-    var Users = [], Team;
+    var Users = [], RealtimeUsers = [], Team;
 
     function _update(name, publix) {
         Team.name   = name;
@@ -12,17 +12,33 @@
         if(index < 0) {
             Users.push(user);
         }
+        // Synchronise
+        _addRealtimeUser(user);
     }
 
-    function _addUsers(users) {
-        users = users || [];
-        users.foreach(function(user){
-            _addUser(user);
+    function _addRealtimeUser(user) {
+        var index = RealtimeUsers.indexBy('id', user.id || '');
+        
+        if(index < 0) {
+            RealtimeUsers.push(user);
+        } else {
+            RealtimeUsers[index] = user;
+        }
+    }
+
+    function _synchronizeUsers() {
+        Users.forEach(function(user) {
+            _addRealtimeUser(user);
         });
     }
 
     function _replaceUsers(users) {
         Users = users;
+    }
+
+    function _replaceRealtimeUsers(users) {
+        RealtimeUsers = users;
+        _synchronizeUsers();
     }
 
     function _filterbyRoleUser(role) {
@@ -62,8 +78,8 @@
     }
 
     var MiitTeamStore = injector.resolve(
-        ['object-assign', 'key-mirror', 'miit-storage', 'miit-dispatcher', 'miit-team-constants'],
-        function(ObjectAssign, KeyMirror, MiitStorage, MiitDispatcher, MiitTeamConstants) {
+        ['object-assign', 'key-mirror', 'miit-storage', 'miit-dispatcher', 'miit-user-store', 'miit-team-constants'],
+        function(ObjectAssign, KeyMirror, MiitStorage, MiitDispatcher, MiitUserStore, MiitTeamConstants) {
             var ActionTypes = MiitTeamConstants.ActionTypes;
 
             var events = KeyMirror({
@@ -99,7 +115,11 @@
                     return _getUserById(id);
                 },
 
-                getUsers: function() {
+                getUsers: function(filtered) {
+                    if(!filtered) {
+                        return RealtimeUsers;
+                    }
+
                     return Users;
                 },
 
@@ -135,6 +155,11 @@
                         break;
                     case ActionTypes.REFRESH_USERS_ERROR:
                         TeamStore.emitNotRefreshed();
+                        break;
+
+                    case ActionTypes.REFRESH_REALTIME_USERS_COMPLETED:
+                        _replaceRealtimeUsers(action.users);
+                        TeamStore.emitRefreshed();
                         break;
 
                     case ActionTypes.UPDATE_TEAM_COMPLETED:

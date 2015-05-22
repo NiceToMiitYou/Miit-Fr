@@ -4,12 +4,13 @@
     MiitComponents.UserList = React.createClass({
         getDefaultProps: function() {
             return {
-                users:   [],
-                loading: MiitTranslator.get('loading', 'team'),
-                headers: true,
-                invite:  true,
-                roles:   true,
-                emails:  true
+                users:    [],
+                loading:  MiitTranslator.get('loading', 'team'),
+                headers:  true,
+                invite:   true,
+                roles:    true,
+                emails:   true,
+                filtered: true
             };
         },
 
@@ -34,7 +35,7 @@
                 UserStatusActions = MiitApp.get('miit-user-status-actions');
             }
             this.setState({
-                users: TeamStore.getUsers()
+                users: TeamStore.getUsers(this.props.filtered)
             });
         },
 
@@ -69,7 +70,7 @@
         _refresh: function() {
             if(this.isMounted()) {
                 this.setState({
-                    users:  TeamStore.getUsers().sortBy('name'),
+                    users:  TeamStore.getUsers(this.props.filtered).sortBy('name'),
                     loaded: true
                 });
             }

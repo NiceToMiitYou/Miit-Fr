@@ -1,7 +1,7 @@
 (function(){
     var TeamActions = injector.resolve(
-        ['miit-dispatcher', 'miit-team-constants', 'miit-team-request'],
-        function(MiitDispatcher, MiitTeamConstants, MiitTeamRequest) {
+        ['miit-dispatcher', 'miit-team-constants', 'miit-realtime', 'miit-team-request'],
+        function(MiitDispatcher, MiitTeamConstants, MiitRealtime, MiitTeamRequest) {
             var ActionTypes = MiitTeamConstants.ActionTypes;
 
             // Handle promote
@@ -73,9 +73,22 @@
                 MiitDispatcher.dispatch(action);
             };
 
+            // Handle refresh
+            var onRefreshRealtime = function(data) {
+                var action = {
+                    type:  ActionTypes.REFRESH_REALTIME_USERS_COMPLETED,
+                    users: data.users
+                };
+
+                MiitDispatcher.dispatch(action);
+            };
+
+            MiitRealtime.on('users:list', onRefreshRealtime);
+
             return {
                 refresh: function() {
                     MiitTeamRequest.users(onRefresh);
+                    MiitRealtime.send('users:list', {});
                 },
 
                 update: function(name, publix) {

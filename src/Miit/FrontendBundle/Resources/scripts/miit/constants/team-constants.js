@@ -6,6 +6,8 @@
                 ActionTypes: KeyMirror({
                     REFRESH_USERS_COMPLETED: null,
                     REFRESH_USERS_ERROR: null,
+                    //Refrash realtime users
+                    REFRESH_REALTIME_USERS_COMPLETED: null,
                     // Update Actions
                     UPDATE_TEAM_COMPLETED: null,
                     UPDATE_TEAM_ERROR: null,
