@@ -10,7 +10,7 @@
         };
     }
 
-    function _isAnonymous(userTmp) {
+    function _isAnonymous(user) {
         var user  = (user || Me || { id: '' });
 
         return '4' === user.id.charAt(14);
