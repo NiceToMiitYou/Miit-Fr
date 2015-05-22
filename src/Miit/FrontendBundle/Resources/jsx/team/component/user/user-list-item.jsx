@@ -32,17 +32,17 @@
         },
 
         _onChanged: function() {
-            console.log('changed');
             this.forceUpdate();
         },
 
         render: function() {
             var status = UserStatusStore.getUserStatusByUserId(this.props.user.id);
+            var name   = UserStore.getName(this.props.user);
 
             return (
                 <div className="miit-component user-list-item">
                     <MiitComponents.UserAvatar user={this.props.user} />
-                    <span className="pl10">{this.props.user.name}</span>
+                    <span className="pl10">{name}</span>
                     <If test={this.props.email && UserStore.isUser()}>
                         <span className="pl10">{this.props.user.email}</span>
                     </If>
