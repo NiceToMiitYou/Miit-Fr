@@ -34,6 +34,7 @@
 
     function _replaceUsers(users) {
         Users = users;
+        _synchronizeUsers();
     }
 
     function _replaceRealtimeUsers(users) {
