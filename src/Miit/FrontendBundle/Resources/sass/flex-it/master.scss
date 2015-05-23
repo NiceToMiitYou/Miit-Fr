@@ -79,6 +79,11 @@ html {
     font-family: 'Open Sans', sans-serif;
 }
 
+a {
+    text-decoration: none;
+    color: #3498db;
+}
+
 .container {
     padding: 0 30px;
 }
@@ -684,6 +689,10 @@ input {
     i + input {
         padding-left: 0;
     }
+
+    &.invalid {
+      border-color: #d73e4d;
+    }
 }
 
 .checkbox-field {
@@ -1274,6 +1283,9 @@ click-wave { 0% {
   color: #d73e4d;
 }
 
+.text-white {
+  color: #FFF!important;
+}
 /* ---------------- END BACKGROUND COLOR CSS ---------------- */
 
 

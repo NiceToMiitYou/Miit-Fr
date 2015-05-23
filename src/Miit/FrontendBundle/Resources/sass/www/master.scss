@@ -1,6 +1,11 @@
 // Test sass
 body {
     background-color: #f4f4f4;
+    color: #1E2D3A;
+}
+
+p {
+	line-height: 1.4em;
 }
 
 h3 {
@@ -56,7 +61,6 @@ h3 {
 
 .feature {
 
-	color: #1E2D3A;
 	margin-top: 20px;
 	
 	i {
@@ -75,4 +79,60 @@ h3 {
 		
 	}
 
+}
+
+.app {
+
+	i {
+		line-height: 110px;
+		font-size: 3.2em;
+	}
+
+	p {
+		font-weight: 100;
+	}
+
+}
+
+.social {
+	color: #1e2d3a;
+	-webkit-transition: background-color .6s ease-out;
+	-moz-transition: background-color .6s ease-out;
+	-o-transition: background-color .6s ease-out;
+	transition: background-color .6s ease-out;
+	padding: 30px 0;
+	border-radius: 5px;
+
+	i {
+		font-size: 4.5em;
+		-webkit-transition: color .6s ease-out;
+		-moz-transition: color .6s ease-out;
+		-o-transition: color .6s ease-out;
+		transition: color .6s ease-out;
+	}
+
+	&:hover {
+		color: #3498db;
+		background: #EEE;
+
+		.fa-twitter-square {
+			color: #00aced;
+		}
+		.fa-facebook-square {
+			color: #3b5998;
+		}
+		.fa-youtube-square {
+			color: #bb0000;
+		}
+		.fa-google-plus-square {
+			color: #dd4b39;
+		}
+	}
+}
+
+.news-letter {
+
+	.btn {
+		width: 100%;
+	}
 }

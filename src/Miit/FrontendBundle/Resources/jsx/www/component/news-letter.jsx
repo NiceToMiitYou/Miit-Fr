@@ -12,8 +12,11 @@
         },
 
         getInitialState: function() {
+            var state =  this.getDefaultErrors();
 
-            return this.getDefaultErrors();
+            state.done = false;
+
+            return state;
         },
 
         getDefaultErrors: function() {
@@ -57,9 +60,11 @@
 
             NewsLetterRequest.registration(email, function(data) {
                 if(data.done) {
-                    console.log('Thanks');
+                    this.setState({
+                        done: true
+                    });
                 }
-            });
+            }.bind(this));
 
             return;
         },
@@ -70,20 +75,27 @@
                            this.state.invalid_email
             });
 
+            var done = this.state.done;
+
             return (
                 <form className="miit-component news-letter" onSubmit={this.handleSubmit}>
                     
-                    <div className="row pt20 pb20">
-                        <div className="col-md-8 mb10">
-                            <div className="input-field left-icon icon-transparent push0">
-                                <i className="fa fa-envelope-o"></i>
-                                <input type="text" className={classes_email} placeholder={this.props.placeholder.email} ref="email" />
+                    <If test={!done}>
+                        <div className="row pt30 pb20">
+                            <div className="col-md-9 mb10">
+                                <div className={classes_email + " input-field left-icon icon-transparent push0 pt5 pb5" }>
+                                    <i className="fa fa-envelope-o pt5 pl5 pb5"></i>
+                                    <input type="text" placeholder={this.props.placeholder.email} ref="email" />
+                                </div>
+                            </div>
+                            <div className="col-md-3 mb10">
+                                <button type="submit" className="btn btn-dark pt15 pb15">{this.props.submit}</button>
                             </div>
                         </div>
-                        <div className="col-md-4 mb10">
-                            <button type="submit" className="btn btn-dark pt10 pb10">{this.props.submit}</button>
-                        </div>
-                    </div>
+                    </If>
+                    <If test={done}>
+                        <div className="mt30">Merci beaucoup pour votre confiance.</div>
+                    </If>
                 </form>
             );
         }

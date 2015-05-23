@@ -103,24 +103,24 @@
             return (
                 <form className="miit-component create-team" onSubmit={this.handleSubmit}>
                     
-                    <div className="row pt20 pb20">
-                        <div className="col-md-6 mb10">
-                            <div className="input-field left-icon icon-transparent push0">
-                                <i className="fa fa-envelope-o"></i>
-                                <input type="text" className={classes_email} placeholder={this.props.placeholder.email} ref="email" />
+                        <div className="row pt20 pb20">
+                            <div className="col-md-6 mb10">
+                                <div className="input-field left-icon icon-transparent push0">
+                                    <i className="fa fa-envelope-o"></i>
+                                    <input type="text" className={classes_email} placeholder={this.props.placeholder.email} ref="email" />
+                                </div>
+                            </div>
+
+                            <div className="col-md-6">
+                                <div className="input-field left-icon icon-transparent col5">
+                                    <i className="fa fa-users"></i>
+                                    <input type="text" className={classes_team}  placeholder={this.props.placeholder.team}  ref="team" />
+                                </div>
                             </div>
                         </div>
 
-                        <div className="col-md-6">
-                            <div className="input-field left-icon icon-transparent col5">
-                                <i className="fa fa-users"></i>
-                                <input type="text" className={classes_team}  placeholder={this.props.placeholder.team}  ref="team" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <button type="submit" className="btn btn-dark mt5">{this.props.submit}</button>
-                
+                        <button type="submit" className="btn btn-dark mt5">{this.props.submit}</button>
+                    
                 </form>
             );
         }
