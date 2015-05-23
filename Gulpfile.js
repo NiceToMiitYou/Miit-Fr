@@ -137,6 +137,8 @@ gulp.task('concat-uglify', ['clean', 'compile-jsx'], function() {
 
 gulp.task('build', ['sass', 'concat-uglify']);
 
+gulp.task('production', ['copy', 'build']);
+
 gulp.task('watch', ['build'], function () {
 
     // Watch all files then compile them
