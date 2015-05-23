@@ -25,5 +25,5 @@ monolog:
             type:  console
 
 parameters:
-    domain: miit.dev
-    ws_port: 443
+    domain: miit.fr
+    ws_port: 8080
