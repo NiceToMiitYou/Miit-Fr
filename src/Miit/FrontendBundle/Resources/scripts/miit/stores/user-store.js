@@ -11,9 +11,9 @@
     }
 
     function _isAnonymous(user) {
-        var user  = (user || Me || { id: '' });
+        var userTmp  = (user || Me || { id: '' });
 
-        return '4' === user.id.charAt(14);
+        return '4' === userTmp.id.charAt(14);
     }
 
     // Check if this is the same user
