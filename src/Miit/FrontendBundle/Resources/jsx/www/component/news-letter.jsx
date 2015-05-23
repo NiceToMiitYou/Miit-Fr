@@ -89,7 +89,7 @@
                                 </div>
                             </div>
                             <div className="col-md-3 mb10">
-                                <button type="submit" className="btn btn-dark pt15 pb15">{this.props.submit}</button>
+                                <button type="submit" className="btn btn-dark pl10 pr10 pt15 pb15">{this.props.submit}</button>
                             </div>
                         </div>
                     </If>
