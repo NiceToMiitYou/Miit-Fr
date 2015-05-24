@@ -4,6 +4,9 @@
         function(MiitDispatcher, MiitTeamConstants, MiitRealtime, MiitTeamRequest) {
             var ActionTypes = MiitTeamConstants.ActionTypes;
 
+            var realtimeSending = false;
+            var ajaxSending = false;
+
             // Handle promote
             var onPromoted = function(id, roles, data) {
                 var action = {
@@ -64,6 +67,8 @@
 
             // Handle refresh
             var onRefresh = function(data) {
+                ajaxSending = false;
+
                 var action = {
                     type: (data.done) ? ActionTypes.REFRESH_USERS_COMPLETED :
                                         ActionTypes.REFRESH_USERS_ERROR,
@@ -75,6 +80,8 @@
 
             // Handle refresh
             var onRefreshRealtime = function(data) {
+                realtimeSending = false;
+
                 var action = {
                     type:  ActionTypes.REFRESH_REALTIME_USERS_COMPLETED,
                     users: data.users
@@ -85,10 +92,18 @@
 
             MiitRealtime.on('users:list', onRefreshRealtime);
 
-            return {
+            var obj = {
                 refresh: function() {
-                    MiitTeamRequest.users(onRefresh);
-                    MiitRealtime.send('users:list', {});
+                    if(false === ajaxSending) {
+                        ajaxSending = true;
+
+                        MiitTeamRequest.users(onRefresh);
+                    }
+                    if(false === realtimeSending) {
+                        realtimeSending = true;
+                        
+                        MiitRealtime.send('users:list', {});
+                    }
                 },
 
                 update: function(name, publix) {
@@ -111,6 +126,8 @@
                     MiitTeamRequest.remove(id, onRemoved.bind({}, id));
                 }
             };
+
+            return obj;
         }
     );
 
