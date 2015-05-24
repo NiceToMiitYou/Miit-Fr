@@ -32,6 +32,9 @@
         this.sort(function(a, b){
             var result;
 
+            if(!a || !b)
+                return;
+
             if(a[prop] < b[prop])
             {
                 return (order === 'desc') ? 1 : -1;
