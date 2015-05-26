@@ -7,6 +7,10 @@
     }
 
     function _addUser(user) {
+        if(!user) {
+            return;
+        }
+
         var index = Users.indexBy('id', user.id || '');
         
         if(index < 0) {
@@ -17,6 +21,10 @@
     }
 
     function _addRealtimeUser(user) {
+        if(!user) {
+            return;
+        }
+
         var index = RealtimeUsers.indexBy('id', user.id || '');
         
         if(index < 0) {

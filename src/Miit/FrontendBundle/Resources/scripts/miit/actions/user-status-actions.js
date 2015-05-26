@@ -4,6 +4,8 @@
         function(MiitDispatcher, MiitUserStatusConstants, MiitRealtime) {
             var ActionTypes = MiitUserStatusConstants.ActionTypes;
 
+            var sending = false;
+
             function onStatusUpdate(data) {
                 var action = {
                     type:   ActionTypes.UPDATE_USER_STATUS,
@@ -14,6 +16,8 @@
             }
 
             function onStatusRefresh(data) {
+                sending = false;
+
                 var action = {
                     type:   ActionTypes.REFRESH_USER_STATUS,
                     status: data.status
@@ -26,14 +30,20 @@
 
             MiitRealtime.on('users:status', onStatusRefresh);
 
-            // Refresh the whole list
-            MiitRealtime.send('users:status');
-
-            return {
+            var obj = {
                 refresh: function() {
-                    MiitRealtime.send('users:status');
+                    if(false === sending) {
+                        sending = true;
+
+                        MiitRealtime.send('users:status');
+                    }
                 }
             };
+
+            // Refresh the whole list
+            obj.refresh();
+
+            return obj;
         }
     );
 

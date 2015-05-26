@@ -17,7 +17,9 @@
         };
 
         this.expire = function(key, delay) {
-            clearTimeout(timeoutId[key]);
+            if(timeoutId[key]) {
+                clearTimeout(timeoutId[key]);
+            }
 
             if(undefined !== delay && null !== delay) {
                 // Set the timeout
