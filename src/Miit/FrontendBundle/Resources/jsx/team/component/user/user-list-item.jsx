@@ -36,13 +36,14 @@
         },
 
         render: function() {
-            var status = UserStatusStore.getUserStatusByUserId(this.props.user.id);
+            var status = UserStatusStore.getUserStatusByUserId(this.props.user.id).toLowerCase();
             var name   = UserStore.getName(this.props.user);
 
             return (
                 <div className="miit-component user-list-item">
                     <MiitComponents.UserAvatar user={this.props.user} />
                     <span className="pl10">{name}</span>
+                    <span className={"status pl10 " + status}><i className="icon-logo-miit"></i></span>
                     <If test={this.props.email && UserStore.isUser()}>
                         <span className="pl10">{this.props.user.email}</span>
                     </If>

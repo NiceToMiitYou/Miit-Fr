@@ -5,6 +5,8 @@
 @import 'variables';
 @import 'mixins';
 @import 'grid';
+@import 'font';
+
 
 /* ---------------- BEGIN RESET CSS ---------------- */
 
@@ -588,6 +590,21 @@ a {
 
       .user-avatar  {
         min-width: initial;
+
+        img {
+          width: 30px;
+        }
+      }
+
+      span.status {
+        width: 32px;
+        float: right;
+        &.online {
+          color:#4caf50;
+        }
+        &.offline {
+          color :#f44336;
+        }
       }
     }
 
