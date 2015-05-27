@@ -45,13 +45,25 @@ class WelcomeController extends Controller
     }
 
     /**
-     * @Route("/",
+     * @Route("/{nothing}",
      *      host="{domain}",
      *      defaults={
-     *          "domain":    "%domain%"
+     *          "domain":    "%domain%",
+     *          "nothing":   ""
      *      },
      *      requirements={
-     *          "domain":    "%domain%"
+     *          "domain":    "%domain%",
+     *          "nothing":   "[a-zA-Z0-9-+_/\s]+"
+     *      }
+     * )
+     * @Route("/{nothing}",
+     *      host="{ip}",
+     *      defaults={
+     *          "nothing":   ""
+     *      },
+     *      requirements={
+     *          "ip":      "[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+",
+     *          "nothing": "[a-zA-Z0-9-+_/\s]+"
      *      }
      * )
      */
