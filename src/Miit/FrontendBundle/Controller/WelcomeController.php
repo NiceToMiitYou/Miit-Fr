@@ -28,6 +28,7 @@ class WelcomeController extends Controller
     /**
      * @Route("/",
      *      host="{subdomain}.{domain}",
+     *      name="welcome_home",
      *      defaults={
      *          "domain":    "%domain%",
      *          "subdomain": "www"
@@ -37,9 +38,15 @@ class WelcomeController extends Controller
      *          "subdomain": "www"
      *      }
      * )
+     */
+    public function indexAction(Request $request)
+    {
+        return $this->render('MiitFrontendBundle:www:index.html.twig');
+    }
+
+    /**
      * @Route("/",
      *      host="{domain}",
-     *      name="welcome_home",
      *      defaults={
      *          "domain":    "%domain%"
      *      },
@@ -48,9 +55,9 @@ class WelcomeController extends Controller
      *      }
      * )
      */
-    public function indexAction(Request $request)
+    public function redirectHomeAction(Request $request)
     {
-        return $this->render('MiitFrontendBundle:www:index.html.twig');
+        return  $this->redirect($this->generateUrl('welcome_home'), 301);
     }
 
     /**
