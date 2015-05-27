@@ -53,7 +53,21 @@
         <div class="container pt50 pb50">
             <h2>Inscrivez vous dès maintenant</h2>
             <p class="pt10 text-100">Restez informé et béneficiez d'une relation privilégiée avec nos équipes.</p>
-            <div id="create-team"></div>
+            <div id="create-team">
+                <form class="miit-component news-letter">
+                    <div class="row pt30 pb20">
+                        <div class="col-md-9 mb10">
+                            <div class="input-field left-icon icon-transparent push0 pt5 pb5">
+                                <i class="fa fa-envelope-o pt5 pl5 pb5"></i>
+                                <input type="text" placeholder="{% trans from "inputs" %}placeholder.your.email{% endtrans %}" ref="email" />
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb10">
+                            <button type="submit" class="btn btn-dark pl10 pr10 pt15 pb15">{% trans from "inputs" %}submit.subscribe.newsletter{% endtrans %}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 

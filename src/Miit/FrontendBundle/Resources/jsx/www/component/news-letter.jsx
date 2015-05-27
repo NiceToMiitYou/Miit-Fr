@@ -79,7 +79,6 @@
 
             return (
                 <form className="miit-component news-letter" onSubmit={this.handleSubmit}>
-                    
                     <If test={!done}>
                         <div className="row pt30 pb20">
                             <div className="col-md-9 mb10">
